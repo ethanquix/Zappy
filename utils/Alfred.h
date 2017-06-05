@@ -13,5 +13,6 @@
 
 #include "macros.h"
 #include "OO_macros.h"
+#include "error.h"
 
 #endif //ZAPPY_ALFRED_HPP

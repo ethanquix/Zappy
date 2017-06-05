@@ -8,44 +8,49 @@
 ** Last update Mon Jun 05 14:38:17 2017 Dimitri Wyzlic
 */
 
-#include "error.h"
 #include "String.h"
 
-static char *val(String *this);
-static char *to_str(String *this);
-static int len(String *this);
-static char at(String *this, int at);
-static String *add(String *this, String *other);
+static char	*val(String *this);
+static char	*to_str(String *this);
+static int	len(String *this);
+static char	at(String *this, int at);
+static String	*add(String *this, String *other);
+static String		*epur(String *this, char to_delete);
 
-String *newString(char *str)
+
+
+String		*newString(char *str)
 {
-    void *new;
-    String tmp;
+  void		*new;
+  String	tmp;
+  String	*out;
 
-    tmp = initString(str);
-    if ((new = calloc(1, sizeof(String))) == NULL)
-        raise(get_error());
-    if ((new = memcpy(new, &tmp, sizeof(String))) == NULL)
-        raise(get_error());
-    String *out = (String *)new;
+  tmp = initString(str);
+  if ((new = calloc(1, sizeof(String))) == NULL)
+    raise(get_error());
+  if ((new = memcpy(new, &tmp, sizeof(String))) == NULL)
+    raise(get_error());
+  out = (String *) new;
 
-    return (out);
+  return (out);
 }
 
-String initString(char *str)
+String		initString(char *str)
 {
-    String out;
+  String	out;
 
-    out.len = &len;
-    out.val = &val;
-    out.at = &at;
-    out.to_str = &to_str;
-    out.add = &add;
+  out.len = &len;
+  out.val = &val;
+  out.at = &at;
+  out.to_str = &to_str;
+  out.add = &add;
+  out.epur = &epur;
 
-    out.__str = str;
-    out.__len = strlen(str);
+  out.__str = str;
+  out.__len = strlen(str);
 
-    return (out);
+  return (out);
 }
 
 #include "implem/StringImplem1.c"
+#include "implem/StringImplem2.c"

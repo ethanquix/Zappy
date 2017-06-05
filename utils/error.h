@@ -13,10 +13,19 @@
 #include <errno.h>
 
 #ifndef ZAPPY_ERROR_H
-#define ZAPPY_ERROR
+#define ZAPPY_ERROR_H
+
+#define __norme__1 __FILE__, __LINE__, __func__
+#define __norme__ stderr, "%s: %u -> %s: %s\nERRNO: %s\n", __norme__1
+
+
 
 char	*get_error(void);
 
-#define raise(msg) fprintf(stderr, "%s: %u -> %s: %s\nERRNO: %s\n", __FILE__, __LINE__, __func__, msg, get_error());
+#define raise(msg) fprintf(__norme__ , msg, get_error())
+
+#define MALLOC(a, b) if(((a) = malloc(b)) == NULL && raise("Malloc fail"))
+
+
 
 #endif //ZAPPY_ERROR_H

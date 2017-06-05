@@ -8,44 +8,43 @@
 ** Last update Mon Jun 05 20:17:42 2017 Dimitri Wyzlic
 */
 
-#include <error.h>
+#include "Alfred.h"
 #include "String.h"
 
-static int len(String *this)
+static int	len(String *this)
 {
-    return this->__len;
+  return this->__len;
 }
 
-static char *val(String *this)
+static char	*val(String *this)
 {
-    return this->__str;
+  return this->__str;
 }
 
-static char *to_str(String *this)
+static char	*to_str(String *this)
 {
-    return this->__str;
+  return this->__str;
 }
 
-static char at(String *this, int at)
+static char	at(String *this, int at)
 {
 
 #ifdef DEBUG
-    if (at > this->__len || at < 0)
-        raise("Invalid index");
+  if (at > this->__len || at < 0)
+      raise("Invalid index");
 #endif
-    return this->__str[at];
+  return this->__str[at];
 }
 
-static String *add(String *this, String *other)
+static String	*add(String *this, String *other)
 {
-    String *out;
+  String	*out;
 
-    out = newString(this->__str);
-    out->__str = malloc(sizeof(char) * (this->__len + other->__len));
-    if (out->__str == NULL)
-        raise("Malloc fail");
-    strcpy(out->__str, this->__str);
-    strcat(out->__str, other->__str);
-    out->__len = strlen(out->__str);
-    return (out);
+  out = newString(this->__str);
+  out->__str = malloc(sizeof(char) * (this->__len + other->__len));
+  if (out->__str == NULL && raise("Malloc fail"));
+  strcpy(out->__str, this->__str);
+  strcat(out->__str, other->__str);
+  out->__len = strlen(out->__str);
+  return (out);
 }

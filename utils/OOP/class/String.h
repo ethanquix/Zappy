@@ -17,18 +17,26 @@
 
 typedef class s_String String;
 
-class s_String{
-    char *__str;
-    int __len;
-    int (*len)(String *this);
-    char *(*val)(String *this); // = to_str
-    char *(*to_str)(String *this); // == val
-    String *(*add)(String *this, String *other);
-    char (*at)(String *this, int emp);
-//    String (plus)
+#define THIS String *this
+
+class		s_String
+{
+  char		*__str;
+  int		__len;
+
+  int		(*len)(THIS);
+  char		*(*val)(THIS); // = to_str
+  char		*(*to_str)(THIS); // == val
+  String	*(*add)(THIS, String *other);
+  char 		(*at)(THIS, int emp);
+
+  String	*(*epur)(THIS, char to_delete);
 };
 
-String *newString(char *str);
-String initString(char *str);
+#undef THIS
+
+String	*newString(char *str);
+
+String	initString(char *str);
 
 #endif //ZAPPY_STRING_H
