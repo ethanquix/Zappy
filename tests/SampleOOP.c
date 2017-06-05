@@ -15,28 +15,30 @@
 // The top-level class.
 
 typedef struct s_MasterClass {
-    int (*hello)(struct s_MasterClass *self, char *name);   //<- This is the virtual function which we are gonna override
+    int (*hello)(struct s_MasterClass *this, char *name);   //<- This is the virtual function which we are gonna override
+    int t;
 } t_MasterClass;
 
 // A class
 
-static int A_Open (t_MasterClass *A, char *name) {
-    printf ("Hello, you can see I am the A class: %s\n", name);
+static int A_Open (t_MasterClass *this, char *name) {
+    printf ("Hello, you can see I am the --A-- class: %s\n", name);
     return 0;
 }
-static int A_Init (t_MasterClass *A) {
-    A->hello = &A_Open;
+static int A_Init (t_MasterClass *this) {
+    this->hello = &A_Open;
+    this->t = 0;
     return 0;
 }
 
 // B class
 
-static int B_Open (t_MasterClass *B, char *name) {
-    printf ("Hello, you can see I am the B class: %s\n", name);
+static int B_Open (t_MasterClass *this, char *name) {
+    printf ("Hello, you can see I am the --B-- class: %s\n", name);
     return 0;
 }
-static int B_Init (t_MasterClass *B) {
-    B->hello = &B_Open;
+static int B_Init (t_MasterClass *this) {
+    this->hello = &B_Open;
     return 0;
 }
 
@@ -45,13 +47,21 @@ static int B_Init (t_MasterClass *B) {
 int main()
 {
     int status;
-    t_MasterClass A, B;
+    t_MasterClass A, B, C;
 
     // Same 'base' class but initialised to different sub-classes.
 
     A_Init(&A);
     B_Init(&B);
 
+    A_Init(&C);
+
+    printf("%d\n", A.t);
+
+    C.t = 40;
+
+    printf("%d\n", A.t);
+    printf("%d\n", C.t);
     // Called in exactly the same manner.
 
     status = (A.hello)(&A, "A");
