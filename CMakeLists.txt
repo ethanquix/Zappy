@@ -12,3 +12,6 @@ include_directories(utils)
 
 set(SOURCE_FILES_ZAPPY main.c)
 add_executable(Zappy ${SOURCE_FILES_ZAPPY})
+
+# Tests
+add_executable(SampleOOP tests/SampleOOP.c)
