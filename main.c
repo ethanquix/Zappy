@@ -1,20 +1,36 @@
 #include <stdio.h>
 
-#include "utils/OOP/class/String.h"
+#include "Alfred.h"
+#include "Vector.h"
+#include "String.h"
 
-int ZAPPY() asm("main");
+THE_BEST
+ZAPPY_EVER
 
-int ZAPPY()
+
+int main[ZAPPY];
+
+
+int		zappy()
 {
-    String *str;
-    String test;
+  String	test;
+  String	*str;
+  Vector	*vector;
 
-    test = initString("Hey !");
-    str = newString("string");
+  test = initString("I am a Local String");
+  str = newString("I am a Pointer String");
 
-    printf("SUCCESS\n");
+  vector = newVector();
 
-    printf("Hello, World!\nsize= %d -> __str= %s\n", str->len(str), str->val(str));
-    printf("Hello, World!\nsize= %d -> __str= %s\n", test.len(&test), test.val(&test));
-    return 0;
+  vector->add(vector, &test);
+  vector->add(vector, str);
+
+  printf("%s\n", ((String *)vector->get(vector, 1))->__str);
+
+
+  printf("String Pointer!\nsize= %d -> __str= %s\n", str->len(str),
+	 str->get(str));
+  printf("String Local!\nsize= %d -> __str= %s\n", test.len(&test),
+	 test.get(&test));
+  return 0;
 }

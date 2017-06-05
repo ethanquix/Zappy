@@ -15,7 +15,7 @@ static char	*to_str(String *this);
 static int	len(String *this);
 static char	at(String *this, int at);
 static String	*add(String *this, String *other);
-static String		*epur(String *this, char to_delete);
+static String	*epur(String *this, char to_delete);
 
 
 
@@ -27,9 +27,9 @@ String		*newString(char *str)
 
   tmp = initString(str);
   if ((new = calloc(1, sizeof(String))) == NULL)
-    raise(get_error());
+    raise("Calloc String");
   if ((new = memcpy(new, &tmp, sizeof(String))) == NULL)
-    raise(get_error());
+    raise("Memcpy String");
   out = (String *) new;
 
   return (out);
@@ -40,7 +40,7 @@ String		initString(char *str)
   String	out;
 
   out.len = &len;
-  out.val = &val;
+  out.get = &val;
   out.at = &at;
   out.to_str = &to_str;
   out.add = &add;

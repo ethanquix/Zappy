@@ -11,11 +11,18 @@
 #ifndef ZAPPY_MACROS_HPP
 #define ZAPPY_MACROS_HPP
 
+//Troll
+
+#define ZAPPY 42
+#define THE_BEST int main[ZAPPY] asm("NotMain");
+#define ZAPPY_EVER int zappy() asm("main");
+
 
 //Python Like
 #define OR ||
 #define AND &&
 
+//Utils
 #define RESET(a,b)   memset(a,b,sizeof(a))
 
 //List manipulation

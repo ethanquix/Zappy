@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <memory.h>
 #include <errno.h>
+#include <stdlib.h>
 
 #ifndef ZAPPY_ERROR_H
 #define ZAPPY_ERROR_H
@@ -18,11 +19,15 @@
 #define __norme__1 __FILE__, __LINE__, __func__
 #define __norme__ stderr, "%s: %u -> %s: %s\nERRNO: %s\n", __norme__1
 
-
+static int	mexit()
+{
+  exit(1);
+  return (0);
+};
 
 char	*get_error(void);
 
-#define raise(msg) fprintf(__norme__ , msg, get_error())
+#define raise(msg) (fprintf(__norme__ , msg, get_error()) != -42 && mexit())
 
 #define MALLOC(a, b) if(((a) = malloc(b)) == NULL && raise("Malloc fail"))
 

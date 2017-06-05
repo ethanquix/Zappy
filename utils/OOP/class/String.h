@@ -25,8 +25,8 @@ class		s_String
   int		__len;
 
   int		(*len)(THIS);
-  char		*(*val)(THIS); // = to_str
-  char		*(*to_str)(THIS); // == val
+  char		*(*get)(THIS);
+  char		*(*to_str)(THIS);
   String	*(*add)(THIS, String *other);
   char 		(*at)(THIS, int emp);
 
