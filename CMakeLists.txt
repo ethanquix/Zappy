@@ -10,8 +10,10 @@ PRINT_HEADER()
 include_directories(includes)
 include_directories(utils)
 
-set(SOURCE_FILES_ZAPPY main.c)
+set(SOURCE_UTILS utils/Alfred.h utils/macros.h utils/OO_macros.h)
+
+set(SOURCE_FILES_ZAPPY main.c ${SOURCE_UTILS} utils/OOP/class/String.c utils/OOP/class/String.h utils/error.c utils/error.h)
 add_executable(Zappy ${SOURCE_FILES_ZAPPY})
 
 # Tests
-add_executable(SampleOOP tests/SampleOOP.c)
+add_executable(SampleOOP tests/SampleOOP.c utils/Alfred.h utils/macros.h utils/OO_macros.h)

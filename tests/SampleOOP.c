@@ -8,6 +8,7 @@
 ** Last update Mon Jun 05 02:42:17 2017 Dimitri Wyzlic
 */
 
+#include "Alfred.h"
 #include <stdio.h>
 
 
@@ -15,6 +16,7 @@
 // The top-level class.
 
 typedef struct s_MasterClass {
+//    ALFRED_MF(int, hello, struct s_MasterClass *this, char *name); <-- macro to help making member function but IDE dont like
     int (*hello)(struct s_MasterClass *this, char *name);   //<- This is the virtual function which we are gonna override
     int t;
 } t_MasterClass;
@@ -65,7 +67,19 @@ int main()
     // Called in exactly the same manner.
 
     status = (A.hello)(&A, "A");
-    status = (B.hello)(&B, "B");
+    status = (B.hello(&B, "B"));
+//    status = (B.hello)(&B, "B"); <-- same but this one is easier to understand
 
     return 0;
 }
+
+
+
+//Another Sample, let's make an Car class
+
+typedef struct s_car
+{
+    int speed;
+    char *name;
+    struct s_car new(int speed, char *nae)
+} Car;
