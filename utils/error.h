@@ -15,8 +15,8 @@
 #ifndef ZAPPY_ERROR_H
 #define ZAPPY_ERROR
 
-#define raise(msg) fprintf(stderr, "%s: %u -> %s: %s\n", __FILE__, __LINE__, __func__, msg);
-
 char	*get_error(void);
+
+#define raise(msg) fprintf(stderr, "%s: %u -> %s: %s\nERRNO: %s\n", __FILE__, __LINE__, __func__, msg, get_error());
 
 #endif //ZAPPY_ERROR_H

@@ -13,15 +13,20 @@
 
 #include <stdlib.h>
 #include <memory.h>
+#include <Alfred.h>
 
-#define String struct s_String
+typedef class s_String String;
 
-typedef struct s_String{
+class s_String{
     char *__str;
     int __len;
-    int (*getLen)(String *this);
-    char *(*c_str)(String *this);
-} t_String;
+    int (*len)(String *this);
+    char *(*val)(String *this); // = to_str
+    char *(*to_str)(String *this); // == val
+    String *(*add)(String *this, String *other);
+    char (*at)(String *this, int emp);
+//    String (plus)
+};
 
 String *newString(char *str);
 String initString(char *str);

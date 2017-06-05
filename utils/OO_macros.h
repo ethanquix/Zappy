@@ -12,6 +12,7 @@
 #define ZAPPY_OO_MACROS_HPP
 
 #define ALFRED_MF(RET, NAME, ...) RET (*NAME)(__VA__ARGS__)
+#define class struct
 
 
 #endif //ZAPPY_OO_MACROS_HPP

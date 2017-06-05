@@ -11,12 +11,15 @@
 #include "error.h"
 #include "String.h"
 
-static int getLen(struct s_String *this);
-static char *c_str(String *this);
+static char *val(String *this);
+static char *to_str(String *this);
+static int len(String *this);
+static char at(String *this, int at);
+static String *add(String *this, String *other);
 
 String *newString(char *str)
 {
-    void	*new;
+    void *new;
     String tmp;
 
     tmp = initString(str);
@@ -33,8 +36,11 @@ String initString(char *str)
 {
     String out;
 
-    out.getLen = &getLen;
-    out.c_str = &c_str;
+    out.len = &len;
+    out.val = &val;
+    out.at = &at;
+    out.to_str = &to_str;
+    out.add = &add;
 
     out.__str = str;
     out.__len = strlen(str);
@@ -42,12 +48,4 @@ String initString(char *str)
     return (out);
 }
 
-static int getLen(String *this)
-{
-    return this->__len;
-}
-
-static char *c_str(String *this)
-{
-    return this->__str;
-}
+#include "implem/StringImplem1.c"

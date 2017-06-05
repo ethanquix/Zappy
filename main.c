@@ -2,7 +2,9 @@
 
 #include "utils/OOP/class/String.h"
 
-int main()
+int ZAPPY() asm("main");
+
+int ZAPPY()
 {
     String *str;
     String test;
@@ -12,7 +14,7 @@ int main()
 
     printf("SUCCESS\n");
 
-    printf("Hello, World!\nsize= %d -> __str= %s\n", str->getLen(str), str->c_str(str));
-    printf("Hello, World!\nsize= %d -> __str= %s\n", test.getLen(&test), test.c_str(&test));
+    printf("Hello, World!\nsize= %d -> __str= %s\n", str->len(str), str->val(str));
+    printf("Hello, World!\nsize= %d -> __str= %s\n", test.len(&test), test.val(&test));
     return 0;
 }
