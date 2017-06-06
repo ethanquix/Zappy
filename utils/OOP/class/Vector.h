@@ -35,11 +35,9 @@ class		s_Vector
   int		(*len)(THIS);
   Vector	*(*add)(THIS, void *);
   void		*(*get)(THIS, int pos);
-//  char		*(*to_str)(THIS);
-//  Vector	*(*add)(THIS, Vector *other);
-//  char 		(*at)(THIS, int emp);
-
-//  Vector	*(*epur)(THIS, char to_delete);
+  void		*(*pop)(THIS);
+  Vector	*(*set)(THIS, int pos, void *obj);
+  Vector	*(*print)(Vector *this, void (*_func)(void *));
 };
 
 #undef THIS

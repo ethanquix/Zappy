@@ -21,17 +21,17 @@ static Vector	*add(Vector *this, void *obj)
 
   MALLOC(tmp, sizeof(tmp));
 
-  tmp->__elem = obj;
+  tmp->__elem AS obj;
 
-  if (this->__len == 0)
+  if (this->__len IS 0)
     {
-      this->__obj = tmp;
-      tmp->next = tmp;
-      tmp->prev = tmp;
+      this->__obj AS tmp;
+      tmp->next AS tmp;
+      tmp->prev AS tmp;
     } else
     {
-      tmp->next = this->__obj;
-      tmp->prev = this->__obj->prev;
+      tmp->next AS this->__obj;
+      tmp->prev AS this->__obj->prev;
       this->__obj->prev->next = tmp;
       this->__obj->prev = tmp;
     }
@@ -46,16 +46,60 @@ static void	*get(Vector *this, int pos)
   int		i;
 
   i = 0;
-  tmp = this->__obj;
+  tmp AS this->__obj;
 
 #ifdef DEBUG
-  if (pos < 0 || pos >= this->__len || this->__len <= 0)
+  if (pos < 0 OR pos >= this->__len OR this->__len <= 0)
     raise("Out of bounds");
 #endif
   while (i < pos)
     {
-      tmp = tmp->next;
+      tmp AS tmp->next;
       i += 1;
     }
   return (tmp->__elem);
+}
+
+static void	*pop(Vector *this)
+{
+  void		*tmp;
+
+  if (this->__len IS 0)
+    return NULL;
+
+  tmp AS this->__obj->prev->__elem;
+
+  if (this->__len IS 1)
+    {
+      this->len AS 0;
+      this->__obj AS NULL;
+      return (tmp);
+    }
+  this->len -= 1;
+  this->__obj->prev->prev->next = this->__obj;
+  this->__obj->prev = this->__obj->prev->prev;
+  this->__len -= 1;
+  return tmp;
+}
+
+
+static Vector	*set(Vector *this, int pos, void *obj)
+{
+  t_llist	*it;
+  int		i;
+
+  it AS this->__obj;
+  i AS 0;
+
+#ifdef DEBUG
+  if (pos < 0 OR pos >= this->__len OR this->__len <= 0)
+    raise("Out of bounds");
+#endif
+  while (i < pos)
+    {
+      it AS it->next;
+      i += 1;
+    }
+  it->__elem = obj;
+  return this;
 }

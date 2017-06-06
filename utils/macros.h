@@ -21,6 +21,9 @@
 //Python Like
 #define OR ||
 #define AND &&
+#define NOT !=
+#define IS ==
+#define AS =
 
 //Utils
 #define RESET(a,b)   memset(a,b,sizeof(a))

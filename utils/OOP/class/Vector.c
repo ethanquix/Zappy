@@ -13,6 +13,9 @@
 static int	len(Vector *this);
 static Vector	*add(Vector *this, void *obj);
 static void	*get(Vector *this, int pos);
+static void	*pop(Vector *this);
+static Vector	*set(Vector *this, int pos, void *obj);
+static Vector	*print(Vector *this, void (*_func)(void *));
 
 
 Vector		*newVector()
@@ -43,6 +46,10 @@ Vector		initVector()
   out.len = &len;
   out.add = &add;
   out.get = &get;
+  out.pop = &pop;
+  out.set = &set;
+  out.print = &print;
+
 //  out.at = &at;
 //  out.to_str = &to_str;
 //  out.add = &add;
@@ -55,3 +62,4 @@ Vector		initVector()
 }
 
 #include "implem/VectorImplem1.c"
+#include "implem/VectorImplem2.c"

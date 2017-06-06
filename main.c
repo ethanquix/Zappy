@@ -11,6 +11,15 @@ ZAPPY_EVER
 int main<:ZAPPY:>;
 
 
+void a(void *c)
+{
+  String *t;
+
+  t = (String *)c;
+
+  t->to_str(t);
+}
+
 
 int		zappy()
 {
@@ -27,11 +36,13 @@ int		zappy()
   vector->add(vector, str);
 
   printf("%s\n", ((String *)vector->get(vector, 1))->__str);
+  vector->print(vector, &a);
 
-
-  printf("String Pointer!\nsize= %d -> __str= %s\n", str->len(str),
-	 str->get(str));
-  printf("String Local!\nsize= %d -> __str= %s\n", test.len(&test),
-	 test.get(&test));
+//
+//
+//  printf("String Pointer!\nsize= %d -> __str= %s\n", str->len(str),
+//	 str->get(str));
+//  printf("String Local!\nsize= %d -> __str= %s\n", test.len(&test),
+//	 test.get(&test));
   return 0;
 }

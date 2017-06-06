@@ -21,13 +21,13 @@ static String	*epur(String *this, char to_delete)
   MALLOC(tmp, sizeof(char) * this->__len);
   while (this->__str[i])
     {
-      if (this->__str[i] != to_delete)
+      if (this->__str[i] NOT to_delete)
 	{
 	  tmp[j] = this->__str[i];
 	  j += 1;
 	}
       i += 1;
     }
-  tmp[j] = 0;
+  tmp[j] AS 0;
   return (newString(tmp));
 }
