@@ -11,7 +11,7 @@
 #include "String.h"
 
 static char	*val(String *this);
-static char	*to_str(String *this);
+static String	*print(String *this);
 static int	len(String *this);
 static char	at(String *this, int at);
 static String	*add(String *this, String *other);
@@ -42,7 +42,7 @@ String		initString(char *str)
   out.len = &len;
   out.get = &val;
   out.at = &at;
-  out.to_str = &to_str;
+  out.print = &print;
   out.add = &add;
   out.epur = &epur;
 

@@ -26,7 +26,7 @@ class		s_String
 
   int		(*len)(THIS);
   char		*(*get)(THIS);
-  char		*(*to_str)(THIS);
+  String	*(*print)(THIS);
   String	*(*add)(THIS, String *other);
   char 		(*at)(THIS, int emp);
 

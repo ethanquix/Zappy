@@ -22,15 +22,10 @@ static char	*val(String *this)
   return this->__str;
 }
 
-static char	*to_str(String *this)
+static String	*print(String *this)
 {
-  char		*out;
-  size_t	size;
-
-  size = (size_t) snprintf(NULL, 0, "String -> value: %s\n", this->__str);
-  MALLOC(out, size + 1);
-  snprintf(out, size + 1, "String -> value: %s\n", this->__str);
-  return this->__str;
+  printf("String -> value: %s\n", this->__str);
+  return (this);
 }
 
 static char	at(String *this, int at)

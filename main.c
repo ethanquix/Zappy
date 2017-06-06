@@ -17,7 +17,7 @@ void a(void *c)
 
   t = (String *)c;
 
-  t->to_str(t);
+  t->print(t);
 }
 
 
