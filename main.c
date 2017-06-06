@@ -8,7 +8,8 @@ THE_BEST
 ZAPPY_EVER
 
 
-int main[ZAPPY];
+int main<:ZAPPY:>;
+
 
 
 int		zappy()
