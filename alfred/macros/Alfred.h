@@ -11,8 +11,8 @@
 #ifndef ZAPPY_ALFRED_HPP
 #define ZAPPY_ALFRED_HPP
 
-#include "macros.h"
-#include "OO_macros.h"
-#include "error.h"
+#include "misc/macros.h"
+#include "OOP_macros/OOP_macros.h"
+#include "error/error.h"
 
 #endif //ZAPPY_ALFRED_HPP

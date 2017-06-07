@@ -13,7 +13,7 @@
 
 #include <stdlib.h>
 #include <memory.h>
-#include <Alfred.h>
+#include "Alfred.h"
 
 typedef class s_Vector Vector;
 

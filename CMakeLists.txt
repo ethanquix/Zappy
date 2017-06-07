@@ -4,22 +4,28 @@ project(Zappy)
 set(CMAKE_C_STANDARD 11)
 
 include(Header.cmake)
-
 PRINT_HEADER()
+
+add_subdirectory(alfred)
 
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -DDEBUG")
 
 include_directories(includes)
-include_directories(utils)
-include_directories(utils/OOP)
-include_directories(utils/OOP/class)
-include_directories(utils/OOP/class/Map)
+include_directories(alfred/macros)
+include_directories(alfred/OOP/class/Map)
+include_directories(alfred/OOP/class/String)
+include_directories(alfred/OOP/class/Vector)
 
-set(SOURCE_UTILS utils/Alfred.h utils/macros.h utils/error.c utils/error.h)
-set(SOURCE_OOP utils/OO_macros.h utils/OOP/class/String.c utils/OOP/class/String.h utils/OOP/class/implem/StringImplem1.c utils/OOP/class/implem/StringImplem2.c utils/OOP/class/Vector.h utils/OOP/class/Vector.c utils/OOP/class/implem/VectorImplem1.c utils/OOP/class/implem/VectorImplem2.c utils/OOP/class/Map/MapCI.h utils/OOP/class/Map/MapCI.c utils/OOP/class/Map/implem/MapCIImplem1.c)
 
-set(SOURCE_FILES_ZAPPY main.c ${SOURCE_UTILS} ${SOURCE_OOP})
+
+set(SOURCE_FILES_ZAPPY main.c)
+
+
+
 add_executable(Zappy ${SOURCE_FILES_ZAPPY})
+target_link_libraries(Zappy alfred)
+
+
 
 # Tests
-add_executable(SampleOOP tests/SampleOOP.c utils/Alfred.h utils/macros.h utils/OO_macros.h)
+add_executable(SampleOOP tests/SampleOOP.c alfred/macros/Alfred.h alfred/macros/misc/macros.h alfred/macros/OOP_macros/OOP_macros.h)

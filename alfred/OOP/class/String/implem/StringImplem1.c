@@ -8,8 +8,6 @@
 ** Last update Mon Jun 05 20:17:42 2017 Dimitri Wyzlic
 */
 
-#include <stdio.h>
-#include "Alfred.h"
 #include "String.h"
 
 static int	len(THIS)
