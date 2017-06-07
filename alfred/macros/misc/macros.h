@@ -19,20 +19,10 @@
 #define THE_BEST int main[ZAPPY] asm("NotMain");
 #define ZAPPY_EVER int zappy() asm("main");
 
-
-//Python Like
-#define OR ||
-#define AND &&
-#define NOT !=
-#define IS ==
-#define AS =
-
-#include <stdbool.h>
-
 //Utils
 #define RESET(a,b)   memset(a,b,sizeof(a))
 
 //List manipulation
-#define ARRAY_LENGTH(A) (sizeof(A) / sizeof(A[0]))
+#define ARRAY_LENGTH(A) (sizeof(A) / sizeof((A)[0]))
 
 #endif //ZAPPY_MACROS_HPP

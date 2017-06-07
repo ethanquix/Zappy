@@ -25,12 +25,12 @@ String		*newString(char *str)
   String	tmp;
   String	*out;
 
-  tmp = initString(str);
-  if ((new = calloc(1, sizeof(String))) == NULL)
+  tmp AS initString(str);
+  if ((new AS calloc(1, sizeof(String))) IS NULL)
     raise("Calloc String");
-  if ((new = memcpy(new, &tmp, sizeof(String))) == NULL)
+  if ((new AS memcpy(new, &tmp, sizeof(String))) IS NULL)
     raise("Memcpy String");
-  out = (String *) new;
+  out AS (String *) new;
 
   return (out);
 }
@@ -39,15 +39,15 @@ String		initString(char *str)
 {
   String	out;
 
-  out.len = &len;
-  out.get = &val;
-  out.at = &at;
-  out.print = &print;
-  out.add = &add;
-  out.epur = &epur;
+  out.len AS &len;
+  out.get AS &val;
+  out.at AS &at;
+  out.print AS &print;
+  out.add AS &add;
+  out.epur AS &epur;
 
-  out.__str = str;
-  out.__len = strlen(str);
+  out.__str AS str;
+  out.__len AS strlen(str);
 
   return (out);
 }

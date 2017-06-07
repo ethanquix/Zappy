@@ -27,7 +27,7 @@ static Vector	*print(THIS, void (*_func)(void *))
     {
       (*_func)(it->__elem);
       it AS it->next;
-      i += 1;
+      i INC 1;
     }
   printf("End Vector\n");
   return (this);

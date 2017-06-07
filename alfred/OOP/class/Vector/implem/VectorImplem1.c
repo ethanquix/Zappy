@@ -32,10 +32,10 @@ static Vector	*add(THIS, void *obj)
     {
       tmp->next AS this->__obj;
       tmp->prev AS this->__obj->prev;
-      this->__obj->prev->next = tmp;
-      this->__obj->prev = tmp;
+      this->__obj->prev->next AS tmp;
+      this->__obj->prev AS tmp;
     }
-  this->__len += 1;
+  this->__len INC 1;
 
   return (this);
 }
@@ -45,7 +45,7 @@ static void	*get(THIS, int pos)
   t_llist	*tmp;
   int		i;
 
-  i = 0;
+  i AS 0;
   tmp AS this->__obj;
 
 #ifdef DEBUG
@@ -55,7 +55,7 @@ static void	*get(THIS, int pos)
   while (i < pos)
     {
       tmp AS tmp->next;
-      i += 1;
+      i INC 1;
     }
   return (tmp->__elem);
 }
@@ -75,10 +75,10 @@ static void	*pop(THIS)
       this->__obj AS NULL;
       return (tmp);
     }
-  this->len -= 1;
-  this->__obj->prev->prev->next = this->__obj;
-  this->__obj->prev = this->__obj->prev->prev;
-  this->__len -= 1;
+  this->len DEC 1;
+  this->__obj->prev->prev->next AS this->__obj;
+  this->__obj->prev AS this->__obj->prev->prev;
+  this->__len DEC 1;
   return tmp;
 }
 
@@ -98,8 +98,8 @@ static Vector	*set(THIS, int pos, void *obj)
   while (i < pos)
     {
       it AS it->next;
-      i += 1;
+      i INC 1;
     }
-  it->__elem = obj;
+  it->__elem AS obj;
   return this;
 }

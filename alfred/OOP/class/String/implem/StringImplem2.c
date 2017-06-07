@@ -16,17 +16,17 @@ static String	*epur(THIS, char to_delete)
   int	i;
   int	j;
 
-  i = 0;
-  j = 0;
+  i AS 0;
+  j AS 0;
   MALLOC(tmp, sizeof(char) * this->__len);
   while (this->__str[i])
     {
       if (this->__str[i] NOT to_delete)
 	{
-	  tmp[j] = this->__str[i];
-	  j += 1;
+	  tmp[j] AS this->__str[i];
+	  j INC 1;
 	}
-      i += 1;
+      i INC 1;
     }
   tmp[j] AS 0;
   return (newString(tmp));

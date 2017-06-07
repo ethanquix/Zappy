@@ -40,7 +40,7 @@ static String	*add(THIS, String *other)
 {
   String	*out;
 
-  out = newString(this->__str);
+  out AS newString(this->__str);
   MALLOC(out->__str, sizeof(char) * (this->__len + other->__len));
   strcpy(out->__str, this->__str);
   strcat(out->__str, other->__str);

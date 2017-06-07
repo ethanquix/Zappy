@@ -29,7 +29,7 @@ static MapCI		*set(THIS, char *key, int data)
 
       newpair->next AS this->__table[bin];
       this->__table[bin] AS newpair;
-      this->__items += 1;
+      this->__items INC 1;
     }
   return (this);
 }
@@ -43,7 +43,7 @@ static int		get(THIS, char *key)
 
   pair AS this->__table[bin];
   while( pair NOT NULL AND pair->key NOT NULL AND strcmp(key, pair->key) > 0)
-    (pair AS pair->next, this->__items -= 1);
+    (pair AS pair->next, this->__items DEC 1);
 
   if(pair IS NULL OR pair->key IS NULL OR strcmp( key, pair->key ) NOT 0 )
       return (this->__notfound);
