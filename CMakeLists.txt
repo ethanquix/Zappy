@@ -22,7 +22,7 @@ include_directories(src/class/Player)
 set(SOURCE_FILES_ZAPPY main.c src/class/MapPlayer/MapCP.c src/class/MapPlayer/MapCP.h src/class/MapPlayer/implem/MapCPImplem1.c src/class/MapPlayer/implem/MapCPImplem2.c src/class/Player/Player.c src/class/Player/Player.h)
 
 add_executable(Zappy ${SOURCE_FILES_ZAPPY})
-target_link_libraries(Zappy alfred)
+target_link_libraries(Zappy alfred_c)
 
 
 
