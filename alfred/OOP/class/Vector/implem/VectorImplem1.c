@@ -12,7 +12,7 @@
 
 static int	len(THIS)
 {
-  return this->__len;
+  return (this->__len);
 }
 
 static Vector	*add(THIS, void *obj)
@@ -65,7 +65,7 @@ static void	*pop(THIS)
   void		*tmp;
 
   if (this->__len IS 0)
-    return NULL;
+    return (NULL);
 
   tmp AS this->__obj->prev->__elem;
 
@@ -79,7 +79,7 @@ static void	*pop(THIS)
   this->__obj->prev->prev->next AS this->__obj;
   this->__obj->prev AS this->__obj->prev->prev;
   this->__len DEC 1;
-  return tmp;
+  return (tmp);
 }
 
 
@@ -101,5 +101,5 @@ static Vector	*set(THIS, int pos, void *obj)
       i INC 1;
     }
   it->__elem AS obj;
-  return this;
+  return (this);
 }

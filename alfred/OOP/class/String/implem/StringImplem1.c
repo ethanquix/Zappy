@@ -12,12 +12,12 @@
 
 static int	len(THIS)
 {
-  return this->__len;
+  return (this->__len);
 }
 
 static char	*val(THIS)
 {
-  return this->__str;
+  return (this->__str);
 }
 
 static String	*print(THIS)
@@ -33,7 +33,7 @@ static char	at(THIS, int at)
   if (at > this->__len OR at < 0)
       raise("Invalid index");
 #endif
-  return this->__str[at];
+  return (this->__str[at]);
 }
 
 static String	*add(THIS, String *other)

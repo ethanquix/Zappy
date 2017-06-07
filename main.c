@@ -44,5 +44,5 @@ int		zappy()
   while ((pair = map->loop(map)) NOT NULL)
     printf("key: %s data: %d\n", pair->key, pair->data);
 
-  return 0;
+  return (0);
 }

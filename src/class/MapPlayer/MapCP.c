@@ -1,5 +1,5 @@
 /*
-** MapCI.c for Zappy in /home/wyzlic_a/delivery/Zappy/MapCI.c
+** MapCP.c for Zappy in /home/wyzlic_a/delivery/Zappy/MapCP.c
 **
 ** Made by Dimitri Wyzlic
 ** Login   <dimitri1.wyzlic@epitech.eu>
@@ -9,37 +9,36 @@
 */
 
 #include <limits.h>
-#include "MapCI.h"
+#include "MapCP.h"
 
-static MapCI		*set(THIS, char *key, int data);
-static int		get(THIS, char *key);
+static MapCP		*set(THIS, char *key, Player *data);
+static Player		*get(THIS, char *key);
 static int		len(THIS);
-static int		end(THIS);
+static Player		*end(THIS);
 static bool		exist(THIS, char *key);
-static void			start_loop(THIS);
-static PairCI			*loop(THIS);
+static void		start_loop(THIS);
+static PairCP		*loop(THIS);
 
-MapCI		*newMapCI(int size, int nof)
+MapCP		*newMapCP(int size, Player *nof)
 {
   void		*new;
-  MapCI		tmp;
-  MapCI		*out;
+  MapCP		tmp;
+  MapCP		*out;
 
-  tmp AS initMapCI(size, nof);
-  MALLOC(new, sizeof(MapCI));
-  if ((new AS memcpy(new, &tmp, sizeof(MapCI))) IS NULL)
+  tmp AS initMapCP(size, nof);
+  MALLOC(new, sizeof(MapCP));
+  if ((new AS memcpy(new, &tmp, sizeof(MapCP))) IS NULL)
     raise(get_error());
-  out AS (MapCI *) new;
+  out AS (MapCP *) new;
 
   return (out);
 }
 
-MapCI		initMapCI(int size, int nof)
+MapCP		initMapCP(int size, Player *nof)
 {
-  MapCI		out;
+  MapCP		out;
   int		i;
 
-  i AS 0;
   if (size <= 0 OR size > USHRT_MAX)
     raise("Size negative or too big");
 
@@ -53,13 +52,13 @@ MapCI		initMapCI(int size, int nof)
   out.start_loop AS &start_loop;
   out.loop AS &loop;
 
-  MALLOC(out.__table, sizeof(struct s_entryCI *) * size);
+  MALLOC(out.__table, sizeof(struct s_entryCP *) * size);
   while (i < size)
     (out.__table[i] AS NULL, i INC 1);
   return (out);
 }
 
-int		__hash_MapCI(THIS, char *key)
+int		__hash_MapCP(THIS, char *key)
 {
   unsigned int	hash;
   unsigned int	i;
@@ -78,11 +77,11 @@ int		__hash_MapCI(THIS, char *key)
   return (hash % this->__size);
 }
 
-struct s_entryCI	*__newPairCI(char *key, int val)
+struct s_entryCP * __newPairCP(char *key, Player *val)
 {
-  struct s_entryCI	*newpair;
+  struct s_entryCP	*newpair;
 
-  MALLOC(newpair, sizeof(struct s_entryCI));
+  MALLOC(newpair, sizeof(struct s_entryCP));
 
   if((newpair->key AS strdup(key)) IS NULL)
       raise("Error during strdup");
@@ -92,5 +91,5 @@ struct s_entryCI	*__newPairCI(char *key, int val)
   return (newpair);
 }
 
-#include "implem/MapCIImplem1.c"
-#include "implem/MapCIImplem2.c"
+#include "implem/MapCPImplem1.c"
+#include "implem/MapCPImplem2.c"
