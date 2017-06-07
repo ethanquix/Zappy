@@ -34,10 +34,7 @@ class		s_String
   String	*(*epur)(THIS, char to_delete);
 };
 
-#undef THIS
-
 String	*newString(char *str);
-
 String	initString(char *str);
 
 #endif //ZAPPY_STRING_H

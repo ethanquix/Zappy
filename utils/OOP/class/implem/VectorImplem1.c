@@ -10,12 +10,12 @@
 
 #include "Vector.h"
 
-static int	len(Vector *this)
+static int	len(THIS)
 {
   return this->__len;
 }
 
-static Vector	*add(Vector *this, void *obj)
+static Vector	*add(THIS, void *obj)
 {
   t_llist	*tmp;
 
@@ -40,7 +40,7 @@ static Vector	*add(Vector *this, void *obj)
   return (this);
 }
 
-static void	*get(Vector *this, int pos)
+static void	*get(THIS, int pos)
 {
   t_llist	*tmp;
   int		i;
@@ -60,7 +60,7 @@ static void	*get(Vector *this, int pos)
   return (tmp->__elem);
 }
 
-static void	*pop(Vector *this)
+static void	*pop(THIS)
 {
   void		*tmp;
 
@@ -83,7 +83,7 @@ static void	*pop(Vector *this)
 }
 
 
-static Vector	*set(Vector *this, int pos, void *obj)
+static Vector	*set(THIS, int pos, void *obj)
 {
   t_llist	*it;
   int		i;

@@ -10,7 +10,7 @@
 
 #include "String.h"
 
-static String	*epur(String *this, char to_delete)
+static String	*epur(THIS, char to_delete)
 {
   char	*tmp;
   int	i;

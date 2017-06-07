@@ -10,12 +10,12 @@
 
 #include "Vector.h"
 
-static int	len(Vector *this);
-static Vector	*add(Vector *this, void *obj);
-static void	*get(Vector *this, int pos);
-static void	*pop(Vector *this);
-static Vector	*set(Vector *this, int pos, void *obj);
-static Vector	*print(Vector *this, void (*_func)(void *));
+static int	len(THIS);
+static Vector	*add(THIS, void *obj);
+static void	*get(THIS, int pos);
+static void	*pop(THIS);
+static Vector	*set(THIS, int pos, void *obj);
+static Vector	*print(THIS, void (*_func)(void *));
 
 
 Vector		*newVector()

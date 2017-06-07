@@ -41,10 +41,7 @@ class		s_Vector
   Vector	*(*print)(Vector *this, void (*_func)(void *));
 };
 
-#undef THIS
-
 Vector	*newVector();
-
 Vector	initVector();
 
 #endif //ZAPPY_VECTOR_H

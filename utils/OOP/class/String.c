@@ -10,12 +10,12 @@
 
 #include "String.h"
 
-static char	*val(String *this);
-static String	*print(String *this);
-static int	len(String *this);
-static char	at(String *this, int at);
-static String	*add(String *this, String *other);
-static String	*epur(String *this, char to_delete);
+static char	*val(THIS);
+static String	*print(THIS);
+static int	len(THIS);
+static char	at(THIS, int at);
+static String	*add(THIS, String *other);
+static String	*epur(THIS, char to_delete);
 
 
 

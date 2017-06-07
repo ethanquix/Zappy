@@ -12,23 +12,23 @@
 #include "Alfred.h"
 #include "String.h"
 
-static int	len(String *this)
+static int	len(THIS)
 {
   return this->__len;
 }
 
-static char	*val(String *this)
+static char	*val(THIS)
 {
   return this->__str;
 }
 
-static String	*print(String *this)
+static String	*print(THIS)
 {
   printf("String -> value: %s\n", this->__str);
   return (this);
 }
 
-static char	at(String *this, int at)
+static char	at(THIS, int at)
 {
 
 #ifdef DEBUG
@@ -38,7 +38,7 @@ static char	at(String *this, int at)
   return this->__str[at];
 }
 
-static String	*add(String *this, String *other)
+static String	*add(THIS, String *other)
 {
   String	*out;
 
