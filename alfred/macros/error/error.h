@@ -19,14 +19,13 @@
 #define __norme__1 __FILE__, __LINE__, __PRETTY_FUNCTION__
 #define __norme__ stderr, "%s: %u -> %s: %s\nERRNO: %s\n", __norme__1
 
-static int	mexit()
+static char	*get_error(void)
 {
-  exit(1);
-};
+  int	errnum = errno;
+  return (strerror(errnum));
+}
 
-char	*get_error(void);
-
-#define raise(msg) (fprintf(__norme__ , msg, get_error()) != -42 && mexit())
+#define raise(msg) (fprintf(__norme__ , msg, get_error()), exit(1), NULL)
 
 #define MALLOC(a, b) if(((a) = malloc(b)) == NULL && raise("Malloc fail"))
 

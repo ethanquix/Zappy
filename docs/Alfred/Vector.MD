@@ -7,10 +7,16 @@ Method:
 
 - `int		len(Vector *this)`
 - `Vector	*add(Vector *this, void *obj)`
-- `void		*get(String *this, int pos)`
 - `Vector	*set(String *this, int pos, void * obj)`
+- `void		*get(String *this, int pos)`
 - `Vector	*pop(Vector *this, int pos)`
 - `Vector	*print(Vector *this, void (*_func)(void *))`
+
+Macros:
+
+- `VGET(var, vector, pos)` -> var = ((typeof(var))(vect)->get(vect, pos))
+- `VGETNP(var, vector, pos)` -> var = ((typeof(var))(vect).get(&vect, pos))
+
 
 Example:
 ```
