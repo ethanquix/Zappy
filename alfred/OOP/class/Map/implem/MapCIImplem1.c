@@ -20,14 +20,14 @@ static MapCI		*set(THIS, char *key, int data)
   next AS this->__table[bin];
 
   while (next NOT NULL AND next->key NOT NULL AND strcmp(key, next->key) > 0)
-    next AS next->next;
+    next AS next->__next;
   if (next NOT NULL AND next->key NOT NULL AND strcmp(key, next->key) IS 0)
     next->data AS data;
   else
     {
       newpair AS __newPairCI(key, data);
 
-      newpair->next AS this->__table[bin];
+      newpair->__next AS this->__table[bin];
       this->__table[bin] AS newpair;
       this->__items INC 1;
     }
@@ -43,7 +43,7 @@ static int		get(THIS, char *key)
 
   pair AS this->__table[bin];
   while( pair NOT NULL AND pair->key NOT NULL AND strcmp(key, pair->key) > 0)
-    (pair AS pair->next, this->__items DEC 1);
+    (pair AS pair->__next, this->__items DEC 1);
 
   if(pair IS NULL OR pair->key IS NULL OR strcmp( key, pair->key ) NOT 0 )
       return (this->__notfound);

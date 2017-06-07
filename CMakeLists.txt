@@ -16,10 +16,10 @@ include_directories(alfred/OOP/class/Map)
 include_directories(alfred/OOP/class/String)
 include_directories(alfred/OOP/class/Vector)
 
+include_directories(src/class/MapPlayer)
 
-
+#src/class/MapPlayer/MapCI.c src/class/MapPlayer/MapCI.h src/class/MapPlayer/implem/MapCIImplem1.c
 set(SOURCE_FILES_ZAPPY main.c)
-
 
 
 add_executable(Zappy ${SOURCE_FILES_ZAPPY})

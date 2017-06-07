@@ -22,8 +22,8 @@ void		mapCI_sample()
 
   map = newMapCI(100, -1);
 
-  map->set(map, "toto", 1)
+  map->set(map, "toto", 1);
 
-  printf("Test: %d\n", get(map, "toto"));
+  printf("Test: %d\n", map->get(map, "toto"));
  }
 ```

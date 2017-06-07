@@ -18,11 +18,13 @@ typedef class s_MapCI MapCI;
 #undef THIS
 #define THIS MapCI *this
 
+#define PairCI	struct s_entryCI
+
 struct			s_entryCI
 {
   char			*key;
   int			data;
-  struct s_entryCI	*next;
+  PairCI		*__next;
 };
 
 class			s_MapCI
@@ -30,18 +32,22 @@ class			s_MapCI
   int			__size;
   int			__items;
   int			__notfound;
-  struct s_entryCI	**__table;
+  PairCI		**__table;
+  int			__currentIt;
+  PairCI		*__currentEntry;
 
   MapCI			*(*set)(THIS, char *key, int data);
   int			(*get)(THIS, char *key);
   int			(*len)(THIS);
   int			(*end)(THIS);
   bool			(*exist)(THIS, char *key);
+  PairCI		*(*loop)(THIS);
+  void			(*start_loop)(THIS);
 };
 
 MapCI			*newMapCI(int size, int nof);
 MapCI			initMapCI(int size, int nof);
 int			__hash_MapCI(THIS, char *key);
-struct s_entryCI	*__newPairCI(char *key, int val);
+PairCI			*__newPairCI(char *key, int val);
 
 #endif //ZAPPY_MAPINTERFACE_H

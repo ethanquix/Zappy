@@ -16,6 +16,8 @@ static int		get(THIS, char *key);
 static int		len(THIS);
 static int		end(THIS);
 static bool		exist(THIS, char *key);
+static void			start_loop(THIS);
+static PairCI			*loop(THIS);
 
 MapCI		*newMapCI(int size, int nof)
 {
@@ -48,6 +50,8 @@ MapCI		initMapCI(int size, int nof)
   out.len AS &len;
   out.end AS &end;
   out.exist AS &exist;
+  out.start_loop AS &start_loop;
+  out.loop AS &loop;
 
   MALLOC(out.__table, sizeof(struct s_entryCI *) * size);
   while (i < size)
@@ -83,9 +87,10 @@ struct s_entryCI	*__newPairCI(char *key, int val)
   if((newpair->key AS strdup(key)) IS NULL)
       raise("Error during strdup");
   newpair->data AS val;
-  newpair->next AS NULL;
+  newpair->__next AS NULL;
 
   return newpair;
 }
 
 #include "implem/MapCIImplem1.c"
+#include "implem/MapCIImplem2.c"
