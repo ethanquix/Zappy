@@ -38,7 +38,7 @@ class		s_Vector
   void		*(*get)(THIS, int pos);
   void		*(*pop)(THIS);
   Vector	*(*set)(THIS, int pos, void *obj);
-  Vector	*(*print)(Vector *this, void (*_func)(void *));
+  Vector	*(*print)(THIS, void (*_func)(void *));
 };
 
 Vector	*newVector();

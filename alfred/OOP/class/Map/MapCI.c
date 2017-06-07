@@ -16,8 +16,9 @@ static int		get(THIS, char *key);
 static int		len(THIS);
 static int		end(THIS);
 static bool		exist(THIS, char *key);
-static void			start_loop(THIS);
-static PairCI			*loop(THIS);
+static void		start_loop(THIS);
+static PairCI		*loop(THIS);
+static MapCI		*print(THIS, void (*_func)(PairCI *pair));
 
 MapCI		*newMapCI(int size, int nof)
 {
@@ -52,6 +53,7 @@ MapCI		initMapCI(int size, int nof)
   out.exist AS &exist;
   out.start_loop AS &start_loop;
   out.loop AS &loop;
+  out.print AS &print;
 
   MALLOC(out.__table, sizeof(struct s_entryCI *) * size);
   while (i < size)

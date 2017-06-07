@@ -16,6 +16,11 @@ THE_BEST
 ZAPPY_EVER
 
 
+void	printMap(PairCI *data)
+{
+  printf("key -> %s | data -> %d\n", data->key, data->data);
+}
+
 int main<:ZAPPY:>;
 
 
@@ -43,6 +48,8 @@ int		zappy()
   map->start_loop(map);
   while ((pair = map->loop(map)) NOT NULL)
     printf("key: %s data: %d\n", pair->key, pair->data);
+
+  map->print(map, &printMap);
 
   return (0);
 }

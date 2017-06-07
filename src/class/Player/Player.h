@@ -11,6 +11,8 @@
 #ifndef ZAPPY_PLAYER_H
 #define ZAPPY_PLAYER_H
 
+#include <inventory.h>
+#include "MapCI.h"
 #include "Alfred.h"
 
 typedef class s_Player Player;
@@ -33,6 +35,7 @@ class			s_Player
   Vec2I			pos;
   Direction		direction;
   int			level;
+  Inventory		inv;
 };
 
 Player			*newPlayer(int size, int nof);

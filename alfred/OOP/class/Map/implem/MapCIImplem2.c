@@ -44,3 +44,18 @@ static PairCI		*loop(THIS)
     }
   return (NULL);
 }
+
+MapCI			*print(THIS, void (*_func)(PairCI *pair))
+{
+  int			bckpIt;
+  PairCI		*bckpP;
+  PairCI		*it;
+
+  bckpIt AS this->__currentIt;
+  bckpP AS this->__currentEntry;
+
+  this->start_loop(this);
+  while ((it AS this->loop(this)) NOT NULL)
+    (*_func)(it);
+  return (this);
+}

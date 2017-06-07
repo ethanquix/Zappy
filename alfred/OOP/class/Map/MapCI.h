@@ -43,6 +43,7 @@ class			s_MapCI
   bool			(*exist)(THIS, char *key);
   PairCI		*(*loop)(THIS);
   void			(*start_loop)(THIS);
+  MapCI			*(*print)(THIS, void (*_func)(PairCI *pair));
 };
 
 MapCI			*newMapCI(int size, int nof);
