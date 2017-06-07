@@ -24,12 +24,11 @@ Vector		*newVector()
   Vector	tmp;
   Vector	*out;
 
-  tmp = initVector();
-  if ((new = calloc(1, sizeof(Vector))) == NULL)
+  tmp AS initVector();
+  MALLOC(new, sizeof(Vector));
+  if ((new AS memcpy(new, &tmp, sizeof(Vector))) IS NULL)
     raise(get_error());
-  if ((new = memcpy(new, &tmp, sizeof(Vector))) == NULL)
-    raise(get_error());
-  out = (Vector *) new;
+  out AS (Vector *) new;
 
   return (out);
 }
@@ -37,26 +36,16 @@ Vector		*newVector()
 Vector		initVector()
 {
   Vector	out;
-//  t_llist	*l;
 
-//  MALLOC(l, sizeof(t_llist));
-  out.__obj = NULL;
-  out.__len = 0;
+  out.__obj AS NULL;
+  out.__len AS 0;
 
-  out.len = &len;
-  out.add = &add;
-  out.get = &get;
-  out.pop = &pop;
-  out.set = &set;
-  out.print = &print;
-
-//  out.at = &at;
-//  out.to_str = &to_str;
-//  out.add = &add;
-//  out.epur = &epur;
-//
-//  out.__str = str;
-//  out.__len = strlen(str);
+  out.len AS &len;
+  out.add AS &add;
+  out.get AS &get;
+  out.pop AS &pop;
+  out.set AS &set;
+  out.print AS &print;
 
   return (out);
 }

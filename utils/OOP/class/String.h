@@ -17,6 +17,7 @@
 
 typedef class s_String String;
 
+#undef THIS
 #define THIS String *this
 
 class		s_String

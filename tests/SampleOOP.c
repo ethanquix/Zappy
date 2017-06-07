@@ -18,6 +18,7 @@
 typedef struct s_MasterClass {
 //    ALFRED_MF(int, hello, struct s_MasterClass *this, char *name); <-- macro to help making member function but IDE dont like
     int (*hello)(struct s_MasterClass *this, char *name);   //<- This is the virtual function which we are gonna override
+  int (*yop)(struct s_MasterClass *this, void *a);
     int t;
 } t_MasterClass;
 
@@ -27,8 +28,16 @@ static int A_Open (t_MasterClass *this, char *name) {
     printf ("Hello, you can see I am the --A-- class: %s\n", name);
     return 0;
 }
+
+static int A_yop(t_MasterClass *this, char *c)
+{
+  printf("A_yop: %s\n", c);
+  return (4);
+}
+
 static int A_Init (t_MasterClass *this) {
     this->hello = &A_Open;
+  this->yop = (int (*)(struct s_MasterClass *, void *)) &A_yop;
     this->t = 0;
     return 0;
 }
@@ -39,8 +48,16 @@ static int B_Open (t_MasterClass *this, char *name) {
     printf ("Hello, you can see I am the --B-- class: %s\n", name);
     return 0;
 }
+
+static int B_yop(t_MasterClass *this, int *i)
+{
+  printf("B_yop: %d\n", *i);
+  return (4);
+}
+
 static int B_Init (t_MasterClass *this) {
     this->hello = &B_Open;
+  this->yop = (int (*)(struct s_MasterClass *, void *)) &B_yop;
     return 0;
 }
 
@@ -68,18 +85,10 @@ int main()
 
     status = (A.hello)(&A, "A");
     status = (B.hello(&B, "B"));
+
+  A.yop(&A, "salut");
+  B.yop(&B, &C.t);
 //    status = (B.hello)(&B, "B"); <-- same but this one is easier to understand
 
     return 0;
 }
-
-
-
-//Another Sample, let's make an Car class
-
-typedef struct s_car
-{
-    int speed;
-    char *name;
-    struct s_car new(int speed, char *nae)
-} Car;

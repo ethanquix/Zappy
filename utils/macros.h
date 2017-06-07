@@ -11,6 +11,8 @@
 #ifndef ZAPPY_MACROS_HPP
 #define ZAPPY_MACROS_HPP
 
+#include <stdbool.h>
+
 //Troll
 
 #define ZAPPY 42
@@ -24,6 +26,8 @@
 #define NOT !=
 #define IS ==
 #define AS =
+
+#include <stdbool.h>
 
 //Utils
 #define RESET(a,b)   memset(a,b,sizeof(a))

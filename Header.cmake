@@ -1,3 +1,10 @@
+########################################################################################################################
+#                                                                                                                      #
+#                                               COLOR MACROS                                                           #
+#                                                                                                                      #
+########################################################################################################################
+
+
 if (UNIX)
     string(ASCII 27 Esc)
     set(Reset "${Esc}[m")
@@ -31,11 +38,12 @@ set(PROJECT_VERSION_PATCH 0)
 set(PROJECT_VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH})
 set(SETTINGS_ORGANIZATION "${BoldCyan}Epitech${Reset}")
 set(SETTINGS_APPLICATION ${PROJECT_NAME}${Reset})
-set(PROJECT_AUTHOR "${BoldYellow}Dimitri Wyzlic${Reset}, ${BoldRed}Hugo Laroche${Reset}, ${BoldGreen}Valentin Gaillard${Reset}, ${BoldBlue}JON DOE${Reset}, ${BoldMagenta}JON DOE${Reset}, ${BoldCyan}JON DOE${Reset}")
+set(PROJECT_AUTHOR "${BoldYellow}Dimitri Wyzlic${Reset}, ${BoldRed}Hugo Laroche${Reset}, ${BoldGreen}Valentin Gaillard${Reset}, ${BoldBlue}Olivier Gillon${Reset}, ${BoldMagenta}Raphael Chriqui${Reset},
+${BoldCyan}")
 set(ORGANIZATION_BUILD_MESSAGE "Organization : ${SETTINGS_ORGANIZATION}")
 set(PROJECT_YEAR_COPYRIGHT "2017")
 set(PROJECT_AUTHOR_EMAIL "${BoldYellow}dimitri1.wyzlic@epitech.eu${Reset}, ${BoldRed}hugo1.laroche@epitech.eu${Reset}, ${BoldGreen}valentin.gaillard@epitech.eu${Reset}")
-set(PROJECT_AUTHOR_EMAIL2 "${BoldBlue}JON DOE@epitech.eu${Reset}, ${BoldMagenta}JON DOE@epitech.eu${Reset}, ${BoldCyan}JON DOE@epitech.eu${Reset}")
+set(PROJECT_AUTHOR_EMAIL2 "${BoldBlue}olivier.gillon@epitech.eu${Reset}, ${BoldMagenta}raphael.chriqui@epitech.eu${Reset}")
 set(PROJECT_BUILD_MESSAGE  " v" ${PROJECT_VERSION} " (" ${CMAKE_BUILD_TYPE} ")")
 set(COPYRIGHT_BUILD_MESSAGE "Copyright (c) ${PROJECT_YEAR_COPYRIGHT}  ${PROJECT_AUTHOR}")
 set(EMAIL_BUILD_MESSAGE "Email : ${PROJECT_AUTHOR_EMAIL}")

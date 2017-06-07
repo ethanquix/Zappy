@@ -17,6 +17,7 @@
 
 typedef class s_Vector Vector;
 
+#undef THIS
 #define THIS Vector *this
 
 typedef struct		s_llist
