@@ -31,7 +31,7 @@ typedef struct	s_inv
   char		loot[7];
 }		t_inv;
 
-void		init_inv(Inventory *inv)
+static void		init_inv(Inventory *inv)
 {
   inv->loot[LINEMATE] = 0;
   inv->loot[DERAUMERE] = 0;

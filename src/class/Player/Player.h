@@ -11,8 +11,9 @@
 #ifndef ZAPPY_PLAYER_H
 #define ZAPPY_PLAYER_H
 
-#include <inventory.h>
-#include "MapCI.h"
+//#include "Server.h"
+#include "inventory.h"
+#include "String.h"
 #include "Alfred.h"
 
 typedef class s_Player Player;
@@ -32,13 +33,30 @@ typedef	enum	e_dir
 
 class			s_Player
 {
-  Vec2I			pos;
+  Vec2I			position;
   Direction		direction;
   int			level;
   Inventory		inv;
+  String		*number;
+  //Client		*client;
+//Team			*team;
+//String		*name ???
+
+  void			(*forward)(THIS);
+  void			(*rotate)(THIS, Direction *direction);
+  void			(*see)(THIS);
+  void			(*get_inventory)(THIS);
+  void			(*broadcast)(THIS, String *);
+  void			(*unused_slot)(THIS);
+  void			(*forkPlayer)(THIS);
+  void			(*eject)(THIS);
+  void			(*death)(THIS);
+  void			(*take_obj)(THIS);
+  void			(*place_obj)(THIS);
+  void			(*incant)(THIS);
 };
 
-Player			*newPlayer(int size, int nof);
-Player			initPlayer(int size, int nof);
+Player			*newPlayer(/* Client ? */);
+Player			initPlayer(/* Client ? */);
 
 #endif //ZAPPY_PLAYER_H

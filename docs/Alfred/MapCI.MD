@@ -11,6 +11,9 @@ Method:
 - `int		end(MapCI *this)`
 - `bool		exist(MapCI *this, char *key)`
 - `char		at(MapCI *this, int pos);`
+- `void		start_loop(MapCI *this);`
+- `PairCI	*loop(MapCI *this);`
+- `void		*print(MapCI *this, void (*_func)(PairCI *pair));`
 
 Example:
 ```
@@ -19,11 +22,17 @@ Example:
 void		mapCI_sample()
 {
   MapCI		*map;
-
+  PairCI	*pair;
+  
   map = newMapCI(100, -1);
 
   map->set(map, "toto", 1);
+  map->set(map, "salut", 2);;
 
   printf("Test: %d\n", map->get(map, "toto"));
+  
+  map->start_loop(map);
+  while ((pair = map->loop(map)) NOT NULL)
+    printf("key: %s data: %d\n", pair->key, pair->data); 
  }
 ```

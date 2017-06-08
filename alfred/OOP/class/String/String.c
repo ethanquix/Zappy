@@ -46,7 +46,7 @@ String		initString(char *str)
   out.add AS &add;
   out.epur AS &epur;
 
-  out.__str AS str;
+  out.__str AS strdup(str);
   out.__len AS strlen(str);
 
   return (out);

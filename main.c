@@ -8,48 +8,27 @@
 ** Last update Wed Jun 07 00:48:19 2017 Dimitri Wyzlic
 */
 
-#include "MapCI.h"
 #include "Alfred.h"
+#include "Server.h"
 
 
 THE_BEST
 ZAPPY_EVER
 
 
-void	printMap(PairCI *data)
-{
-  printf("key -> %s | data -> %d\n", data->key, data->data);
-}
-
 int main<:ZAPPY:>;
 
 
-/*
-** TODO Zappy in the zappy() func
-** :)
-*/
+
+
 int		zappy()
 {
-  MapCI		*map;
-  PairCI	*pair;
+  server = newServer();
 
-
-  map = newMapCI(1000, -1);
-
-  map->set(map, "toto", 1);
-  map->set(map, "salut", 2);
-  map->set(map, "je", 3);
-  map->set(map, "suis", 4);
-  map->set(map, "un", 5);
-  map->set(map, "dimitri", 6);
-
-  printf("Test: %d\n", map->get(map, "toto"));
-
-  map->start_loop(map);
-  while ((pair = map->loop(map)) NOT NULL)
-    printf("key: %s data: %d\n", pair->key, pair->data);
-
-  map->print(map, &printMap);
-
+  server->map = newWorldMap(0, 0);
+  server->players[TEAM_ONE] = newMapCP(100, NULL);
+  server->players[TEAM_TWO] = newMapCP(100, NULL);
+  server->team_one = newString("name of team one");
+  server->team_two = newString("name of team two");
   return (0);
 }
