@@ -31,19 +31,29 @@ class			s_Server
   String		*team_one;
   String		*team_two;
   MapCP			*players[2];
+  int			maxSlots;
+  int			port;
+  int			timeLimit;
+
+  Server		*(*run)(THIS);
+  void			(*delete)(THIS);
+
+  Server		*(*forward)(THIS, Player *player, int width, int height);
+  Server		*(*rotate)(THIS, Player *player, Direction *direction);
+  Server		*(*see)(THIS, Player *player);
+  Server		*(*get_inventory)(THIS, Player *player);
+  Server		*(*broadcast)(THIS, Player *player, String *, WorldMap *map, MapCP *players[2]);
+  Server		*(*forkPlayer)(THIS, Player *player, WorldMap *map, MapCP *players[2]);
+  Server		*(*eject)(THIS, Player *player, WorldMap *map, MapCP *players[2]);
+  Server		*(*death)(THIS, Player *player);
+  Server		*(*take_obj)(THIS, Player *player, WorldMap *map);
+  Server		*(*place_obj)(THIS, Player *player, WorldMap *map);
+  Server		*(*incant)(THIS, Player *player, WorldMap *map, MapCP *players[2]);
+  Server		*(*unused_slot)(THIS, Player *player);
   // which will contain the client (way to communicate via tcp or maybe put it here ?)
 };
 
-Server			*newServer();
-Server			initServer();
+Server			*newServer(WorldMap *map, String *teamOne, String *teamTwo, int port, int maxSlots);
+Server			initServer(WorldMap *map, String *teamOne, String *teamTwo, int port, int maxSlots);
 
-
-#define serverNorme server = NULL
-static Server *serverNorme;
-
-
-static Server		*getServer()
-{
-  return (server);
-}
 #endif //ZAPPY_SERVER_H

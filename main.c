@@ -9,6 +9,7 @@
 */
 
 #include "Alfred.h"
+#include "WorldMap.h"
 #include "Server.h"
 
 
@@ -23,12 +24,10 @@ int main<:ZAPPY:>;
 
 int		zappy()
 {
-  server = newServer();
+  Server	*server;
 
-  server->map = newWorldMap(0, 0);
-  server->players[TEAM_ONE] = newMapCP(100, NULL);
-  server->players[TEAM_TWO] = newMapCP(100, NULL);
-  server->team_one = newString("name of team one");
-  server->team_two = newString("name of team two");
+
+  server = newServer(newWorldMap(50, 50), newString("team one"), newString("team two"), 1234, 10);
+  server->run(server)->delete(server);
   return (0);
 }

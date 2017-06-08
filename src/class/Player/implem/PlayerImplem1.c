@@ -10,7 +10,7 @@
 //
 //#include "Player.h"
 //
-//static void			forward(THIS)
+//static void			forward(THIS, int width, int height)
 //{
 //  if (this->direction == NORTH)
 //    {
@@ -21,14 +21,14 @@
 //    }
 //  if (this->direction == SOUTH)
 //    {
-//      if (this->position.y + 1 < getServer()->map->height)
+//      if (this->position.y + 1 < height)
 //	(this->position.y = this->position.y + 1); //&& client add command OK
 ////      else
 //      //bad this->client->add_command->(COMMAND_KO);
 //    }
 //  if (this->direction == EAST)
 //    {
-//      if (this->position.x + 1 < getServer()->map->width)
+//      if (this->position.x + 1 < width)
 //	(this->position.x = this->position.x + 1); //&& client add command OK
 ////      else
 //      //bad this->client->add_command->(COMMAND_KO);
@@ -67,8 +67,3 @@
 //	return (void) (this->direction = NORTH);
 //    }
 //}
-//
-////static void			see(THIS);
-////static void			get_inventory(THIS);
-////static void			broadcast(String *);
-////static void			unused_slot(THIS);

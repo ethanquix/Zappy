@@ -18,6 +18,7 @@ static Player		*end(THIS);
 static bool		exist(THIS, char *key);
 static void		start_loop(THIS);
 static PairCP		*loop(THIS);
+static MapCP		*print(THIS, void (*_func)(PairCP *pair));
 
 MapCP		*newMapCP(int size, Player *nof)
 {

@@ -11,7 +11,6 @@
 #ifndef ZAPPY_WORLDMAP_H
 #define ZAPPY_WORLDMAP_H
 
-#include "Player.h"
 #include "inventory.h"
 #include "String.h"
 #include "MapCI.h"

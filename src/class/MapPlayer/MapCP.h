@@ -44,6 +44,7 @@ class			s_MapCP
   bool			(*exist)(THIS, char *key);
   PairCP		*(*loop)(THIS);
   void			(*start_loop)(THIS);
+  MapCP			*(*print)(THIS, void (*_func)(PairCP *pair));
 };
 
 MapCP			*newMapCP(int size, Player *end);

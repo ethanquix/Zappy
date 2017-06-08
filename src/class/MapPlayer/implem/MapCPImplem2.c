@@ -44,3 +44,22 @@ static PairCP		*loop(THIS)
     }
   return (NULL);
 }
+
+
+static MapCP		*print(THIS, void (*_func)(PairCP *pair))
+{
+  int			bckpIt;
+  PairCP		*bckpP;
+  PairCP		*it;
+
+  bckpIt AS this->__currentIt;
+  bckpP AS this->__currentEntry;
+
+  this->start_loop(this);
+  while ((it AS this->loop(this)) NOT NULL)
+    (*_func)(it);
+
+  this->__currentEntry AS bckpP;
+  this->__currentIt AS bckpIt;
+  return (this);
+}

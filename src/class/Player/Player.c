@@ -10,19 +10,6 @@
 
 #include "Player.h"
 
-static void			forward(THIS);
-static void			rotate(THIS, Direction *direction);
-static void			see(THIS);
-static void			get_inventory(THIS);
-static void			broadcast(THIS, String *);
-static void			unused_slot(THIS);
-static void			forkPlayer(THIS);
-static void			eject(THIS);
-static void			death(THIS);
-static void			take_obj(THIS);
-static void			place_obj(THIS);
-static void			incant(THIS);
-
 Player			*newPlayer(/* Client ? */)
 {
   void			*new;

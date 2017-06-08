@@ -11,6 +11,9 @@
 #ifndef ZAPPY_INVENTORY_H
 #define ZAPPY_INVENTORY_H
 
+#include <time.h>
+#include <stdlib.h>
+
 typedef struct s_inv	Inventory;
 
 typedef enum e_mineral	Mineral;
@@ -28,7 +31,7 @@ typedef	enum	e_mineral
 
 typedef struct	s_inv
 {
-  char		loot[7];
+  int		loot[7];
 }		t_inv;
 
 static void		init_inv(Inventory *inv)
@@ -40,6 +43,18 @@ static void		init_inv(Inventory *inv)
   inv->loot[PHIRAS] = 0;
   inv->loot[THYSTAME] = 0;
   inv->loot[FOOD] = 0;
+}
+
+static void		random_inv(Inventory *inv)
+{
+  srand(time(NULL));
+  inv->loot[LINEMATE] = rand() % 2;
+  inv->loot[DERAUMERE] = rand() % 2;
+  inv->loot[SIBUR] = rand() % 2;
+  inv->loot[MENDIANE] = rand() % 2;
+  inv->loot[PHIRAS] = rand() % 2;
+  inv->loot[THYSTAME] = rand() % 2;
+  inv->loot[FOOD] = rand() % 2;
 }
 
 #endif //ZAPPY_INVENTORY_H
