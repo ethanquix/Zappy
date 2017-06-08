@@ -39,6 +39,7 @@ class		s_Vector
   void		*(*pop)(THIS);
   Vector	*(*set)(THIS, int pos, void *obj);
   Vector	*(*print)(THIS, void (*_func)(void *));
+  void		(*delete)(THIS);
 };
 
 Vector	*newVector();

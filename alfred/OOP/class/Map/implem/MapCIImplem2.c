@@ -57,5 +57,8 @@ MapCI			*print(THIS, void (*_func)(PairCI *pair))
   this->start_loop(this);
   while ((it AS this->loop(this)) NOT NULL)
     (*_func)(it);
+
+  this->__currentIt AS bckpIt;
+  this->__currentEntry AS bckpP;
   return (this);
 }

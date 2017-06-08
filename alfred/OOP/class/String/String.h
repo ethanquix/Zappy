@@ -32,6 +32,7 @@ class		s_String
   char 		(*at)(THIS, int emp);
 
   String	*(*epur)(THIS, char to_delete);
+  void		(*delete)(THIS);
 };
 
 String	*newString(char *str);

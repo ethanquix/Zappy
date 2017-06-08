@@ -44,6 +44,7 @@ class			s_MapCI
   PairCI		*(*loop)(THIS);
   void			(*start_loop)(THIS);
   MapCI			*(*print)(THIS, void (*_func)(PairCI *pair));
+  void			(*delete)(THIS);
 };
 
 MapCI			*newMapCI(int size, int nof);

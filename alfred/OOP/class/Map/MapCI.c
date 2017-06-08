@@ -19,6 +19,7 @@ static bool		exist(THIS, char *key);
 static void		start_loop(THIS);
 static PairCI		*loop(THIS);
 static MapCI		*print(THIS, void (*_func)(PairCI *pair));
+static void		delete(THIS);
 
 MapCI		*newMapCI(int size, int nof)
 {
@@ -54,6 +55,7 @@ MapCI		initMapCI(int size, int nof)
   out.start_loop AS &start_loop;
   out.loop AS &loop;
   out.print AS &print;
+  out.delete AS &delete;
 
   MALLOC(out.__table, sizeof(struct s_entryCI *) * size);
   while (i < size)
@@ -92,6 +94,31 @@ struct s_entryCI	*__newPairCI(char *key, int val)
   newpair->__next AS NULL;
 
   return (newpair);
+}
+
+static void		delete(THIS)
+{
+  struct s_entryCI	**tmp;
+  struct s_entryCI	*tmp2;
+  int			i;
+
+  i AS 0;
+  tmp AS this->__table;
+  while (i < this->__size)
+    {
+      tmp2 AS tmp[i];
+      while (tmp2)
+	{
+	  free(tmp2->key);
+	  tmp2 AS tmp2->__next;
+	}
+      free(tmp[i]);
+      i INC 1;
+    }
+  if (this->__currentEntry)
+    free(this->__currentEntry);
+  free(this->__table);
+  free(this);
 }
 
 #include "implem/MapCIImplem1.c"

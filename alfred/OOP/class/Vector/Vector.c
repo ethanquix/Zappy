@@ -16,6 +16,7 @@ static void	*get(THIS, int pos);
 static void	*pop(THIS);
 static Vector	*set(THIS, int pos, void *obj);
 static Vector	*print(THIS, void (*_func)(void *));
+static void	delete(THIS);
 
 
 Vector		*newVector()
@@ -48,6 +49,19 @@ Vector		initVector()
   out.print AS &print;
 
   return (out);
+}
+
+static void	delete(THIS)
+{
+  t_llist	*tmp;
+
+  tmp AS this->__obj;
+  while (tmp)
+    {
+      free(tmp->__elem);
+      tmp AS tmp->next;
+    }
+  free(this);
 }
 
 #include "implem/VectorImplem1.c"

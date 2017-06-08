@@ -16,6 +16,7 @@ static int	len(THIS);
 static char	at(THIS, int at);
 static String	*add(THIS, String *other);
 static String	*epur(THIS, char to_delete);
+static void	delete(THIS);
 
 
 
@@ -45,11 +46,19 @@ String		initString(char *str)
   out.print AS &print;
   out.add AS &add;
   out.epur AS &epur;
+  out.delete AS &delete;
 
   out.__str AS strdup(str);
   out.__len AS strlen(str);
 
   return (out);
+}
+
+static void	delete(THIS)
+{
+  if (this->__str)
+    free(this->__str);
+  free(this);
 }
 
 #include "implem/StringImplem1.c"
