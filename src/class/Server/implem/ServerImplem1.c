@@ -10,6 +10,39 @@
 
 #include "Server.h"
 
+static Server		*add_team(THIS, String *name)
+{
+  int			i;
+  t_team		*out;
+
+  MALLOC(out, sizeof(t_team));
+  out->name = name;
+  out->nb_player = this->maxSlots;
+
+  i = 0;
+  while (this->teams[i] != NULL)
+    i += 1;
+  this->teams[i] = out;
+  return (this);
+}
+
+static Server		*player_connect(THIS, String *name)
+{
+  Player		*new;
+
+  new = newPlayer();
+  if (this->players->exist(this->players, name->get(name)) == true)
+    {
+      //TODO ERROR PLAYER EXIST
+    }
+  else
+    {
+      this->players->set(this->players, name->get(name), new);
+      //TODO CONTACT CLIENT OK AND PLACE PLAYER ON MAP
+    }
+  return (this);
+}
+
 static Server		*forward(THIS, Player *player, int width, int height)
 {
   if (player->direction == NORTH)

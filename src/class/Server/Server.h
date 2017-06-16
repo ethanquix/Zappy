@@ -15,29 +15,28 @@
 #include "MapCP.h"
 #include "String.h"
 #include "WorldMap.h"
+#include "team.h"
 
-typedef class s_Server Server;
+typedef class s_server Server;
 
 #undef THIS
 #define THIS Server *this
 
-#define TEAM_ONE 0
-#define TEAM_TWO 1
-
-
-class			s_Server
+class			s_server
 {
+  t_team		**teams;
   WorldMap		*map;
-  String		*team_one;
-  String		*team_two;
-  MapCP			*players[2];
+  MapCP			*players;
   int			maxSlots;
+  int			nb_teams;
   int			port;
   int			timeLimit;
 
   Server		*(*run)(THIS);
   void			(*delete)(THIS);
 
+  Server		*(*add_team)(THIS, String *name);
+  Server		*(*player_connect)(THIS, String *name);
   Server		*(*forward)(THIS, Player *player, int width, int height);
   Server		*(*rotate)(THIS, Player *player, Direction *direction);
   Server		*(*see)(THIS, Player *player);
@@ -53,7 +52,7 @@ class			s_Server
   // which will contain the client (way to communicate via tcp or maybe put it here ?)
 };
 
-Server			*newServer(WorldMap *map, String *teamOne, String *teamTwo, int port, int maxSlots);
-Server			initServer(WorldMap *map, String *teamOne, String *teamTwo, int port, int maxSlots);
+Server			*newServer(WorldMap *map, int port, int maxSlots, int nbTeams);
+Server			initServer(WorldMap *map, int port, int maxSlots, int nbTeams);
 
 #endif //ZAPPY_SERVER_H

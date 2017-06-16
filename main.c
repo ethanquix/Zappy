@@ -26,8 +26,9 @@ int		zappy()
 {
   Server	*server;
 
-
-  server = newServer(newWorldMap(50, 50), newString("team one"), newString("team two"), 1234, 10);
+  server = newServer(newWorldMap(50, 50), 1234, 10, 2);
+  server->add_team(server, newString("Team One"));
+  server->add_team(server, newString("Team Two"));
   server->run(server)->delete(server);
   return (0);
 }

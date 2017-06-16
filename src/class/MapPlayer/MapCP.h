@@ -45,6 +45,7 @@ class			s_MapCP
   PairCP		*(*loop)(THIS);
   void			(*start_loop)(THIS);
   MapCP			*(*print)(THIS, void (*_func)(PairCP *pair));
+  void			(*delete)(THIS);
 };
 
 MapCP			*newMapCP(int size, Player *end);

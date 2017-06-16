@@ -26,6 +26,8 @@ class			s_WorldMap
   int			width;
   int			height;
   Inventory		**tiles;
+
+  void			(*delete)(THIS);
 };
 
 WorldMap		*newWorldMap(int width, int height);

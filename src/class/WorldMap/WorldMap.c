@@ -12,6 +12,8 @@
 
 Inventory	*init_row(int width);
 
+static void	delete(THIS);
+
 WorldMap		*newWorldMap(int width, int height)
 {
   void			*new;
@@ -31,6 +33,8 @@ WorldMap		initWorldMap(int width, int height)
 {
   WorldMap		map;
   int			i;
+
+  map.delete = &delete;
 
   i = 0;
   map.width = width;
@@ -57,4 +61,14 @@ Inventory	*init_row(int width)
       i INC 1;
     }
   return (out);
+}
+
+static void	delete(THIS)
+{
+  int		i;
+
+  i = 0;
+  while (i < this->height)
+    free(this->tiles[i++]);
+  free(this);
 }

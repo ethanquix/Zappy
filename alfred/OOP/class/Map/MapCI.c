@@ -115,8 +115,6 @@ static void		delete(THIS)
       free(tmp[i]);
       i INC 1;
     }
-  if (this->__currentEntry)
-    free(this->__currentEntry);
   free(this->__table);
   free(this);
 }

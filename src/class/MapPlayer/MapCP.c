@@ -19,6 +19,7 @@ static bool		exist(THIS, char *key);
 static void		start_loop(THIS);
 static PairCP		*loop(THIS);
 static MapCP		*print(THIS, void (*_func)(PairCP *pair));
+static void		delete(THIS);
 
 MapCP		*newMapCP(int size, Player *nof)
 {
@@ -40,6 +41,7 @@ MapCP		initMapCP(int size, Player *nof)
   MapCP		out;
   int		i;
 
+  i = 0;
   if (size <= 0 OR size > USHRT_MAX)
     raise("Size negative or too big");
 
@@ -52,6 +54,7 @@ MapCP		initMapCP(int size, Player *nof)
   out.exist AS &exist;
   out.start_loop AS &start_loop;
   out.loop AS &loop;
+  out.delete AS &delete;
 
   MALLOC(out.__table, sizeof(struct s_entryCP *) * size);
   while (i < size)
@@ -90,6 +93,29 @@ struct s_entryCP * __newPairCP(char *key, Player *val)
   newpair->__next AS NULL;
 
   return (newpair);
+}
+
+static void		delete(THIS)
+{
+  struct s_entryCP	**tmp;
+  struct s_entryCP	*tmp2;
+  int			i;
+
+  i AS 0;
+  tmp AS this->__table;
+  while (i < this->__size)
+    {
+      tmp2 AS tmp[i];
+      while (tmp2)
+	{
+	  free(tmp2->key);
+	  tmp2 AS tmp2->__next;
+	}
+      free(tmp[i]);
+      i INC 1;
+    }
+  free(this->__table);
+  free(this);
 }
 
 #include "implem/MapCPImplem1.c"
