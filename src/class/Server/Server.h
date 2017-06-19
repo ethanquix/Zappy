@@ -36,18 +36,18 @@ class			s_server
   void			(*delete)(THIS);
 
   Server		*(*add_team)(THIS, String *name);
-  Server		*(*player_connect)(THIS, String *name);
-  Server		*(*forward)(THIS, Player *player, int width, int height);
+  Server		*(*player_connect)(THIS, Player *player);
+  Server		*(*forward)(Server *this, Player *player);
   Server		*(*rotate)(THIS, Player *player, Direction *direction);
   Server		*(*see)(THIS, Player *player);
   Server		*(*get_inventory)(THIS, Player *player);
-  Server		*(*broadcast)(THIS, Player *player, String *, WorldMap *map, MapCP *players[2]);
-  Server		*(*forkPlayer)(THIS, Player *player, WorldMap *map, MapCP *players[2]);
-  Server		*(*eject)(THIS, Player *player, WorldMap *map, MapCP *players[2]);
+  Server		*(*broadcast)(Server *this, Player *player, String *msg);
+  Server		*(*forkPlayer)(THIS, Player *player);
+  Server		*(*eject)(THIS, Player *player);
   Server		*(*death)(THIS, Player *player);
-  Server		*(*take_obj)(THIS, Player *player, WorldMap *map);
-  Server		*(*place_obj)(THIS, Player *player, WorldMap *map);
-  Server		*(*incant)(THIS, Player *player, WorldMap *map, MapCP *players[2]);
+  Server		*(*take_obj)(THIS, Player *player);
+  Server		*(*place_obj)(THIS, Player *player); // et l'obj a placer
+  Server		*(*incant)(THIS, Player *player);
   Server		*(*unused_slot)(THIS, Player *player);
   // which will contain the client (way to communicate via tcp or maybe put it here ?)
 };

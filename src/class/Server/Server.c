@@ -16,13 +16,13 @@ static Server		*forward(THIS, Player *player, int width, int height);
 static Server		*rotate(THIS, Player *player, Direction *direction);
 static Server		*see(THIS, Player *player);
 static Server		*get_inventory(THIS, Player *player);
-static Server		*broadcast(THIS, Player *player, String *, WorldMap *map, MapCP **players);
-static Server		*forkPlayer(THIS, Player *player, WorldMap *map, MapCP **players);
-static Server		*eject(THIS, Player *player, WorldMap *map, MapCP **players);
+static Server		*broadcast(THIS, Player *player, String *msg);
+static Server		*forkPlayer(THIS, Player *player);
+static Server		*eject(THIS, Player *player);
 static Server		*death(THIS, Player *player);
-static Server		*take_obj(THIS, Player *player, WorldMap *map);
-static Server		*place_obj(THIS, Player *player, WorldMap *map);
-static Server		*incant(THIS, Player *player, WorldMap *map, MapCP **players);
+static Server		*take_obj(THIS, Player *player);
+static Server		*place_obj(THIS, Player *player);
+static Server		*incant(THIS, Player *player);
 static Server		*unused_slot(THIS, Player *player);
 
 static Server		*run(THIS);
@@ -35,11 +35,11 @@ Server *newServer(WorldMap *map, int port, int maxSlots, int nbTeams)
   Server		tmp;
   Server		*out;
 
-  tmp AS initServer(map, port, maxSlots, nbTeams);
+  tmp = initServer(map, port, maxSlots, nbTeams);
   MALLOC(new, sizeof(Server));
-  if ((new AS memcpy(new, &tmp, sizeof(Server))) IS NULL)
+  if ((new = memcpy(new, &tmp, sizeof(Server))) IS NULL)
     raise(get_error());
-  out AS (Server *) new;
+  out = (Server *) new;
 
   return (out);
 }
@@ -73,7 +73,7 @@ Server			initServer(WorldMap *map, int port, int maxSlots, int nbTeams)
 static Server	*run(THIS)
 {
   //1: Ask connect tool to fetch all request
-  //2: Execute thme
+  //2: Execute the command returned by the server
   //3: loop
   //TODO all serv connection, save command etc...
   return (this);

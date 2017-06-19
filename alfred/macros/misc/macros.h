@@ -16,8 +16,8 @@
 //Troll
 
 #define ZAPPY 42
-#define THE_BEST int main[ZAPPY] asm("NotMain");
-#define ZAPPY_EVER int zappy() asm("main");
+#define THE_BEST int	main[ZAPPY] asm("NotMain");
+#define ZAPPY_EVER int	zappy(int nb, char **arg) asm("main");
 
 //Utils
 #define RESET(a,b)   memset(a,b,sizeof(a))

@@ -12,8 +12,8 @@
 
 static void		start_loop(THIS)
 {
-  this->__currentIt AS 0;
-  this->__currentEntry AS NULL;
+  this->__currentIt = 0;
+  this->__currentEntry = NULL;
 
   while (this->__currentIt < this->__size)
     {
@@ -34,8 +34,8 @@ static PairCI		*loop(THIS)
     {
       if (this->__currentEntry NOT NULL)
 	{
-	  out AS this->__currentEntry;
-	  this->__currentEntry AS this->__currentEntry->__next;
+	  out = this->__currentEntry;
+	  this->__currentEntry = this->__currentEntry->__next;
 	  return (out);
 	}
       this->__currentIt INC 1;
@@ -51,14 +51,14 @@ MapCI			*print(THIS, void (*_func)(PairCI *pair))
   PairCI		*bckpP;
   PairCI		*it;
 
-  bckpIt AS this->__currentIt;
-  bckpP AS this->__currentEntry;
+  bckpIt = this->__currentIt;
+  bckpP = this->__currentEntry;
 
   this->start_loop(this);
-  while ((it AS this->loop(this)) NOT NULL)
+  while ((it = this->loop(this)) NOT NULL)
     (*_func)(it);
 
-  this->__currentIt AS bckpIt;
-  this->__currentEntry AS bckpP;
+  this->__currentIt = bckpIt;
+  this->__currentEntry = bckpP;
   return (this);
 }

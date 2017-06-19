@@ -17,12 +17,12 @@ THE_BEST
 ZAPPY_EVER
 
 
-int main<:ZAPPY:>;
+int	main<:ZAPPY:>;
 
 
 
 
-int		zappy()
+int		zappy(int nb, char **arg)
 {
   Server	*server;
 

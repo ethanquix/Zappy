@@ -20,11 +20,11 @@ WorldMap		*newWorldMap(int width, int height)
   WorldMap		tmp;
   WorldMap		*out;
 
-  tmp AS initWorldMap(width, height);
+  tmp = initWorldMap(width, height);
   MALLOC(new, sizeof(WorldMap));
-  if ((new AS memcpy(new, &tmp, sizeof(WorldMap))) IS NULL)
+  if ((new = memcpy(new, &tmp, sizeof(WorldMap))) IS NULL)
     raise(get_error());
-  out AS (WorldMap *) new;
+  out = (WorldMap *) new;
 
   return (out);
 }

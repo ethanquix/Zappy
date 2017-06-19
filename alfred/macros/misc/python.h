@@ -16,7 +16,6 @@
 #define AND &&
 #define NOT !=
 #define IS ==
-#define AS =
 #define INC +=
 #define DEC -=
 

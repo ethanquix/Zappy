@@ -15,8 +15,8 @@ static Vector	*print(THIS, void (*_func)(void *))
   int		i;
   t_llist	*it;
 
-  i AS 0;
-  it AS this->__obj;
+  i = 0;
+  it = this->__obj;
   printf("Vector -> len: %d\tData:\n", this->__len);
   if (this->__len IS 0)
     {
@@ -26,7 +26,7 @@ static Vector	*print(THIS, void (*_func)(void *))
   while (i NOT this->__len)
     {
       (*_func)(it->__elem);
-      it AS it->next;
+      it = it->next;
       i INC 1;
     }
   printf("End Vector\n");

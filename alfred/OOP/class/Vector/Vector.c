@@ -25,11 +25,11 @@ Vector		*newVector()
   Vector	tmp;
   Vector	*out;
 
-  tmp AS initVector();
+  tmp = initVector();
   MALLOC(new, sizeof(Vector));
-  if ((new AS memcpy(new, &tmp, sizeof(Vector))) IS NULL)
+  if ((new = memcpy(new, &tmp, sizeof(Vector))) IS NULL)
     raise(get_error());
-  out AS (Vector *) new;
+  out = (Vector *) new;
 
   return (out);
 }
@@ -38,15 +38,15 @@ Vector		initVector()
 {
   Vector	out;
 
-  out.__obj AS NULL;
-  out.__len AS 0;
+  out.__obj = NULL;
+  out.__len = 0;
 
-  out.len AS &len;
-  out.add AS &add;
-  out.get AS &get;
-  out.pop AS &pop;
-  out.set AS &set;
-  out.print AS &print;
+  out.len = &len;
+  out.add = &add;
+  out.get = &get;
+  out.pop = &pop;
+  out.set = &set;
+  out.print = &print;
 
   return (out);
 }
@@ -55,11 +55,11 @@ static void	delete(THIS)
 {
   t_llist	*tmp;
 
-  tmp AS this->__obj;
+  tmp = this->__obj;
   while (tmp)
     {
       free(tmp->__elem);
-      tmp AS tmp->next;
+      tmp = tmp->next;
     }
   free(this);
 }
