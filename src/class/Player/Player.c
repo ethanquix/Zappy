@@ -32,7 +32,7 @@ Player			initPlayer(/* Client ? */)
   out.position.x = 0;
   out.position.y = 0;
   out.direction = NORTH;
-  out.level = 0;
+  out.level = 1;
   init_inv(&(out.inv));
 
 //  out.forward = &forward;

@@ -25,4 +25,8 @@
 //List manipulation
 #define ARRAY_LENGTH(A) (sizeof(A) / sizeof((A)[0]))
 
+//C++
+
+#define AUTO(a, b) typeof(b) (a) = b
+
 #endif //ZAPPY_MACROS_HPP

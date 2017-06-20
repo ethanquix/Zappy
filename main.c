@@ -21,14 +21,23 @@ int	main<:ZAPPY:>;
 
 
 
-
 int		zappy(int nb, char **arg)
 {
   Server	*server;
 
+  //parse args
   server = newServer(newWorldMap(50, 50), 1234, 10, 2);
   server->add_team(server, newString("Team One"));
   server->add_team(server, newString("Team Two"));
-  server->run(server)->delete(server);
+//  server->run(server)->delete(server); // TODO A DELETE
+  //io_manager = new_io_manager(port);
+  //io_manager->add_server(io_manager, server);
+  //io_manager->run(io_manager)->delete(io_manager);
   return (0);
 }
+
+// EXAMPLE TO CALL GET INVENTORY METHOD
+//server->get_inventory(server, server->players->get(server->players, "joueur 1");
+//and then send the result of this function to the client (yeah it currently return a server * but soon a String *
+
+//TODO NORME ","

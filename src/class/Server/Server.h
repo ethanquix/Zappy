@@ -37,7 +37,7 @@ class			s_server
 
   Server		*(*add_team)(THIS, String *name);
   Server		*(*player_connect)(THIS, Player *player);
-  Server		*(*forward)(Server *this, Player *player);
+  Server		*(*forward)(Server *this, Player *player, int width, int height); //this->map->width, this->map->height
   Server		*(*rotate)(THIS, Player *player, Direction *direction);
   Server		*(*see)(THIS, Player *player);
   Server		*(*get_inventory)(THIS, Player *player);
@@ -45,8 +45,8 @@ class			s_server
   Server		*(*forkPlayer)(THIS, Player *player);
   Server		*(*eject)(THIS, Player *player);
   Server		*(*death)(THIS, Player *player);
-  Server		*(*take_obj)(THIS, Player *player);
-  Server		*(*place_obj)(THIS, Player *player); // et l'obj a placer
+  Server		*(*take_obj)(THIS, Player *player, t_mineral mineral);
+  Server		*(*place_obj)(THIS, Player *player, t_mineral mineral);
   Server		*(*incant)(THIS, Player *player);
   Server		*(*unused_slot)(THIS, Player *player);
   // which will contain the client (way to communicate via tcp or maybe put it here ?)

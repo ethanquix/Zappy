@@ -20,8 +20,8 @@ static Server		*broadcast(THIS, Player *player, String *msg);
 static Server		*forkPlayer(THIS, Player *player);
 static Server		*eject(THIS, Player *player);
 static Server		*death(THIS, Player *player);
-static Server		*take_obj(THIS, Player *player);
-static Server		*place_obj(THIS, Player *player);
+static Server		*take_obj(THIS, Player *player, t_mineral mineral);
+static Server		*place_obj(THIS, Player *player, t_mineral mineral);
 static Server		*incant(THIS, Player *player);
 static Server		*unused_slot(THIS, Player *player);
 
@@ -60,12 +60,15 @@ Server			initServer(WorldMap *map, int port, int maxSlots, int nbTeams)
   out.timeLimit = 100;
   out.players = newMapCP(500, NULL);
 
-  out.run = &run;
+  out.run = &run; // TODO REMOVE RUN METHOD
   out.delete = &delete;
 
   out.add_team = &add_team;
   out.forward = &forward;
   out.rotate = &rotate;
+  out.see = &see;
+  out.get_inventory = &get_inventory;
+
 
   return (out);
 }

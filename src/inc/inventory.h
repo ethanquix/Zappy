@@ -14,9 +14,23 @@
 #include <time.h>
 #include <stdlib.h>
 
+#define MAX_MINERAL 7
+
 typedef struct s_inv	Inventory;
 
 typedef enum e_mineral	Mineral;
+
+//TODO Norme
+static char*	mineral_name[] =
+{
+	"linemate",
+	"deraumere",
+	"sibur",
+	"mendiane",
+	"phiras",
+	"thystame",
+	"food",
+};
 
 typedef	enum	e_mineral
 {
