@@ -37,7 +37,7 @@ void			check_cmd_client(char *cmd, Server *srv)
       resp = client_cmd[i].ptr();
       i = 0;
       while (i < resp->len(resp))
-	srv->players->get(srv->players, ((t_responsse*)resp->get(resp, i))->name->__str);
+	srv->players->get(srv->players, ((t_response*)resp->get(resp, i))->name->__str);
     }
   else
     dprintf(get_socketi()->fd_client, "Command not found !\n");

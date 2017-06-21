@@ -25,7 +25,13 @@ static char	*get_error(void)
   return (strerror(errnum));
 }
 
-#define raise(msg) (fprintf(__norme__, msg, get_error()), exit(1), NULL)
+static void	*__raise__(char *msg)
+{
+  fprintf(__norme__, msg, get_error());
+  exit(1);
+}
+
+#define raise(msg) (__raise__(msg))
 
 #define MALLOC(a, b) if(((a) = malloc(b)) == NULL && raise("Malloc fail"))
 

@@ -11,6 +11,10 @@
 #ifndef ZAPPY_SERVER_H
 #define ZAPPY_SERVER_H
 
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+
 #include "Alfred.h"
 #include "Vector.h"
 #include "MapCP.h"
@@ -28,7 +32,7 @@ typedef struct	s_responsse
 {
   String	*name;
   String	*msg;
-}		t_responsse;
+}		t_response;
 
 class			s_server
 {

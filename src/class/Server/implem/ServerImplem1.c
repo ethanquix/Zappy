@@ -243,20 +243,3 @@ static Server	*get_inventory(THIS, Player *player)
     }
   return (this); //TODO RETURN OUT
 }
-
-static Vector		*calc_sound(Server *server, Player *player)
-{
-
-}
-
-static Server		*broadcast(THIS, Player *player, String *msg)
-{
-  Vector		*out;
-  PairCP		*it;
-
-  out = newVector();
-  this->players->start_loop(this->players);
-  while ((it = this->players->loop(this->players)) != NULL)
-    out->add(out, calc_sound(this, it->data));
-  return (this); //TODO return out
-}

@@ -99,3 +99,4 @@ static void	delete(THIS)
 }
 
 #include "implem/ServerImplem1.c"
+#include "implem/ServerImplem2.c"

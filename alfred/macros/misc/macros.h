@@ -29,4 +29,7 @@
 
 #define AUTO(a, b) typeof(b) (a) = b
 
+//Maths
+#define ABS(value)    (((value) < 0) ? ((value) * (-1)) : (value))
+
 #endif //ZAPPY_MACROS_HPP
