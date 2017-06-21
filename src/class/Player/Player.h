@@ -32,6 +32,7 @@ typedef	enum	e_dir
 
 class			s_Player
 {
+  int			fd;
   Vec2I			position;
   Direction		direction;
   int			level;
