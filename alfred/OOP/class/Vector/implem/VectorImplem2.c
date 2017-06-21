@@ -32,3 +32,16 @@ static Vector	*print(THIS, void (*_func)(void *))
   printf("End Vector\n");
   return (this);
 }
+
+static void	start_loop(THIS)
+{
+  this->__cursor = 0;
+}
+
+static void	*loop(THIS)
+{
+  if (this->__cursor > this->__len)
+    return (NULL);
+  this->__cursor += 1;
+  return (this->get(this, this->__cursor - 1));
+}

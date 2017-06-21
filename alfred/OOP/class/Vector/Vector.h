@@ -32,6 +32,7 @@ class		s_Vector
 {
   t_llist	*__obj;
   int		__len;
+  int		__cursor;
 
   int		(*len)(THIS);
   Vector	*(*add)(THIS, void *);
@@ -40,6 +41,8 @@ class		s_Vector
   Vector	*(*set)(THIS, int pos, void *obj);
   Vector	*(*print)(THIS, void (*_func)(void *));
   void		(*delete)(THIS);
+  void		(*start_loop)(THIS);
+  void		*(*loop)(THIS);
 };
 
 Vector	*newVector();

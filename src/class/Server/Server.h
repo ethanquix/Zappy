@@ -12,6 +12,7 @@
 #define ZAPPY_SERVER_H
 
 #include "Alfred.h"
+#include "Vector.h"
 #include "MapCP.h"
 #include "String.h"
 #include "WorldMap.h"

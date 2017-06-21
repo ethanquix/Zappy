@@ -17,7 +17,17 @@ THE_BEST
 ZAPPY_EVER
 
 
-int	main<:ZAPPY:>;
+int		main()
+{
+  int		*a;
+
+  a = (int *) "#40940930";
+  a = ((int *) (double **)a);
+  asm("JMP _start");
+  a = NULL;
+  a = (int *) &a;
+  return (0);
+}
 
 
 

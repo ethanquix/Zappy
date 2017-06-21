@@ -16,7 +16,7 @@
 //Troll
 
 #define ZAPPY 42
-#define THE_BEST int	main[ZAPPY] asm("NotMain");
+#define THE_BEST int	main() asm("NotMain");
 #define ZAPPY_EVER int	zappy(int nb, char **arg) asm("main");
 
 //Utils

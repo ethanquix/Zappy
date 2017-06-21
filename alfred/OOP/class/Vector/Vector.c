@@ -17,6 +17,8 @@ static void	*pop(THIS);
 static Vector	*set(THIS, int pos, void *obj);
 static Vector	*print(THIS, void (*_func)(void *));
 static void	delete(THIS);
+static void	start_loop(THIS);
+static void	*loop(THIS);
 
 
 Vector		*newVector()
@@ -47,6 +49,8 @@ Vector		initVector()
   out.pop = &pop;
   out.set = &set;
   out.print = &print;
+  out.start_loop = &start_loop;
+  out.loop = &loop;
 
   return (out);
 }
