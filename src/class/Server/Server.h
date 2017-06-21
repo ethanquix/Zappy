@@ -17,11 +17,18 @@
 #include "String.h"
 #include "WorldMap.h"
 #include "team.h"
+#include "Socket.h"
 
 typedef class s_server Server;
 
 #undef THIS
 #define THIS Server *this
+
+typedef struct	s_responsse
+{
+  String	*name;
+  String	*msg;
+}		t_responsse;
 
 class			s_server
 {
