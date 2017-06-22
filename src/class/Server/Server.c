@@ -16,14 +16,14 @@ static Server		*forward(THIS, Player *player, int width, int height);
 static Server		*rotate(THIS, Player *player, Direction *direction);
 static Server		*see(THIS, Player *player);
 static Server		*get_inventory(THIS, Player *player);
-static Server		*broadcast(THIS, Player *player, String *msg);
+static Vector		*broadcast(THIS, Player *player, String *msg);
 static Server		*forkPlayer(THIS, Player *player);
-static Server		*eject(THIS, Player *player);
+static Vector		*eject(THIS, Player *player);
 static Server		*death(THIS, Player *player);
-static Server		*take_obj(THIS, Player *player, t_mineral mineral);
-static Server		*place_obj(THIS, Player *player, t_mineral mineral);
+static t_response	*take_obj(THIS, Player *player, t_mineral mineral);
+static t_response	*place_obj(THIS, Player *player, t_mineral mineral);
 static Server		*incant(THIS, Player *player);
-static Server		*unused_slot(THIS, Player *player);
+static t_response	*unused_slot(THIS, Player *player);
 
 static Server		*run(THIS);
 static void		delete(THIS);
@@ -45,6 +45,7 @@ Server			initServer(WorldMap *map, int port, int maxSlots, int nbTeams)
   int			i;
 
   i = 0;
+  out.team_index = newMapCI(500, -1);
   out.nb_teams = nbTeams;
   MALLOC(out.teams, sizeof(t_team *) * nbTeams);
   while (i < nbTeams)
@@ -63,6 +64,11 @@ Server			initServer(WorldMap *map, int port, int maxSlots, int nbTeams)
   out.rotate = &rotate;
   out.see = &see;
   out.get_inventory = &get_inventory;
+  out.broadcast = &broadcast;
+  out.eject = &eject;
+  out.unused_slot = &unused_slot;
+  out.take_obj = &take_obj;
+  out.place_obj = &place_obj;
 
 
   return (out);
@@ -87,6 +93,7 @@ static void	delete(THIS)
       this->teams[i]->name->delete(this->teams[i]->name);
       free(this->teams[i]);
     }
+  this->team_index->delete(this->team_index);
   free(this->teams);
   this->players->delete(this->players);
   this->map->delete(this->map);
@@ -95,3 +102,5 @@ static void	delete(THIS)
 
 #include "implem/ServerImplem1.c"
 #include "implem/ServerImplem2.c"
+#include "implem/ServerImplem3.c"
+#include "implem/ServerImplem4.c"

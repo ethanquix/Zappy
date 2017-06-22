@@ -76,7 +76,7 @@ static t_response		*calc_sound(THIS, Player *from, Player *to, String *msg)
 
   MALLOC(out, sizeof(t_response));
   MALLOC(tmp, 2);
-  out->name = to->number;
+  out->name = to->name;
   orientation = calc_coo(this, from, to);
   tmp[0] = (char) (orientation + '0');
   tmp[1] = 0;
@@ -86,7 +86,7 @@ static t_response		*calc_sound(THIS, Player *from, Player *to, String *msg)
   out->msg = msg;
 }
 
-static Server		*broadcast(THIS, Player *player, String *msg)
+static Vector		*broadcast(THIS, Player *player, String *msg)
 {
   Vector		*out;
   PairCP		*it;
@@ -95,5 +95,5 @@ static Server		*broadcast(THIS, Player *player, String *msg)
   this->players->start_loop(this->players);
   while ((it = this->players->loop(this->players)) != NULL)
     out->add(out, calc_sound(this, player, it->data, msg));
-  return (this); //TODO return out
+  return (out);
 }

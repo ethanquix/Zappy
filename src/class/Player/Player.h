@@ -15,6 +15,15 @@
 #include "String.h"
 #include "Alfred.h"
 
+//TODO NORME
+static char*	direction_name[] =
+	{
+		"NORTH",
+		"EAST",
+		"SOUTH",
+		"WEST"
+	};
+
 typedef class s_Player Player;
 
 typedef enum e_dir Direction;
@@ -22,9 +31,9 @@ typedef enum e_dir Direction;
 typedef	enum	e_dir
 {
   NORTH = 0,
-  SOUTH = 1,
-  WEST = 2,
-  EAST = 3
+  EAST = 1,
+  SOUTH = 2,
+  WEST = 3
 }		t_dir;
 
 #undef THIS
@@ -37,7 +46,7 @@ class			s_Player
   Direction		direction;
   int			level;
   Inventory		inv;
-  String		*number;
+  String		*name;
   String		*team;
   //ClientInfo		*client info;
 };

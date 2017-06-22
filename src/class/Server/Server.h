@@ -36,6 +36,7 @@ typedef struct	s_responsse
 
 class			s_server
 {
+  MapCI			*team_index;
   t_team		**teams;
   WorldMap		*map;
   MapCP			*players;
@@ -53,14 +54,14 @@ class			s_server
   Server		*(*rotate)(THIS, Player *player, Direction *direction);
   Server		*(*see)(THIS, Player *player);
   Server		*(*get_inventory)(THIS, Player *player);
-  Server		*(*broadcast)(Server *this, Player *player, String *msg);
+  Vector		*(*broadcast)(Server *this, Player *player, String *msg);
   Server		*(*forkPlayer)(THIS, Player *player);
-  Server		*(*eject)(THIS, Player *player);
+  Vector		*(*eject)(THIS, Player *player);
   Server		*(*death)(THIS, Player *player);
-  Server		*(*take_obj)(THIS, Player *player, t_mineral mineral);
-  Server		*(*place_obj)(THIS, Player *player, t_mineral mineral);
+  t_response		*(*take_obj)(THIS, Player *player, t_mineral mineral);
+  t_response		*(*place_obj)(THIS, Player *player, t_mineral mineral);
   Server		*(*incant)(THIS, Player *player);
-  Server		*(*unused_slot)(THIS, Player *player);
+  t_response		*(*unused_slot)(THIS, Player *player);
   // which will contain the client (way to communicate via tcp or maybe put it here ?)
 };
 

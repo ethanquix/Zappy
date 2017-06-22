@@ -23,6 +23,7 @@ static Server		*add_team(THIS, String *name)
   while (this->teams[i] != NULL)
     i += 1;
   this->teams[i] = out;
+  this->team_index->set(this->team_index, name->__str, i);
   return (this);
 }
 
@@ -129,7 +130,7 @@ static String		*get_tile_inv(THIS, int x, int y)
 	{
 	  if (out->len > 0)
 	    out->add(out, newString(" "));
-	  out->add(out, it->data->number);
+	  out->add(out, it->data->name);
 	}
     }
   return (out);
@@ -236,6 +237,7 @@ static Server	*get_inventory(THIS, Player *player)
     {
       free(tmp);
       MALLOC(tmp, 1000);
+      RESET(tmp, '\0');
       sprintf(tmp, "%d", player->inv.loot[i]);
       out->add(out, newString(mineral_name[i]))->add(out, newString(" "));
       out->add(out, newString(tmp))->add(out, newString(","));

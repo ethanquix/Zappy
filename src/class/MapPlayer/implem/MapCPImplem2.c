@@ -72,6 +72,7 @@ static MapCP		*erase(THIS, char *key)
   if (this->exist(this, key) == false)
     raise("Can't erase because don'key exist");
 
+  this->__items -= 1;
   bin = __hash_MapCP(this, key);
   pair = this->__table[bin];
 
@@ -86,5 +87,6 @@ static MapCP		*erase(THIS, char *key)
 
   if (pair->__next NOT NULL)
     pair->__next = pair->__next->__next;
+
   return (this);
 }
