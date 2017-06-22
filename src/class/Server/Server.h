@@ -50,7 +50,7 @@ class			s_server
 
   Server		*(*add_team)(THIS, String *name);
   Server		*(*player_connect)(THIS, Player *player);
-  Server		*(*forward)(Server *this, Player *player, int width, int height); //this->map->width, this->map->height
+  t_response		*(*forward)(Server *this, Player *player, int width, int height); //this->map->width, this->map->height
   Server		*(*rotate)(THIS, Player *player, Direction *direction);
   Server		*(*see)(THIS, Player *player);
   Server		*(*get_inventory)(THIS, Player *player);

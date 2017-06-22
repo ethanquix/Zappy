@@ -12,7 +12,7 @@
 
 static Server		*add_team(THIS, String *name);
 static Server		*player_connect(THIS, String *name);
-static Server		*forward(THIS, Player *player, int width, int height);
+static t_response	*forward(THIS, Player *player, int width, int height);
 static Server		*rotate(THIS, Player *player, Direction *direction);
 static Server		*see(THIS, Player *player);
 static Server		*get_inventory(THIS, Player *player);
