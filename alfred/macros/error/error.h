@@ -33,7 +33,7 @@ static void	*__raise__(char *msg)
 
 #define raise(msg) (__raise__(msg))
 
-#define MALLOC(a, b) if(((a) = malloc(b)) == NULL && raise("Malloc fail"))
+#define MALLOC(a, b) (((a) = malloc(b)) == NULL && raise("Malloc fail"))
 
 
 

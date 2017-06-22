@@ -20,6 +20,7 @@ static void		start_loop(THIS);
 static PairCP		*loop(THIS);
 static MapCP		*print(THIS, void (*_func)(PairCP *pair));
 static void		delete(THIS);
+static MapCP		*erase(THIS, char *key);
 
 MapCP		*newMapCP(int size, Player *nof)
 {
@@ -50,6 +51,7 @@ MapCP		initMapCP(int size, Player *nof)
   out.start_loop = &start_loop;
   out.loop = &loop;
   out.delete = &delete;
+  out.erase = &erase;
 
   MALLOC(out.__table, sizeof(struct s_entryCP *) * size);
   while (i < size)

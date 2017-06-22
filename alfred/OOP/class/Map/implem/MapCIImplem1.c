@@ -42,10 +42,10 @@ static int		get(THIS, char *key)
   bin = __hash_MapCI(this, key);
 
   pair = this->__table[bin];
-  while( pair NOT NULL AND pair->key NOT NULL AND strcmp(key, pair->key) > 0)
-    (pair = pair->__next, this->__items DEC 1);
+  while (pair NOT NULL AND pair->key NOT NULL AND strcmp(key, pair->key) > 0)
+    pair = pair->__next;
 
-  if(pair IS NULL OR pair->key IS NULL OR strcmp( key, pair->key ) NOT 0 )
+  if (pair IS NULL OR pair->key IS NULL OR strcmp( key, pair->key) NOT 0 )
       return (this->__notfound);
   return (pair->data);
 }

@@ -63,3 +63,28 @@ static MapCP		*print(THIS, void (*_func)(PairCP *pair))
   this->__currentIt = bckpIt;
   return (this);
 }
+
+static MapCP		*erase(THIS, char *key)
+{
+  int			bin;
+  struct s_entryCP	*pair;
+
+  if (this->exist(this, key) == false)
+    raise("Can't erase because don'key exist");
+
+  bin = __hash_MapCP(this, key);
+  pair = this->__table[bin];
+
+  if (strcmp(key, pair->key) IS 0)
+    {
+      this->__table[bin] = NULL;
+      return (this);
+    }
+
+  while (pair->__next NOT NULL AND pair->__next->key NOT NULL AND strcmp(key, pair->__next->key) > 0)
+    pair = pair->__next;
+
+  if (pair->__next NOT NULL)
+    pair->__next = pair->__next->__next;
+  return (this);
+}
