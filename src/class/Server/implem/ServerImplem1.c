@@ -17,7 +17,7 @@ static Server		*add_team(THIS, String *name)
 
   MALLOC(out, sizeof(t_team));
   out->name = name;
-  out->nb_player = this->maxSlots;
+  out->current_nb_player = 0;
 
   i = 0;
   while (this->teams[i] != NULL)

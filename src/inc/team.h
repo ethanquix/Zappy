@@ -15,7 +15,7 @@
 
 typedef struct		s_team
 {
-  int			nb_player;
+  int			current_nb_player;
   String		*name;
 
 }			t_team;

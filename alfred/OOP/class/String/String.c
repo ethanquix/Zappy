@@ -22,16 +22,10 @@ static void	delete(THIS);
 
 String		*newString(char *str)
 {
-  void		*new;
-  String	tmp;
   String	*out;
 
-  tmp = initString(str);
-  if ((new = calloc(1, sizeof(String))) IS NULL)
-    raise("Calloc String");
-  if ((new = memcpy(new, &tmp, sizeof(String))) IS NULL)
-    raise("Memcpy String");
-  out = (String *) new;
+  MALLOC(out, sizeof(String));
+  *out = initString(str);
 
   return (out);
 }

@@ -16,15 +16,10 @@ static void	delete(THIS);
 
 WorldMap		*newWorldMap(int width, int height)
 {
-  void			*new;
-  WorldMap		tmp;
   WorldMap		*out;
 
-  tmp = initWorldMap(width, height);
-  MALLOC(new, sizeof(WorldMap));
-  if ((new = memcpy(new, &tmp, sizeof(WorldMap))) IS NULL)
-    raise(get_error());
-  out = (WorldMap *) new;
+  MALLOC(out, sizeof(WorldMap));
+  *out = initWorldMap(width, height);
 
   return (out);
 }

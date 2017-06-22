@@ -12,15 +12,10 @@
 
 Player			*newPlayer(/* Client ? */)
 {
-  void			*new;
-  Player		tmp;
   Player		*out;
 
-  tmp = initPlayer(/* Client ? */);
-  MALLOC(new, sizeof(Player));
-  if ((new = memcpy(new, &tmp, sizeof(Player))) IS NULL)
-    raise(get_error());
-  out = (Player *) new;
+  MALLOC(out, sizeof(Player));
+  *out = initPlayer(/* Client ? */);
 
   return (out);
 }

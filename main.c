@@ -43,6 +43,7 @@ int		zappy(int nb, char **arg)
   //io_manager = new_io_manager(port);
   //io_manager->add_server(io_manager, server);
   //io_manager->run(io_manager)->delete(io_manager);
+  server->delete(server);
   return (0);
 }
 

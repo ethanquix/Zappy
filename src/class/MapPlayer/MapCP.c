@@ -23,15 +23,10 @@ static void		delete(THIS);
 
 MapCP		*newMapCP(int size, Player *nof)
 {
-  void		*new;
-  MapCP		tmp;
   MapCP		*out;
 
-  tmp = initMapCP(size, nof);
-  MALLOC(new, sizeof(MapCP));
-  if ((new = memcpy(new, &tmp, sizeof(MapCP))) IS NULL)
-    raise(get_error());
-  out = (MapCP *) new;
+  MALLOC(out, sizeof(MapCP));
+  *out = initMapCP(size, nof);
 
   return (out);
 }

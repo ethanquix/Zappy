@@ -29,19 +29,14 @@ static Server		*run(THIS);
 static void		delete(THIS);
 
 
-Server *newServer(WorldMap *map, int port, int maxSlots, int nbTeams)
+Server			*newServer(WorldMap *map, int port, int maxSlots, int nbTeams)
 {
-  void			*new;
-  Server		tmp;
-  Server		*out;
+  Server		*tmp;
 
-  tmp = initServer(map, port, maxSlots, nbTeams);
-  MALLOC(new, sizeof(Server));
-  if ((new = memcpy(new, &tmp, sizeof(Server))) IS NULL)
-    raise(get_error());
-  out = (Server *) new;
+  MALLOC(tmp, sizeof(Server));
+  *tmp = initServer(map, port, maxSlots, nbTeams);
 
-  return (out);
+  return (tmp);
 }
 
 Server			initServer(WorldMap *map, int port, int maxSlots, int nbTeams)

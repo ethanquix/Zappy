@@ -23,15 +23,10 @@ static void	*loop(THIS);
 
 Vector		*newVector()
 {
-  void		*new;
-  Vector	tmp;
   Vector	*out;
 
-  tmp = initVector();
-  MALLOC(new, sizeof(Vector));
-  if ((new = memcpy(new, &tmp, sizeof(Vector))) IS NULL)
-    raise(get_error());
-  out = (Vector *) new;
+  MALLOC(out, sizeof(Vector));
+  *out = initVector();
 
   return (out);
 }

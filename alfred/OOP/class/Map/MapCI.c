@@ -23,15 +23,10 @@ static void		delete(THIS);
 
 MapCI		*newMapCI(int size, int nof)
 {
-  void		*new;
-  MapCI		tmp;
   MapCI		*out;
 
-  tmp = initMapCI(size, nof);
-  MALLOC(new, sizeof(MapCI));
-  if ((new = memcpy(new, &tmp, sizeof(MapCI))) IS NULL)
-    raise(get_error());
-  out = (MapCI *) new;
+  MALLOC(out, sizeof(MapCI));
+  *out = initMapCI(size, nof);
 
   return (out);
 }
