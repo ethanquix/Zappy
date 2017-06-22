@@ -46,22 +46,23 @@ static Server		*player_connect(THIS, String *name)
 
 static t_response	*forward(THIS, Player *player, int width, int height)
 {
-  t_response		*out;
-
-  MALLOC(out, sizeof(t_response));
-  out->name = player->name;
-  out->msg = newString("ok");
-  if (player->direction == NORTH && player->position.y - 1 >= 0)
-    (player->position.y = player->position.y - 1);
-  else if (player->direction == SOUTH && player->position.y + 1 < height)
-    (player->position.y = player->position.y + 1);
-  else if (player->direction == EAST && player->position.x + 1 < width)
-    (player->position.x = player->position.x + 1);
-  else if (player->direction == WEST && player->position.x - 1 >= 0)
-    (player->position.x = player->position.x - 1);
-  else
-    out->msg = newString("ko");
-  return (out);
+  //TODO FIX IT, NEET TO TRAVERSE MAP
+//  t_response		*out;
+//
+//  MALLOC(out, sizeof(t_response));
+//  out->name = player->name;
+//  out->msg = newString("ok");
+//  if (player->direction == NORTH && player->position.y - 1 >= 0)
+//    (player->position.y = player->position.y - 1);
+//  else if (player->direction == SOUTH && player->position.y + 1 < height)
+//    (player->position.y = player->position.y + 1);
+//  else if (player->direction == EAST && player->position.x + 1 < width)
+//    (player->position.x = player->position.x + 1);
+//  else if (player->direction == WEST && player->position.x - 1 >= 0)
+//    (player->position.x = player->position.x - 1);
+//  else
+//    out->msg = newString("ko");
+//  return (out);
 }
 
 static Server		*rotate(THIS, Player *player, Direction *direction)
