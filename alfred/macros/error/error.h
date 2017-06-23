@@ -19,17 +19,8 @@
 #define __norme__1 __FILE__, __LINE__, __PRETTY_FUNCTION__
 #define __norme__ stderr, "%s: %u -> %s: %s\nERRNO: %s\n", __norme__1
 
-static char	*get_error(void)
-{
-  int	errnum = errno;
-  return (strerror(errnum));
-}
-
-static void	*__raise__(char *msg)
-{
-  fprintf(__norme__, msg, get_error());
-  exit(1);
-}
+char	*get_error(void);
+void	*__raise__(char *msg);
 
 #define raise(msg) (__raise__(msg))
 
