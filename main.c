@@ -8,6 +8,7 @@
 ** Last update Wed Jun 07 00:48:19 2017 Dimitri Wyzlic
 */
 
+#include "arg_parser.h"
 #include "Alfred.h"
 #include "WorldMap.h"
 #include "Server.h"
@@ -34,17 +35,18 @@ int		main()
 
 int		zappy(int nb, char **arg)
 {
+
   Server	*server;
 
   //parse args
-  server = newServer(newWorldMap(50, 50), 1234, 10, 2);
-  server->add_team(server, newString("Team One"));
-  server->add_team(server, newString("Team Two"));
+  server = newServer(newWorldMap(50, 50), parse_arg(nb, arg));
+//  server->add_team(server, newString("Team One"));
+//  server->add_team(server, newString("Team Two"));
 //  server->run(server)->delete(server); // TODO A DELETE
   //io_manager = new_io_manager(port);
   //io_manager->add_server(io_manager, server);
   //io_manager->run(io_manager)->delete(io_manager);
-  server->delete(server);
+//  server->delete(server);
   return (0);
 }
 

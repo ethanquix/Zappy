@@ -26,38 +26,41 @@ static t_response	*place_obj(THIS, Player *player, t_mineral mineral);
 static Server		*incant(THIS, Player *player); //TODO
 static t_response	*unused_slot(THIS, Player *player);
 
-static Server		*run(THIS);
 static void		delete(THIS);
 
 
-Server			*newServer(WorldMap *map, int port, int maxSlots, int nbTeams)
+Server			*newServer(WorldMap *map, t_arg *arg)
 {
   Server		*tmp;
 
   MALLOC(tmp, sizeof(Server));
-  *tmp = initServer(map, port, maxSlots, nbTeams);
+  *tmp = initServer(map, arg);
 
   return (tmp);
 }
 
-Server			initServer(WorldMap *map, int port, int maxSlots, int nbTeams)
+Server			initServer(WorldMap *map, t_arg *arg)
 {
   Server		out;
   int			i;
+  void			*it;
 
   i = 0;
   out.team_index = newMapCI(500, -1);
-  out.nb_teams = nbTeams;
-  MALLOC(out.teams, sizeof(t_team *) * nbTeams);
-  while (i < nbTeams)
+  out.nb_teams = arg->teamName->len(arg->teamName);
+  MALLOC(out.teams, sizeof(t_team *) * out.nb_teams);
+  while (i < out.nb_teams)
     out.teams[i++] = NULL;
   out.map = map;
-  out.port = port;
-  out.maxSlots = maxSlots;
-  out.timeLimit = 100;
+  out.maxSlots = arg->maxPlayers;
+  out.freq = arg->freq;
   out.players = newMapCP(500, NULL);
 
-  out.run = &run; // TODO REMOVE RUN METHOD
+  arg->teamName->start_loop(arg->teamName);
+  while ((it = arg->teamName->loop(arg->teamName)) != NULL)
+    out.add_team(&out, (String *) it);
+
+
   out.delete = &delete;
 
   out.add_team = &add_team;
@@ -74,15 +77,6 @@ Server			initServer(WorldMap *map, int port, int maxSlots, int nbTeams)
 
 
   return (out);
-}
-
-static Server	*run(THIS)
-{
-  //1: Ask connect tool to fetch all request
-  //2: Execute the command returned by the server
-  //3: loop
-  //TODO all serv connection, save command etc...
-  return (this);
 }
 
 static void	delete(THIS)

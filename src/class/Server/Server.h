@@ -15,6 +15,7 @@
 #include <math.h>
 #include <stdlib.h>
 
+#include "arg_parser.h"
 #include "Alfred.h"
 #include "Vector.h"
 #include "MapCP.h"
@@ -42,10 +43,8 @@ CLASS			s_server
   MapCP			*players;
   int			maxSlots;
   int			nb_teams;
-  int			port;
-  int			timeLimit;
+  int			freq;
 
-  Server		*(*run)(THIS);
   void			(*delete)(THIS);
 
   Server		*(*add_team)(THIS, String *name);
@@ -66,7 +65,7 @@ CLASS			s_server
   // which will contain the client (way to communicate via tcp or maybe put it here ?)
 };
 
-Server			*newServer(WorldMap *map, int port, int maxSlots, int nbTeams);
-Server			initServer(WorldMap *map, int port, int maxSlots, int nbTeams);
+Server			*newServer(WorldMap *map, t_arg *arg);
+Server			initServer(WorldMap *map, t_arg *arg);
 
 #endif //ZAPPY_SERVER_H

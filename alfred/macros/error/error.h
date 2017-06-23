@@ -17,12 +17,12 @@
 #define ZAPPY_ERROR_H
 
 #define __norme__1 __FILE__, __LINE__, __PRETTY_FUNCTION__
-#define __norme__ stderr, "%s: %u -> %s: %s\nERRNO: %s\n", __norme__1
+#define __norme__ stderr, "%s: %u -> %s: %s\nERRNO: %s\n"
 
 char	*get_error(void);
-void	*__raise__(char *msg);
+void	*__raise__(char *msg, char *file, unsigned int l, char *f);
 
-#define raise(msg) (__raise__(msg))
+#define raise(msg) (__raise__(msg, __norme__1))
 
 #define MALLOC(a, b) (((a) = malloc(b)) == NULL && raise("Malloc fail"))
 

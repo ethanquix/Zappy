@@ -24,10 +24,18 @@ t_arg		*init_arg_parser()
   return (out);
 }
 
-Vector		*parse_team(char *name)
+Vector		*parse_team(int idx, char **arg, int max)
 {
-  printf("%s\n", name);
-  return (NULL);
+  Vector	*tmp;
+
+  tmp = newVector();
+  idx = idx - 1;
+  while (idx < max)
+    {
+      tmp->add(tmp, arg[idx]);
+      idx += 1;
+    }
+  return (tmp);
 }
 
 t_arg		*parse_arg(int nb, char **arg)
@@ -40,7 +48,6 @@ t_arg		*parse_arg(int nb, char **arg)
 
   while((c = getopt(nb, arg, short_opt)) != -1)
     {
-      optind
       if (c == 'p')
 	out->port = atoi(optarg);
       if (c == 'f')
@@ -52,6 +59,7 @@ t_arg		*parse_arg(int nb, char **arg)
       if (c == 'c')
 	out->maxPlayers = atoi(optarg);
       if (c == 'n')
-	out->teamName = parse_team(optarg);
+	out->teamName = parse_team(optind, arg, nb);
     };
+  return (out);
 }
