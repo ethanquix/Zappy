@@ -13,7 +13,7 @@
 
 
 // Example of C++ 'Virtual'
-// The top-level class.
+// The top-level CLASS.
 
 typedef struct s_MasterClass {
 //    ALFRED_MF(int, hello, struct s_MasterClass *this, char *name); <-- macro to help making member function but IDE dont like
@@ -22,10 +22,10 @@ typedef struct s_MasterClass {
     int t;
 } t_MasterClass;
 
-// A class
+// A CLASS
 
 static int A_Open (t_MasterClass *this, char *name) {
-    printf ("Hello, you can see I am the --A-- class: %s\n", name);
+    printf ("Hello, you can see I am the --A-- CLASS: %s\n", name);
     return 0;
 }
 
@@ -42,10 +42,10 @@ static int A_Init (t_MasterClass *this) {
     return 0;
 }
 
-// B class
+// B CLASS
 
 static int B_Open (t_MasterClass *this, char *name) {
-    printf ("Hello, you can see I am the --B-- class: %s\n", name);
+    printf ("Hello, you can see I am the --B-- CLASS: %s\n", name);
     return 0;
 }
 
@@ -68,7 +68,7 @@ int main()
     int status;
     t_MasterClass A, B, C;
 
-    // Same 'base' class but initialised to different sub-classes.
+    // Same 'base' CLASS but initialised to different sub-CLASSes.
 
     A_Init(&A);
     B_Init(&B);

@@ -14,7 +14,7 @@
 #include "Alfred.h"
 #include "Player.h"
 
-typedef class s_MapCP MapCP;
+typedef CLASS s_MapCP MapCP;
 
 #undef THIS
 #define THIS MapCP *this
@@ -28,7 +28,7 @@ struct			s_entryCP
   PairCP		*__next;
 };
 
-class			s_MapCP
+CLASS			s_MapCP
 {
   int			__size;
   int			__items;

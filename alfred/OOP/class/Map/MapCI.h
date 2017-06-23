@@ -13,7 +13,7 @@
 
 #include "Alfred.h"
 
-typedef class s_MapCI MapCI;
+typedef CLASS s_MapCI MapCI;
 
 #undef THIS
 #define THIS MapCI *this
@@ -27,7 +27,7 @@ struct			s_entryCI
   PairCI		*__next;
 };
 
-class			s_MapCI
+CLASS			s_MapCI
 {
   int			__size;
   int			__items;
@@ -45,6 +45,7 @@ class			s_MapCI
   void			(*start_loop)(THIS);
   MapCI			*(*print)(THIS, void (*_func)(PairCI *pair));
   void			(*delete)(THIS);
+  MapCI			*(*erase)(THIS, char *key);
 };
 
 MapCI			*newMapCI(int size, int nof);

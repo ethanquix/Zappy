@@ -10,19 +10,20 @@
 
 #include "Server.h"
 
-static Server		*add_team(THIS, String *name);
-static Server		*player_connect(THIS, String *name);
-static t_response	*forward(THIS, Player *player, int width, int height);
-static Server		*rotate(THIS, Player *player, Direction *direction);
-static Server		*see(THIS, Player *player);
-static Server		*get_inventory(THIS, Player *player);
+static Server		*add_team(THIS, String *name); //TODO
+static Server		*player_connect(THIS, String *name); //TODO
+static t_response	*forward(THIS, Player *player);
+static t_response	*rotate_left(THIS, Player *player);
+static t_response	*rotate_right(THIS, Player *player);
+static t_response	*see(THIS, Player *player);
+static t_response	*get_inventory(THIS, Player *player);
 static Vector		*broadcast(THIS, Player *player, String *msg);
-static Server		*forkPlayer(THIS, Player *player);
+static Server		*forkPlayer(THIS, Player *player); //TODO
 static Vector		*eject(THIS, Player *player);
-static Server		*death(THIS, Player *player);
+static Server		*death(THIS, Player *player); //TODO
 static t_response	*take_obj(THIS, Player *player, t_mineral mineral);
 static t_response	*place_obj(THIS, Player *player, t_mineral mineral);
-static Server		*incant(THIS, Player *player);
+static Server		*incant(THIS, Player *player); //TODO
 static t_response	*unused_slot(THIS, Player *player);
 
 static Server		*run(THIS);
@@ -61,7 +62,8 @@ Server			initServer(WorldMap *map, int port, int maxSlots, int nbTeams)
 
   out.add_team = &add_team;
   out.forward = &forward;
-  out.rotate = &rotate;
+  out.rotate_left = &rotate_left;
+  out.rotate_right = &rotate_right;
   out.see = &see;
   out.get_inventory = &get_inventory;
   out.broadcast = &broadcast;

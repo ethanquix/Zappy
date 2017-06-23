@@ -20,6 +20,7 @@ static void		start_loop(THIS);
 static PairCI		*loop(THIS);
 static MapCI		*print(THIS, void (*_func)(PairCI *pair));
 static void		delete(THIS);
+static MapCI		*erase(THIS, char *key);
 
 MapCI		*newMapCI(int size, int nof)
 {
@@ -51,6 +52,7 @@ MapCI		initMapCI(int size, int nof)
   out.loop = &loop;
   out.print = &print;
   out.delete = &delete;
+  out.erase = &erase;
 
   MALLOC(out.__table, sizeof(struct s_entryCI *) * size);
   while (i < size)

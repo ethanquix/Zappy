@@ -16,12 +16,12 @@
 #include "MapCI.h"
 #include "Alfred.h"
 
-typedef class s_WorldMap WorldMap;
+typedef CLASS s_WorldMap WorldMap;
 
 #undef THIS
 #define THIS WorldMap *this
 
-class			s_WorldMap
+CLASS			s_WorldMap
 {
   int			width;
   int			height;

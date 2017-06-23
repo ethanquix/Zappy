@@ -5,7 +5,7 @@
 ** Login   <dimitri1.wyzlic@epitech.eu>
 **
 ** Started on  Fri Jun 09 01:16:13 2017 Dimitri Wyzlic
-** Last update Fri Jun 23 01:53:12 2017 Doom
+** Last update Fri Jun 23 15:10:48 2017 Doom
 */
 
 #include "Server.h"
@@ -44,52 +44,60 @@ static Server		*player_connect(THIS, String *name)
   return (this);
 }
 
-static t_response	*forward(THIS, Player *player, int width, int height)
+static t_response	*forward(THIS, Player *player)
 {
-  //TODO FIX IT, NEET TO TRAVERSE MAP
-//  t_response		*out;
-//
-//  MALLOC(out, sizeof(t_response));
-//  out->name = player->name;
-//  out->msg = newString("ok");
-//  if (player->direction == NORTH && player->position.y - 1 >= 0)
-//    (player->position.y = player->position.y - 1);
-//  else if (player->direction == SOUTH && player->position.y + 1 < height)
-//    (player->position.y = player->position.y + 1);
-//  else if (player->direction == EAST && player->position.x + 1 < width)
-//    (player->position.x = player->position.x + 1);
-//  else if (player->direction == WEST && player->position.x - 1 >= 0)
-//    (player->position.x = player->position.x - 1);
-//  else
-//    out->msg = newString("ko");
-//  return (out);
+  t_response		*out;
+
+  MALLOC(out, sizeof(t_response));
+  out->name = player->name;
+  out->msg = newString("ok");
+  if (player->direction == NORTH)
+    (player->position.y = (player->position.y - 1 + this->map->height) % this->map->height);
+  else if (player->direction == SOUTH)
+    (player->position.y = (player->position.y + 1 + this->map->height) % this->map->height);
+  else if (player->direction == EAST)
+    (player->position.x = (player->position.x + 1 + this->map->width) % this->map->width);
+  else if (player->direction == WEST)
+    (player->position.x = (player->position.x - 1 + this->map->width) % this->map->width);
+  return (out);
 }
 
-static Server		*rotate(THIS, Player *player, Direction *direction)
+static t_response	*rotate_left(THIS, Player *player)
 {
-  if (*direction == EAST)
-    {
-      if (player->direction == NORTH)
-	player->direction = EAST;
-      else if (player->direction == EAST)
-	player->direction = SOUTH;
-      else if (player->direction == SOUTH)
-	player->direction = WEST;
-      else if (player->direction == WEST)
-	player->direction = NORTH;
-    }
-  else
-    {
-      if (player->direction == NORTH)
-	player->direction = WEST;
-      else if (player->direction == WEST)
-	player->direction = SOUTH;
-      else if (player->direction == SOUTH)
-	player->direction = EAST;
-      else if (player->direction == EAST)
-	player->direction = NORTH;
-    }
-  return (this);
+  t_response		*out;
+
+  MALLOC(out, sizeof(t_response));
+  out->name = player->name;
+  out->msg = newString("ok");
+
+  if (player->direction == NORTH)
+    player->direction = WEST;
+  else if (player->direction == WEST)
+    player->direction = SOUTH;
+  else if (player->direction == SOUTH)
+    player->direction = EAST;
+  else if (player->direction == EAST)
+    player->direction = NORTH;
+  return (out);
+}
+
+static t_response	*rotate_right(THIS, Player *player)
+{
+  t_response		*out;
+
+  MALLOC(out, sizeof(t_response));
+  out->name = player->name;
+  out->msg = newString("ok");
+  if (player->direction == NORTH)
+    player->direction = EAST;
+  else if (player->direction == EAST)
+    player->direction = SOUTH;
+  else if (player->direction == SOUTH)
+    player->direction = WEST;
+  else if (player->direction == WEST)
+    player->direction = NORTH;
+
+  return (out);
 }
 
 static String		*get_tile_inv(THIS, int x, int y)
@@ -163,19 +171,22 @@ static String		*get_line_from_map(THIS, int x1, int y1, int x2, int y2)
   return (out);
 }
 
-static Server		*see(THIS, Player *player)
+static t_response	*see(THIS, Player *player)
 {
   String		*out;
   int			i;
   Vec2I			a;
   Vec2I			b;
+  t_response		*resp;
 
-
+  MALLOC(resp, sizeof(t_response));
+  resp->name = player->name;
   a.x = player->position.x;
   a.y = player->position.y;
   b = a;
-  out = newString("");
+  out = newString("ok");
   i = 0;
+
   while (i < player->level)
     {
       out->add(out, get_line_from_map(this, a.x, a.y, a.x, a.y));
@@ -209,18 +220,21 @@ static Server		*see(THIS, Player *player)
 	}
       i INC 1;
     }
-  // TODO replace by return out;
-  return (this);
+  // TODO NORME
+  resp->msg = out;
+  return (resp);
 }
 
-static Server	*get_inventory(THIS, Player *player)
+static t_response	*get_inventory(THIS, Player *player)
 {
-  String	*out;
-  int		i;
-  char		*tmp;
+  t_response		*resp;
+  int			i;
+  char			*tmp;
 
+  MALLOC(resp, sizeof(t_response));
   MALLOC(tmp, 1000);
-  out = newString("");
+  resp->name = player->name;
+  resp->msg = newString("");
   i = 0;
   while (i < MAX_MINERAL)
     {
@@ -228,9 +242,9 @@ static Server	*get_inventory(THIS, Player *player)
       MALLOC(tmp, 1000);
       RESET(tmp, '\0');
       sprintf(tmp, "%d", player->inv.loot[i]);
-      out->add(out, newString(mineral_name[i]))->add(out, newString(" "));
-      out->add(out, newString(tmp))->add(out, newString(","));
+      resp->msg->add(resp->msg, newString(mineral_name[i]))->add(resp->msg, newString(" "));
+      resp->msg->add(resp->msg, newString(tmp))->add(resp->msg, newString(","));
       i INC 1;
     }
-  return (this); //TODO RETURN OUT
+  return (resp);
 }

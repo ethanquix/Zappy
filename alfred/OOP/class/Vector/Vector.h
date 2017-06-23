@@ -15,7 +15,7 @@
 #include <memory.h>
 #include "Alfred.h"
 
-typedef class s_Vector Vector;
+typedef CLASS s_Vector Vector;
 
 #undef THIS
 #define THIS Vector *this
@@ -28,7 +28,7 @@ typedef struct		s_llist
 
 }			t_llist;
 
-class		s_Vector
+CLASS		s_Vector
 {
   t_llist	*__obj;
   int		__len;

@@ -15,12 +15,12 @@
 #include <memory.h>
 #include "Alfred.h"
 
-typedef class s_String String;
+typedef CLASS s_String String;
 
 #undef THIS
 #define THIS String *this
 
-class		s_String
+CLASS		s_String
 {
   char		*__str;
   int		__len;

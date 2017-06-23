@@ -24,7 +24,7 @@ static char*	direction_name[] =
 		"WEST"
 	};
 
-typedef class s_Player Player;
+typedef CLASS s_Player Player;
 
 typedef enum e_dir Direction;
 
@@ -39,7 +39,7 @@ typedef	enum	e_dir
 #undef THIS
 #define THIS Player *this
 
-class			s_Player
+CLASS			s_Player
 {
   int			fd;
   Vec2I			position;

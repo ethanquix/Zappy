@@ -13,7 +13,7 @@
 
 #define ALFRED_MF(RET, NAME, ...) RET (*NAME)(__VA__ARGS__)
 
-#define class struct
+#define CLASS struct
 
 #define VGET(var, vect, pos) var = ((typeof(var))(vect)->get(vect, pos))
 #define VGETNP(var, vect, pos) var = ((typeof(var))(vect).get(&(vect), pos))

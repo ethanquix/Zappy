@@ -23,7 +23,7 @@
 #include "team.h"
 #include "Socket.h"
 
-typedef class s_server Server;
+typedef CLASS s_server Server;
 
 #undef THIS
 #define THIS Server *this
@@ -34,7 +34,7 @@ typedef struct	s_responsse
   String	*msg;
 }		t_response;
 
-class			s_server
+CLASS			s_server
 {
   MapCI			*team_index;
   t_team		**teams;
@@ -50,10 +50,11 @@ class			s_server
 
   Server		*(*add_team)(THIS, String *name);
   Server		*(*player_connect)(THIS, Player *player);
-  t_response		*(*forward)(Server *this, Player *player, int width, int height); //this->map->width, this->map->height
-  Server		*(*rotate)(THIS, Player *player, Direction *direction);
-  Server		*(*see)(THIS, Player *player);
-  Server		*(*get_inventory)(THIS, Player *player);
+  t_response		*(*forward)(Server *this, Player *player);
+  t_response		*(*rotate_left)(THIS, Player *player);
+  t_response		*(*rotate_right)(THIS, Player *player);
+  t_response		*(*see)(THIS, Player *player);
+  t_response		*(*get_inventory)(THIS, Player *player);
   Vector		*(*broadcast)(Server *this, Player *player, String *msg);
   Server		*(*forkPlayer)(THIS, Player *player);
   Vector		*(*eject)(THIS, Player *player);
