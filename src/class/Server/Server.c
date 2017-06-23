@@ -12,6 +12,7 @@
 
 static Server		*add_team(THIS, String *name); //TODO
 static Server		*player_connect(THIS, int fd); //TODO
+static t_connect_info	*add_player_info(THIS, Player *player, String *team);
 static t_response	*forward(THIS, Player *player);
 static t_response	*rotate_left(THIS, Player *player);
 static t_response	*rotate_right(THIS, Player *player);
@@ -63,6 +64,8 @@ Server			initServer(WorldMap *map, t_arg *arg)
 
   out.delete = &delete;
 
+  out.player_connect = &player_connect;
+  out.add_player_info = &add_player_info;
   out.add_team = &add_team;
   out.forward = &forward;
   out.rotate_left = &rotate_left;
@@ -74,7 +77,6 @@ Server			initServer(WorldMap *map, t_arg *arg)
   out.unused_slot = &unused_slot;
   out.take_obj = &take_obj;
   out.place_obj = &place_obj;
-
 
   return (out);
 }

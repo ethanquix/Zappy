@@ -13,10 +13,17 @@
 
 #include <String.h>
 
+typedef struct		s_egg
+{
+  int			time;
+  Vec2I			pos;
+}			t_egg;
+
 typedef struct		s_team
 {
   int			current_nb_player;
   String		*name;
+  Vector		*eggs;
 
 }			t_team;
 

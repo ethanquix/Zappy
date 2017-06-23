@@ -29,19 +29,41 @@ static Server		*add_team(THIS, String *name)
 
 static Server		*player_connect(THIS, int fd)
 {
-//  Player		*new;
-//
-//  new = newPlayer();
-//  if (this->players->exist(this->players, name->get(name)) == true)
-//    {
-//      //TODO ERROR PLAYER EXIST
-//    }
-//  else
-//    {
-//      this->players->set(this->players, name->get(name), new);
-//      //TODO CONTACT CLIENT OK AND PLACE PLAYER ON MAP
-//    }
-//  return (this);
+  Player		*new;
+
+  new = newPlayer();
+  new->fd = fd;
+  new->team = NULL;
+  new->name = newString("");
+  new->name = new->name->random_string(new->name, 20);
+  this->players->set(this->players, new->name->__str, new);
+  return (this);
+}
+
+static t_connect_info		*add_player_info(THIS, Player *player, String *team)
+{
+  int				idx;
+  t_connect_info		*out;
+  char				*str;
+
+  MALLOC(str, 12);
+  //TODO GERER OEUFS ET POS RANDOM
+  MALLOC(out, sizeof(t_connect_info));
+  idx = this->team_index->get(this->team_index, team->__str);
+  if (idx == this->team_index->end(this->team_index))
+    return (NULL);
+  if (this->teams[idx]->current_nb_player + 1 >= this->maxSlots)
+    return (NULL);
+  this->teams[idx]->current_nb_player += 1;
+  player->team = team;
+
+  //TODO POS
+  player->position.x = 0;
+  player->position.y = 0;
+  out->name = player->name;
+  sprintf(str, "%d %d", player->position.x, player->position.y);
+  out->coord = newString(str);
+  return (out);
 }
 
 static t_response	*forward(THIS, Player *player)

@@ -35,6 +35,12 @@ typedef struct	s_responsse
   String	*msg;
 }		t_response;
 
+typedef struct	s_connect_info
+{
+  String	*name;
+  String	*coord;
+}		t_connect_info;
+
 CLASS			s_server
 {
   MapCI			*team_index;
@@ -49,6 +55,7 @@ CLASS			s_server
 
   Server		*(*add_team)(THIS, String *name);
   Server		*(*player_connect)(THIS, int fd);
+  t_connect_info	*(*add_player_info)(THIS, Player *player, String *team);
   t_response		*(*forward)(Server *this, Player *player);
   t_response		*(*rotate_left)(THIS, Player *player);
   t_response		*(*rotate_right)(THIS, Player *player);
