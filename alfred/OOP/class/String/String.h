@@ -30,8 +30,8 @@ CLASS		s_String
   String	*(*print)(THIS);
   String	*(*add)(THIS, String *other);
   char 		(*at)(THIS, int emp);
-
   String	*(*epur)(THIS, char to_delete);
+  String	*(*random_string)(THIS, size_t);
   void		(*delete)(THIS);
 };
 

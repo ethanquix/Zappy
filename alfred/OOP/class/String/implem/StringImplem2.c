@@ -5,7 +5,7 @@
 ** Login   <dimitri1.wyzlic@epitech.eu>
 **
 ** Started on  Mon Jun 05 21:06:36 2017 Dimitri Wyzlic
-** Last update Mon Jun 05 21:06:36 2017 Dimitri Wyzlic
+** Last update Fri Jun 23 15:56:59 2017 Doom
 */
 
 #include "String.h"
@@ -30,4 +30,26 @@ static String	*epur(THIS, char to_delete)
     }
   tmp[j] = 0;
   return (newString(tmp));
+}
+
+static String	*random_string(THIS, size_t len)
+{
+  size_t	i;
+
+  i = 0;
+  MALLOC(this->__str, len);
+  static const char alphanum[] =
+    "0123456789"
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    "abcdefghijklmnopqrstuvwxyz";
+
+  while (i < len)
+    {
+
+      this->__str[i] = alphanum[rand() % (sizeof(alphanum) - 1)];
+      i += 1;
+    }
+
+  this->__str[len] = 0;
+  return (this);
 }

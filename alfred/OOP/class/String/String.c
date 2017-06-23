@@ -16,6 +16,7 @@ static int	len(THIS);
 static char	at(THIS, int at);
 static String	*add(THIS, String *other);
 static String	*epur(THIS, char to_delete);
+static String	*random_string(THIS, size_t len);
 static void	delete(THIS);
 
 
@@ -40,10 +41,11 @@ String		initString(char *str)
   out.print = &print;
   out.add = &add;
   out.epur = &epur;
+  out.random_string = &random_string;
   out.delete = &delete;
 
   out.__str = strdup(str);
-  out.__len = strlen(str);
+  out.__len = (int) strlen(str);
 
   return (out);
 }
