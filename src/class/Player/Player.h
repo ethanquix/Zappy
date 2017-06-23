@@ -17,6 +17,19 @@
 
 //TODO NORME
 
+#define TIME_FORWARD 7
+#define TIME_RIGHT 7
+#define TIME_LEFT 7
+#define TIME_LOOK 7
+#define TIME_INVENTORY 1
+#define TIME_BROADCAST 7
+#define TIME_UNUSED 0
+#define TIME_FORK 42
+#define TIME_EJECT 7
+#define TIME_TAKE 7
+#define TIME_SET 7
+#define TIME_INCANT 300
+
 enum	e_cmd_nb
 {
   C_KO = 0,
