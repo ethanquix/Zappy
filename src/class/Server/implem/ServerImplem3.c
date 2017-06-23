@@ -10,18 +10,6 @@
 
 #include "Server.h"
 
-static bool		cant_eject(THIS, Player *from)
-{
-  if (from->direction == NORTH && from->position.y == 0)
-    return (true);
-  if (from->direction == SOUTH && from->position.y == this->map->height - 1)
-    return (true);
-  if (from->direction == WEST && from->position.x == 0)
-    return (true);
-  if (from->direction == EAST && from->position.x == this->map->width - 1)
-    return (true);
-}
-
 static t_response	*eject_player(THIS, Player *from, Player *to)
 {
   t_response		*response;
@@ -29,13 +17,13 @@ static t_response	*eject_player(THIS, Player *from, Player *to)
   MALLOC(response, sizeof(t_response));
   response->name = to->name;
   if (from->direction == NORTH)
-    to->position.y = to->position.y - 1;
+    to->position.y = (to->position.y - 1 + this->map->height) % this->map->height;
   if (from->direction == SOUTH)
-    to->position.y = to->position.y + 1;
+    to->position.y = (to->position.y + 1 + this->map->height) % this->map->height;
   if (from->direction == EAST)
-    to->position.y = to->position.x + 1;
+    to->position.x = (to->position.x + 1 + this->map->width) % this->map->width;
   if (from->direction == WEST)
-    to->position.y = to->position.x - 1;
+    to->position.x = (to->position.x + 1 + this->map->width) % this->map->width;
   response->msg = newString("eject: ");
   response->msg->add(response->msg, newString(direction_name[(from->direction + 2) % 4]));
 
@@ -51,12 +39,6 @@ static Vector		*eject(THIS, Player *player)
   MALLOC(resp, sizeof(t_response));
   resp->name = player->name;
   out = newVector();
-  if (cant_eject(this, player) == true)
-    {
-      resp->msg = newString("ko");
-      out->add(out, resp);
-      return (out);
-    }
   resp->msg = newString("ok");
   out->add(out, resp);
   this->players->start_loop(this->players);
