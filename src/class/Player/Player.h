@@ -17,26 +17,29 @@
 
 //TODO NORME
 
-enum	s_CMD_NB
+enum	e_cmd_nb
 {
-  KO = 0,
-  FORWARD,
-  EJECT,
-  //TODO
+  C_KO = 0,
+  C_FORWARD,
+  C_RIGHT,
+  C_LEFT,
+  C_LOOK,
+  C_INVENTORY,
+  C_BROADCAST,
+  C_UNUSED,
+  C_FORK,
+  C_EJECT,
+  C_TAKE,
+  C_SET,
+  C_INCANT
+};
 
-}	t_CMD_NB;
-
-typedef struct	s_egg
-{
-  int		time;
-  Vec2I		position;
-  String	*team;
-}		t_egg;
-
+CLASS Player;
 typedef struct	s_todo
 {
+  enum e_cmd_nb	action;
   int		time;
-  String	*cmd;
+  CLASS Player	*player;
   t_mineral	mineral;
   String	*msg;
 }		t_todo;

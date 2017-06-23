@@ -50,7 +50,6 @@ CLASS			s_server
   int			maxSlots;
   int			nb_teams;
   int			freq;
-  Vector		*eggs_vector;
 
   void			(*delete)(THIS);
 
