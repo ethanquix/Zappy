@@ -64,7 +64,8 @@ static void			select_op(t_socket *socket, Server *server)
       while ((it = server->players->loop(server->players)))
 	FD_SET(it->data->fd, &rfds);
       tv.tv_sec = 2;
-      if ((retval = select(server->players->len(server->players) + 1, &rfds, NULL, NULL, &tv)) == -1)
+      if ((retval = select(server->players->len(server->players) + 1,
+			   &rfds, NULL, NULL, &tv)) == -1 && !sig_int)
 	raise("Select failed");
       else if (retval == 0)
 	continue ;
@@ -79,7 +80,7 @@ int	        start(t_arg *args)
   t_socket	*socket;
 
   signal(SIGINT, &sigHandler);
-  (socket = get_socketi())->bind_listen(server, args->port, args->maxPlayers * 1);//TODO ADD maxTeam
+  (socket = get_socketi())->bind_listen(socket, args->port, args->maxPlayers * 1);//TODO ADD maxTeam
   server = newServer(newWorldMap(args->height, args->width), args); //TODO nbTeams
   select_op(socket, server);
   close(socket->fd);
