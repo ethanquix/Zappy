@@ -11,10 +11,14 @@
 #ifndef ZAPPY_CMD_H
 #define ZAPPY_CMD_H
 
+#include "Server.h"
+
 typedef struct			s_cmd
 {
   char				*cmd_name;
   Vector			*(*ptr)();
 }				t_cmd;
+
+void			check_cmd_client(char *cmd, Server *srv);
 
 #endif //ZAPPY_CMD_H

@@ -48,7 +48,7 @@ CLASS			s_server
   void			(*delete)(THIS);
 
   Server		*(*add_team)(THIS, String *name);
-  Server		*(*player_connect)(THIS, Player *player);
+  Server		*(*player_connect)(THIS, int fd);
   t_response		*(*forward)(Server *this, Player *player);
   t_response		*(*rotate_left)(THIS, Player *player);
   t_response		*(*rotate_right)(THIS, Player *player);

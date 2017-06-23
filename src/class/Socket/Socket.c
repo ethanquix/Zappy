@@ -14,31 +14,22 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
-
 t_socket		*get_socketi()
 {
   static t_socket	*socketi = NULL;
 
   if (!socketi)
-    socketi->socket_new(socketi);
+    socketi = socket_new();
   return (socketi);
 }
 
-static void	socket_new(THIS)
-{
-  MALLOC(this, sizeof(t_socket));
-  this->in.sin_addr.s_addr = INADDR_ANY;
-  this->in.sin_family = AF_INET;
-  this->fd_client = 0;
-  this->in_size = sizeof(this->in_client);
-}
 
-static void	bind_listen(THIS, int port, int nclient)
+static void	bind_listen(THIS, int port, int maxclients)
 {
-  this->in.sin_port = htons(port);
+  this->in.sin_port = 42;//htons(port);
   this->fd = socket(AF_INET, SOCK_STREAM, getprotobyname("TCP")->p_proto);
   if (this->fd == -1)
-    perror("socketi creation error");
+    raise("socketi creation error");
   if (bind(this->fd, (const struct sockaddr*)(&this->in),
 	   sizeof(this->in)) == -1)
     raise("Bind failed");
@@ -46,11 +37,11 @@ static void	bind_listen(THIS, int port, int nclient)
     raise("Listen failed");
 }
 
-static void	socket_acepte(THIS)
+static void	socket_accept(THIS)
 {
   this->fd_client = accept(this->fd,
-			      (struct sockaddr *)&(this->in_client),
-			      &this->in_size);
+			   (struct sockaddr *)&(this->in_client),
+			   &this->in_size);
   if (this->fd_client == -1)
     {
       perror("Accept failed");
@@ -75,4 +66,19 @@ static char	*socket_receive(THIS)
   else
     buff[index] = '\0';
   return (buff);
+}
+
+t_socket	*socket_new()
+{
+  t_socket	*socket;
+
+  MALLOC(socket, sizeof(t_socket));
+  socket->in.sin_addr.s_addr = INADDR_ANY;
+  socket->in.sin_family = AF_INET;
+  socket->fd_client = 0;
+  socket->in_size = sizeof(socket->in_client);
+  socket->socket_receive = &socket_receive;
+  socket->bind_listen = &bind_listen;
+  socket->socket_accept = &socket_accept;
+  return (socket);
 }

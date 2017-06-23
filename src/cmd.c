@@ -12,8 +12,6 @@
 #include <stdio.h>
 #include <Vector.h>
 #include "cmd.h"
-#include "Socket.h"
-#include "Server.h"
 
 static const t_cmd	client_cmd[] =
   {
@@ -24,7 +22,6 @@ void			check_cmd_client(char *cmd, Server *srv)
 {
   Vector		*resp;
   int			i;
-  int			clientn;
 
   i = 0;
   if (cmd == NULL)

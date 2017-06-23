@@ -16,7 +16,7 @@ char	*get_error(void)
   return (strerror(errnum));
 }
 
-void	*__raise__(char *msg, char *file, unsigned int l, char *f)
+void	*__raise__(const char *msg, const char *file, unsigned int l, const char *f)
 {
   fprintf(__norme__, file, l ,f , msg, get_error());
   exit(1);

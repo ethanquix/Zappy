@@ -18,6 +18,7 @@ THE_BEST
 ZAPPY_EVER
 
 //TODO PLAYER CONNECT A REVOIR, IL PRENDS RIEN OU JUSTE LE FD ET C AU SOCKET DE LUI CREER UN NOM RANDOM ET TOUSSA
+int	start(t_arg *args);
 
 int		main()
 {
@@ -33,20 +34,9 @@ int		main()
 
 
 
-int		zappy(int nb, char **arg)
+int		zappy(int ac, char *av[])
 {
-
-  Server	*server;
-
-  //parse args
-  server = newServer(newWorldMap(50, 50), parse_arg(nb, arg));
-//  server->add_team(server, newString("Team One"));
-//  server->add_team(server, newString("Team Two"));
-//  server->run(server)->delete(server); // TODO A DELETE
-  //io_manager = new_io_manager(port);
-  //io_manager->add_server(io_manager, server);
-  //io_manager->run(io_manager)->delete(io_manager);
-//  server->delete(server);
+  start(parse_arg(ac, av));
   return (0);
 }
 

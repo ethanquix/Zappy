@@ -11,7 +11,7 @@
 #include "Server.h"
 
 static Server		*add_team(THIS, String *name); //TODO
-static Server		*player_connect(THIS, String *name); //TODO
+static Server		*player_connect(THIS, int fd); //TODO
 static t_response	*forward(THIS, Player *player);
 static t_response	*rotate_left(THIS, Player *player);
 static t_response	*rotate_right(THIS, Player *player);

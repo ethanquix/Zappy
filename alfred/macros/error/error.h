@@ -20,7 +20,7 @@
 #define __norme__ stderr, "%s: %u -> %s: %s\nERRNO: %s\n"
 
 char	*get_error(void);
-void	*__raise__(char *msg, char *file, unsigned int l, char *f);
+void	*__raise__(const char *msg, const char *file, unsigned int l, const char *f);
 
 #define raise(msg) (__raise__(msg, __norme__1))
 

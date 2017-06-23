@@ -21,6 +21,7 @@ typedef struct s_socket t_socket;
 #define THIS t_socket *this
 
 t_socket		*get_socketi();
+t_socket		*socket_new();
 
 struct	s_socket
 {
@@ -29,10 +30,9 @@ struct	s_socket
   struct sockaddr_in		in;
   struct sockaddr_in		in_client;
   socklen_t			in_size;
-  void				*(*socket_new)(THIS);
-  void				*(*bind_listen)(THIS, int port, int nclient);
-  void				*(*socket_accept)(THIS);
-  void				*(*socket_receive)(THIS);
+  void				(*bind_listen)(THIS, int port, int nclient);
+  void				(*socket_accept)(THIS);
+  char				*(*socket_receive)(THIS);
 };
 
 #endif

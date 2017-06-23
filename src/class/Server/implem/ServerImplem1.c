@@ -27,21 +27,21 @@ static Server		*add_team(THIS, String *name)
   return (this);
 }
 
-static Server		*player_connect(THIS, String *name)
+static Server		*player_connect(THIS, int fd)
 {
-  Player		*new;
-
-  new = newPlayer();
-  if (this->players->exist(this->players, name->get(name)) == true)
-    {
-      //TODO ERROR PLAYER EXIST
-    }
-  else
-    {
-      this->players->set(this->players, name->get(name), new);
-      //TODO CONTACT CLIENT OK AND PLACE PLAYER ON MAP
-    }
-  return (this);
+//  Player		*new;
+//
+//  new = newPlayer();
+//  if (this->players->exist(this->players, name->get(name)) == true)
+//    {
+//      //TODO ERROR PLAYER EXIST
+//    }
+//  else
+//    {
+//      this->players->set(this->players, name->get(name), new);
+//      //TODO CONTACT CLIENT OK AND PLACE PLAYER ON MAP
+//    }
+//  return (this);
 }
 
 static t_response	*forward(THIS, Player *player)
