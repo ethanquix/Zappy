@@ -47,15 +47,6 @@ enum	e_cmd_nb
   C_INCANT
 };
 
-CLASS Player;
-typedef struct	s_todo
-{
-  enum e_cmd_nb	action;
-  int		time;
-  CLASS Player	*player;
-  t_mineral	mineral;
-  String	*msg;
-}		t_todo;
 
 static char*	direction_name[] =
 	{
@@ -80,6 +71,14 @@ typedef	enum	e_dir
 #undef THIS
 #define THIS Player *this
 
+typedef struct	s_todo
+{
+  enum e_cmd_nb	action;
+  int		time;
+  t_mineral	mineral;
+  String	*msg;
+}		t_todo;
+
 CLASS			s_Player
 {
   int			fd;
@@ -89,10 +88,11 @@ CLASS			s_Player
   Inventory		inv;
   String		*name;
   String		*team;
-  t_todo		todo[10];
+  struct s_todo		todo[10];
 };
 
 Player			*newPlayer();
 Player			initPlayer();
+
 
 #endif //ZAPPY_PLAYER_H

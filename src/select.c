@@ -38,12 +38,13 @@ static void			select_check(t_socket *socket, Server *server, fd_set *rfds)
 	  if (index == socket->fd)
 	    {
 	      socket->socket_accept(socket);
+	      dprintf(socket->fd_client, "WELCOM\n");
 	      server->player_connect(server, socket->fd_client);
 	    }
 	  else
 	    {
 	      socket->fd_client = index;
-	      check_cmd_client(socket->socket_receive(socket), server);
+	      check_cmd_client(server, socket);
 	    }
 	}
     }

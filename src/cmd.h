@@ -16,9 +16,10 @@
 typedef struct			s_cmd
 {
   char				*cmd_name;
-  Vector			*(*ptr)();
+  enum e_cmd_nb			action;
+  int				time;
 }				t_cmd;
 
-void			check_cmd_client(char *cmd, Server *srv);
+void			check_cmd_client(Server *srv, t_socket *socket);
 
 #endif //ZAPPY_CMD_H
