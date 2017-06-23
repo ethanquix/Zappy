@@ -50,6 +50,7 @@ CLASS			s_server
   int			maxSlots;
   int			nb_teams;
   int			freq;
+  Vector		*eggs_vector;
 
   void			(*delete)(THIS);
 
@@ -63,13 +64,13 @@ CLASS			s_server
   t_response		*(*get_inventory)(THIS, Player *player);
   Vector		*(*broadcast)(Server *this, Player *player, String *msg);
   Server		*(*forkPlayer)(THIS, Player *player);
+  Server		*(*hatch_egg)(THIS);
   Vector		*(*eject)(THIS, Player *player);
   Server		*(*death)(THIS, Player *player);
   t_response		*(*take_obj)(THIS, Player *player, t_mineral mineral);
   t_response		*(*place_obj)(THIS, Player *player, t_mineral mineral);
   Server		*(*incant)(THIS, Player *player);
   t_response		*(*unused_slot)(THIS, Player *player);
-  // which will contain the client (way to communicate via tcp or maybe put it here ?)
 };
 
 Server			*newServer(WorldMap *map, t_arg *arg);

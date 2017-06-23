@@ -16,6 +16,31 @@
 #include "Alfred.h"
 
 //TODO NORME
+
+enum	s_CMD_NB
+{
+  KO = 0,
+  FORWARD,
+  EJECT,
+  //TODO
+
+}	t_CMD_NB;
+
+typedef struct	s_egg
+{
+  int		time;
+  Vec2I		position;
+  String	*team;
+}		t_egg;
+
+typedef struct	s_todo
+{
+  int		time;
+  String	*cmd;
+  t_mineral	mineral;
+  String	*msg;
+}		t_todo;
+
 static char*	direction_name[] =
 	{
 		"NORTH",
@@ -48,10 +73,10 @@ CLASS			s_Player
   Inventory		inv;
   String		*name;
   String		*team;
-  //ClientInfo		*client info;
+  t_todo		todo[10];
 };
 
-Player			*newPlayer(/* Client ? */);
-Player			initPlayer(/* Client ? */);
+Player			*newPlayer();
+Player			initPlayer();
 
 #endif //ZAPPY_PLAYER_H

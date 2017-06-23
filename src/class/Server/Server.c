@@ -20,6 +20,7 @@ static t_response	*see(THIS, Player *player);
 static t_response	*get_inventory(THIS, Player *player);
 static Vector		*broadcast(THIS, Player *player, String *msg);
 static Server		*forkPlayer(THIS, Player *player); //TODO
+static Server		hatch_egg(THIS); //TODO
 static Vector		*eject(THIS, Player *player);
 static Server		*death(THIS, Player *player); //TODO
 static t_response	*take_obj(THIS, Player *player, t_mineral mineral);
