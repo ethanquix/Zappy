@@ -17,7 +17,7 @@
 #define ZAPPY_ERROR_H
 
 #define __norme__1 __FILE__, __LINE__, __PRETTY_FUNCTION__
-#define __norme__ stderr, "%s: %u -> %s: %s\nERRNO: %s\n"
+#define __norme__ stderr, "%s: %u [%s] -> %s\nERRNO: %s\n"
 
 char	*get_error(void);
 void	*__raise__(const char *msg, const char *file, unsigned int l, const char *f);
