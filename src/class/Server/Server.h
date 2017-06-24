@@ -64,16 +64,16 @@ CLASS			s_server
   t_response		*(*see)(THIS, Player *player);
   t_response		*(*get_inventory)(THIS, Player *player);
   Vector		*(*broadcast)(Server *this, Player *player, String *msg);
-  Server		*(*forkPlayer)(THIS, Player *player);
+  Server		*(*forkPlayer)(THIS, Player *player); //TODO DO FORK PLAYER
   Vector		*(*eject)(THIS, Player *player);
   t_response		*(*take_obj)(THIS, Player *player, t_mineral mineral);
   t_response		*(*place_obj)(THIS, Player *player, t_mineral mineral);
-  Server		*(*incant)(THIS, Player *player);
+  Server		*(*incant)(THIS, Player *player); //TODO FINISH INCANT
   t_response		*(*unused_slot)(THIS, Player *player);
 
-  Server		*(*hatch_egg)(THIS);
+  Server		*(*hatch_egg)(THIS); //TODO HATCH EGG AND WHAT TO DO HEN EGG PLACED
   //TODO ADD INCANT DONE
-  Server		*(*death)(THIS, Player *player);
+  Server		*(*death)(THIS, Player *player); //TODO DEATH
 };
 
 Server			*newServer(WorldMap *map, t_arg *arg);

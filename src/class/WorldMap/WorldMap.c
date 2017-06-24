@@ -65,5 +65,6 @@ static void	delete(THIS)
   i = 0;
   while (i < this->height)
     free(this->tiles[i++]);
+  free(this->tiles);
   free(this);
 }

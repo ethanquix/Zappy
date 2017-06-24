@@ -16,11 +16,12 @@ static t_response	*place_obj(THIS, Player *player, t_mineral mineral)
 
   MALLOC(out, sizeof(t_response));
   out->name = player->name;
+  out->fd = player->fd;
   if (player->inv.loot[mineral] > 0)
     {
       out->msg = newString("ok");
-      this->map->tiles[player->position.y][player->position.x].loot[mineral] = player->inv.loot[mineral];
-      player->inv.loot[mineral] = 0;
+      this->map->tiles[player->position.y][player->position.x].loot[mineral] += 1;
+      player->inv.loot[mineral] -= 0;
     }
   else
     out->msg = newString("ko");

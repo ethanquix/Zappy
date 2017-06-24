@@ -12,15 +12,27 @@
 
 static Vector			*wrapper_take(Server *server, Player *player, t_mineral mineral, String *msg)
 {
+  Vector		*out;
 
+  out = newVector();
+  out->add(out, server->take_obj(server, player, mineral));
+  return (out);
 }
 
 static Vector			*wrapper_place(Server *server, Player *player, t_mineral mineral, String *msg)
 {
+  Vector		*out;
 
+  out = newVector();
+  out->add(out, server->place_obj(server, player, mineral));
+  return (out);
 }
 
 static Vector			*wrapper_incant(Server *server, Player *player, t_mineral mineral, String *msg)
 {
+  //TODO FINISH INCANT
+  Vector			*out;
 
+  out = newVector();
+  return (out);
 }

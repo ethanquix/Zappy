@@ -85,5 +85,9 @@ int	        start(t_arg *args)
   server = newServer(newWorldMap(args->height, args->width), args); //TODO nbTeams
   select_op(socket, server);
   close(socket->fd);
+  server->delete(server);
+  free(socket);
+  free(args->teamName);
+  free(args);
   return (0);
 }

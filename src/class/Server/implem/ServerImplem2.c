@@ -60,7 +60,6 @@ static int	calc_coo(THIS, Player *player, Player *current)
   int     dir;
   int     x;
   int     y;
-  char    *msg;
 
   calc_coord(this, player, current, &x, &y);
   dir = search_dir(x, y);
@@ -77,6 +76,7 @@ static t_response		*calc_sound(THIS, Player *from, Player *to, String *msg)
   MALLOC(out, sizeof(t_response));
   MALLOC(tmp, 2);
   out->name = to->name;
+  out->fd = to->fd;
   orientation = calc_coo(this, from, to);
   tmp[0] = (char) (orientation + '0');
   tmp[1] = 0;

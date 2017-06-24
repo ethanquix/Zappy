@@ -72,6 +72,7 @@ static t_response	*forward(THIS, Player *player)
 
   MALLOC(out, sizeof(t_response));
   out->name = player->name;
+  out->fd = player->fd;
   out->msg = newString("ok");
   if (player->direction == NORTH)
     (player->position.y = (player->position.y - 1 + this->map->height) % this->map->height);
@@ -90,6 +91,7 @@ static t_response	*rotate_left(THIS, Player *player)
 
   MALLOC(out, sizeof(t_response));
   out->name = player->name;
+  out->fd = player->fd;
   out->msg = newString("ok");
 
   if (player->direction == NORTH)
@@ -109,6 +111,7 @@ static t_response	*rotate_right(THIS, Player *player)
 
   MALLOC(out, sizeof(t_response));
   out->name = player->name;
+  out->fd = player->fd;
   out->msg = newString("ok");
   if (player->direction == NORTH)
     player->direction = EAST;
@@ -256,6 +259,7 @@ static t_response	*get_inventory(THIS, Player *player)
   MALLOC(resp, sizeof(t_response));
   MALLOC(tmp, 1000);
   resp->name = player->name;
+  resp->fd = player->fd;
   resp->msg = newString("");
   i = 0;
   while (i < MAX_MINERAL)

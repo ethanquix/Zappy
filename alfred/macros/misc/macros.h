@@ -17,7 +17,7 @@
 
 #define ZAPPY 42
 #define THE_BEST int	main() asm("NotMain");
-#define ZAPPY_EVER int	zappy(int nb, char **arg) asm("main");
+#define ZAPPY_EVER int	zappy(int ac, char *av[]) asm("main");
 
 //Utils
 #define RESET(a,b)   memset(a,b,sizeof(a))

@@ -16,6 +16,7 @@ static t_response	*eject_player(THIS, Player *from, Player *to)
 
   MALLOC(response, sizeof(t_response));
   response->name = to->name;
+  response->fd = to->fd;
   if (from->direction == NORTH)
     to->position.y = (to->position.y - 1 + this->map->height) % this->map->height;
   if (from->direction == SOUTH)
@@ -38,6 +39,7 @@ static Vector		*eject(THIS, Player *player)
 
   MALLOC(resp, sizeof(t_response));
   resp->name = player->name;
+  resp->fd = player->fd;
   out = newVector();
   resp->msg = newString("ok");
   out->add(out, resp);
@@ -57,6 +59,7 @@ static t_response	*unused_slot(THIS, Player *player)
   idx = this->team_index->get(this->team_index, player->team->__str);
   MALLOC(out, sizeof(t_response));
   out->name = player->name;
+  out->fd = player->fd;
   sprintf(tmp, "%d", this->maxSlots - this->teams[idx]->current_nb_player);
   out->msg = newString(tmp);
   return (out);
@@ -68,12 +71,13 @@ static t_response	*take_obj(THIS, Player *player, t_mineral mineral)
 
   MALLOC(resp, sizeof(t_response));
   resp->name = player->name;
+  resp->fd = player->fd;
   //TODO NORME
   if (this->map->tiles[player->position.y][player->position.x].loot[mineral] > 0)
     {
       resp->msg = newString("ok");
-      player->inv.loot[mineral] += this->map->tiles[player->position.y][player->position.x].loot[mineral];
-      this->map->tiles[player->position.y][player->position.x].loot[mineral] = 0;
+      player->inv.loot[mineral] += 1;
+      this->map->tiles[player->position.y][player->position.x].loot[mineral] -= 1;
     }
   else
     resp->msg = newString("ko");

@@ -12,25 +12,43 @@
 
 static Vector			*wrapper_get_inv(Server *server, Player *player, t_mineral mineral, String *msg)
 {
+  Vector		*out;
 
+  out = newVector();
+  out->add(out, server->get_inventory(server, player));
+  return (out);
 }
 
 static Vector			*wrapper_broadcast(Server *server, Player *player, t_mineral mineral, String *msg)
 {
+  Vector		*out;
 
+  out = server->broadcast(server, player, msg);
+  return (out);
 }
 
 static Vector			*wrapper_unused(Server *server, Player *player, t_mineral mineral, String *msg)
 {
+  Vector		*out;
 
+  out = newVector();
+  out->add(out, server->unused_slot(server, player));
+  return (out);
 }
 
 static Vector			*wrapper_fork(Server *server, Player *player, t_mineral mineral, String *msg)
 {
+  Vector		*out;
 
+  out = newVector();
+  out->add(out, server->forkPlayer(server, player)); //TODO FINIS FORK LOGIC
+  return (out);
 }
 
 static Vector			*wrapper_eject(Server *server, Player *player, t_mineral mineral, String *msg)
 {
+  Vector		*out;
 
+  out = server->eject(server, player);
+  return (out);
 }
