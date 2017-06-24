@@ -31,7 +31,8 @@ typedef CLASS s_server Server;
 
 typedef struct	s_responsse
 {
-  String	*name;
+  String	*name; //TODO mostly here to debug
+  int		fd;
   String	*msg;
 }		t_response;
 
@@ -56,6 +57,7 @@ CLASS			s_server
   Server		*(*add_team)(THIS, String *name);
   Server		*(*player_connect)(THIS, int fd);
   t_connect_info	*(*add_player_info)(THIS, Player *player, String *team);
+
   t_response		*(*forward)(Server *this, Player *player);
   t_response		*(*rotate_left)(THIS, Player *player);
   t_response		*(*rotate_right)(THIS, Player *player);
@@ -63,13 +65,15 @@ CLASS			s_server
   t_response		*(*get_inventory)(THIS, Player *player);
   Vector		*(*broadcast)(Server *this, Player *player, String *msg);
   Server		*(*forkPlayer)(THIS, Player *player);
-  Server		*(*hatch_egg)(THIS);
   Vector		*(*eject)(THIS, Player *player);
-  Server		*(*death)(THIS, Player *player);
   t_response		*(*take_obj)(THIS, Player *player, t_mineral mineral);
   t_response		*(*place_obj)(THIS, Player *player, t_mineral mineral);
   Server		*(*incant)(THIS, Player *player);
   t_response		*(*unused_slot)(THIS, Player *player);
+
+  Server		*(*hatch_egg)(THIS);
+  //TODO ADD INCANT DONE
+  Server		*(*death)(THIS, Player *player);
 };
 
 Server			*newServer(WorldMap *map, t_arg *arg);

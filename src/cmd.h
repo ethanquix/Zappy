@@ -12,6 +12,7 @@
 #define ZAPPY_CMD_H
 
 #include "Server.h"
+#include "config.h"
 
 typedef struct			s_cmd
 {

@@ -54,14 +54,21 @@ int			check_team(Player *player, Server *server, char *cmd)
 
 void			second_tick(Server *server, Player *player)
 {
-  Vector		*resp;
-  int			index;
+//  Vector		*resp;
+//  int			index;
 
-  resp = client_cmd[index].ptr(server, player);
-  index = 0;
-  while (index < resp->len(resp))
-    dprintf(server->players->get(server->players, ((t_response*)resp->get(resp, index))->name->__str)->fd,
-	    ((t_response*)resp->get(resp, index))->msg->__str);
+//  resp = client_cmd[index].ptr(server, player);
+//  index = 0;
+
+  //TODO A REFAIRE TA FOIRE TES DPRINTF MDR
+//  while (index < resp->len(resp))
+//    dprintf(server->players->get(server->players, ((t_response*)resp->get(resp, index))->name->__str)->fd,
+//	    ((t_response*)resp->get(resp, index))->msg->__str);
+//
+//
+//  dprintf(server->players->get(server->players,
+//			       ((t_response*)resp->get(resp, index))->name->get(((t_response*)resp->get(resp, index))->name))->fd,
+//	  ((t_response*)resp->get(resp, index))->msg->get(((t_response*)resp->get(resp, index))->msg));
 }
 
 void			check_cmd_client(Server *server, t_socket *socket)
@@ -87,7 +94,7 @@ void			check_cmd_client(Server *server, t_socket *socket)
       player->todo[index].action = client_cmd[index].action;
       player->todo[index].time = client_cmd[index].time / server->freq;
       cmd = strtok(NULL, " \n");
-      mineraln = -1;
+      mineraln = -1; //TODO ERROR HERE MINERAL DONT NOT HAVE -1
       while ((cmd != mineral_name[++mineraln]) || cmd == NULL);
       player->todo[index].mineral = mineraln;
       player->todo[index].msg = newString(cmd);
