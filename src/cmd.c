@@ -20,15 +20,7 @@ static const t_cmd	client_cmd[] =
 
 static Player		*get_player(Server *server, int fd)
 {
-  PairCP		*it;
-
-  server->players->start_loop(server->players);
-  while ((it = server->players->loop(server->players)))
-    {
-      if (fd == it->data->fd)
-	return (it->data);
-    }
-  return (NULL);
+  return (server->players->get(server->players, fd));
 }
 
 int			check_team(Player *player, Server *server, char *cmd)

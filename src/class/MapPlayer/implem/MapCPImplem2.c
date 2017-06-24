@@ -64,7 +64,7 @@ static MapCP		*print(THIS, void (*_func)(PairCP *pair))
   return (this);
 }
 
-static MapCP		*erase(THIS, char *key)
+static MapCP		*erase(THIS, int key)
 {
   int			bin;
   struct s_entryCP	*pair;
@@ -76,13 +76,16 @@ static MapCP		*erase(THIS, char *key)
   bin = __hash_MapCP(this, key);
   pair = this->__table[bin];
 
-  if (strcmp(key, pair->key) IS 0)
+  if (key == pair->key)
     {
-      this->__table[bin] = NULL;
+      if (pair->__next NOT NULL)
+	this->__table[bin] = pair->__next;
+      else
+	this->__table[bin] = NULL;
       return (this);
     }
 
-  while (pair->__next NOT NULL AND pair->__next->key NOT NULL AND strcmp(key, pair->__next->key) > 0)
+  while (pair->__next NOT NULL AND key NOT pair->__next->key)
     pair = pair->__next;
 
   if (pair->__next NOT NULL)

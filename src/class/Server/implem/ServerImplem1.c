@@ -36,7 +36,7 @@ static Server		*player_connect(THIS, int fd)
   new->team = NULL;
   new->name = newString("");
   new->name = new->name->random_string(new->name, 20);
-  this->players->set(this->players, new->name->__str, new);
+  this->players->set(this->players, fd, new);
   return (this);
 }
 

@@ -12,5 +12,8 @@
 #define ZAPPY_CONFIG_H
 
 #define MAX_CMD 10
+#define MAX_FD 2500
+#define MAP_IP_MAX 500
+#define MAP_CI_MAX 500
 
 #endif //ZAPPY_CONFIG_H

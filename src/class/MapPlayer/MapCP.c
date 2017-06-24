@@ -11,16 +11,16 @@
 #include <limits.h>
 #include "MapCP.h"
 
-static MapCP		*set(THIS, char *key, Player *data);
-static Player		*get(THIS, char *key);
+static MapCP		*set(THIS, int key, Player *data);
+static Player		*get(THIS, int key);
 static int		len(THIS);
 static Player		*end(THIS);
-static bool		exist(THIS, char *key);
+static bool		exist(THIS, int key);
 static void		start_loop(THIS);
 static PairCP		*loop(THIS);
 static MapCP		*print(THIS, void (*_func)(PairCP *pair));
 static void		delete(THIS);
-static MapCP		*erase(THIS, char *key);
+static MapCP		*erase(THIS, int key);
 
 MapCP		*newMapCP(int size, Player *nof)
 {
@@ -59,33 +59,18 @@ MapCP		initMapCP(int size, Player *nof)
   return (out);
 }
 
-int		__hash_MapCP(THIS, char *key)
+int		__hash_MapCP(THIS, int key)
 {
-  unsigned int	hash;
-  unsigned int	i;
-
-  hash = 0;
-  i = 0;
-
-  while (key[i])
-    {
-      hash = i;
-      hash INC key[i], hash INC ( hash << 10 ), hash ^= ( hash >> 6 );
-      i INC 1;
-    }
-  hash INC ( hash << 3 ), hash ^= ( hash >> 11 ), hash INC ( hash << 15 );
-
-  return (hash % this->__size);
+  return (key % this->__size);
 }
 
-struct s_entryCP * __newPairCP(char *key, Player *val)
+struct s_entryCP * __newPairCP(int key, Player *val)
 {
   struct s_entryCP	*newpair;
 
   MALLOC(newpair, sizeof(struct s_entryCP));
 
-  if((newpair->key = strdup(key)) IS NULL)
-      raise("Error during strdup");
+  newpair->key = key;
   newpair->data = val;
   newpair->__next = NULL;
 
@@ -105,7 +90,7 @@ static void		delete(THIS)
       tmp2 = tmp[i];
       while (tmp2)
 	{
-	  free(tmp2->key);
+	  tmp2->data->delete(tmp2->data);
 	  tmp2 = tmp2->__next;
 	}
       free(tmp[i]);

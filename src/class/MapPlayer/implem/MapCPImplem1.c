@@ -10,7 +10,7 @@
 
 #include "MapCP.h"
 
-static MapCP		*set(THIS, char *key, Player *data)
+static MapCP		*set(THIS, int key, Player *data)
 {
   int			bin;
   struct s_entryCP	*newpair;
@@ -19,9 +19,9 @@ static MapCP		*set(THIS, char *key, Player *data)
   bin = __hash_MapCP(this, key);
   next = this->__table[bin];
 
-  while (next NOT NULL AND next->key NOT NULL AND strcmp(key, next->key) > 0)
+  while (next NOT NULL AND key NOT next->key)
     next = next->__next;
-  if (next NOT NULL AND next->key NOT NULL AND strcmp(key, next->key) IS 0)
+  if (next NOT NULL AND key == next->key)
     next->data = data;
   else
     {
@@ -34,7 +34,7 @@ static MapCP		*set(THIS, char *key, Player *data)
   return (this);
 }
 
-static Player		*get(THIS, char *key)
+static Player		*get(THIS, int key)
 {
   int			bin;
   struct s_entryCP	*pair;
@@ -42,10 +42,10 @@ static Player		*get(THIS, char *key)
   bin = __hash_MapCP(this, key);
 
   pair = this->__table[bin];
-  while (pair NOT NULL AND pair->key NOT NULL AND strcmp(key, pair->key) > 0)
+  while (pair NOT NULL AND key NOT pair->key)
     pair = pair->__next;
 
-  if (pair IS NULL OR pair->key IS NULL OR strcmp( key, pair->key) NOT 0 )
+  if (pair IS NULL OR key NOT pair->key)
       return (this->__notfound);
   return (pair->data);
 }
@@ -60,7 +60,7 @@ static Player	*end(THIS)
   return (this->__notfound);
 }
 
-static bool		exist(THIS, char *key)
+static bool		exist(THIS, int key)
 {
   int			bin;
   struct s_entryCP	*tmp;

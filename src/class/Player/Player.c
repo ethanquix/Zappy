@@ -10,6 +10,8 @@
 
 #include "Player.h"
 
+static void	delete(THIS);
+
 Player			*newPlayer(/* Client ? */)
 {
   Player		*out;
@@ -30,6 +32,7 @@ Player			initPlayer(/* Client ? */)
   out.level = 1;
   init_inv(&(out.inv));
 
+  out.delete = &delete;
 //  out.forward = &forward;
 //  out.rotate = &rotate;
 //  out.see= &see;
@@ -44,6 +47,22 @@ Player			initPlayer(/* Client ? */)
 //  out.incant = &incant;
 
   return (out);
+}
+
+static void	delete(THIS)
+{
+  int		i;
+
+  i = 0;
+  this->name->delete(this->name);
+  this->team->delete(this->team);
+  while (i < MAX_CMD)
+    {
+      if (this->todo[i].msg != NULL)
+	this->todo[i].msg->delete(this->todo[i].msg);
+      i += 1;
+    }
+  free (this);
 }
 
 #include "implem/PlayerImplem1.c"

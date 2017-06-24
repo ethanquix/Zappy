@@ -11,6 +11,7 @@
 #ifndef ZAPPY_PLAYER_H
 #define ZAPPY_PLAYER_H
 
+#include "config.h"
 #include "inventory.h"
 #include "String.h"
 #include "Alfred.h"
@@ -88,7 +89,9 @@ CLASS			s_Player
   Inventory		inv;
   String		*name;
   String		*team;
-  struct s_todo		todo[10];
+  struct s_todo		todo[MAX_CMD];
+
+  void			(*delete)(THIS);
 };
 
 Player			*newPlayer();

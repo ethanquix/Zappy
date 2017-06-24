@@ -48,7 +48,7 @@ Server			initServer(WorldMap *map, t_arg *arg)
   void			*it;
 
   i = 0;
-  out.team_index = newMapCI(500, -1);
+  out.team_index = newMapCI(MAP_CI_MAX, -1);
   out.nb_teams = arg->teamName->len(arg->teamName);
   MALLOC(out.teams, sizeof(t_team *) * out.nb_teams);
   while (i < out.nb_teams)
@@ -56,7 +56,7 @@ Server			initServer(WorldMap *map, t_arg *arg)
   out.map = map;
   out.maxSlots = arg->maxPlayers;
   out.freq = arg->freq;
-  out.players = newMapCP(500, NULL);
+  out.players = newMapCP(MAP_IP_MAX, NULL);
 
   arg->teamName->start_loop(arg->teamName);
   while ((it = arg->teamName->loop(arg->teamName)) != NULL)

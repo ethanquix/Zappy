@@ -77,7 +77,10 @@ static MapCI		*erase(THIS, char *key)
 
   if (strcmp(key, pair->key) IS 0)
     {
-      this->__table[bin] = NULL;
+      if (this->__table[bin]->__next NOT NULL)
+	this->__table[bin] = this->__table[bin]->__next;
+      else
+	this->__table[bin] = NULL;
       return (this);
     }
 

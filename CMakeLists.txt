@@ -22,6 +22,7 @@ include_directories(src/class/Player)
 include_directories(src/class/Server)
 include_directories(src/class/WorldMap)
 include_directories(src/class/Socket)
+include_directories(src/)
 
 set(SOURCE_FILES_ZAPPY main.c src/class/MapPlayer/MapCP.c src/class/MapPlayer/MapCP.h src/class/MapPlayer/implem/MapCPImplem1.c src/class/MapPlayer/implem/MapCPImplem2.c src/class/Player/Player.c src/class/Player/Player.h src/inc/inventory.h src/class/Player/implem/PlayerImplem1.c src/class/WorldMap/WorldMap.h src/class/Server/Server.h src/class/Server/Server.c src/class/WorldMap/WorldMap.c src/class/Server/implem/ServerImplem1.c src/inc/team.h src/cmd.c src/class/Socket/Socket.c src/class/Socket/Socket.h src/cmd.h src/class/Server/implem/ServerImplem2.c src/class/Server/implem/ServerImplem3.c src/class/Server/implem/ServerImplem4.c src/arg_parser.c src/inc/arg_parser.h src/select.c src/config.h src/wrapper_1.c src/wrapper_2.c src/wrapper_main.c src/wrapper_3.c)
 
