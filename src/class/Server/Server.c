@@ -74,6 +74,8 @@ Server			initServer(WorldMap *map, t_arg *arg)
   arg->teamName->start_loop(arg->teamName);
   while ((it = arg->teamName->loop(arg->teamName)) != NULL)
       out.add_team(&out, (String *) it);
+
+  out.death = &death;
   return (out);
 }
 
@@ -92,6 +94,14 @@ static void	delete(THIS)
   this->players->delete(this->players);
   this->map->delete(this->map);
   free(this);
+}
+
+static Server		*death(THIS, Player *player)
+{
+  dprintf(player->fd, "death\n");
+  this->players->erase(this->players, player->fd);
+  player->delete(player);
+  return (this);
 }
 
 #include "implem/ServerImplem1.c"

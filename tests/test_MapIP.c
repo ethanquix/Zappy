@@ -8,7 +8,8 @@
 ** Last update Sat Jun 24 21:40:37 2017 Dimitri Wyzlic
 */
 
-#include <MapCP.h>
+#include "MapCP.h"
+#include "Vector.h"
 #include "Alfred.h"
 
 void		print(PairCP *pair)
@@ -18,24 +19,33 @@ void		print(PairCP *pair)
 
 int		main()
 {
-  MapCP		*map;
-  Player	*a;
-  Player	*b;
+//  MapCP		*map;
+//  Player	*a;
+//  Player	*b;
+  Vector	*vect;
+//
+  vect = newVector();
 
-  a = newPlayer();
-  b = newPlayer();
 
-  a->name = newString("Player A");
-  b->name = newString("Player B");
-
-  map = newMapCP(10, NULL);
-  map->set(map, 12, a);
-  map->set(map, 13, b);
-
-  map->print(map, print);
-
-  map->erase(map, 13);
-  map->print(map, print);
-
+  vect->delete(vect);
+  free(vect);
+//  a = newPlayer();
+//  b = newPlayer();
+//
+//  a->name = newString("Player A");
+//  b->name = newString("Player B");
+//
+//  map = newMapCP(10, NULL);
+//  map->set(map, 12, a);
+//  map->set(map, 13, b);
+//
+//  map->print(map, print);
+//
+//  map->erase(map, 13);
+//  map->print(map, print);
+//
+//  map->delete(map);
+//  a->delete(a);
+//  b->delete(b);
   return (0);
 }

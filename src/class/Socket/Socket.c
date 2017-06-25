@@ -65,8 +65,7 @@ static char	*socket_receive(THIS)
       close(this->fd_client);
       return (NULL);
     }
-  else
-    buff[index] = '\0';
+  buff[index] = '\0';
   return (buff);
 }
 

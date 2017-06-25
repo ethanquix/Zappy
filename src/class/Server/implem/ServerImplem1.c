@@ -136,7 +136,7 @@ static String		*get_tile_inv(THIS, int x, int y)
   out = newString("");
   while (i < MAX_MINERAL)
     {
-      tmp = this->map->tiles[x][y].loot[i];
+      tmp = this->map->tiles[y][x].loot[i];
       if (tmp > 0)
 	{
 	  if (out->len(out) > 0)
@@ -213,8 +213,9 @@ static t_response	*see(THIS, Player *player)
   out = newString("");
   i = 0;
 
-  while (i < player->level)
+  while (i <= player->level)
     {
+      printf("TMP: %s\n", out->__str);
       out->add(out, get_line_from_map(this, a.x, a.y, a.x, a.y));
       if (player->direction == NORTH)
 	{
@@ -244,6 +245,10 @@ static t_response	*see(THIS, Player *player)
 	  a.y -= 1;
 	  b.y += 1;
 	}
+      a.x = (a.x + this->map->width) % this->map->width;
+      a.y = (a.y + this->map->height) % this->map->height;
+      b.x = (b.x + this->map->width) % this->map->width;
+      b.y = (b.y + this->map->height) % this->map->height;
       i INC 1;
     }
   // TODO NORME

@@ -33,7 +33,7 @@ Vector		*parse_team(int idx, char **arg, int max)
   idx = idx - 1;
   while (idx < max)
     {
-      tmp->add(tmp, newString(arg[idx]));
+      tmp->add(tmp, newString(strdup(arg[idx])));
       idx += 1;
     }
   return (tmp);

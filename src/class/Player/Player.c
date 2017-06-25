@@ -56,7 +56,8 @@ static void	delete(THIS)
 
   i = 0;
   this->name->delete(this->name);
-  this->team->delete(this->team);
+  if (this->team)
+    this->team->delete(this->team);
   while (i < MAX_CMD)
     {
       if (this->todo[i].msg != NULL)

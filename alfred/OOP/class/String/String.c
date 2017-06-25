@@ -46,7 +46,7 @@ String		initString(char *str)
 
   if (str == NULL)
     {
-      out.__str = "";
+      out.__str = strdup("");
       out.__len = 0;
     }
   else
