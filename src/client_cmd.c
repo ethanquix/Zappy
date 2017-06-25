@@ -113,7 +113,7 @@ void			check_cmd_client(Server *server, t_socket *socket)
     return ;
   index = 0;
   while (client_cmd[index].name != NULL && cmd &&
-	 strcasecmp(client_cmd[index].name, cmd) != 0)
+	 strcmp(client_cmd[index].name, cmd) != 0)
     index++;
   action_setup(server, player, cmd, index);
 }

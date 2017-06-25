@@ -52,7 +52,7 @@ String		initString(char *str)
   else
     {
       out.__str = strdup(str);
-      out.__len = (int) strlen(str);
+      out.__len = (int)strlen(str);
     }
   return (out);
 }

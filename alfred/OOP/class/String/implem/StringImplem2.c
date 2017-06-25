@@ -47,11 +47,11 @@ static String	*random_string(THIS, size_t len)
 
   while (i < len)
     {
-
       this->__str[i] = alphanum[rand() % (sizeof(alphanum) - 1)];
       i += 1;
     }
 
   this->__str[len] = 0;
+  this->__len = (int)len;
   return (this);
 }
