@@ -37,7 +37,6 @@ static String	*random_string(THIS, size_t len)
 {
   size_t	i;
 
-  srand(time(NULL));
   i = 0;
   MALLOC(this->__str, sizeof(char) * (len + 1));
   static const char alphanum[] =

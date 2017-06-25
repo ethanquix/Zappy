@@ -61,14 +61,13 @@ static void		init_inv(Inventory *inv)
 
 static void		random_inv(Inventory *inv)
 {
-  srand(time(NULL));
-  inv->loot[LINEMATE] = rand() % 2;
-  inv->loot[DERAUMERE] = rand() % 2;
-  inv->loot[SIBUR] = rand() % 2;
-  inv->loot[MENDIANE] = rand() % 2;
-  inv->loot[PHIRAS] = rand() % 2;
-  inv->loot[THYSTAME] = rand() % 2;
-  inv->loot[FOOD] = rand() % 2;
+  inv->loot[LINEMATE] = rand() % 4;
+  inv->loot[DERAUMERE] = rand() % 4;
+  inv->loot[SIBUR] = rand() % 4;
+  inv->loot[MENDIANE] = rand() % 4;
+  inv->loot[PHIRAS] = rand() % 4;
+  inv->loot[THYSTAME] = rand() % 4;
+  inv->loot[FOOD] = rand() % 4;
 }
 
 #endif //ZAPPY_INVENTORY_H

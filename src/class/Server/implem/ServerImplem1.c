@@ -147,11 +147,12 @@ static String		*get_tile_inv(THIS, int x, int y)
   while (i < MAX_MINERAL)
     {
       tmp = this->map->tiles[y][x].loot[i];
-      if (tmp > 0)
+      while (tmp > 0)
 	{
 	  if (out->len(out) > 0)
 	    out->add(out, newString(" "));
 	  out->add(out, newString(mineral_name[i]));
+	  tmp -= 1;
 	}
       i INC 1;
     }
@@ -196,7 +197,6 @@ static String		*get_line_from_map(THIS, int x1, int y1, int x2, int y2)
     {
       tmp = get_tile_inv(this, x1, y1);
       out = out->add(out, tmp)->add(out, comma);
-      printf("out: %s\n", out->__str);
       return (out);
     }
   while (x1 < x2 && y1 == y2)
@@ -210,7 +210,6 @@ static String		*get_line_from_map(THIS, int x1, int y1, int x2, int y2)
       y1 INC 1;
     }
   comma->delete(comma);
-  printf("out get line: %s\n", out->__str);
   return (out);
 }
 
@@ -274,6 +273,8 @@ static t_response	*see(THIS, Player *player)
     }
   // TODO NORME
   resp->msg = out;
+  if (resp->msg->__len > 1 && resp->msg->__str[resp->msg->__len - 1] == ',' || resp->msg->__str[0] == ',')
+    resp->msg->__str[resp->msg->__len - 1] = 0;
   return (resp);
 }
 

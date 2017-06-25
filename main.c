@@ -36,6 +36,7 @@ int		main()
 
 int		zappy(int ac, char *av[])
 {
+  srand(time(NULL)); //TODO ADD PRE MAIN
   start(parse_arg(ac, av));
   return (0);
 }
