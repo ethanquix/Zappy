@@ -1,4 +1,4 @@
-OB/*
+/*
 ** wrapper_main.c for Zappy in /home/wyzlic_a/delivery/Zappy/wrapper_main.c
 **
 ** Made by Dimitri Wyzlic
