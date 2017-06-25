@@ -48,23 +48,7 @@ Server			initServer(WorldMap *map, t_arg *arg)
   void			*it;
 
   i = 0;
-  out.team_index = newMapCI(MAP_CI_MAX, -1);
-  out.nb_teams = arg->teamName->len(arg->teamName);
-  MALLOC(out.teams, sizeof(t_team *) * out.nb_teams);
-  while (i < out.nb_teams)
-    out.teams[i++] = NULL;
-  out.map = map;
-  out.maxSlots = arg->maxPlayers;
-  out.freq = arg->freq;
-  out.players = newMapCP(MAP_IP_MAX, NULL);
-
-  arg->teamName->start_loop(arg->teamName);
-  while ((it = arg->teamName->loop(arg->teamName)) != NULL)
-    out.add_team(&out, (String *) it);
-
-
   out.delete = &delete;
-
   out.player_connect = &player_connect;
   out.add_player_info = &add_player_info;
   out.add_team = &add_team;
@@ -78,7 +62,18 @@ Server			initServer(WorldMap *map, t_arg *arg)
   out.unused_slot = &unused_slot;
   out.take_obj = &take_obj;
   out.place_obj = &place_obj;
-
+  out.team_index = newMapCI(MAP_CI_MAX, -1);
+  out.nb_teams = arg->teamName->len(arg->teamName);
+  MALLOC(out.teams, sizeof(t_team *) * out.nb_teams);
+  while (i < out.nb_teams)
+    out.teams[i++] = NULL;
+  out.map = map;
+  out.maxSlots = arg->maxPlayers;
+  out.freq = arg->freq;
+  out.players = newMapCP(MAP_IP_MAX, NULL);
+  arg->teamName->start_loop(arg->teamName);
+  while ((it = arg->teamName->loop(arg->teamName)) != NULL)
+      out.add_team(&out, (String *) it);
   return (out);
 }
 

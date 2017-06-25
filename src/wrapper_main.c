@@ -26,19 +26,19 @@ static Vector			*wrapper_incant(Server *server, Player *player, t_mineral minera
 
 static Vector	*(*wrapper_function[13])(Server *server, Player *player, t_mineral mineral, String *msg) =
 {
-  wrapper_ko,
-  wrapper_forward,
-  wrapper_right,
-  wrapper_left,
-  wrapper_see,
-  wrapper_get_inv,
-  wrapper_broadcast,
-  wrapper_unused,
-  wrapper_fork,
-  wrapper_eject,
-  wrapper_take,
-  wrapper_place,
-  wrapper_incant,
+  &wrapper_ko,
+  &wrapper_forward,
+  &wrapper_right,
+  &wrapper_left,
+  &wrapper_see,
+  &wrapper_get_inv,
+  &wrapper_broadcast,
+  &wrapper_unused,
+  &wrapper_fork,
+  &wrapper_eject,
+  &wrapper_take,
+  &wrapper_place,
+  &wrapper_incant,
 };
 
 void		respond(Vector *vector)
@@ -66,12 +66,15 @@ void		loop_todo(Server *server)
       i = 0;
       while (i < MAX_CMD)
 	{
-	  if (it->data->todo[i].time == 0)
+	  if (it->data->todo[i].action != C_NOTHING && it->data->todo[i].time == 0)
 	    {
-	      respond(wrapper_function[it->data->todo->action](server, it->data, it->data->todo[i].mineral, it->data->todo[i].msg));
+ 	      respond(wrapper_function[it->data->todo[i].action - 1](server, it->data, it->data->todo[i].mineral, it->data->todo[i].msg));
+	      it->data->todo[i].action = C_NOTHING;
 	      //TODO IF TIME < 0 ALORS DUCOUP ON PEUT OVERRIDE DESSUS
 	      // 	  it->data->todo_time -= it->data->todo[i].time; TODO
 	    }
+	  if ((it->data->todo_time -= 1) <= 0)
+	    it->data->todo_time = 0;
 	  it->data->todo[i].time -= 1; //TODO CALC MEILLEUR TEMPS QUE 1
 	  i += 1;
 	}

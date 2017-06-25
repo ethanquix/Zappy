@@ -26,7 +26,8 @@ t_socket		*get_socketi()
 
 static void	bind_listen(THIS, int port, int maxclients)
 {
-  port = 8080;//TODO
+  if (port == -1)
+    port = 4242;
   this->in.sin_port = htons(port);
   this->fd = socket(AF_INET, SOCK_STREAM, getprotobyname("TCP")->p_proto);
   if (this->fd == -1)

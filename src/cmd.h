@@ -21,6 +21,7 @@ typedef struct			s_cmd
   int				time;
 }				t_cmd;
 
+void			loop_todo(Server *server);
 void			check_cmd_client(Server *srv, t_socket *socket);
 
 #endif //ZAPPY_CMD_H

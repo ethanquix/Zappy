@@ -40,7 +40,7 @@ static void	start_loop(THIS)
 
 static void	*loop(THIS)
 {
-  if (this->__cursor > this->__len || this->__len == 0)
+  if (this->__cursor >= this->__len || this->__len == 0)
     return (NULL);
   this->__cursor += 1;
   return (this->get(this, this->__cursor - 1));

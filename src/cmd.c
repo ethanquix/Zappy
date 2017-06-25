@@ -15,6 +15,17 @@
 static const t_cmd	client_cmd[] =
   {
 	  { "Forward", C_FORWARD, TIME_FORWARD },
+	  { "Left", C_LEFT, TIME_LEFT },
+	  { "Right", C_RIGHT, TIME_RIGHT },
+	  { "Look", C_LOOK, TIME_LOOK },
+	  { "Inventory", C_INVENTORY, TIME_INVENTORY },
+	  { "Broadcast", C_BROADCAST, TIME_BROADCAST },
+	  { "Connect_nbr", C_UNUSED, TIME_UNUSED },
+	  { "Fork", C_FORK, TIME_FORK },
+	  { "Eject", C_EJECT, TIME_EJECT },
+	  { "Take", C_TAKE, TIME_TAKE },
+	  { "Set", C_SET, TIME_SET },
+	  { "Incantation", C_INCANT, TIME_INCANT },
 	  { NULL, 0, 0 }
   };
 
@@ -29,14 +40,14 @@ int			check_team(Player *player, Server *server, char *cmd)
 
   if (!player->team)
     {
-      if ((cinfo = server->add_player_info(server, player, newString(cmd))) ==
+      if ((cinfo = server->add_player_info(server, player, newString(cmd))) !=
 	  NULL)
 	{
 	  dprintf(player->fd, "%s\n%s\n", cinfo->name->__str,
 		  cinfo->coord->__str);
 	} else
 	{
-	  dprintf(player->fd, "Ko\r\n");
+	  dprintf(player->fd, "ko\r\n");
 	}
       return (1);
     }
@@ -63,12 +74,38 @@ void			second_tick(Server *server, Player *player)
 //	  ((t_response*)resp->get(resp, index))->msg->get(((t_response*)resp->get(resp, index))->msg));
 }
 
+static void		action_setup(Server *server, Player *player, char *cmd, int index)
+{
+  enum e_mineral	mineraln;
+  int			todo_index;
+
+  todo_index = -1;
+  while (player->todo[++todo_index].action != C_NOTHING && todo_index < 10);
+  if (todo_index >= 10)
+    return ;
+  if (client_cmd[index].cmd_name)
+    {
+      player->todo[todo_index].action = client_cmd[index].action;
+      player->todo[todo_index].time = (client_cmd[index].time / server->freq) * player->todo_time;
+      player->todo_time = player->todo[todo_index].time;
+      cmd = strtok(NULL, " \n");
+      mineraln = -1; //TODO ERROR HERE MINERAL DONT NOT HAVE -1
+      while (mineraln < MAX_MINERAL && (cmd != mineral_name[++mineraln]));
+      player->todo[todo_index].mineral = mineraln;
+      player->todo[todo_index].msg = newString(cmd);
+    }
+  else
+    {
+      player->todo[todo_index].action = C_KO;
+      player->todo[todo_index].time = player->todo_time;
+    }
+}
+
 void			check_cmd_client(Server *server, t_socket *socket)
 {
   Player		*player;
   char			*cmd;
   int			index;
-  enum e_mineral	mineraln;
 
   player = get_player(server, socket->fd_client);
   if ((cmd = socket->socket_receive(socket)) == NULL)
@@ -76,22 +113,8 @@ void			check_cmd_client(Server *server, t_socket *socket)
   if (check_team(player, server, (cmd = strtok(cmd, " \r\n"))))
     return ;
   index = 0;
-  while (client_cmd[index].cmd_name != NULL &&
+  while (client_cmd[index].cmd_name != NULL && cmd &&
 	 strcasecmp(client_cmd[index].cmd_name, cmd) != 0)
     index++;
-  if (client_cmd[index].cmd_name)
-    {
-      index = -1;
-      while (player->todo[++index].time != -1);
-      player->todo[index].action = client_cmd[index].action;
-      player->todo[index].time = client_cmd[index].time / server->freq;
-      cmd = strtok(NULL, " \n");
-      mineraln = -1; //TODO ERROR HERE MINERAL DONT NOT HAVE -1
-      while ((cmd != mineral_name[++mineraln]) || cmd == NULL);
-      player->todo[index].mineral = mineraln;
-      player->todo[index].msg = newString(cmd);
-    }
-  else
-    {
-    }
+  action_setup(server, player, cmd, index);
 }

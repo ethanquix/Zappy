@@ -33,7 +33,8 @@
 
 enum	e_cmd_nb
 {
-  C_KO = 0,
+  C_NOTHING = 0,
+  C_KO,
   C_FORWARD,
   C_RIGHT,
   C_LEFT,
@@ -90,7 +91,7 @@ CLASS			s_Player
   String		*name;
   String		*team;
   struct s_todo		todo[MAX_CMD];
-
+  int			todo_time;
   void			(*delete)(THIS);
 };
 

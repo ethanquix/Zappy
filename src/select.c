@@ -38,7 +38,7 @@ static void			select_check(t_socket *socket, Server *server, fd_set *rfds)
 	  if (index == socket->fd)
 	    {
 	      socket->socket_accept(socket);
-	      dprintf(socket->fd_client, "WELCOM\n");
+	      dprintf(socket->fd_client, "WELCOME\n");
 	      server->player_connect(server, socket->fd_client);
 	    }
 	  else
@@ -64,14 +64,16 @@ static void			select_op(t_socket *socket, Server *server)
       server->players->start_loop(server->players);
       while ((it = server->players->loop(server->players)))
 	FD_SET(it->data->fd, &rfds);
+      FD_SET(socket->fd, &rfds);
       tv.tv_sec = 2;
-      if ((retval = select(server->players->len(server->players) + 1,
+      if ((retval = select(server->players->len(server->players) + socket->fd + 1,
 			   &rfds, NULL, NULL, &tv)) == -1 && !sig_int)
 	raise("Select failed");
       else if (retval == 0)
 	continue ;
       else
 	select_check(socket, server, &rfds);
+      loop_todo(server);
     }
 }
 

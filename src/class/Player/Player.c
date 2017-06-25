@@ -30,6 +30,8 @@ Player			initPlayer(/* Client ? */)
   out.position.y = 0;
   out.direction = NORTH;
   out.level = 1;
+  out.todo_time = 0;
+  memset(out.todo, 0, sizeof(t_todo) * 10);
   init_inv(&(out.inv));
 
   out.delete = &delete;
@@ -45,7 +47,6 @@ Player			initPlayer(/* Client ? */)
 //  out.take_obj = &take_obj;
 //  out.place_obj = &place_obj;
 //  out.incant = &incant;
-
   return (out);
 }
 

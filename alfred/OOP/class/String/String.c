@@ -44,9 +44,16 @@ String		initString(char *str)
   out.random_string = &random_string;
   out.delete = &delete;
 
-  out.__str = strdup(str);
-  out.__len = (int) strlen(str);
-
+  if (str == NULL)
+    {
+      out.__str = "";
+      out.__len = 0;
+    }
+  else
+    {
+      out.__str = strdup(str);
+      out.__len = (int) strlen(str);
+    }
   return (out);
 }
 
