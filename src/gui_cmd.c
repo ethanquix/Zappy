@@ -13,12 +13,13 @@
 
 static const t_gui	client_cmd[] =
 	{
-		{ NULL, 0, }
+		{ "get_map_size", NULL },
+		{ "get_tileinfo", NULL },
+		{ NULL, NULL }
 	};
 
 void			check_cmd_gui(Server *server, t_socket *socket)
 {
-  Player		*player;
   char			*cmd;
   int			index;
 

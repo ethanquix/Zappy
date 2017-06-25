@@ -14,16 +14,13 @@
 #include "Server.h"
 #include "config.h"
 
-enum e_gui_cmd
-{
-  C_GET_TILEINFO
-};
+typedef void	(*gui_ptr)(Server *server, char *cmd);
 
-typedef struct			s_gui
+typedef struct		s_gui
 {
-  const char			*name;
-  enum e_gui_cmd		action;
-}				t_gui;
+  const char		*name;
+  const gui_ptr 	*ptr;
+}			t_gui;
 
 typedef struct			s_cmd
 {
@@ -35,5 +32,6 @@ typedef struct			s_cmd
 void			loop_todo(Server *server);
 
 void			check_cmd_client(Server *srv, t_socket *socket);
+void			check_cmd_gui(Server *srv, t_socket *socket);
 
 #endif //ZAPPY_CMD_H
