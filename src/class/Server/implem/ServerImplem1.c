@@ -206,10 +206,11 @@ static t_response	*see(THIS, Player *player)
 
   MALLOC(resp, sizeof(t_response));
   resp->name = player->name;
+  resp->fd = player->fd;
   a.x = player->position.x;
   a.y = player->position.y;
   b = a;
-  out = newString("ok");
+  out = newString("");
   i = 0;
 
   while (i < player->level)

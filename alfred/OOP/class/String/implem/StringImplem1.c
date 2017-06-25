@@ -29,7 +29,7 @@ static String	*print(THIS)
 static char	at(THIS, int at)
 {
 
-#ifdef DEBUG
+#ifdef RELEASE
   if (at > this->__len OR at < 0)
       raise("Invalid index");
 #endif

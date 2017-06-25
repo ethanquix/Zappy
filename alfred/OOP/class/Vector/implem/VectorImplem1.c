@@ -48,7 +48,7 @@ static void	*get(THIS, int pos)
   i = 0;
   tmp = this->__obj;
 
-#ifdef DEBUG
+#ifdef RELEASE
   if (pos < 0 OR pos >= this->__len OR this->__len <= 0)
     raise("Out of bounds");
 #endif
@@ -91,7 +91,7 @@ static Vector	*set(THIS, int pos, void *obj)
   it = this->__obj;
   i = 0;
 
-#ifdef DEBUG
+#ifdef RELEASE
   if (pos < 0 OR pos >= this->__len OR this->__len <= 0)
     raise("Out of bounds");
 #endif

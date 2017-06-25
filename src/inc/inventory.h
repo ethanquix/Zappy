@@ -5,7 +5,7 @@
 ** Login   <dimitri1.wyzlic@epitech.eu>
 **
 ** Started on  Wed Jun 07 22:07:41 2017 Dimitri Wyzlic
-** Last update Wed Jun 07 22:07:41 2017 Dimitri Wyzlic
+** Last update Sun Jun 25 16:28:33 2017 Doom
 */
 
 #ifndef ZAPPY_INVENTORY_H
@@ -22,26 +22,26 @@ typedef enum e_mineral	Mineral;
 
 //TODO Norme
 static char*	mineral_name[] =
-{
-	"linemate",
-	"deraumere",
-	"sibur",
-	"mendiane",
-	"phiras",
-	"thystame",
-	"food",
-};
+  {
+    "linemate",
+    "deraumere",
+    "sibur",
+    "mendiane",
+    "phiras",
+    "thystame",
+    "food",
+  };
 
 typedef	enum	e_mineral
-{
-  LINEMATE = 0,
-  DERAUMERE = 1,
-  SIBUR = 2,
-  MENDIANE = 3,
-  PHIRAS = 4,
-  THYSTAME = 5,
-  FOOD = 6
-}		t_mineral;
+  {
+    LINEMATE = 0,
+    DERAUMERE = 1,
+    SIBUR = 2,
+    MENDIANE = 3,
+    PHIRAS = 4,
+    THYSTAME = 5,
+    FOOD = 6
+  }		t_mineral;
 
 typedef struct	s_inv
 {

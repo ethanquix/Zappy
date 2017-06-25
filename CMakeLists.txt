@@ -9,6 +9,7 @@ PRINT_HEADER()
 add_subdirectory(alfred)
 
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -DDEBUG")
+set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -DRELEASE")
 #SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
 
 include_directories(src/inc)

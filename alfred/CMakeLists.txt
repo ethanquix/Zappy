@@ -5,7 +5,7 @@ include(Header.cmake)
 PRINT_HEADER()
 
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -DDEBUG")
-#SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
+set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -DRELEASE")
 
 include_directories(macros)
 include_directories(OOP/class/Map)
