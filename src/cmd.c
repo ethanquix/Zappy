@@ -51,8 +51,7 @@ int			check_team(Player *player, Server *server, char *cmd)
 	}
       return (1);
     }
-  else
-    return (0);
+  return (0);
 }
 
 void			second_tick(Server *server, Player *player)

@@ -8,6 +8,7 @@
 ** Last update Fri Jun 23 15:56:59 2017 Doom
 */
 
+#include <time.h>
 #include "String.h"
 
 static String	*epur(THIS, char to_delete)
@@ -36,6 +37,7 @@ static String	*random_string(THIS, size_t len)
 {
   size_t	i;
 
+  srand(time(NULL));
   i = 0;
   MALLOC(this->__str, len);
   static const char alphanum[] =

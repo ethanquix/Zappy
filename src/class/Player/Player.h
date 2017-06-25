@@ -92,6 +92,7 @@ CLASS			s_Player
   String		*team;
   struct s_todo		todo[MAX_CMD];
   int			todo_time;
+  bool			is_gui;
   void			(*delete)(THIS);
 };
 

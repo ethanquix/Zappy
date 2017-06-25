@@ -34,6 +34,8 @@ Player			initPlayer(/* Client ? */)
   memset(out.todo, 0, sizeof(t_todo) * 10);
   init_inv(&(out.inv));
 
+  out.is_gui = false;
+
   out.delete = &delete;
 //  out.forward = &forward;
 //  out.rotate = &rotate;

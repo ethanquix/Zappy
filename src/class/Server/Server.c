@@ -48,6 +48,10 @@ Server			initServer(WorldMap *map, t_arg *arg)
   void			*it;
 
   i = 0;
+  out.gui = newPlayer();
+  out.gui->is_gui = true;
+  out.gui->fd = -1;
+
   out.delete = &delete;
   out.player_connect = &player_connect;
   out.add_player_info = &add_player_info;

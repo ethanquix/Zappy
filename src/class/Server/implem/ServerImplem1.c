@@ -49,6 +49,15 @@ static t_connect_info		*add_player_info(THIS, Player *player, String *team)
   MALLOC(str, 12);
   //TODO GERER OEUFS ET POS RANDOM
   MALLOC(out, sizeof(t_connect_info));
+
+  if (strcmp(team->__str, strdup("GUI")) == 0)
+    {
+      this->gui->fd = player->fd;
+      this->players->erase(this->players, player->fd);
+      out->name = newString("GUI");
+      out->coord = newString("GUI");
+      return (out);
+    }
   idx = this->team_index->get(this->team_index, team->__str);
   if (idx == this->team_index->end(this->team_index))
     return (NULL);
@@ -248,7 +257,7 @@ static t_response	*see(THIS, Player *player)
       a.x = (a.x + this->map->width) % this->map->width;
       a.y = (a.y + this->map->height) % this->map->height;
       b.x = (b.x + this->map->width) % this->map->width;
-      b.y = (b.y + this->map->height) % this->map->height;
+      b.y = (b.y + this->map->width) % this->map->height;
       i INC 1;
     }
   // TODO NORME

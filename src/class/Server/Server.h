@@ -51,6 +51,7 @@ CLASS			s_server
   int			maxSlots;
   int			nb_teams;
   int			freq;
+  Player		*gui;
 
   void			(*delete)(THIS);
 
