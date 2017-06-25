@@ -1,11 +1,11 @@
-/*
+OB/*
 ** wrapper_main.c for Zappy in /home/wyzlic_a/delivery/Zappy/wrapper_main.c
 **
 ** Made by Dimitri Wyzlic
 ** Login   <dimitri1.wyzlic@epitech.eu>
 **
 ** Started on  Sat Jun 24 19:40:59 2017 Dimitri Wyzlic
-** Last update Sat Jun 24 19:40:59 2017 Dimitri Wyzlic
+** Last update Sun Jun 25 15:21:35 2017 Doom
 */
 
 #include "cmd.h"
@@ -25,21 +25,21 @@ static Vector			*wrapper_place(Server *server, Player *player, t_mineral mineral
 static Vector			*wrapper_incant(Server *server, Player *player, t_mineral mineral, String *msg);
 
 static Vector	*(*wrapper_function[13])(Server *server, Player *player, t_mineral mineral, String *msg) =
-	{
-		wrapper_ko,
-		wrapper_forward,
-		wrapper_right,
-		wrapper_left,
-		wrapper_see,
-		wrapper_get_inv,
-		wrapper_broadcast,
-		wrapper_unused,
-		wrapper_fork,
-		wrapper_eject,
-		wrapper_take,
-		wrapper_place,
-		wrapper_incant,
-	};
+{
+  wrapper_ko,
+  wrapper_forward,
+  wrapper_right,
+  wrapper_left,
+  wrapper_see,
+  wrapper_get_inv,
+  wrapper_broadcast,
+  wrapper_unused,
+  wrapper_fork,
+  wrapper_eject,
+  wrapper_take,
+  wrapper_place,
+  wrapper_incant,
+};
 
 void		respond(Vector *vector)
 {
