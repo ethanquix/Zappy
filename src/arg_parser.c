@@ -38,6 +38,25 @@ Vector		*parse_team(int idx, char **arg, int max)
   return (tmp);
 }
 
+t_arg		*verif_arg(t_arg *src)
+{
+  if (src->port < 0)
+    raise("Port must be positive");
+  if (src->freq < 2 || src->port > 10000)
+    raise("-f option only accepts integer values between 2 and 10000");
+  if (src->width < 10 || src->width > 30)
+    raise("-x option only accepts integer values between 10 and 30");
+  if (src->height < 10 || src->height > 30)
+    raise("-y option only accepts integer values between 10 and 30");
+  if (src->maxPlayers < 1)
+    raise("-c option only accepts integer values greater or equal to 1");
+  if (src->teamName->len(src->teamName) <= 0)
+    raise("You need to specify team name");
+  //TODO CHECK IF NOT TEAM DOUBLON
+  return (src);
+
+}
+
 t_arg		*parse_arg(int nb, char **arg)
 {
   t_arg		*out;
@@ -61,5 +80,5 @@ t_arg		*parse_arg(int nb, char **arg)
       if (c == 'n')
 	out->teamName = parse_team(optind, arg, nb);
     };
-  return (out);
+  return (verif_arg(out));
 }
