@@ -38,12 +38,12 @@ static char	at(THIS, int at)
 
 static String	*add(THIS, String *other)
 {
-  String	*out;
+  char		*tmp;
 
-  out = newString(this->__str);
-  MALLOC(out->__str, sizeof(char) * (this->__len + other->__len));
-  strcpy(out->__str, this->__str);
-  strcat(out->__str, other->__str);
-  out->__len = strlen(out->__str);
-  return (out);
+  MALLOC(tmp, sizeof(char) * (this->__len + other->__len));
+  strcpy(tmp, this->__str);
+  strcat(tmp, other->__str);
+  this->__str = tmp;
+  this->__len = (int) strlen(this->__str);
+  return (this);
 }

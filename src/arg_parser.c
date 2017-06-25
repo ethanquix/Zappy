@@ -33,6 +33,8 @@ Vector		*parse_team(int idx, char **arg, int max)
   idx = idx - 1;
   while (idx < max)
     {
+      if (strcmp(strdup(arg[idx]), strdup("GUI")) == 0)
+	raise("Can't have a GUI team name");
       tmp->add(tmp, newString(strdup(arg[idx])));
       idx += 1;
     }

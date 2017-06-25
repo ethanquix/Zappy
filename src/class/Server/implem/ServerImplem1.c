@@ -91,6 +91,7 @@ static t_response	*forward(THIS, Player *player)
     (player->position.x = (player->position.x + 1 + this->map->width) % this->map->width);
   else if (player->direction == WEST)
     (player->position.x = (player->position.x - 1 + this->map->width) % this->map->width);
+  printf("x %d y %d\n", player->position.x, player->position.y);
   return (out);
 }
 
@@ -181,16 +182,23 @@ static String		*get_line_from_map(THIS, int x1, int y1, int x2, int y2)
 {
   String		*out;
   String		*comma;
+  String		*tmp;
 
   out = newString("");
   comma = newString(",");
 
+  printf("x1 %d y1 %d x2 %d y2 %d\n", x1, y1, x2, y2);
   if (x2 > x1)
     my_swap(&x1, &x2);
   if (y2 > y1)
     my_swap(&y1, &y2);
   if (x1 == x2 && y1 == y2)
-    return (out->add(out, get_tile_inv(this, x1, y1))->add(out, comma));
+    {
+      tmp = get_tile_inv(this, x1, y1);
+      out = out->add(out, tmp)->add(out, comma);
+      printf("out: %s\n", out->__str);
+      return (out);
+    }
   while (x1 < x2 && y1 == y2)
     {
       out->add(out, get_tile_inv(this, x1, y1))->add(out, comma);
@@ -202,6 +210,7 @@ static String		*get_line_from_map(THIS, int x1, int y1, int x2, int y2)
       y1 INC 1;
     }
   comma->delete(comma);
+  printf("out get line: %s\n", out->__str);
   return (out);
 }
 
@@ -212,6 +221,7 @@ static t_response	*see(THIS, Player *player)
   Vec2I			a;
   Vec2I			b;
   t_response		*resp;
+  String		*tmp;
 
   MALLOC(resp, sizeof(t_response));
   resp->name = player->name;
@@ -224,8 +234,10 @@ static t_response	*see(THIS, Player *player)
 
   while (i <= player->level)
     {
-      printf("TMP: %s\n", out->__str);
-      out->add(out, get_line_from_map(this, a.x, a.y, a.x, a.y));
+      tmp = get_line_from_map(this, a.x, a.y, a.x, a.y);
+      printf("TMP WHEN OUT: %s\n", tmp->__str);
+      out->add(out, tmp);
+      printf("OUT: %s\n", out->__str);
       if (player->direction == NORTH)
 	{
 	  a.x -= 1;
