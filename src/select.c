@@ -69,10 +69,8 @@ static void			select_op(t_socket *socket, Server *server)
       if ((retval = select(server->players->len(server->players) + socket->fd + 1,
 			   &rfds, NULL, NULL, &tv)) == -1 && !sig_int)
 	raise("Select failed");
-      else if (retval == 0)
-	continue ;
-      else
-	select_check(socket, server, &rfds);
+      else if (retval >= 0)
+	  select_check(socket, server, &rfds);
       loop_todo(server);
     }
 }
