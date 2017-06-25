@@ -19,7 +19,7 @@ static Vector	*add(THIS, void *obj)
 {
   t_llist	*tmp;
 
-  MALLOC(tmp, sizeof(tmp));
+  MALLOC(tmp, sizeof(t_llist));
 
   tmp->__elem = obj;
 

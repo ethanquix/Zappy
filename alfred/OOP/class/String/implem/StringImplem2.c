@@ -39,7 +39,7 @@ static String	*random_string(THIS, size_t len)
 
   srand(time(NULL));
   i = 0;
-  MALLOC(this->__str, len);
+  MALLOC(this->__str, sizeof(char) * (len + 1));
   static const char alphanum[] =
     "0123456789"
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
