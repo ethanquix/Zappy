@@ -67,9 +67,12 @@ void		loop_todo(Server *server)
       while (i < MAX_CMD)
 	{
 	  if (it->data->todo[i].time == 0)
-	    respond(wrapper_function[it->data->todo->action](server, it->data, it->data->todo[i].mineral, it->data->todo[i].msg));
-	  //TODO IF TIME < 0 ALORS DUCOUP ON PEUT OVERRIDE DESSUS
-	  it->data->todo->time -= 1; //TODO CALC MEILLEUR TEMPS QUE 1
+	    {
+	      respond(wrapper_function[it->data->todo->action](server, it->data, it->data->todo[i].mineral, it->data->todo[i].msg));
+	      //TODO IF TIME < 0 ALORS DUCOUP ON PEUT OVERRIDE DESSUS
+	      // 	  it->data->todo_time -= it->data->todo[i].time; TODO
+	    }
+	  it->data->todo[i].time -= 1; //TODO CALC MEILLEUR TEMPS QUE 1
 	  i += 1;
 	}
     }
