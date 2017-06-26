@@ -64,8 +64,6 @@ static void			select_op(t_socket *socket, t_server *server)
   tv.tv_sec = 0;
   while (!sig_int)
     {
-      tv.tv_usec = 0;
-      tv.tv_sec = 0;
       FD_ZERO(&rfds);
       server->players->start_loop(server->players);
       while ((it = server->players->loop(server->players)))
