@@ -34,6 +34,7 @@ t_player			init_player()
   init_inv(&(out.inv));
   out.inv.loot[FOOD] = BASE_FOOD;
   out.delete = &delete;
+  out.cur_food_loss = FOOD_LOSS;
   return (out);
 }
 

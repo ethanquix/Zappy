@@ -45,8 +45,8 @@ t_arg		*verif_arg(t_arg *src)
 {
   if (src->port < 0)
     RAISE("Port must be positive");
-  if (src->freq < 2 || src->port > 10000)
-    RAISE("-f option only accepts integer values between 2 and 10000");
+  if (src->freq < 1 || src->freq > 1000)
+    RAISE("-f option only accepts integer values between 1 and 1000");
   if (src->width < 10 || src->width > 30)
     RAISE("-x option only accepts integer values between 10 and 30");
   if (src->height < 10 || src->height > 30)

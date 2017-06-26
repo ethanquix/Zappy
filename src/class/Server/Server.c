@@ -32,6 +32,7 @@ static void		delete(THIS);
 static t_server		*apply_fork(THIS);
 static t_server		*apply_incant(THIS, t_serv_todo *todo);
 static bool		check_time(THIS);
+static bool		calc_food(THIS, t_player *player);
 
 static t_server	*(*wrapper_function_server[])(THIS, t_serv_todo *src) =
 {
@@ -92,7 +93,7 @@ t_server			init_server(t_worldmap *map, t_arg *arg)
   out.ms = 0;
   out.cur_div = 1000 / out.freq;
   out.check_time = &check_time;
-
+  out.calc_food = &calc_food;
   return (out);
 }
 
@@ -132,6 +133,7 @@ static t_server		*loop(THIS)
 {
   t_serv_todo		*cur;
   int			i;
+  PAIR_CP		*it;
 
   apply_fork(this);
   i = 0;
@@ -146,6 +148,10 @@ static t_server		*loop(THIS)
 	}
       cur->time -= 1;
     }
+  this->players->start_loop(this->players);
+  while ((it = this->players->loop(this->players)) != NULL)
+    if (this->calc_food(this, it->data) == true)
+      this->death(this, it->data);
   return (this);
 }
 
@@ -153,18 +159,34 @@ static bool		check_time(THIS)
 {
   double		current_ms;
   struct timespec	spec;
-  double		diff_ms;
+  double		diff;
+  double		current_s;
 
   clock_gettime(CLOCK_REALTIME, &spec);
-  current_ms = round(spec.tv_nsec / 1.0e6);
-  diff_ms = current_ms - this->ms;
-//  printf("%d\n", rand());
-  printf("cur ms: %lf previous ms: %lf\n", current_ms, this->ms);
-  if (diff_ms != 0 && diff_ms >= this->cur_div)
+  current_s = spec.tv_sec;
+  current_ms = ((round(spec.tv_nsec / 1.0e6) + (current_s * 1000))) / 1000;
+  diff = (current_ms - this->ms) * 1000;
+  if (diff != 0 && diff >= this->cur_div)
     {
       this->ms = current_ms;
       return (true);
     }
+  return (false);
+}
+
+static bool		calc_food(THIS, t_player *player)
+{
+  if (DISABLE_FOOD)
+    return (false);
+  if (player->team == NULL)
+    return (false);
+  if (player->cur_food_loss -= 1 <= 0)
+    {
+      player->inv.loot[FOOD] -= 1;
+      player->cur_food_loss = FOOD_LOSS;
+    }
+  if (player->inv.loot[FOOD] <= 0)
+    return (true);
   return (false);
 }
 

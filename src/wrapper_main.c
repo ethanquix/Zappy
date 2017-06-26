@@ -70,14 +70,12 @@ void		loop_todo(t_server *server)
 	    {
  	      respond(wrapper_function[it->data->todo[i].action - 1](server, it->data, it->data->todo[i].mineral, it->data->todo[i].msg));
 	      it->data->todo[i].action = C_NOTHING;
-	      //TODO IF TIME < 0 ALORS DUCOUP ON PEUT OVERRIDE DESSUS
-	      // 	  it->data->todo_time -= it->data->todo[i].time; TODO
 	    }
-	  if ((it->data->todo_time -= 1) <= 0)
-	    it->data->todo_time = 0;
-	  it->data->todo[i].time -= 1; //TODO CALC MEILLEUR TEMPS QUE 1
+	  it->data->todo[i].time -= 1;
 	  i += 1;
 	}
+      if ((it->data->todo_time -= 1) <= 0)
+	it->data->todo_time = 0;
     }
 }
 
