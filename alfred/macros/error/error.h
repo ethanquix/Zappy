@@ -27,6 +27,4 @@ void	*__RAISE__(const char *msg, const char *file, unsigned int l, const char *f
 #define MALLOC(a, b) (((a) = malloc(b)) == NULL && RAISE("Malloc fail"))
 #define ST(a) sizeof(typeof(a))
 
-
-
 #endif //ZAPPY_ERROR_H

@@ -45,6 +45,7 @@ static t_vector		*eject(THIS, t_player *player)
   out->add(out, resp);
   this->players->start_loop(this->players);
   while ((it = this->players->loop(this->players)) != NULL)
+    if (it->data->fd != player->fd)
       out->add(out, eject_player(this, player, it->data));
   return (out);
 }
@@ -72,7 +73,6 @@ static t_response	*take_obj(THIS, t_player *player, t_mineral mineral)
   MALLOC(resp, sizeof(t_response));
   resp->name = player->name;
   resp->fd = player->fd;
-  //TODO NORME
   if (this->map->tiles[player->position.y][player->position.x].loot[mineral] > 0)
     {
       resp->msg = new_string(MSG_OK);

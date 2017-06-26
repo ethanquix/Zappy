@@ -11,12 +11,7 @@
 #ifndef ZAPPY_ARG_PARSER_H
 #define ZAPPY_ARG_PARSER_H
 
-#define DEFAULT_WIDTH 10
-#define DEFAULT_HEIGHT 10
-#define DEFAULT_PORT 4242
-#define DEFAULT_MAX_CLIENT 10
-#define DEFAULT_FREQ 100
-
+#include "config.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
