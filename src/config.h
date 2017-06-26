@@ -51,6 +51,6 @@
 
 #define FOOD_LOSS 126
 
-#define DISABLE_FOOD false
+#define DISABLE_FOOD true
 
 #endif //ZAPPY_CONFIG_H
