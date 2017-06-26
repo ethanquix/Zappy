@@ -11,7 +11,6 @@
 #ifndef ZAPPY_PYTHON_H
 #define ZAPPY_PYTHON_H
 
-//Python Like
 #define OR ||
 #define AND &&
 #define NOT !=
