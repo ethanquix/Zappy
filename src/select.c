@@ -64,8 +64,6 @@ static void			select_op(t_socket *socket, t_server *server)
   tv.tv_sec = 0;
   while (!sig_int)
     {
-      tv.tv_usec = 0;
-      tv.tv_sec = 0;
       FD_ZERO(&rfds);
       server->players->start_loop(server->players);
       while ((it = server->players->loop(server->players)))
@@ -73,7 +71,6 @@ static void			select_op(t_socket *socket, t_server *server)
       if (server->gui->fd != -1)
 	FD_SET(server->gui->fd, &rfds);
       FD_SET(socket->fd, &rfds);
-      tv.tv_sec = 2;
       if ((retval = select(server->players->len(server->players) + socket->fd + 2,
 			   &rfds, NULL, NULL, &tv)) == -1 && !sig_int)
 	RAISE("Select failed");
