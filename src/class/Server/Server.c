@@ -12,21 +12,21 @@
 
 static Server		*add_team(THIS, String *name); //TODO
 static Server		*player_connect(THIS, int fd); //TODO
-static t_connect_info	*add_player_info(THIS, Player *player, String *team);
-static t_response	*forward(THIS, Player *player);
-static t_response	*rotate_left(THIS, Player *player);
-static t_response	*rotate_right(THIS, Player *player);
-static t_response	*see(THIS, Player *player);
-static t_response	*get_inventory(THIS, Player *player);
-static Vector		*broadcast(THIS, Player *player, String *msg);
-static Server		*forkPlayer(THIS, Player *player); //TODO
+static t_connect_info	*add_player_info(THIS, t_player *player, String *team);
+static t_response	*forward(THIS, t_player *player);
+static t_response	*rotate_left(THIS, t_player *player);
+static t_response	*rotate_right(THIS, t_player *player);
+static t_response	*see(THIS, t_player *player);
+static t_response	*get_inventory(THIS, t_player *player);
+static Vector		*broadcast(THIS, t_player *player, String *msg);
+static Server		*forkt_player(THIS, t_player *player); //TODO
 static Server		hatch_egg(THIS); //TODO
-static Vector		*eject(THIS, Player *player);
-static Server		*death(THIS, Player *player); //TODO
-static t_response	*take_obj(THIS, Player *player, t_mineral mineral);
-static t_response	*place_obj(THIS, Player *player, t_mineral mineral);
-static Server		*incant(THIS, Player *player); //TODO
-static t_response	*unused_slot(THIS, Player *player);
+static Vector		*eject(THIS, t_player *player);
+static Server		*death(THIS, t_player *player); //TODO
+static t_response	*take_obj(THIS, t_player *player, t_mineral mineral);
+static t_response	*place_obj(THIS, t_player *player, t_mineral mineral);
+static Server		*incant(THIS, t_player *player); //TODO
+static t_response	*unused_slot(THIS, t_player *player);
 
 static String		*get_tile_inv(THIS, int x, int y);
 
@@ -50,7 +50,7 @@ Server			initServer(WorldMap *map, t_arg *arg)
   void			*it;
 
   i = 0;
-  out.gui = newPlayer();
+  out.gui = new_player();
   out.gui->fd = -1;
 
   out.delete = &delete;
@@ -73,7 +73,7 @@ Server			initServer(WorldMap *map, t_arg *arg)
   while (i < out.nb_teams)
     out.teams[i++] = NULL;
   out.map = map;
-  out.maxSlots = arg->maxPlayers;
+  out.maxSlots = arg->maxt_players;
   out.freq = arg->freq;
   out.players = newMapCP(MAP_IP_MAX, NULL);
   arg->teamName->start_loop(arg->teamName);
@@ -104,7 +104,7 @@ static void	delete(THIS)
   free(this);
 }
 
-static Server		*death(THIS, Player *player)
+static Server		*death(THIS, t_player *player)
 {
   int			ti;
 

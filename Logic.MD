@@ -5,3 +5,7 @@ IO Manager va recup les infos puis ensuite:
 -appeller la fonction correspondante du serveur avec le player
 
 -Repondre au client ce que cette fonction retournera
+
+//TODO
+
+IMPLEMENTER BOUFFE

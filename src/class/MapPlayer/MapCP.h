@@ -24,7 +24,7 @@ typedef CLASS s_MapCP MapCP;
 struct			s_entryCP
 {
   int			key;
-  Player		*data;
+  t_player		*data;
   PairCP		*__next;
 };
 
@@ -32,15 +32,15 @@ CLASS			s_MapCP
 {
   int			__size;
   int			__items;
-  Player		*__notfound;
+  t_player		*__notfound;
   PairCP		**__table;
   int			__currentIt;
   PairCP		*__currentEntry;
 
-  MapCP			*(*set)(THIS, int key, Player *data);
-  Player		*(*get)(THIS, int key);
+  MapCP			*(*set)(THIS, int key, t_player *data);
+  t_player		*(*get)(THIS, int key);
   int			(*len)(THIS);
-  Player		*(*end)(THIS);
+  t_player		*(*end)(THIS);
   bool			(*exist)(THIS, int key);
   PairCP		*(*loop)(THIS);
   void			(*start_loop)(THIS);
@@ -49,9 +49,9 @@ CLASS			s_MapCP
   MapCP			*(*erase)(THIS, int key);
 };
 
-MapCP			*newMapCP(int size, Player *end);
-MapCP			initMapCP(int size, Player *end);
+MapCP			*newMapCP(int size, t_player *end);
+MapCP			initMapCP(int size, t_player *end);
 int			__hash_MapCP(THIS, int key);
-PairCP			*__newPairCP(int key, Player *val);
+PairCP			*__newPairCP(int key, t_player *val);
 
 #endif //ZAPPY_MAPCP_H

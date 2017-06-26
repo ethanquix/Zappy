@@ -29,9 +29,9 @@ static Server		*add_team(THIS, String *name)
 
 static Server		*player_connect(THIS, int fd)
 {
-  Player		*new;
+  t_player		*new;
 
-  new = newPlayer();
+  new = new_player();
   new->fd = fd;
   new->team = NULL;
   new->name = newString("");
@@ -40,7 +40,7 @@ static Server		*player_connect(THIS, int fd)
   return (this);
 }
 
-static t_connect_info		*add_player_info(THIS, Player *player, String *team)
+static t_connect_info		*add_player_info(THIS, t_player *player, String *team)
 {
   int				idx;
   t_connect_info		*out;
@@ -75,7 +75,7 @@ static t_connect_info		*add_player_info(THIS, Player *player, String *team)
   return (out);
 }
 
-static t_response	*forward(THIS, Player *player)
+static t_response	*forward(THIS, t_player *player)
 {
   t_response		*out;
 
@@ -95,7 +95,7 @@ static t_response	*forward(THIS, Player *player)
   return (out);
 }
 
-static t_response	*rotate_left(THIS, Player *player)
+static t_response	*rotate_left(THIS, t_player *player)
 {
   t_response		*out;
 
@@ -115,7 +115,7 @@ static t_response	*rotate_left(THIS, Player *player)
   return (out);
 }
 
-static t_response	*rotate_right(THIS, Player *player)
+static t_response	*rotate_right(THIS, t_player *player)
 {
   t_response		*out;
 
@@ -214,7 +214,7 @@ static String		*get_line_from_map(THIS, int x1, int y1, int x2, int y2)
   return (out);
 }
 
-static t_response	*see(THIS, Player *player)
+static t_response	*see(THIS, t_player *player)
 {
   String		*out;
   int			i;
@@ -275,7 +275,7 @@ static t_response	*see(THIS, Player *player)
   return (resp);
 }
 
-static t_response	*get_inventory(THIS, Player *player)
+static t_response	*get_inventory(THIS, t_player *player)
 {
   t_response		*resp;
   int			i;

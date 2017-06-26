@@ -19,7 +19,7 @@ t_arg		*init_arg_parser()
   out->width = DEFAULT_WIDTH;
   out->height = DEFAULT_HEIGHT;
   out->port = DEFAULT_PORT;
-  out->maxPlayers = DEFAULT_MAX_CLIENT;
+  out->maxt_players = DEFAULT_MAX_CLIENT;
   out->freq = DEFAULT_FREQ;
   out->teamName = newVector();
   return (out);
@@ -51,7 +51,7 @@ t_arg		*verif_arg(t_arg *src)
     raise("-x option only accepts integer values between 10 and 30");
   if (src->height < 10 || src->height > 30)
     raise("-y option only accepts integer values between 10 and 30");
-  if (src->maxPlayers < 1)
+  if (src->maxt_players < 1)
     raise("-c option only accepts integer values greater or equal to 1");
   if (src->teamName->len(src->teamName) <= 0)
     raise("You need to specify team name");
@@ -78,7 +78,7 @@ t_arg		*parse_arg(int nb, char **arg)
       if (c == 'h')
 	out->height = atoi(optarg);
       if (c == 'c')
-	out->maxPlayers = atoi(optarg);
+	out->maxt_players = atoi(optarg);
       if (c == 'n')
 	out->teamName = parse_team(optind, arg, nb);
     };

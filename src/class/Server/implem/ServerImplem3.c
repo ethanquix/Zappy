@@ -10,7 +10,7 @@
 
 #include "Server.h"
 
-static t_response	*eject_player(THIS, Player *from, Player *to)
+static t_response	*eject_player(THIS, t_player *from, t_player *to)
 {
   t_response		*response;
 
@@ -31,7 +31,7 @@ static t_response	*eject_player(THIS, Player *from, Player *to)
   return (response);
 }
 
-static Vector		*eject(THIS, Player *player)
+static Vector		*eject(THIS, t_player *player)
 {
   Vector		*out;
   PairCP		*it;
@@ -49,7 +49,7 @@ static Vector		*eject(THIS, Player *player)
   return (out);
 }
 
-static t_response	*unused_slot(THIS, Player *player)
+static t_response	*unused_slot(THIS, t_player *player)
 {
   t_response		*out;
   int			idx;
@@ -65,7 +65,7 @@ static t_response	*unused_slot(THIS, Player *player)
   return (out);
 }
 
-static t_response	*take_obj(THIS, Player *player, t_mineral mineral)
+static t_response	*take_obj(THIS, t_player *player, t_mineral mineral)
 {
   t_response		*resp;
 

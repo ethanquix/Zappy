@@ -1,5 +1,5 @@
 /*
-** Player.c for Zappy in /home/wyzlic_a/delivery/Zappy/Player.c
+** t_player.c for Zappy in /home/wyzlic_a/delivery/Zappy/t_player.c
 **
 ** Made by Dimitri Wyzlic
 ** Login   <dimitri1.wyzlic@epitech.eu>
@@ -12,18 +12,18 @@
 
 static void	delete(THIS);
 
-Player			*newPlayer()
+t_player			*new_player()
 {
-  Player		*out;
+  t_player		*out;
 
-  MALLOC(out, sizeof(Player));
-  *out = initPlayer();
+  MALLOC(out, sizeof(t_player));
+  *out = init_player();
   return (out);
 }
 
-Player			initPlayer()
+t_player			init_player()
 {
-  Player		out;
+  t_player		out;
 
   out.position.x = 0;
   out.position.y = 0;

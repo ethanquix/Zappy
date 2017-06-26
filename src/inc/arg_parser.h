@@ -30,7 +30,7 @@ typedef struct	s_arg
   int		width;
   int		height;
   Vector	*teamName;
-  int		maxPlayers;
+  int		maxt_players;
   int		freq;
 }		t_arg;
 

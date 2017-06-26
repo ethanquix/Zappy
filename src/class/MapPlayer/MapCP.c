@@ -11,10 +11,10 @@
 #include <limits.h>
 #include "MapCP.h"
 
-static MapCP		*set(THIS, int key, Player *data);
-static Player		*get(THIS, int key);
+static MapCP		*set(THIS, int key, t_player *data);
+static t_player		*get(THIS, int key);
 static int		len(THIS);
-static Player		*end(THIS);
+static t_player		*end(THIS);
 static bool		exist(THIS, int key);
 static void		start_loop(THIS);
 static PairCP		*loop(THIS);
@@ -22,7 +22,7 @@ static MapCP		*print(THIS, void (*_func)(PairCP *pair));
 static void		delete(THIS);
 static MapCP		*erase(THIS, int key);
 
-MapCP		*newMapCP(int size, Player *nof)
+MapCP		*newMapCP(int size, t_player *nof)
 {
   MapCP		*out;
 
@@ -32,7 +32,7 @@ MapCP		*newMapCP(int size, Player *nof)
   return (out);
 }
 
-MapCP		initMapCP(int size, Player *nof)
+MapCP		initMapCP(int size, t_player *nof)
 {
   MapCP		out;
   int		i;
@@ -65,7 +65,7 @@ int		__hash_MapCP(THIS, int key)
   return (key % this->__size);
 }
 
-struct s_entryCP * __newPairCP(int key, Player *val)
+struct s_entryCP * __newPairCP(int key, t_player *val)
 {
   struct s_entryCP	*newpair;
 

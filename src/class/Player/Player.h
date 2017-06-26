@@ -1,5 +1,5 @@
 /*
-** Player.h for Zappy in /home/wyzlic_a/delivery/Zappy/Player.h
+** t_player.h for Zappy in /home/wyzlic_a/delivery/Zappy/t_player.h
 **
 ** Made by Dimitri Wyzlic
 ** Login   <dimitri1.wyzlic@epitech.eu>
@@ -58,7 +58,7 @@ static char*	direction_name[] =
 		"WEST"
 	};
 
-typedef CLASS s_Player Player;
+//typedef CLASS s_player t_player;
 
 typedef enum e_dir Direction;
 
@@ -71,7 +71,6 @@ typedef	enum	e_dir
 }		t_dir;
 
 #undef THIS
-#define THIS Player *this
 
 typedef struct	s_todo
 {
@@ -81,7 +80,7 @@ typedef struct	s_todo
   String	*msg;
 }		t_todo;
 
-CLASS			s_Player
+typedef CLASS		s_player
 {
   int			fd;
   Vec2I			position;
@@ -92,11 +91,12 @@ CLASS			s_Player
   String		*team;
   struct s_todo		todo[MAX_CMD];
   int			todo_time;
-  void			(*delete)(THIS);
-};
+  void			(*delete)(struct s_player *this);
+}			t_player;
 
-Player			*newPlayer();
-Player			initPlayer();
+t_player			*new_player();
+t_player			init_player();
 
+#define THIS t_player *this
 
 #endif //ZAPPY_PLAYER_H

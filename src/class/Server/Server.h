@@ -51,32 +51,33 @@ CLASS			s_server
   int			maxSlots;
   int			nb_teams;
   int			freq;
-  Player		*gui;
+  t_player		*gui;
+  t_todo		todo;
 
   void			(*delete)(THIS);
 
   Server		*(*add_team)(THIS, String *name);
   Server		*(*player_connect)(THIS, int fd);
-  t_connect_info	*(*add_player_info)(THIS, Player *player, String *team);
+  t_connect_info	*(*add_player_info)(THIS, t_player *player, String *team);
 
-  t_response		*(*forward)(Server *this, Player *player);
-  t_response		*(*rotate_left)(THIS, Player *player);
-  t_response		*(*rotate_right)(THIS, Player *player);
-  t_response		*(*see)(THIS, Player *player);
-  t_response		*(*get_inventory)(THIS, Player *player);
-  Vector		*(*broadcast)(Server *this, Player *player, String *msg);
-  Server		*(*forkPlayer)(THIS, Player *player); //TODO DO FORK PLAYER
-  Vector		*(*eject)(THIS, Player *player);
-  t_response		*(*take_obj)(THIS, Player *player, t_mineral mineral);
-  t_response		*(*place_obj)(THIS, Player *player, t_mineral mineral);
-  Server		*(*incant)(THIS, Player *player); //TODO FINISH INCANT
-  t_response		*(*unused_slot)(THIS, Player *player);
+  t_response		*(*forward)(Server *this, t_player *player);
+  t_response		*(*rotate_left)(THIS, t_player *player);
+  t_response		*(*rotate_right)(THIS, t_player *player);
+  t_response		*(*see)(THIS, t_player *player);
+  t_response		*(*get_inventory)(THIS, t_player *player);
+  Vector		*(*broadcast)(Server *this, t_player *player, String *msg);
+  Server		*(*forkt_player)(THIS, t_player *player); //TODO DO FORK PLAYER
+  Vector		*(*eject)(THIS, t_player *player);
+  t_response		*(*take_obj)(THIS, t_player *player, t_mineral mineral);
+  t_response		*(*place_obj)(THIS, t_player *player, t_mineral mineral);
+  Server		*(*incant)(THIS, t_player *player); //TODO FINISH INCANT
+  t_response		*(*unused_slot)(THIS, t_player *player);
 
   String		*(*__get_tile_inv)(THIS, int x, int y);
 
   Server		*(*hatch_egg)(THIS); //TODO HATCH EGG AND WHAT TO DO HEN EGG PLACED
   //TODO ADD INCANT DONE
-  Server		*(*death)(THIS, Player *player); //TODO DEATH
+  Server		*(*death)(THIS, t_player *player); //TODO DEATH
 };
 
 Server			*newServer(WorldMap *map, t_arg *arg);

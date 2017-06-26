@@ -10,7 +10,7 @@
 
 #include "MapCP.h"
 
-static MapCP		*set(THIS, int key, Player *data)
+static MapCP		*set(THIS, int key, t_player *data)
 {
   int			bin;
   struct s_entryCP	*newpair;
@@ -34,7 +34,7 @@ static MapCP		*set(THIS, int key, Player *data)
   return (this);
 }
 
-static Player		*get(THIS, int key)
+static t_player		*get(THIS, int key)
 {
   int			bin;
   struct s_entryCP	*pair;
@@ -55,7 +55,7 @@ static int	len(THIS)
   return (this->__items);
 }
 
-static Player	*end(THIS)
+static t_player	*end(THIS)
 {
   return (this->__notfound);
 }

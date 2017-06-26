@@ -20,8 +20,8 @@ void		print(PairCP *pair)
 int		main()
 {
 //  MapCP		*map;
-//  Player	*a;
-//  Player	*b;
+//  t_player	*a;
+//  t_player	*b;
   Vector	*vect;
 //
   vect = newVector();
@@ -29,11 +29,11 @@ int		main()
 
   vect->delete(vect);
   free(vect);
-//  a = newPlayer();
-//  b = newPlayer();
+//  a = new_player();
+//  b = new_player();
 //
-//  a->name = newString("Player A");
-//  b->name = newString("Player B");
+//  a->name = newString("t_player A");
+//  b->name = newString("t_player B");
 //
 //  map = newMapCP(10, NULL);
 //  map->set(map, 12, a);

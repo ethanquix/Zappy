@@ -10,21 +10,21 @@
 
 #include "cmd.h"
 
-static Vector			*wrapper_ko(Server *server, Player *player, t_mineral mineral, String *msg);
-static Vector			*wrapper_forward(Server *server, Player *player, t_mineral mineral, String *msg);
-static Vector			*wrapper_right(Server *server, Player *player, t_mineral mineral, String *msg);
-static Vector			*wrapper_left(Server *server, Player *player, t_mineral mineral, String *msg);
-static Vector			*wrapper_see(Server *server, Player *player, t_mineral mineral, String *msg);
-static Vector			*wrapper_get_inv(Server *server, Player *player, t_mineral mineral, String *msg);
-static Vector			*wrapper_broadcast(Server *server, Player *player, t_mineral mineral, String *msg);
-static Vector			*wrapper_unused(Server *server, Player *player, t_mineral mineral, String *msg);
-static Vector			*wrapper_fork(Server *server, Player *player, t_mineral mineral, String *msg);
-static Vector			*wrapper_eject(Server *server, Player *player, t_mineral mineral, String *msg);
-static Vector			*wrapper_take(Server *server, Player *player, t_mineral mineral, String *msg);
-static Vector			*wrapper_place(Server *server, Player *player, t_mineral mineral, String *msg);
-static Vector			*wrapper_incant(Server *server, Player *player, t_mineral mineral, String *msg);
+static Vector			*wrapper_ko(Server *server, t_player *player, t_mineral mineral, String *msg);
+static Vector			*wrapper_forward(Server *server, t_player *player, t_mineral mineral, String *msg);
+static Vector			*wrapper_right(Server *server, t_player *player, t_mineral mineral, String *msg);
+static Vector			*wrapper_left(Server *server, t_player *player, t_mineral mineral, String *msg);
+static Vector			*wrapper_see(Server *server, t_player *player, t_mineral mineral, String *msg);
+static Vector			*wrapper_get_inv(Server *server, t_player *player, t_mineral mineral, String *msg);
+static Vector			*wrapper_broadcast(Server *server, t_player *player, t_mineral mineral, String *msg);
+static Vector			*wrapper_unused(Server *server, t_player *player, t_mineral mineral, String *msg);
+static Vector			*wrapper_fork(Server *server, t_player *player, t_mineral mineral, String *msg);
+static Vector			*wrapper_eject(Server *server, t_player *player, t_mineral mineral, String *msg);
+static Vector			*wrapper_take(Server *server, t_player *player, t_mineral mineral, String *msg);
+static Vector			*wrapper_place(Server *server, t_player *player, t_mineral mineral, String *msg);
+static Vector			*wrapper_incant(Server *server, t_player *player, t_mineral mineral, String *msg);
 
-static Vector	*(*wrapper_function[13])(Server *server, Player *player, t_mineral mineral, String *msg) =
+static Vector	*(*wrapper_function[13])(Server *server, t_player *player, t_mineral mineral, String *msg) =
 {
   &wrapper_ko,
   &wrapper_forward,

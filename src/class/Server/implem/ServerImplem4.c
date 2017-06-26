@@ -10,7 +10,7 @@
 
 #include "Server.h"
 
-static t_response	*place_obj(THIS, Player *player, t_mineral mineral)
+static t_response	*place_obj(THIS, t_player *player, t_mineral mineral)
 {
   t_response		*out;
 

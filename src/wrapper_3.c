@@ -10,7 +10,7 @@
 
 #include "cmd.h"
 
-static Vector			*wrapper_take(Server *server, Player *player, t_mineral mineral, String *msg)
+static Vector			*wrapper_take(Server *server, t_player *player, t_mineral mineral, String *msg)
 {
   Vector		*out;
 
@@ -19,7 +19,7 @@ static Vector			*wrapper_take(Server *server, Player *player, t_mineral mineral,
   return (out);
 }
 
-static Vector			*wrapper_place(Server *server, Player *player, t_mineral mineral, String *msg)
+static Vector			*wrapper_place(Server *server, t_player *player, t_mineral mineral, String *msg)
 {
   Vector		*out;
 
@@ -28,7 +28,7 @@ static Vector			*wrapper_place(Server *server, Player *player, t_mineral mineral
   return (out);
 }
 
-static Vector			*wrapper_incant(Server *server, Player *player, t_mineral mineral, String *msg)
+static Vector			*wrapper_incant(Server *server, t_player *player, t_mineral mineral, String *msg)
 {
   //TODO FINISH INCANT
   Vector			*out;

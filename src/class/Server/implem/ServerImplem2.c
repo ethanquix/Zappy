@@ -41,7 +41,7 @@ static int	search_dir(int dest_x, int dest_y)
   return ((dest_y > 0) ? (1) : (5));
 }
 
-static void	calc_coord(THIS, Player *from, Player *to, int *new_x, int *new_y)
+static void	calc_coord(THIS, t_player *from, t_player *to, int *new_x, int *new_y)
 {
   if (ABS(to->position.x - from->position.x) <
       ABS((to->position.x + this->map->width) - from->position.x))
@@ -55,7 +55,7 @@ static void	calc_coord(THIS, Player *from, Player *to, int *new_x, int *new_y)
     (*new_y) = (to->position.y + this->map->height) - from->position.y;
 }
 
-static int	calc_coo(THIS, Player *player, Player *current)
+static int	calc_coo(THIS, t_player *player, t_player *current)
 {
   int     dir;
   int     x;
@@ -66,7 +66,7 @@ static int	calc_coo(THIS, Player *player, Player *current)
   return (check_direction_for_broadcast(current->direction, dir));
 }
 
-static t_response		*calc_sound(THIS, Player *from, Player *to, String *msg)
+static t_response		*calc_sound(THIS, t_player *from, t_player *to, String *msg)
 {
   t_response			*out;
   int				orientation;
@@ -86,7 +86,7 @@ static t_response		*calc_sound(THIS, Player *from, Player *to, String *msg)
   out->msg = msg;
 }
 
-static Vector		*broadcast(THIS, Player *player, String *msg)
+static Vector		*broadcast(THIS, t_player *player, String *msg)
 {
   Vector		*out;
   PairCP		*it;
