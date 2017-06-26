@@ -12,7 +12,6 @@
 #define ZAPPY_ALFRED_HPP
 
 #include "struct/Vec2I.h"
-
 #include "misc/python.h"
 #include "misc/macros.h"
 #include "OOP_macros/OOP_macros.h"

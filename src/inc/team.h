@@ -17,7 +17,7 @@ typedef struct		s_egg
 {
   int			time;
   bool			is_hatched;
-  Vec2I			pos;
+  t_vec_ii			pos;
 }			t_egg;
 
 typedef struct		s_team

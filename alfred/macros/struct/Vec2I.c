@@ -1,5 +1,5 @@
 /*
-** Vec2I.c for Zappy in /home/wyzlic_a/delivery/Zappy/Vec2I.c
+** t_vec_ii.c for Zappy in /home/wyzlic_a/delivery/Zappy/t_vec_ii.c
 **
 ** Made by Dimitri Wyzlic
 ** Login   <dimitri1.wyzlic@epitech.eu>
@@ -11,9 +11,9 @@
 #include <stdlib.h>
 #include "Vec2I.h"
 
-t_vec2I		rand_pos(int minx, int miny, int maxx, int maxy)
+t_vec_ii		rand_pos(int minx, int miny, int maxx, int maxy)
 {
-  t_vec2I	out;
+  t_vec_ii	out;
 
   out.x = (rand() % (maxx + 1 - minx)) + minx;
   out.y = (rand() % (maxy + 1 - miny)) + miny;

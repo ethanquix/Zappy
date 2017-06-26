@@ -27,7 +27,7 @@ static const t_levelup	levelup_need[] =
     {6, {2, 2, 2, 2, 2, 1}},
   };
 
-static int	count_player_on_tile(THIS, Vec2I pos)
+static int	count_player_on_tile(THIS, t_vec_ii pos)
 {
   int		out;
   PAIR_CP	*it;

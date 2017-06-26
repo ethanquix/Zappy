@@ -56,8 +56,6 @@ static char*	direction_name[] =
     "WEST"
   };
 
-typedef enum e_dir Direction;
-
 typedef	enum	e_dir
 {
   NORTH = 0,
@@ -79,8 +77,8 @@ typedef struct	s_todo
 typedef CLASS		s_player
 {
   int			fd;
-  Vec2I			position;
-  Direction		direction;
+  t_vec_ii			position;
+  t_dir			direction;
   int			level;
   t_inv			inv;
   t_string		*name;

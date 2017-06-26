@@ -241,8 +241,8 @@ static t_response	*see(THIS, t_player *player)
 {
   t_string		*out;
   int			i;
-  Vec2I			a;
-  Vec2I			b;
+  t_vec_ii			a;
+  t_vec_ii			b;
   t_response		*resp;
 
   MALLOC(resp, sizeof(t_response));
