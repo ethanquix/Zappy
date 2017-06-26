@@ -61,10 +61,11 @@ static void			select_op(t_socket *socket, t_server *server)
   PAIR_CP			*it;
 
   tv.tv_usec = 0;
+  tv.tv_sec = 0;
   while (!sig_int)
     {
-      //RAPH PK IL RENTRE ICI GENRE TOUTES LES 1-2 SECONDES ??? TODO le printf pour voir
-      printf("%d\n", rand());
+      tv.tv_usec = 0;
+      tv.tv_sec = 0;
       FD_ZERO(&rfds);
       server->players->start_loop(server->players);
       while ((it = server->players->loop(server->players)))
