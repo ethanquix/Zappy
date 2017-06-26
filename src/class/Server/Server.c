@@ -111,7 +111,6 @@ static void	delete(THIS)
   free(this->teams);
   this->players->delete(this->players);
   this->map->delete(this->map);
-  this->todo->delete(this->todo);
   free(this);
 }
 
