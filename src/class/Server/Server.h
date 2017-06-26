@@ -31,15 +31,15 @@ typedef CLASS s_server Server;
 
 typedef struct	s_responsse
 {
-  String	*name; //TODO mostly here to debug
+  t_string	*name; //TODO mostly here to debug
   int		fd;
-  String	*msg;
+  t_string	*msg;
 }		t_response;
 
 typedef struct	s_connect_info
 {
-  String	*name;
-  String	*coord;
+  t_string	*name;
+  t_string	*coord;
 }		t_connect_info;
 
 CLASS			s_server
@@ -56,16 +56,16 @@ CLASS			s_server
 
   void			(*delete)(THIS);
 
-  Server		*(*add_team)(THIS, String *name);
+  Server		*(*add_team)(THIS, t_string *name);
   Server		*(*player_connect)(THIS, int fd);
-  t_connect_info	*(*add_player_info)(THIS, t_player *player, String *team);
+  t_connect_info	*(*add_player_info)(THIS, t_player *player, t_string *team);
 
   t_response		*(*forward)(Server *this, t_player *player);
   t_response		*(*rotate_left)(THIS, t_player *player);
   t_response		*(*rotate_right)(THIS, t_player *player);
   t_response		*(*see)(THIS, t_player *player);
   t_response		*(*get_inventory)(THIS, t_player *player);
-  Vector		*(*broadcast)(Server *this, t_player *player, String *msg);
+  Vector		*(*broadcast)(Server *this, t_player *player, t_string *msg);
   Server		*(*forkt_player)(THIS, t_player *player); //TODO DO FORK PLAYER
   Vector		*(*eject)(THIS, t_player *player);
   t_response		*(*take_obj)(THIS, t_player *player, t_mineral mineral);
@@ -73,7 +73,7 @@ CLASS			s_server
   Server		*(*incant)(THIS, t_player *player); //TODO FINISH INCANT
   t_response		*(*unused_slot)(THIS, t_player *player);
 
-  String		*(*__get_tile_inv)(THIS, int x, int y);
+  t_string		*(*__get_tile_inv)(THIS, int x, int y);
 
   Server		*(*hatch_egg)(THIS); //TODO HATCH EGG AND WHAT TO DO HEN EGG PLACED
   //TODO ADD INCANT DONE

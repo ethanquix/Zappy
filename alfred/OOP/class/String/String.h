@@ -15,27 +15,24 @@
 #include <memory.h>
 #include "Alfred.h"
 
-typedef CLASS s_String String;
-
 #undef THIS
-#define THIS String *this
+#define THIS struct s_string *this
 
-CLASS		s_String
+typedef CLASS		s_string
 {
-  char		*__str;
-  int		__len;
+  char			*__str;
+  int			__len;
+  int			(*len)(THIS);
+  char			*(*get)(THIS);
+  struct s_string	*(*print)(THIS);
+  struct s_string	*(*add)(THIS, struct s_string *other);
+  char 			(*at)(THIS, int emp);
+  struct s_string	*(*epur)(THIS, char to_delete);
+  struct s_string	*(*random_string)(THIS, size_t);
+  void			(*delete)(THIS);
+}			t_string;
 
-  int		(*len)(THIS);
-  char		*(*get)(THIS);
-  String	*(*print)(THIS);
-  String	*(*add)(THIS, String *other);
-  char 		(*at)(THIS, int emp);
-  String	*(*epur)(THIS, char to_delete);
-  String	*(*random_string)(THIS, size_t);
-  void		(*delete)(THIS);
-};
-
-String	*newString(char *str);
-String	initString(char *str);
+t_string	*new_string(char *str);
+t_string	init_string(char *str);
 
 #endif //ZAPPY_STRING_H

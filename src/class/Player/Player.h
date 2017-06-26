@@ -77,7 +77,7 @@ typedef struct	s_todo
   enum e_cmd_nb	action;
   int		time;
   t_mineral	mineral;
-  String	*msg;
+  t_string	*msg;
 }		t_todo;
 
 typedef CLASS		s_player
@@ -87,8 +87,8 @@ typedef CLASS		s_player
   Direction		direction;
   int			level;
   Inventory		inv;
-  String		*name;
-  String		*team;
+  t_string		*name;
+  t_string		*team;
   struct s_todo		todo[MAX_CMD];
   int			todo_time;
   void			(*delete)(struct s_player *this);

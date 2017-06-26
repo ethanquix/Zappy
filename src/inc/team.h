@@ -11,7 +11,7 @@
 #ifndef ZAPPY_TEAM_H
 #define ZAPPY_TEAM_H
 
-#include <String.h>
+#include "String.h"
 
 typedef struct		s_egg
 {
@@ -22,7 +22,7 @@ typedef struct		s_egg
 typedef struct		s_team
 {
   int			current_nb_player;
-  String		*name;
+  t_string		*name;
   Vector		*eggs;
 
 }			t_team;

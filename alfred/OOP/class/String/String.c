@@ -11,29 +11,27 @@
 #include "String.h"
 
 static char	*val(THIS);
-static String	*print(THIS);
+static t_string	*print(THIS);
 static int	len(THIS);
 static char	at(THIS, int at);
-static String	*add(THIS, String *other);
-static String	*epur(THIS, char to_delete);
-static String	*random_string(THIS, size_t len);
+static t_string	*add(THIS, t_string *other);
+static t_string	*epur(THIS, char to_delete);
+static t_string	*random_string(THIS, size_t len);
 static void	delete(THIS);
 
-
-
-String		*newString(char *str)
+t_string		*new_string(char *str)
 {
-  String	*out;
+  t_string		*out;
 
-  MALLOC(out, sizeof(String));
-  *out = initString(str);
+  MALLOC(out, sizeof(t_string));
+  *out = init_string(str);
 
   return (out);
 }
 
-String		initString(char *str)
+t_string	init_string(char *str)
 {
-  String	out;
+  t_string	out;
 
   out.len = &len;
   out.get = &val;
@@ -43,7 +41,6 @@ String		initString(char *str)
   out.epur = &epur;
   out.random_string = &random_string;
   out.delete = &delete;
-
   if (str == NULL)
     {
       out.__str = strdup("");

@@ -66,11 +66,11 @@ static int	calc_coo(THIS, t_player *player, t_player *current)
   return (check_direction_for_broadcast(current->direction, dir));
 }
 
-static t_response		*calc_sound(THIS, t_player *from, t_player *to, String *msg)
+static t_response		*calc_sound(THIS, t_player *from, t_player *to, t_string *msg)
 {
   t_response			*out;
   int				orientation;
-  String			*orientation_str;
+  t_string			*orientation_str;
   char				*tmp;
 
   MALLOC(out, sizeof(t_response));
@@ -80,13 +80,13 @@ static t_response		*calc_sound(THIS, t_player *from, t_player *to, String *msg)
   orientation = calc_coo(this, from, to);
   tmp[0] = (char) (orientation + '0');
   tmp[1] = 0;
-  orientation_str = newString(tmp);
+  orientation_str = new_string(tmp);
   orientation_str->add(orientation_str, msg);
   out->msg = orientation_str;
   out->msg = msg;
 }
 
-static Vector		*broadcast(THIS, t_player *player, String *msg)
+static Vector		*broadcast(THIS, t_player *player, t_string *msg)
 {
   Vector		*out;
   PairCP		*it;

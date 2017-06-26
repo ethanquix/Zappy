@@ -10,15 +10,15 @@
 
 #include "Server.h"
 
-static Server		*add_team(THIS, String *name); //TODO
+static Server		*add_team(THIS, t_string *name); //TODO
 static Server		*player_connect(THIS, int fd); //TODO
-static t_connect_info	*add_player_info(THIS, t_player *player, String *team);
+static t_connect_info	*add_player_info(THIS, t_player *player, t_string *team);
 static t_response	*forward(THIS, t_player *player);
 static t_response	*rotate_left(THIS, t_player *player);
 static t_response	*rotate_right(THIS, t_player *player);
 static t_response	*see(THIS, t_player *player);
 static t_response	*get_inventory(THIS, t_player *player);
-static Vector		*broadcast(THIS, t_player *player, String *msg);
+static Vector		*broadcast(THIS, t_player *player, t_string *msg);
 static Server		*forkt_player(THIS, t_player *player); //TODO
 static Server		hatch_egg(THIS); //TODO
 static Vector		*eject(THIS, t_player *player);
@@ -28,7 +28,7 @@ static t_response	*place_obj(THIS, t_player *player, t_mineral mineral);
 static Server		*incant(THIS, t_player *player); //TODO
 static t_response	*unused_slot(THIS, t_player *player);
 
-static String		*get_tile_inv(THIS, int x, int y);
+static t_string		*get_tile_inv(THIS, int x, int y);
 
 static void		delete(THIS);
 
@@ -78,7 +78,7 @@ Server			initServer(WorldMap *map, t_arg *arg)
   out.players = newMapCP(MAP_IP_MAX, NULL);
   arg->teamName->start_loop(arg->teamName);
   while ((it = arg->teamName->loop(arg->teamName)) != NULL)
-      out.add_team(&out, (String *) it);
+      out.add_team(&out, (t_string *) it);
 
   out.death = &death;
 

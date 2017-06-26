@@ -40,7 +40,7 @@ int			check_team(t_player *player, Server *server, char *cmd)
 
   if (!player->team)
     {
-      if ((cinfo = server->add_player_info(server, player, newString(cmd))) !=
+      if ((cinfo = server->add_player_info(server, player, new_string(cmd))) !=
 	  NULL)
 	{
 	  dprintf(player->fd, "%s\n%s\n", cinfo->name->__str,
@@ -91,7 +91,7 @@ static void		action_setup(Server *server, t_player *player, char *cmd, int index
       mineraln = -1; //TODO ERROR HERE MINERAL DONT NOT HAVE -1
       while (mineraln < MAX_MINERAL && (cmd != mineral_name[++mineraln]));
       player->todo[todo_index].mineral = mineraln;
-      player->todo[todo_index].msg = newString(cmd);
+      player->todo[todo_index].msg = new_string(cmd);
     }
   else
     {

@@ -11,7 +11,7 @@
 #include <time.h>
 #include "String.h"
 
-static String	*epur(THIS, char to_delete)
+static t_string	*epur(THIS, char to_delete)
 {
   char	*tmp;
   int	i;
@@ -30,10 +30,10 @@ static String	*epur(THIS, char to_delete)
       i INC 1;
     }
   tmp[j] = 0;
-  return (newString(tmp));
+  return (new_string(tmp));
 }
 
-static String	*random_string(THIS, size_t len)
+static t_string	*random_string(THIS, size_t len)
 {
   size_t	i;
 

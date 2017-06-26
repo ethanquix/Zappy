@@ -10,7 +10,7 @@
 
 #include "Server.h"
 
-static Server		*add_team(THIS, String *name)
+static Server		*add_team(THIS, t_string *name)
 {
   int			i;
   t_team		*out;
@@ -34,13 +34,13 @@ static Server		*player_connect(THIS, int fd)
   new = new_player();
   new->fd = fd;
   new->team = NULL;
-  new->name = newString("");
+  new->name = new_string("");
   new->name = new->name->random_string(new->name, 20);
   this->players->set(this->players, fd, new);
   return (this);
 }
 
-static t_connect_info		*add_player_info(THIS, t_player *player, String *team)
+static t_connect_info		*add_player_info(THIS, t_player *player, t_string *team)
 {
   int				idx;
   t_connect_info		*out;
@@ -54,8 +54,8 @@ static t_connect_info		*add_player_info(THIS, t_player *player, String *team)
     {
       this->gui->fd = player->fd;
       this->players->erase(this->players, player->fd);
-      out->name = newString("GUI");
-      out->coord = newString("GUI");
+      out->name = new_string("GUI");
+      out->coord = new_string("GUI");
       return (out);
     }
   idx = this->team_index->get(this->team_index, team->__str);
@@ -71,7 +71,7 @@ static t_connect_info		*add_player_info(THIS, t_player *player, String *team)
   player->position.y = 0;
   out->name = player->name;
   sprintf(str, "%d %d", player->position.x, player->position.y);
-  out->coord = newString(str);
+  out->coord = new_string(str);
   return (out);
 }
 
@@ -82,7 +82,7 @@ static t_response	*forward(THIS, t_player *player)
   MALLOC(out, sizeof(t_response));
   out->name = player->name;
   out->fd = player->fd;
-  out->msg = newString("ok");
+  out->msg = new_string("ok");
   if (player->direction == NORTH)
     (player->position.y = (player->position.y - 1 + this->map->height) % this->map->height);
   else if (player->direction == SOUTH)
@@ -102,7 +102,7 @@ static t_response	*rotate_left(THIS, t_player *player)
   MALLOC(out, sizeof(t_response));
   out->name = player->name;
   out->fd = player->fd;
-  out->msg = newString("ok");
+  out->msg = new_string("ok");
 
   if (player->direction == NORTH)
     player->direction = WEST;
@@ -122,7 +122,7 @@ static t_response	*rotate_right(THIS, t_player *player)
   MALLOC(out, sizeof(t_response));
   out->name = player->name;
   out->fd = player->fd;
-  out->msg = newString("ok");
+  out->msg = new_string("ok");
   if (player->direction == NORTH)
     player->direction = EAST;
   else if (player->direction == EAST)
@@ -135,24 +135,24 @@ static t_response	*rotate_right(THIS, t_player *player)
   return (out);
 }
 
-static String		*get_tile_inv(THIS, int x, int y)
+static t_string		*get_tile_inv(THIS, int x, int y)
 {
-  String		*out;
+  t_string		*out;
   int			i;
   int			tmp;
   PairCP		*it;
 
   i = 0;
   printf("x %d y %d\n", x, y);
-  out = newString("");
+  out = new_string("");
   while (i < MAX_MINERAL)
     {
       tmp = this->map->tiles[y][x].loot[i];
       while (tmp > 0)
 	{
 	  if (out->len(out) > 0)
-	    out->add(out, newString(" "));
-	  out->add(out, newString(mineral_name[i]));
+	    out->add(out, new_string(" "));
+	  out->add(out, new_string(mineral_name[i]));
 	  tmp -= 1;
 	}
       i INC 1;
@@ -163,7 +163,7 @@ static String		*get_tile_inv(THIS, int x, int y)
       if (it->data->position.x == x && it->data->position.y == y)
 	{
 	  if (out->len > 0)
-	    out->add(out, newString(" "));
+	    out->add(out, new_string(" "));
 	  out->add(out, it->data->name);
 	}
     }
@@ -180,14 +180,14 @@ static void		my_swap(int *a, int *b)
   *b = c;
 }
 
-static String		*get_line_from_map(THIS, int x1, int y1, int x2, int y2)
+static t_string		*get_line_from_map(THIS, int x1, int y1, int x2, int y2)
 {
-  String		*out;
-  String		*comma;
-  String		*tmp;
+  t_string		*out;
+  t_string		*comma;
+  t_string		*tmp;
 
-  out = newString("");
-  comma = newString(",");
+  out = new_string("");
+  comma = new_string(",");
 
   x1 = (x1 + this->map->width) % this->map->width;
   y1 = (y1 + this->map->height) % this->map->height;
@@ -216,7 +216,7 @@ static String		*get_line_from_map(THIS, int x1, int y1, int x2, int y2)
 
 static t_response	*see(THIS, t_player *player)
 {
-  String		*out;
+  t_string		*out;
   int			i;
   Vec2I			a;
   Vec2I			b;
@@ -228,7 +228,7 @@ static t_response	*see(THIS, t_player *player)
   a.x = player->position.x;
   a.y = player->position.y;
   b = a;
-  out = newString("");
+  out = new_string("");
   i = 1;
 
   out->add(out, get_line_from_map(this, a.x, a.y, b.x, b.y));
@@ -285,7 +285,7 @@ static t_response	*get_inventory(THIS, t_player *player)
   MALLOC(tmp, 1000);
   resp->name = player->name;
   resp->fd = player->fd;
-  resp->msg = newString("");
+  resp->msg = new_string("");
   i = 0;
   while (i < MAX_MINERAL)
     {
@@ -293,8 +293,8 @@ static t_response	*get_inventory(THIS, t_player *player)
       MALLOC(tmp, 1000);
       RESET(tmp, '\0');
       sprintf(tmp, "%d", player->inv.loot[i]);
-      resp->msg->add(resp->msg, newString(mineral_name[i]))->add(resp->msg, newString(" "));
-      resp->msg->add(resp->msg, newString(tmp))->add(resp->msg, newString(","));
+      resp->msg->add(resp->msg, new_string(mineral_name[i]))->add(resp->msg, new_string(" "));
+      resp->msg->add(resp->msg, new_string(tmp))->add(resp->msg, new_string(","));
       i INC 1;
     }
   return (resp);

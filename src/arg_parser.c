@@ -8,7 +8,7 @@
 ** Last update Fri Jun 23 16:01:09 2017 Dimitri Wyzlic
 */
 
-#include <String.h>
+#include "String.h"
 #include "arg_parser.h"
 
 t_arg		*init_arg_parser()
@@ -35,7 +35,7 @@ Vector		*parse_team(int idx, char **arg, int max)
     {
       if (strcmp(strdup(arg[idx]), strdup("GUI")) == 0)
 	raise("Can't have a GUI team name");
-      tmp->add(tmp, newString(strdup(arg[idx])));
+      tmp->add(tmp, new_string(strdup(arg[idx])));
       idx += 1;
     }
   return (tmp);

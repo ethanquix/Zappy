@@ -20,7 +20,7 @@ static char	*val(THIS)
   return (this->__str);
 }
 
-static String	*print(THIS)
+static t_string	*print(THIS)
 {
   printf("String -> value: %s\n", this->__str);
   return (this);
@@ -36,7 +36,7 @@ static char	at(THIS, int at)
   return (this->__str[at]);
 }
 
-static String	*add(THIS, String *other)
+static t_string	*add(THIS, t_string *other)
 {
   char		*tmp;
 
