@@ -5,7 +5,7 @@
 ** Login   <dimitri1.wyzlic@epitech.eu>
 **
 ** Started on  Thu Jun 08 22:44:45 2017 Dimitri Wyzlic
-** Last update Thu Jun 08 22:44:45 2017 Dimitri Wyzlic
+** Last update Mon Jun 26 14:06:10 2017 Doom
 */
 
 #include "Server.h"
@@ -33,9 +33,9 @@ static Server		*apply_fork(THIS);
 static Server		*apply_incant(THIS, t_serv_todo *todo);
 
 static Server	*(*wrapper_function_server[1])(THIS, t_serv_todo *src) =
-	{
-		&apply_incant
-	};
+{
+  &apply_incant
+};
 
 
 Server			*newServer(WorldMap *map, t_arg *arg)

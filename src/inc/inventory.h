@@ -13,6 +13,7 @@
 
 #include <time.h>
 #include <stdlib.h>
+#include "config.h"
 
 #define MAX_MINERAL 7
 
@@ -61,13 +62,13 @@ static void		init_inv(Inventory *inv)
 
 static void		random_inv(Inventory *inv)
 {
-  inv->loot[LINEMATE] = rand() % 4;
-  inv->loot[DERAUMERE] = rand() % 4;
-  inv->loot[SIBUR] = rand() % 4;
-  inv->loot[MENDIANE] = rand() % 4;
-  inv->loot[PHIRAS] = rand() % 4;
-  inv->loot[THYSTAME] = rand() % 4;
-  inv->loot[FOOD] = rand() % 4;
+  inv->loot[LINEMATE] = rand() % LINEMATE_RARITY;
+  inv->loot[DERAUMERE] = rand() % DERAUMERE_RARITY;
+  inv->loot[SIBUR] = rand() % SIBUR_RARITY;
+  inv->loot[MENDIANE] = rand() % MENDIANE_RARITY;
+  inv->loot[PHIRAS] = rand() % PHIRAS_RARITY;
+  inv->loot[THYSTAME] = rand() % THYSTAME_RARITY;
+  inv->loot[FOOD] = rand() % FOOD_RARITY;
 }
 
 #endif //ZAPPY_INVENTORY_H

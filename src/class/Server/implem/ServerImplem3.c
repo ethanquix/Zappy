@@ -41,7 +41,7 @@ static Vector		*eject(THIS, t_player *player)
   resp->name = player->name;
   resp->fd = player->fd;
   out = newVector();
-  resp->msg = new_string("ok");
+  resp->msg = new_string(MSG_OK);
   out->add(out, resp);
   this->players->start_loop(this->players);
   while ((it = this->players->loop(this->players)) != NULL)
@@ -75,11 +75,11 @@ static t_response	*take_obj(THIS, t_player *player, t_mineral mineral)
   //TODO NORME
   if (this->map->tiles[player->position.y][player->position.x].loot[mineral] > 0)
     {
-      resp->msg = new_string("ok");
+      resp->msg = new_string(MSG_OK);
       player->inv.loot[mineral] += 1;
       this->map->tiles[player->position.y][player->position.x].loot[mineral] -= 1;
     }
   else
-    resp->msg = new_string("ko");
+    resp->msg = new_string(MSG_KO);
   return (resp);
 }

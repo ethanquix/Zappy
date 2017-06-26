@@ -19,7 +19,7 @@ static Vector			*wrapper_ko(Server *server, t_player *player, t_mineral mineral,
   MALLOC(resp, sizeof(t_response));
   resp->name = player->name;
   resp->fd = player->fd;
-  resp->msg = new_string("ko");
+  resp->msg = new_string(MSG_KO);
   out->add(out, resp);
   return (out);
 }

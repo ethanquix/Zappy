@@ -38,7 +38,7 @@ static void			select_check(t_socket *socket, Server *server, fd_set *rfds)
 	  if (index == socket->fd)
 	    {
 	      socket->socket_accept(socket);
-	      dprintf(socket->fd_client, "WELCOME\n");
+	      dprintf(socket->fd_client, MSG_WELCOME);
 	      server->player_connect(server, socket->fd_client);
 	    }
 	  else if (index == server->gui->fd)

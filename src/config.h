@@ -16,4 +16,16 @@
 #define MAP_IP_MAX 500
 #define MAP_CI_MAX 500
 
+#define LINEMATE_RARITY 10
+#define	DERAUMERE_RARITY 8
+#define SIBUR_RARITY 6
+#define	MENDIANE_RARITY 5
+#define	PHIRAS_RARITY 4
+#define	THYSTAME_RARITY 2
+#define	FOOD_RARITY 10
+
+#define MSG_OK "ok"
+#define MSG_KO "ko"
+#define MSG_WELCOME "WELCOME\n"
+
 #endif //ZAPPY_CONFIG_H

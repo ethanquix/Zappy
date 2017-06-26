@@ -19,11 +19,11 @@ static t_response	*place_obj(THIS, t_player *player, t_mineral mineral)
   out->fd = player->fd;
   if (player->inv.loot[mineral] > 0)
     {
-      out->msg = new_string("ok");
+      out->msg = new_string(MSG_OK);
       this->map->tiles[player->position.y][player->position.x].loot[mineral] += 1;
       player->inv.loot[mineral] -= 0;
     }
   else
-    out->msg = new_string("ko");
+    out->msg = new_string(MSG_KO);
   return (out);
 }

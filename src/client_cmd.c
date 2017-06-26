@@ -26,7 +26,7 @@ static const t_cmd	client_cmd[] =
 		{ "Take", C_TAKE, TIME_TAKE },
 		{ "Set", C_SET, TIME_SET },
 		{ "Incantation", C_INCANT, TIME_INCANT },
-		{ NULL, 0, 0 }
+		{ NULL, C_NOTHING, 0 }
 	};
 
 static t_player		*get_player(Server *server, int fd)

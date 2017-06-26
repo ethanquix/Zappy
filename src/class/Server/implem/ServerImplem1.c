@@ -105,7 +105,7 @@ static t_response	*forward(THIS, t_player *player)
   MALLOC(out, sizeof(t_response));
   out->name = player->name;
   out->fd = player->fd;
-  out->msg = new_string("ok");
+  out->msg = new_string(MSG_OK);
   if (player->direction == NORTH)
     (player->position.y = (player->position.y - 1 + this->map->height) % this->map->height);
   else if (player->direction == SOUTH)
@@ -125,7 +125,7 @@ static t_response	*rotate_left(THIS, t_player *player)
   MALLOC(out, sizeof(t_response));
   out->name = player->name;
   out->fd = player->fd;
-  out->msg = new_string("ok");
+  out->msg = new_string(MSG_OK);
 
   if (player->direction == NORTH)
     player->direction = WEST;
@@ -145,7 +145,7 @@ static t_response	*rotate_right(THIS, t_player *player)
   MALLOC(out, sizeof(t_response));
   out->name = player->name;
   out->fd = player->fd;
-  out->msg = new_string("ok");
+  out->msg = new_string(MSG_OK);
   if (player->direction == NORTH)
     player->direction = EAST;
   else if (player->direction == EAST)
