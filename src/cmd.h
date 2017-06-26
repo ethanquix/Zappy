@@ -14,12 +14,12 @@
 #include "Server.h"
 #include "config.h"
 
-typedef void	(*gui_ptr)(Server *server, char *cmd);
+typedef void	(*gui_ptr)(Server *server, String *cmd);
 
 typedef struct		s_gui
 {
   const char		*name;
-  const gui_ptr 	*ptr;
+  const gui_ptr 	func;
 }			t_gui;
 
 typedef struct			s_cmd

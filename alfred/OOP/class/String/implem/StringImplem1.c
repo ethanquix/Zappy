@@ -41,7 +41,6 @@ static String	*add(THIS, String *other)
   char		*tmp;
 
   MALLOC(tmp, sizeof(char) * (this->__len + other->__len + 1));
-  printf("Other [%s]%d, this [%s]%d\n", other->__str, other->__len, this->__str, this->__len);
   strcpy(tmp, this->__str);
   strcat(tmp, other->__str);
   this->__str = tmp;

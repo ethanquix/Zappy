@@ -55,7 +55,7 @@ static t_response	*unused_slot(THIS, Player *player)
   int			idx;
   char			*tmp;
 
-  MALLOC(tmp, 1000);
+  MALLOC(tmp, 12);
   idx = this->team_index->get(this->team_index, player->team->__str);
   MALLOC(out, sizeof(t_response));
   out->name = player->name;

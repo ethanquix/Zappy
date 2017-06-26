@@ -28,6 +28,8 @@ static t_response	*place_obj(THIS, Player *player, t_mineral mineral);
 static Server		*incant(THIS, Player *player); //TODO
 static t_response	*unused_slot(THIS, Player *player);
 
+static String		*get_tile_inv(THIS, int x, int y);
+
 static void		delete(THIS);
 
 
@@ -49,7 +51,6 @@ Server			initServer(WorldMap *map, t_arg *arg)
 
   i = 0;
   out.gui = newPlayer();
-  out.gui->is_gui = true;
   out.gui->fd = -1;
 
   out.delete = &delete;
@@ -80,6 +81,9 @@ Server			initServer(WorldMap *map, t_arg *arg)
       out.add_team(&out, (String *) it);
 
   out.death = &death;
+
+  out.__get_tile_inv = &get_tile_inv;
+
   return (out);
 }
 
@@ -102,6 +106,10 @@ static void	delete(THIS)
 
 static Server		*death(THIS, Player *player)
 {
+  int			ti;
+
+  ti = this->team_index->get(this->team_index, player->team->__str);
+  this->teams[ti]->current_nb_player -= 1;
   dprintf(player->fd, "death\n");
   this->players->erase(this->players, player->fd);
   player->delete(player);

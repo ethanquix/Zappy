@@ -12,17 +12,16 @@
 
 static void	delete(THIS);
 
-Player			*newPlayer(/* Client ? */)
+Player			*newPlayer()
 {
   Player		*out;
 
   MALLOC(out, sizeof(Player));
-  *out = initPlayer(/* Client ? */);
-
+  *out = initPlayer();
   return (out);
 }
 
-Player			initPlayer(/* Client ? */)
+Player			initPlayer()
 {
   Player		out;
 
@@ -33,22 +32,7 @@ Player			initPlayer(/* Client ? */)
   out.todo_time = 0;
   memset(out.todo, 0, sizeof(t_todo) * 10);
   init_inv(&(out.inv));
-
-  out.is_gui = false;
-
   out.delete = &delete;
-//  out.forward = &forward;
-//  out.rotate = &rotate;
-//  out.see= &see;
-//  out.get_inventory = &get_inventory;
-//  out.broadcast = &broadcast;
-//  out.unused_slot = &unused_slot;
-//  out.forkPlayer = &forkPlayer;
-//  out.eject = &eject;
-//  out.death = &death;
-//  out.take_obj = &take_obj;
-//  out.place_obj = &place_obj;
-//  out.incant = &incant;
   return (out);
 }
 
@@ -68,5 +52,3 @@ static void	delete(THIS)
     }
   free (this);
 }
-
-#include "implem/PlayerImplem1.c"

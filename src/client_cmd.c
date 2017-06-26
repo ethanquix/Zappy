@@ -87,7 +87,7 @@ static void		action_setup(Server *server, Player *player, char *cmd, int index)
       player->todo[todo_index].action = client_cmd[index].action;
       player->todo[todo_index].time = (client_cmd[index].time / server->freq) * player->todo_time;
       player->todo_time = player->todo[todo_index].time;
-      cmd = strtok(NULL, " \n");
+      cmd = strtok(NULL, " \n"); //TODO DAFUQ ??????
       mineraln = -1; //TODO ERROR HERE MINERAL DONT NOT HAVE -1
       while (mineraln < MAX_MINERAL && (cmd != mineral_name[++mineraln]));
       player->todo[todo_index].mineral = mineraln;

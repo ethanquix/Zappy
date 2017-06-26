@@ -17,7 +17,6 @@
 THE_BEST
 ZAPPY_EVER
 
-//TODO PLAYER CONNECT A REVOIR, IL PRENDS RIEN OU JUSTE LE FD ET C AU SOCKET DE LUI CREER UN NOM RANDOM ET TOUSSA
 int	start(t_arg *args);
 
 int		main()
@@ -34,15 +33,15 @@ int		main()
 
 
 
+void	__attribute__ ((constructor)) premain()
+{
+  srand(time(NULL));
+}
+
 int		zappy(int ac, char *av[])
 {
-  srand(time(NULL)); //TODO ADD PRE MAIN
+  if (strcmp(__FUNCTION__, "zappy") != 0)
+    exit(84);
   start(parse_arg(ac, av));
   return (0);
 }
-
-// EXAMPLE TO CALL GET INVENTORY METHOD
-//server->get_inventory(server, server->players->get(server->players, "joueur 1");
-//and then send the result of this function to the client (yeah it currently return a server * but soon a String *
-
-//TODO NORME ","

@@ -5,7 +5,7 @@
 ** Login   <raphael.chriqui@epitech.net>
 **
 ** Started on  Fri May 12 15:59:28 2017 Raphael Chriqui
-** Last update Mon Jun 12 17:31:36 2017 Lheen Teck
+** Last update Mon Jun 26 02:55:39 2017 Doom
 */
 
 #include <stdlib.h>
@@ -41,13 +41,13 @@ static void			select_check(t_socket *socket, Server *server, fd_set *rfds)
 	      dprintf(socket->fd_client, "WELCOME\n");
 	      server->player_connect(server, socket->fd_client);
 	    }
-	    else if (index == server->gui->fd)
-	      check_cmd_gui(server, socket);
-	    else
-	      {
-		socket->fd_client = index;
-		check_cmd_client(server, socket);
-	      }
+	  else if (index == server->gui->fd)
+	    check_cmd_gui(server, socket);
+	  else
+	    {
+	      socket->fd_client = index;
+	      check_cmd_client(server, socket);
+	    }
 	}
     }
 }
@@ -66,9 +66,11 @@ static void			select_op(t_socket *socket, Server *server)
       server->players->start_loop(server->players);
       while ((it = server->players->loop(server->players)))
 	FD_SET(it->data->fd, &rfds);
+      if (server->gui->fd != -1)
+	FD_SET(server->gui->fd, &rfds);
       FD_SET(socket->fd, &rfds);
       tv.tv_sec = 2;
-      if ((retval = select(server->players->len(server->players) + socket->fd + 1,
+      if ((retval = select(server->players->len(server->players) + socket->fd + 2,
 			   &rfds, NULL, NULL, &tv)) == -1 && !sig_int)
 	raise("Select failed");
       else if (retval >= 0)

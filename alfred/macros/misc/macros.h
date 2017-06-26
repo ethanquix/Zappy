@@ -21,6 +21,7 @@
 
 //Utils
 #define RESET(a,b)   memset(a,b,sizeof(a))
+#define UNUSED(var) (void)(var)
 
 //List manipulation
 #define ARRAY_LENGTH(A) (sizeof(A) / sizeof((A)[0]))

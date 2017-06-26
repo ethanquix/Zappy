@@ -72,6 +72,8 @@ CLASS			s_server
   Server		*(*incant)(THIS, Player *player); //TODO FINISH INCANT
   t_response		*(*unused_slot)(THIS, Player *player);
 
+  String		*(*__get_tile_inv)(THIS, int x, int y);
+
   Server		*(*hatch_egg)(THIS); //TODO HATCH EGG AND WHAT TO DO HEN EGG PLACED
   //TODO ADD INCANT DONE
   Server		*(*death)(THIS, Player *player); //TODO DEATH

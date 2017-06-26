@@ -143,6 +143,7 @@ static String		*get_tile_inv(THIS, int x, int y)
   PairCP		*it;
 
   i = 0;
+  printf("x %d y %d\n", x, y);
   out = newString("");
   while (i < MAX_MINERAL)
     {
@@ -188,26 +189,26 @@ static String		*get_line_from_map(THIS, int x1, int y1, int x2, int y2)
   out = newString("");
   comma = newString(",");
 
-  printf("x1 %d y1 %d x2 %d y2 %d\n", x1, y1, x2, y2);
-  if (x2 > x1)
-    my_swap(&x1, &x2);
-  if (y2 > y1)
-    my_swap(&y1, &y2);
+  x1 = (x1 + this->map->width) % this->map->width;
+  y1 = (y1 + this->map->height) % this->map->height;
+  x2 = (x2 + this->map->width) % this->map->width;
+  y2 = (y2 + this->map->width) % this->map->height;
+  while (x1 != x2 && y1 == y2)
+    {
+      out->add(out, get_tile_inv(this, x1, y1))->add(out, comma);
+      x1 = (x1 + 1) % this->map->width;
+    }
+  while (y1 != y2 && x1 == x2)
+    {
+      out->add(out, get_tile_inv(this, x1, y1))->add(out, comma);
+      y1 = (y1 + 1) % this->map->height;
+    }
   if (x1 == x2 && y1 == y2)
     {
       tmp = get_tile_inv(this, x1, y1);
       out = out->add(out, tmp)->add(out, comma);
+      comma->delete(comma);
       return (out);
-    }
-  while (x1 < x2 && y1 == y2)
-    {
-      out->add(out, get_tile_inv(this, x1, y1))->add(out, comma);
-      x1 INC 1;
-    }
-  while (y1 < y2 && x1 == x2)
-    {
-      out->add(out, get_tile_inv(this, x1, y1))->add(out, comma);
-      y1 INC 1;
     }
   comma->delete(comma);
   return (out);
@@ -220,7 +221,6 @@ static t_response	*see(THIS, Player *player)
   Vec2I			a;
   Vec2I			b;
   t_response		*resp;
-  String		*tmp;
 
   MALLOC(resp, sizeof(t_response));
   resp->name = player->name;
@@ -229,20 +229,18 @@ static t_response	*see(THIS, Player *player)
   a.y = player->position.y;
   b = a;
   out = newString("");
-  i = 0;
+  i = 1;
 
+  out->add(out, get_line_from_map(this, a.x, a.y, b.x, b.y));
   while (i <= player->level)
     {
-      tmp = get_line_from_map(this, a.x, a.y, a.x, a.y);
-      printf("TMP WHEN OUT: %s\n", tmp->__str);
-      out->add(out, tmp);
-      printf("OUT: %s\n", out->__str);
       if (player->direction == NORTH)
 	{
 	  a.x -= 1;
 	  b.x += 1;
 	  a.y -= 1;
 	  b.y -= 1;
+	  out->add(out, get_line_from_map(this, a.x, a.y, b.x, b.y));
 	}
       if (player->direction == SOUTH)
 	{
@@ -250,6 +248,7 @@ static t_response	*see(THIS, Player *player)
 	  b.x -= 1;
 	  a.y += 1;
 	  b.y += 1;
+	  out->add(out, get_line_from_map(this, b.x, b.y, a.x, a.y));
 	}
       if (player->direction == WEST)
 	{
@@ -257,6 +256,7 @@ static t_response	*see(THIS, Player *player)
 	  b.x -= 1;
 	  a.y += 1;
 	  b.y -= 1;
+	  out->add(out, get_line_from_map(this, a.x, a.y, b.x, b.y));
 	}
       if (player->direction == EAST)
 	{
@@ -264,12 +264,9 @@ static t_response	*see(THIS, Player *player)
 	  b.x += 1;
 	  a.y -= 1;
 	  b.y += 1;
+	  out->add(out, get_line_from_map(this, b.x, b.y, a.x, a.y));
 	}
-      a.x = (a.x + this->map->width) % this->map->width;
-      a.y = (a.y + this->map->height) % this->map->height;
-      b.x = (b.x + this->map->width) % this->map->width;
-      b.y = (b.y + this->map->width) % this->map->height;
-      i INC 1;
+      i += 1;
     }
   // TODO NORME
   resp->msg = out;
