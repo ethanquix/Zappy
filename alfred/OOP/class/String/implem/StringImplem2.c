@@ -5,7 +5,7 @@
 ** Login   <dimitri1.wyzlic@epitech.eu>
 **
 ** Started on  Mon Jun 05 21:06:36 2017 Dimitri Wyzlic
-** Last update Fri Jun 23 15:56:59 2017 Doom
+** Last update Mon Jun 26 18:01:56 2017 Doom
 */
 
 #include <time.h>
@@ -13,9 +13,9 @@
 
 static t_string	*epur(THIS, char to_delete)
 {
-  char	*tmp;
-  int	i;
-  int	j;
+  char		*tmp;
+  int		i;
+  int		j;
 
   i = 0;
   j = 0;
@@ -33,23 +33,20 @@ static t_string	*epur(THIS, char to_delete)
   return (new_string(tmp));
 }
 
-static t_string	*random_string(THIS, size_t len)
+static t_string		*random_string(THIS, size_t len)
 {
-  size_t	i;
-
-  i = 0;
-  MALLOC(this->__str, sizeof(char) * (len + 1));
-  static const char alphanum[] =
+  size_t		i;
+  static const char	alphanum[] =
     "0123456789"
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     "abcdefghijklmnopqrstuvwxyz";
-
+  i = 0;
+  MALLOC(this->__str, sizeof(char) * (len + 1));
   while (i < len)
     {
       this->__str[i] = alphanum[rand() % (sizeof(alphanum) - 1)];
       i += 1;
     }
-
   this->__str[len] = 0;
   this->__len = (int)len;
   return (this);

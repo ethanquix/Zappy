@@ -25,7 +25,6 @@ t_string		*new_string(char *str)
 
   MALLOC(out, sizeof(t_string));
   *out = init_string(str);
-
   return (out);
 }
 
