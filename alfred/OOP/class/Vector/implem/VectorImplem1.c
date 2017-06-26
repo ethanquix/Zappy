@@ -15,7 +15,7 @@ static int	len(THIS)
   return (this->__len);
 }
 
-static Vector	*add(THIS, void *obj)
+static t_vector	*add(THIS, void *obj)
 {
   t_llist	*tmp;
 
@@ -83,7 +83,7 @@ static void	*pop(THIS)
 }
 
 
-static Vector	*set(THIS, int pos, void *obj)
+static t_vector	*set(THIS, int pos, void *obj)
 {
   t_llist	*it;
   int		i;

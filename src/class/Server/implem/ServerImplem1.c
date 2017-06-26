@@ -23,7 +23,7 @@ static Server		*add_team(THIS, t_string *name)
     i += 1;
   this->teams[i] = out;
   this->team_index->set(this->team_index, name->__str, i);
-  out->eggs = newVector();
+  out->eggs = new_vector();
   return (this);
 }
 

@@ -21,15 +21,15 @@ t_arg		*init_arg_parser()
   out->port = DEFAULT_PORT;
   out->maxt_players = DEFAULT_MAX_CLIENT;
   out->freq = DEFAULT_FREQ;
-  out->teamName = newVector();
+  out->teamName = new_vector();
   return (out);
 }
 
-Vector		*parse_team(int idx, char **arg, int max)
+t_vector		*parse_team(int idx, char **arg, int max)
 {
-  Vector	*tmp;
+  t_vector	*tmp;
 
-  tmp = newVector();
+  tmp = new_vector();
   idx = idx - 1;
   while (idx < max)
     {

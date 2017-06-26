@@ -1,7 +1,7 @@
 Create:
 
-- `Vector		initVector()`
-- `Vector		*newVector()`
+- `Vector		init_vector()`
+- `Vector		*new_vector()`
 
 Method:
 
@@ -36,7 +36,7 @@ void		vector_sample()
   String	test;
   String	*str;
 
-  vector = newVector();
+  vector = new_vector();
   
   test = initString("I am a Local String");
   str = newString("I am a Pointer String");

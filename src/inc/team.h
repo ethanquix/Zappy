@@ -24,7 +24,7 @@ typedef struct		s_team
 {
   int			current_nb_player;
   t_string		*name;
-  Vector		*eggs;
+  t_vector		*eggs;
 
 }			t_team;
 

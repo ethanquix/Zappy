@@ -67,7 +67,7 @@ CLASS			s_server
   int			nb_teams;
   int			freq;
   t_player		*gui;
-  Vector		*todo;
+  t_vector		*todo;
 
   void			(*delete)(THIS);
 
@@ -80,9 +80,9 @@ CLASS			s_server
   t_response		*(*rotate_right)(THIS, t_player *player);
   t_response		*(*see)(THIS, t_player *player);
   t_response		*(*get_inventory)(THIS, t_player *player);
-  Vector		*(*broadcast)(Server *this, t_player *player, t_string *msg);
+  t_vector		*(*broadcast)(Server *this, t_player *player, t_string *msg);
   t_response		*(*fork_player)(THIS, t_player *player); //TODO DO FORK PLAYER
-  Vector		*(*eject)(THIS, t_player *player);
+  t_vector		*(*eject)(THIS, t_player *player);
   t_response		*(*take_obj)(THIS, t_player *player, t_mineral mineral);
   t_response		*(*place_obj)(THIS, t_player *player, t_mineral mineral);
   t_response		*(*incant)(THIS, t_player *player); //TODO FINISH INCANT

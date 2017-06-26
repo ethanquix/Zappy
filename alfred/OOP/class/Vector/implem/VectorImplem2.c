@@ -10,7 +10,7 @@
 
 #include "Vector.h"
 
-static Vector	*print(THIS, void (*_func)(void *))
+static t_vector	*print(THIS, void (*_func)(void *))
 {
   int		i;
   t_llist	*it;

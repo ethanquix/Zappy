@@ -10,12 +10,12 @@
 
 #include "cmd.h"
 
-static Vector			*wrapper_ko(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_ko(Server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
-  Vector		*out;
+  t_vector		*out;
   t_response		*resp;
 
-  out = newVector();
+  out = new_vector();
   MALLOC(resp, sizeof(t_response));
   resp->name = player->name;
   resp->fd = player->fd;
@@ -24,38 +24,38 @@ static Vector			*wrapper_ko(Server *server, t_player *player, t_mineral mineral,
   return (out);
 }
 
-static Vector			*wrapper_forward(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_forward(Server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
-  Vector		*out;
+  t_vector		*out;
 
-  out = newVector();
+  out = new_vector();
   out->add(out, server->forward(server, player));
   return (out);
 }
 
-static Vector			*wrapper_right(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_right(Server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
-  Vector		*out;
+  t_vector		*out;
 
-  out = newVector();
+  out = new_vector();
   out->add(out, server->rotate_right(server, player));
   return (out);
 }
 
-static Vector			*wrapper_left(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_left(Server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
-  Vector		*out;
+  t_vector		*out;
 
-  out = newVector();
+  out = new_vector();
   out->add(out, server->rotate_left(server, player));
   return (out);
 }
 
-static Vector			*wrapper_see(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_see(Server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
-  Vector		*out;
+  t_vector		*out;
 
-  out = newVector();
+  out = new_vector();
   out->add(out, server->see(server, player));
   return (out);
 }

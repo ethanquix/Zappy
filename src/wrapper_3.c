@@ -10,29 +10,29 @@
 
 #include "cmd.h"
 
-static Vector			*wrapper_take(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_take(Server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
-  Vector		*out;
+  t_vector		*out;
 
-  out = newVector();
+  out = new_vector();
   out->add(out, server->take_obj(server, player, mineral));
   return (out);
 }
 
-static Vector			*wrapper_place(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_place(Server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
-  Vector		*out;
+  t_vector		*out;
 
-  out = newVector();
+  out = new_vector();
   out->add(out, server->place_obj(server, player, mineral));
   return (out);
 }
 
-static Vector			*wrapper_incant(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_incant(Server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
   //TODO FINISH INCANT
-  Vector			*out;
+  t_vector			*out;
 
-  out = newVector();
+  out = new_vector();
   return (out);
 }

@@ -15,38 +15,34 @@
 #include <memory.h>
 #include "Alfred.h"
 
-typedef CLASS s_Vector Vector;
-
 #undef THIS
-#define THIS Vector *this
+#define THIS struct s_vector *this
 
 typedef struct		s_llist
 {
   void			*__elem;
   struct s_llist	*next;
   struct s_llist	*prev;
-
 }			t_llist;
 
-CLASS		s_Vector
+typedef CLASS		s_vector
 {
-  t_llist	*__obj;
-  int		__len;
-  int		__cursor;
+  t_llist		*__obj;
+  int			__len;
+  int			__cursor;
+  int			(*len)(THIS);
+  struct s_vector	*(*add)(THIS, void *);
+  void			*(*get)(THIS, int pos);
+  void			*(*pop)(THIS);
+  struct s_vector	*(*set)(THIS, int pos, void *obj);
+  struct s_vector	*(*print)(THIS, void (*_func)(void *));
+  void			(*delete)(THIS);
+  void			(*start_loop)(THIS);
+  void			*(*loop)(THIS);
+  void			*(*erase)(THIS, int pos);
+}			t_vector;
 
-  int		(*len)(THIS);
-  Vector	*(*add)(THIS, void *);
-  void		*(*get)(THIS, int pos);
-  void		*(*pop)(THIS);
-  Vector	*(*set)(THIS, int pos, void *obj);
-  Vector	*(*print)(THIS, void (*_func)(void *));
-  void		(*delete)(THIS);
-  void		(*start_loop)(THIS);
-  void		*(*loop)(THIS);
-  void		*(*erase)(THIS, int pos);
-};
-
-Vector	*newVector();
-Vector	initVector();
+t_vector	*new_vector();
+t_vector	init_vector();
 
 #endif //ZAPPY_VECTOR_H

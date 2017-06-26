@@ -86,12 +86,12 @@ static t_response		*calc_sound(THIS, t_player *from, t_player *to, t_string *msg
   out->msg = msg;
 }
 
-static Vector		*broadcast(THIS, t_player *player, t_string *msg)
+static t_vector		*broadcast(THIS, t_player *player, t_string *msg)
 {
-  Vector		*out;
+  t_vector		*out;
   PairCP		*it;
 
-  out = newVector();
+  out = new_vector();
   this->players->start_loop(this->players);
   while ((it = this->players->loop(this->players)) != NULL)
     out->add(out, calc_sound(this, player, it->data, msg));

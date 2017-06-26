@@ -11,34 +11,32 @@
 #include "Vector.h"
 
 static int	len(THIS);
-static Vector	*add(THIS, void *obj);
+static t_vector	*add(THIS, void *obj);
 static void	*get(THIS, int pos);
 static void	*pop(THIS);
-static Vector	*set(THIS, int pos, void *obj);
-static Vector	*print(THIS, void (*_func)(void *));
+static t_vector	*set(THIS, int pos, void *obj);
+static t_vector	*print(THIS, void (*_func)(void *));
 static void	delete(THIS);
 static void	start_loop(THIS);
 static void	*loop(THIS);
 static void	*erase(THIS, int pos);
 
 
-Vector		*newVector()
+t_vector		*new_vector()
 {
-  Vector	*out;
+  t_vector		*out;
 
-  MALLOC(out, sizeof(Vector));
-  *out = initVector();
-
+  MALLOC(out, sizeof(t_vector));
+  *out = init_vector();
   return (out);
 }
 
-Vector		initVector()
+t_vector		init_vector()
 {
-  Vector	out;
+  t_vector		out;
 
   out.__obj = NULL;
   out.__len = 0;
-
   out.len = &len;
   out.add = &add;
   out.get = &get;

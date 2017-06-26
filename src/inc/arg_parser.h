@@ -29,7 +29,7 @@ typedef struct	s_arg
   int		port;
   int		width;
   int		height;
-  Vector	*teamName;
+  t_vector	*teamName;
   int		maxt_players;
   int		freq;
 }		t_arg;

@@ -18,9 +18,9 @@ static t_response	*rotate_left(THIS, t_player *player);
 static t_response	*rotate_right(THIS, t_player *player);
 static t_response	*see(THIS, t_player *player);
 static t_response	*get_inventory(THIS, t_player *player);
-static Vector		*broadcast(THIS, t_player *player, t_string *msg);
+static t_vector		*broadcast(THIS, t_player *player, t_string *msg);
 static t_response	*fork_player(THIS, t_player *player);
-static Vector		*eject(THIS, t_player *player);
+static t_vector		*eject(THIS, t_player *player);
 static Server		*death(THIS, t_player *player);
 static t_response	*take_obj(THIS, t_player *player, t_mineral mineral);
 static t_response	*place_obj(THIS, t_player *player, t_mineral mineral);
@@ -58,7 +58,7 @@ Server			initServer(WorldMap *map, t_arg *arg)
   out.gui = new_player();
   out.gui->fd = -1;
 
-  out.todo = newVector();
+  out.todo = new_vector();
   out.delete = &delete;
   out.player_connect = &player_connect;
   out.add_player_info = &add_player_info;

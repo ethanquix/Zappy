@@ -10,44 +10,44 @@
 
 #include "cmd.h"
 
-static Vector			*wrapper_get_inv(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_get_inv(Server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
-  Vector		*out;
+  t_vector		*out;
 
-  out = newVector();
+  out = new_vector();
   out->add(out, server->get_inventory(server, player));
   return (out);
 }
 
-static Vector			*wrapper_broadcast(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_broadcast(Server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
-  Vector		*out;
+  t_vector		*out;
 
   out = server->broadcast(server, player, msg);
   return (out);
 }
 
-static Vector			*wrapper_unused(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_unused(Server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
-  Vector		*out;
+  t_vector		*out;
 
-  out = newVector();
+  out = new_vector();
   out->add(out, server->unused_slot(server, player));
   return (out);
 }
 
-static Vector			*wrapper_fork(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_fork(Server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
-  Vector		*out;
+  t_vector		*out;
 
-  out = newVector();
+  out = new_vector();
   out->add(out, server->fork_player(server, player));
   return (out);
 }
 
-static Vector			*wrapper_eject(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_eject(Server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
-  Vector		*out;
+  t_vector		*out;
 
   out = server->eject(server, player);
   return (out);

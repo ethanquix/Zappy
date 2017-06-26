@@ -22,9 +22,9 @@ int		main()
 //  MapCP		*map;
 //  t_player	*a;
 //  t_player	*b;
-  Vector	*vect;
+  t_vector	*vect;
 //
-  vect = newVector();
+  vect = new_vector();
 
 
   vect->delete(vect);

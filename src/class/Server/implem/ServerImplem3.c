@@ -31,16 +31,16 @@ static t_response	*eject_player(THIS, t_player *from, t_player *to)
   return (response);
 }
 
-static Vector		*eject(THIS, t_player *player)
+static t_vector		*eject(THIS, t_player *player)
 {
-  Vector		*out;
+  t_vector		*out;
   PairCP		*it;
   t_response		*resp;
 
   MALLOC(resp, sizeof(t_response));
   resp->name = player->name;
   resp->fd = player->fd;
-  out = newVector();
+  out = new_vector();
   resp->msg = new_string(MSG_OK);
   out->add(out, resp);
   this->players->start_loop(this->players);
