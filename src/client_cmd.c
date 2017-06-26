@@ -29,12 +29,12 @@ static const t_cmd	client_cmd[] =
 		{ NULL, C_NOTHING, 0 }
 	};
 
-static t_player		*get_player(Server *server, int fd)
+static t_player		*get_player(t_server *server, int fd)
 {
   return (server->players->get(server->players, fd));
 }
 
-int			check_team(t_player *player, Server *server, char *cmd)
+int			check_team(t_player *player, t_server *server, char *cmd)
 {
   t_connect_info	*cinfo;
 
@@ -54,7 +54,7 @@ int			check_team(t_player *player, Server *server, char *cmd)
   return (0);
 }
 
-void			second_tick(Server *server, t_player *player)
+void			second_tick(t_server *server, t_player *player)
 {
 //  Vector		*resp;
 //  int			index;
@@ -73,7 +73,7 @@ void			second_tick(Server *server, t_player *player)
 //	  ((t_response*)resp->get(resp, index))->msg->get(((t_response*)resp->get(resp, index))->msg));
 }
 
-static void		action_setup(Server *server, t_player *player, char *cmd, int index)
+static void		action_setup(t_server *server, t_player *player, char *cmd, int index)
 {
   enum e_mineral	mineraln;
   int			todo_index;
@@ -100,7 +100,7 @@ static void		action_setup(Server *server, t_player *player, char *cmd, int index
     }
 }
 
-void			check_cmd_client(Server *server, t_socket *socket)
+void			check_cmd_client(t_server *server, t_socket *socket)
 {
   t_player		*player;
   char			*cmd;

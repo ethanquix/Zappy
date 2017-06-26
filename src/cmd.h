@@ -14,7 +14,7 @@
 #include "Server.h"
 #include "config.h"
 
-typedef void	(*gui_ptr)(Server *server, t_string *cmd);
+typedef void	(*gui_ptr)(t_server *server, t_string *cmd);
 
 typedef struct		s_gui
 {
@@ -29,9 +29,9 @@ typedef struct			s_cmd
   int				time;
 }				t_cmd;
 
-void			loop_todo(Server *server);
+void			loop_todo(t_server *server);
 
-void			check_cmd_client(Server *srv, t_socket *socket);
-void			check_cmd_gui(Server *srv, t_socket *socket);
+void			check_cmd_client(t_server *srv, t_socket *socket);
+void			check_cmd_gui(t_server *srv, t_socket *socket);
 
 #endif //ZAPPY_CMD_H

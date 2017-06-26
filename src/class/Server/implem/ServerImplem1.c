@@ -1,5 +1,5 @@
 /*
-** ServerImplem1.c for Zappy in /home/wyzlic_a/delivery/Zappy/ServerImplem1.c
+** t_serverImplem1.c for Zappy in /home/wyzlic_a/delivery/Zappy/t_serverImplem1.c
 **
 ** Made by Dimitri Wyzlic
 ** Login   <dimitri1.wyzlic@epitech.eu>
@@ -10,7 +10,7 @@
 
 #include "Server.h"
 
-static Server		*add_team(THIS, t_string *name)
+static t_server		*add_team(THIS, t_string *name)
 {
   int			i;
   t_team		*out;
@@ -27,7 +27,7 @@ static Server		*add_team(THIS, t_string *name)
   return (this);
 }
 
-static Server		*player_connect(THIS, int fd)
+static t_server		*player_connect(THIS, int fd)
 {
   t_player		*new;
 

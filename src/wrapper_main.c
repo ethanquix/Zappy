@@ -10,21 +10,21 @@
 
 #include "cmd.h"
 
-static t_vector			*wrapper_ko(Server *server, t_player *player, t_mineral mineral, t_string *msg);
-static t_vector			*wrapper_forward(Server *server, t_player *player, t_mineral mineral, t_string *msg);
-static t_vector			*wrapper_right(Server *server, t_player *player, t_mineral mineral, t_string *msg);
-static t_vector			*wrapper_left(Server *server, t_player *player, t_mineral mineral, t_string *msg);
-static t_vector			*wrapper_see(Server *server, t_player *player, t_mineral mineral, t_string *msg);
-static t_vector			*wrapper_get_inv(Server *server, t_player *player, t_mineral mineral, t_string *msg);
-static t_vector			*wrapper_broadcast(Server *server, t_player *player, t_mineral mineral, t_string *msg);
-static t_vector			*wrapper_unused(Server *server, t_player *player, t_mineral mineral, t_string *msg);
-static t_vector			*wrapper_fork(Server *server, t_player *player, t_mineral mineral, t_string *msg);
-static t_vector			*wrapper_eject(Server *server, t_player *player, t_mineral mineral, t_string *msg);
-static t_vector			*wrapper_take(Server *server, t_player *player, t_mineral mineral, t_string *msg);
-static t_vector			*wrapper_place(Server *server, t_player *player, t_mineral mineral, t_string *msg);
-static t_vector			*wrapper_incant(Server *server, t_player *player, t_mineral mineral, t_string *msg);
+static t_vector			*wrapper_ko(t_server *server, t_player *player, t_mineral mineral, t_string *msg);
+static t_vector			*wrapper_forward(t_server *server, t_player *player, t_mineral mineral, t_string *msg);
+static t_vector			*wrapper_right(t_server *server, t_player *player, t_mineral mineral, t_string *msg);
+static t_vector			*wrapper_left(t_server *server, t_player *player, t_mineral mineral, t_string *msg);
+static t_vector			*wrapper_see(t_server *server, t_player *player, t_mineral mineral, t_string *msg);
+static t_vector			*wrapper_get_inv(t_server *server, t_player *player, t_mineral mineral, t_string *msg);
+static t_vector			*wrapper_broadcast(t_server *server, t_player *player, t_mineral mineral, t_string *msg);
+static t_vector			*wrapper_unused(t_server *server, t_player *player, t_mineral mineral, t_string *msg);
+static t_vector			*wrapper_fork(t_server *server, t_player *player, t_mineral mineral, t_string *msg);
+static t_vector			*wrapper_eject(t_server *server, t_player *player, t_mineral mineral, t_string *msg);
+static t_vector			*wrapper_take(t_server *server, t_player *player, t_mineral mineral, t_string *msg);
+static t_vector			*wrapper_place(t_server *server, t_player *player, t_mineral mineral, t_string *msg);
+static t_vector			*wrapper_incant(t_server *server, t_player *player, t_mineral mineral, t_string *msg);
 
-static t_vector	*(*wrapper_function[13])(Server *server, t_player *player, t_mineral mineral, t_string *msg) =
+static t_vector	*(*wrapper_function[13])(t_server *server, t_player *player, t_mineral mineral, t_string *msg) =
 {
   &wrapper_ko,
   &wrapper_forward,
@@ -55,7 +55,7 @@ void		respond(t_vector *vector)
     }
 }
 
-void		loop_todo(Server *server)
+void		loop_todo(t_server *server)
 {
   int		i;
   PAIR_CP	*it;

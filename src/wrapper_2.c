@@ -10,7 +10,7 @@
 
 #include "cmd.h"
 
-static t_vector			*wrapper_get_inv(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_get_inv(t_server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
   t_vector		*out;
 
@@ -19,7 +19,7 @@ static t_vector			*wrapper_get_inv(Server *server, t_player *player, t_mineral m
   return (out);
 }
 
-static t_vector			*wrapper_broadcast(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_broadcast(t_server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
   t_vector		*out;
 
@@ -27,7 +27,7 @@ static t_vector			*wrapper_broadcast(Server *server, t_player *player, t_mineral
   return (out);
 }
 
-static t_vector			*wrapper_unused(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_unused(t_server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
   t_vector		*out;
 
@@ -36,7 +36,7 @@ static t_vector			*wrapper_unused(Server *server, t_player *player, t_mineral mi
   return (out);
 }
 
-static t_vector			*wrapper_fork(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_fork(t_server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
   t_vector		*out;
 
@@ -45,7 +45,7 @@ static t_vector			*wrapper_fork(Server *server, t_player *player, t_mineral mine
   return (out);
 }
 
-static t_vector			*wrapper_eject(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_eject(t_server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
   t_vector		*out;
 

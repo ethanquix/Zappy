@@ -1,5 +1,5 @@
 /*
-** ServerImplem2.c for Zappy in /home/wyzlic_a/delivery/Zappy/ServerImplem2.c
+** t_serverImplem2.c for Zappy in /home/wyzlic_a/delivery/Zappy/t_serverImplem2.c
 **
 ** Made by Dimitri Wyzlic
 ** Login   <dimitri1.wyzlic@epitech.eu>

@@ -22,11 +22,11 @@ static char	sig_int = 0;
 static void	sigHandler(int n)
 {
   (void)n;
-  printf("\b\bServer Closing\n");
+  printf("\b\bt_server Closing\n");
   sig_int = 1;
 }
 
-static void			select_check(t_socket *socket, Server *server, fd_set *rfds)
+static void			select_check(t_socket *socket, t_server *server, fd_set *rfds)
 {
   int				index;
 
@@ -52,7 +52,7 @@ static void			select_check(t_socket *socket, Server *server, fd_set *rfds)
     }
 }
 
-static void			select_op(t_socket *socket, Server *server)
+static void			select_op(t_socket *socket, t_server *server)
 {
   fd_set			rfds;
   struct timeval		tv;
@@ -83,7 +83,7 @@ static void			select_op(t_socket *socket, Server *server)
 
 int	        start(t_arg *args)
 {
-  Server	*server;
+  t_server	*server;
   t_socket	*socket;
 
   signal(SIGINT, &sigHandler);

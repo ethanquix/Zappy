@@ -1,5 +1,5 @@
 /*
-** Server.h for Zappy in /home/wyzlic_a/delivery/Zappy/Server.h
+** t_server.h for Zappy in /home/wyzlic_a/delivery/Zappy/t_server.h
 **
 ** Made by Dimitri Wyzlic
 ** Login   <dimitri1.wyzlic@epitech.eu>
@@ -27,10 +27,8 @@
 #define TIME_SERVER_FORK 600
 #define TIME_SERVER_INCANT 300
 
-typedef CLASS s_server Server;
-
 #undef THIS
-#define THIS Server *this
+#define THIS struct s_server *this
 
 enum e_cmd_serv_nb
 {
@@ -69,15 +67,15 @@ typedef CLASS		s_server
   t_player		*gui;
   t_vector		*todo;
   void			(*delete)(THIS);
-  Server		*(*add_team)(THIS, t_string *name);
-  Server		*(*player_connect)(THIS, int fd);
+  struct s_server	*(*add_team)(THIS, t_string *name);
+  struct s_server	*(*player_connect)(THIS, int fd);
   t_connect_info	*(*add_player_info)(THIS, t_player *player, t_string *team);
-  t_response		*(*forward)(Server *this, t_player *player);
+  t_response		*(*forward)(THIS, t_player *player);
   t_response		*(*rotate_left)(THIS, t_player *player);
   t_response		*(*rotate_right)(THIS, t_player *player);
   t_response		*(*see)(THIS, t_player *player);
   t_response		*(*get_inventory)(THIS, t_player *player);
-  t_vector		*(*broadcast)(Server *this, t_player *player, t_string *msg);
+  t_vector		*(*broadcast)(THIS, t_player *player, t_string *msg);
   t_response		*(*fork_player)(THIS, t_player *player);
   t_vector		*(*eject)(THIS, t_player *player);
   t_response		*(*take_obj)(THIS, t_player *player, t_mineral mineral);
@@ -85,11 +83,11 @@ typedef CLASS		s_server
   t_response		*(*incant)(THIS, t_player *player);
   t_response		*(*unused_slot)(THIS, t_player *player);
   t_string		*(*__get_tile_inv)(THIS, int x, int y);
-  Server		*(*death)(THIS, t_player *player);
-  Server		*(*loop)(THIS);
+  struct s_server	*(*death)(THIS, t_player *player);
+  struct s_server	*(*loop)(THIS);
 }			t_server;
 
-Server			*new_server(t_worldmap *map, t_arg *arg);
-Server			init_server(t_worldmap *map, t_arg *arg);
+t_server			*new_server(t_worldmap *map, t_arg *arg);
+t_server			init_server(t_worldmap *map, t_arg *arg);
 
 #endif //ZAPPY_SERVER_H

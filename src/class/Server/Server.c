@@ -1,5 +1,5 @@
 /*
-** Server.c for Zappy in /home/wyzlic_a/delivery/Zappy/Server.c
+** t_server.c for Zappy in /home/wyzlic_a/delivery/Zappy/t_server.c
 **
 ** Made by Dimitri Wyzlic
 ** Login   <dimitri1.wyzlic@epitech.eu>
@@ -10,8 +10,8 @@
 
 #include "Server.h"
 
-static Server		*add_team(THIS, t_string *name);
-static Server		*player_connect(THIS, int fd); //TODO
+static t_server		*add_team(THIS, t_string *name);
+static t_server		*player_connect(THIS, int fd); //TODO
 static t_connect_info	*add_player_info(THIS, t_player *player, t_string *team);
 static t_response	*forward(THIS, t_player *player);
 static t_response	*rotate_left(THIS, t_player *player);
@@ -21,43 +21,41 @@ static t_response	*get_inventory(THIS, t_player *player);
 static t_vector		*broadcast(THIS, t_player *player, t_string *msg);
 static t_response	*fork_player(THIS, t_player *player);
 static t_vector		*eject(THIS, t_player *player);
-static Server		*death(THIS, t_player *player);
+static t_server		*death(THIS, t_player *player);
 static t_response	*take_obj(THIS, t_player *player, t_mineral mineral);
 static t_response	*place_obj(THIS, t_player *player, t_mineral mineral);
 static t_response	*incant(THIS, t_player *player); //TODO
 static t_response	*unused_slot(THIS, t_player *player);
-static Server		*loop(THIS);
+static t_server		*loop(THIS);
 static t_string		*get_tile_inv(THIS, int x, int y);
 static void		delete(THIS);
-static Server		*apply_fork(THIS);
-static Server		*apply_incant(THIS, t_serv_todo *todo);
+static t_server		*apply_fork(THIS);
+static t_server		*apply_incant(THIS, t_serv_todo *todo);
 
-static Server	*(*wrapper_function_server[])(THIS, t_serv_todo *src) =
+static t_server	*(*wrapper_function_server[])(THIS, t_serv_todo *src) =
 {
   &apply_incant
 };
 
 
-Server			*new_server(t_worldmap *map, t_arg *arg)
+t_server			*new_server(t_worldmap *map, t_arg *arg)
 {
-  Server		*tmp;
+  t_server		*tmp;
 
-  MALLOC(tmp, sizeof(Server));
+  MALLOC(tmp, sizeof(t_server));
   *tmp = init_server(map, arg);
-
   return (tmp);
 }
 
-Server			init_server(t_worldmap *map, t_arg *arg)
+t_server			init_server(t_worldmap *map, t_arg *arg)
 {
-  Server		out;
+  t_server		out;
   int			i;
   void			*it;
 
   i = 0;
   out.gui = new_player();
   out.gui->fd = -1;
-
   out.todo = new_vector();
   out.delete = &delete;
   out.player_connect = &player_connect;
@@ -85,13 +83,10 @@ Server			init_server(t_worldmap *map, t_arg *arg)
   arg->teamName->start_loop(arg->teamName);
   while ((it = arg->teamName->loop(arg->teamName)) != NULL)
       out.add_team(&out, (t_string *) it);
-
   out.fork_player = &fork_player;
   out.incant = &incant;
-
   out.death = &death;
   out.loop = &loop;
-
   out.__get_tile_inv = &get_tile_inv;
 
   return (out);
@@ -114,7 +109,7 @@ static void	delete(THIS)
   free(this);
 }
 
-static Server		*death(THIS, t_player *player)
+static t_server		*death(THIS, t_player *player)
 {
   int			ti;
 
@@ -129,7 +124,7 @@ static Server		*death(THIS, t_player *player)
   return (this);
 }
 
-static Server		*loop(THIS)
+static t_server		*loop(THIS)
 {
   t_serv_todo		*cur;
   int			i;

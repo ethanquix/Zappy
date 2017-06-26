@@ -8,12 +8,12 @@
 ** Last update Sun Jun 25 18:21:00 2017 Raphael Chriqui
 */
 
-#include <Server.h>
+#include "Server.h"
 #include "cmd.h"
 
-static void		get_map_size(Server *server, t_string *cmd);
-static void		get_tile_info(Server *server, t_string *cmd);
-static void		get_players_by_team(Server *server, t_string *cmd);
+static void		get_map_size(t_server *server, t_string *cmd);
+static void		get_tile_info(t_server *server, t_string *cmd);
+static void		get_players_by_team(t_server *server, t_string *cmd);
 
 static const t_gui	client_cmd[] =
 	{
@@ -23,7 +23,7 @@ static const t_gui	client_cmd[] =
 		{ NULL, NULL }
 	};
 
-void			check_cmd_gui(Server *server, t_socket *socket)
+void			check_cmd_gui(t_server *server, t_socket *socket)
 {
   char			*cmd;
   char			*to_check;
@@ -42,13 +42,13 @@ void			check_cmd_gui(Server *server, t_socket *socket)
     dprintf(server->gui->fd, "Invalid command\n");
 }
 
-static		void	get_map_size(Server *server, t_string *cmd)
+static		void	get_map_size(t_server *server, t_string *cmd)
 {
   UNUSED(cmd);
   dprintf(server->gui->fd, "%d %d\n", server->map->width, server->map->height);
 }
 
-static void		get_tile_info(Server *server, t_string *cmd)
+static void		get_tile_info(t_server *server, t_string *cmd)
 {
   char			*tmp;
   int			x;
@@ -69,7 +69,7 @@ static void		get_tile_info(Server *server, t_string *cmd)
     dprintf(server->gui->fd, "%s\n", server->__get_tile_inv(server, x, y)->__str);
 }
 
-static void		get_players_by_team(Server *server, t_string *cmd)
+static void		get_players_by_team(t_server *server, t_string *cmd)
 {
   char			*tmp;
   t_string		*out;

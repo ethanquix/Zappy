@@ -1,5 +1,5 @@
 /*
-** ServerImplem5.c for Zappy in /home/wyzlic_a/delivery/Zappy/ServerImplem5.c
+** t_serverImplem5.c for Zappy in /home/wyzlic_a/delivery/Zappy/t_serverImplem5.c
 **
 ** Made by Dimitri Wyzlic
 ** Login   <dimitri1.wyzlic@epitech.eu>
@@ -31,7 +31,7 @@ static t_response	*fork_player(THIS, t_player *player)
   return (resp);
 }
 
-static Server		*apply_fork(THIS)
+static t_server		*apply_fork(THIS)
 {
   int			i;
   void			*it;
@@ -77,7 +77,7 @@ static t_response	*incant(THIS, t_player *player)
   return (resp);
 }
 
-static Server		*apply_incant(THIS, t_serv_todo *todo)
+static t_server		*apply_incant(THIS, t_serv_todo *todo)
 {
   PAIR_CP		*it;
   t_player		*current;

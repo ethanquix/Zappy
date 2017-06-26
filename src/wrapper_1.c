@@ -10,7 +10,7 @@
 
 #include "cmd.h"
 
-static t_vector			*wrapper_ko(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_ko(t_server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
   t_vector		*out;
   t_response		*resp;
@@ -24,7 +24,7 @@ static t_vector			*wrapper_ko(Server *server, t_player *player, t_mineral minera
   return (out);
 }
 
-static t_vector			*wrapper_forward(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_forward(t_server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
   t_vector		*out;
 
@@ -33,7 +33,7 @@ static t_vector			*wrapper_forward(Server *server, t_player *player, t_mineral m
   return (out);
 }
 
-static t_vector			*wrapper_right(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_right(t_server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
   t_vector		*out;
 
@@ -42,7 +42,7 @@ static t_vector			*wrapper_right(Server *server, t_player *player, t_mineral min
   return (out);
 }
 
-static t_vector			*wrapper_left(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_left(t_server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
   t_vector		*out;
 
@@ -51,7 +51,7 @@ static t_vector			*wrapper_left(Server *server, t_player *player, t_mineral mine
   return (out);
 }
 
-static t_vector			*wrapper_see(Server *server, t_player *player, t_mineral mineral, t_string *msg)
+static t_vector			*wrapper_see(t_server *server, t_player *player, t_mineral mineral, t_string *msg)
 {
   t_vector		*out;
 
