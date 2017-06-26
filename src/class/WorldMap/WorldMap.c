@@ -1,5 +1,5 @@
 /*
-** WorldMap.c for Zappy in /home/wyzlic_a/delivery/Zappy/WorldMap.c
+** t_worldmap.c for Zappy in /home/wyzlic_a/delivery/Zappy/t_worldmap.c
 **
 ** Made by Dimitri Wyzlic
 ** Login   <dimitri1.wyzlic@epitech.eu>
@@ -14,19 +14,19 @@ t_inv	*init_row(int width);
 
 static void	delete(THIS);
 
-WorldMap		*newWorldMap(int width, int height)
+t_worldmap		*new_world_map(int width, int height)
 {
-  WorldMap		*out;
+  t_worldmap		*out;
 
-  MALLOC(out, sizeof(WorldMap));
-  *out = initWorldMap(width, height);
+  MALLOC(out, sizeof(t_worldmap));
+  *out = init_world_map(width, height);
 
   return (out);
 }
 
-WorldMap		initWorldMap(int width, int height)
+t_worldmap		init_world_map(int width, int height)
 {
-  WorldMap		map;
+  t_worldmap		map;
   int			i;
 
   map.delete = &delete;

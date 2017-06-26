@@ -1,5 +1,5 @@
 /*
-** WorldMap.h for Zappy in /home/wyzlic_a/delivery/Zappy/WorldMap.h
+** t_worldmap.h for Zappy in /home/wyzlic_a/delivery/Zappy/t_worldmap.h
 **
 ** Made by Dimitri Wyzlic
 ** Login   <dimitri1.wyzlic@epitech.eu>
@@ -16,21 +16,18 @@
 #include "MapCI.h"
 #include "Alfred.h"
 
-typedef CLASS s_WorldMap WorldMap;
-
 #undef THIS
-#define THIS WorldMap *this
+#define THIS struct s_worldmap *this
 
-CLASS			s_WorldMap
+typedef CLASS		s_worldmap
 {
   int			width;
   int			height;
-  t_inv		**tiles;
-
+  t_inv			**tiles;
   void			(*delete)(THIS);
-};
+}			t_worldmap;
 
-WorldMap		*newWorldMap(int width, int height);
-WorldMap		initWorldMap(int width, int height);
+t_worldmap		*new_world_map(int width, int height);
+t_worldmap		init_world_map(int width, int height);
 
 #endif //ZAPPY_WORLDMAP_H

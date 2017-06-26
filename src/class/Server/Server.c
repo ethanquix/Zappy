@@ -38,17 +38,17 @@ static Server	*(*wrapper_function_server[])(THIS, t_serv_todo *src) =
 };
 
 
-Server			*newServer(WorldMap *map, t_arg *arg)
+Server			*new_server(t_worldmap *map, t_arg *arg)
 {
   Server		*tmp;
 
   MALLOC(tmp, sizeof(Server));
-  *tmp = initServer(map, arg);
+  *tmp = init_server(map, arg);
 
   return (tmp);
 }
 
-Server			initServer(WorldMap *map, t_arg *arg)
+Server			init_server(t_worldmap *map, t_arg *arg)
 {
   Server		out;
   int			i;

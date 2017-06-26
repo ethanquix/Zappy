@@ -57,46 +57,39 @@ typedef struct	s_connect_info
   t_string	*coord;
 }		t_connect_info;
 
-CLASS			s_server
+typedef CLASS		s_server
 {
-  t_map_ci			*team_index;
+  t_map_ci		*team_index;
   t_team		**teams;
-  WorldMap		*map;
-  t_map_cp			*players;
+  t_worldmap		*map;
+  t_map_cp		*players;
   int			maxSlots;
   int			nb_teams;
   int			freq;
   t_player		*gui;
   t_vector		*todo;
-
   void			(*delete)(THIS);
-
   Server		*(*add_team)(THIS, t_string *name);
   Server		*(*player_connect)(THIS, int fd);
   t_connect_info	*(*add_player_info)(THIS, t_player *player, t_string *team);
-
   t_response		*(*forward)(Server *this, t_player *player);
   t_response		*(*rotate_left)(THIS, t_player *player);
   t_response		*(*rotate_right)(THIS, t_player *player);
   t_response		*(*see)(THIS, t_player *player);
   t_response		*(*get_inventory)(THIS, t_player *player);
   t_vector		*(*broadcast)(Server *this, t_player *player, t_string *msg);
-  t_response		*(*fork_player)(THIS, t_player *player); //TODO DO FORK PLAYER
+  t_response		*(*fork_player)(THIS, t_player *player);
   t_vector		*(*eject)(THIS, t_player *player);
   t_response		*(*take_obj)(THIS, t_player *player, t_mineral mineral);
   t_response		*(*place_obj)(THIS, t_player *player, t_mineral mineral);
-  t_response		*(*incant)(THIS, t_player *player); //TODO FINISH INCANT
+  t_response		*(*incant)(THIS, t_player *player);
   t_response		*(*unused_slot)(THIS, t_player *player);
-
   t_string		*(*__get_tile_inv)(THIS, int x, int y);
-
-  //TODO ADD INCANT DONE
-  Server		*(*death)(THIS, t_player *player); //TODO DEATH
-
+  Server		*(*death)(THIS, t_player *player);
   Server		*(*loop)(THIS);
-};
+}			t_server;
 
-Server			*newServer(WorldMap *map, t_arg *arg);
-Server			initServer(WorldMap *map, t_arg *arg);
+Server			*new_server(t_worldmap *map, t_arg *arg);
+Server			init_server(t_worldmap *map, t_arg *arg);
 
 #endif //ZAPPY_SERVER_H
