@@ -10,7 +10,7 @@
 
 #include "Server.h"
 
-static Server		*add_team(THIS, t_string *name); //TODO
+static Server		*add_team(THIS, t_string *name);
 static Server		*player_connect(THIS, int fd); //TODO
 static t_connect_info	*add_player_info(THIS, t_player *player, t_string *team);
 static t_response	*forward(THIS, t_player *player);
@@ -19,18 +19,23 @@ static t_response	*rotate_right(THIS, t_player *player);
 static t_response	*see(THIS, t_player *player);
 static t_response	*get_inventory(THIS, t_player *player);
 static Vector		*broadcast(THIS, t_player *player, t_string *msg);
-static Server		*forkt_player(THIS, t_player *player); //TODO
-static Server		hatch_egg(THIS); //TODO
+static t_response	*fork_player(THIS, t_player *player);
 static Vector		*eject(THIS, t_player *player);
-static Server		*death(THIS, t_player *player); //TODO
+static Server		*death(THIS, t_player *player);
 static t_response	*take_obj(THIS, t_player *player, t_mineral mineral);
 static t_response	*place_obj(THIS, t_player *player, t_mineral mineral);
-static Server		*incant(THIS, t_player *player); //TODO
+static t_response	*incant(THIS, t_player *player); //TODO
 static t_response	*unused_slot(THIS, t_player *player);
-
+static Server		*loop(THIS);
 static t_string		*get_tile_inv(THIS, int x, int y);
-
 static void		delete(THIS);
+static Server		*apply_fork(THIS);
+static Server		*apply_incant(THIS, t_serv_todo *todo);
+
+static Server	*(*wrapper_function_server[1])(THIS, t_serv_todo *src) =
+	{
+		&apply_incant
+	};
 
 
 Server			*newServer(WorldMap *map, t_arg *arg)
@@ -53,6 +58,7 @@ Server			initServer(WorldMap *map, t_arg *arg)
   out.gui = new_player();
   out.gui->fd = -1;
 
+  out.todo = newVector();
   out.delete = &delete;
   out.player_connect = &player_connect;
   out.add_player_info = &add_player_info;
@@ -80,7 +86,11 @@ Server			initServer(WorldMap *map, t_arg *arg)
   while ((it = arg->teamName->loop(arg->teamName)) != NULL)
       out.add_team(&out, (t_string *) it);
 
+  out.fork_player = &fork_player;
+  out.incant = &incant;
+
   out.death = &death;
+  out.loop = &loop;
 
   out.__get_tile_inv = &get_tile_inv;
 
@@ -101,6 +111,7 @@ static void	delete(THIS)
   free(this->teams);
   this->players->delete(this->players);
   this->map->delete(this->map);
+  this->todo->delete(this->todo);
   free(this);
 }
 
@@ -108,11 +119,35 @@ static Server		*death(THIS, t_player *player)
 {
   int			ti;
 
-  ti = this->team_index->get(this->team_index, player->team->__str);
-  this->teams[ti]->current_nb_player -= 1;
+  if (player->team != NULL)
+    {
+      ti = this->team_index->get(this->team_index, player->team->__str);
+      this->teams[ti]->current_nb_player -= 1;
+    }
   dprintf(player->fd, "death\n");
   this->players->erase(this->players, player->fd);
   player->delete(player);
+  return (this);
+}
+
+static Server		*loop(THIS)
+{
+  t_serv_todo		*cur;
+  int			i;
+
+  apply_fork(this); //TODO it's for the eggs (should work)
+  i = 0;
+  while (i > 0 && i < this->todo->len(this->todo))
+    {
+      VGET(cur, this->todo, i);
+      if (cur->time <= 0)
+	{
+	  wrapper_function_server[cur->action](this, cur);
+	  this->todo->erase(this->todo, i);
+	  i -= 1;
+	}
+      cur->time -= 1;
+    }
   return (this);
 }
 
@@ -120,3 +155,4 @@ static Server		*death(THIS, t_player *player)
 #include "implem/ServerImplem2.c"
 #include "implem/ServerImplem3.c"
 #include "implem/ServerImplem4.c"
+#include "implem/ServerImplem5.c"

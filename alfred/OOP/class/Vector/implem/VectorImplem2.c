@@ -45,3 +45,25 @@ static void	*loop(THIS)
   this->__cursor += 1;
   return (this->get(this, this->__cursor - 1));
 }
+
+static void	*erase(THIS, int pos)
+{
+  t_llist	*it;
+  int		i;
+
+  i = 0;
+  if (this->__len IS 0 || pos > this->__len)
+    return (NULL);
+  it = this->__obj;
+  while (it->next &&  i < pos - 1)
+    {
+      i += 1;
+      it = it->next;
+    }
+  if (it->next == NULL)
+    return (this);
+  it->next = it->next->next;
+  it->next->prev = it;
+  this->__len -= 1;
+  return (this);
+}

@@ -29,7 +29,7 @@
 #define TIME_EJECT 7
 #define TIME_TAKE 7
 #define TIME_SET 7
-#define TIME_INCANT 300
+#define TIME_INCANT 0 //TODO because incant in serv: see server.h
 
 enum	e_cmd_nb
 {

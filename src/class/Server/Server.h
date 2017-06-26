@@ -24,12 +24,27 @@
 #include "team.h"
 #include "Socket.h"
 
+#define TIME_SERVER_FORK 600
+#define TIME_SERVER_INCANT 300
+
 typedef CLASS s_server Server;
 
 #undef THIS
 #define THIS Server *this
 
-typedef struct	s_responsse
+enum e_cmd_serv_nb
+{
+  CMD_SERVER_INCANT,
+};
+
+typedef struct		s_serv_todo
+{
+  enum e_cmd_serv_nb	action;
+  int			time;
+  int			player_fd;
+}			t_serv_todo;
+
+typedef struct	s_response
 {
   t_string	*name; //TODO mostly here to debug
   int		fd;
@@ -38,7 +53,7 @@ typedef struct	s_responsse
 
 typedef struct	s_connect_info
 {
-  t_string	*name;
+  int		remaining;
   t_string	*coord;
 }		t_connect_info;
 
@@ -52,7 +67,7 @@ CLASS			s_server
   int			nb_teams;
   int			freq;
   t_player		*gui;
-  t_todo		todo;
+  Vector		*todo;
 
   void			(*delete)(THIS);
 
@@ -66,18 +81,19 @@ CLASS			s_server
   t_response		*(*see)(THIS, t_player *player);
   t_response		*(*get_inventory)(THIS, t_player *player);
   Vector		*(*broadcast)(Server *this, t_player *player, t_string *msg);
-  Server		*(*forkt_player)(THIS, t_player *player); //TODO DO FORK PLAYER
+  t_response		*(*fork_player)(THIS, t_player *player); //TODO DO FORK PLAYER
   Vector		*(*eject)(THIS, t_player *player);
   t_response		*(*take_obj)(THIS, t_player *player, t_mineral mineral);
   t_response		*(*place_obj)(THIS, t_player *player, t_mineral mineral);
-  Server		*(*incant)(THIS, t_player *player); //TODO FINISH INCANT
+  t_response		*(*incant)(THIS, t_player *player); //TODO FINISH INCANT
   t_response		*(*unused_slot)(THIS, t_player *player);
 
   t_string		*(*__get_tile_inv)(THIS, int x, int y);
 
-  Server		*(*hatch_egg)(THIS); //TODO HATCH EGG AND WHAT TO DO HEN EGG PLACED
   //TODO ADD INCANT DONE
   Server		*(*death)(THIS, t_player *player); //TODO DEATH
+
+  Server		*(*loop)(THIS);
 };
 
 Server			*newServer(WorldMap *map, t_arg *arg);

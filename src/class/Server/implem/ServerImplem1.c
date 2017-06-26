@@ -5,7 +5,7 @@
 ** Login   <dimitri1.wyzlic@epitech.eu>
 **
 ** Started on  Fri Jun 09 01:16:13 2017 Dimitri Wyzlic
-** Last update Fri Jun 23 15:10:48 2017 Doom
+** Last update Mon Jun 26 04:28:50 2017 Doom
 */
 
 #include "Server.h"
@@ -18,12 +18,12 @@ static Server		*add_team(THIS, t_string *name)
   MALLOC(out, sizeof(t_team));
   out->name = name;
   out->current_nb_player = 0;
-
   i = 0;
   while (this->teams[i] != NULL)
     i += 1;
   this->teams[i] = out;
   this->team_index->set(this->team_index, name->__str, i);
+  out->eggs = newVector();
   return (this);
 }
 
@@ -40,36 +40,59 @@ static Server		*player_connect(THIS, int fd)
   return (this);
 }
 
+static	t_player		*find_and_delete_egg(t_team *team, t_player *player)
+{
+  t_egg				*egg;
+  int				i;
+
+  i = 0;
+  while (i < team->eggs->len(team->eggs))
+    {
+      VGET(egg, team->eggs, i);
+      if (egg->is_hatched == true)
+	{
+	  player->position = egg->pos;
+	  team->current_nb_player += 1;
+	  team->eggs->erase(team->eggs, i);
+	  return (player);
+	}
+      i += 1;
+    }
+  return (NULL);
+}
+
 static t_connect_info		*add_player_info(THIS, t_player *player, t_string *team)
 {
   int				idx;
   t_connect_info		*out;
   char				*str;
 
-  MALLOC(str, 12);
-  //TODO GERER OEUFS ET POS RANDOM
+  MALLOC(str, 30);
   MALLOC(out, sizeof(t_connect_info));
-
   if (strcmp(team->__str, strdup("GUI")) == 0)
     {
       this->gui->fd = player->fd;
       this->players->erase(this->players, player->fd);
-      out->name = new_string("GUI");
+      out->remaining = 42;
       out->coord = new_string("GUI");
       return (out);
     }
   idx = this->team_index->get(this->team_index, team->__str);
   if (idx == this->team_index->end(this->team_index))
     return (NULL);
-  if (this->teams[idx]->current_nb_player + 1 >= this->maxSlots)
-    return (NULL);
-  this->teams[idx]->current_nb_player += 1;
+  if (this->teams[idx]->current_nb_player + 1 <= this->maxSlots)
+    {
+      this->teams[idx]->current_nb_player += 1;
+      player->position = rand_pos(0, 0, this->map->width - 1, this->map->height - 1);
+    }
+  else
+    {
+      player = find_and_delete_egg(this->teams[idx], player);
+      if (player == NULL)
+	return (NULL);
+    }
   player->team = team;
-
-  //TODO POS
-  player->position.x = 0;
-  player->position.y = 0;
-  out->name = player->name;
+  out->remaining = ABS(this->maxSlots - this->teams[idx]->current_nb_player) + this->teams[idx]->eggs->__len;
   sprintf(str, "%d %d", player->position.x, player->position.y);
   out->coord = new_string(str);
   return (out);

@@ -43,7 +43,7 @@ int			check_team(t_player *player, Server *server, char *cmd)
       if ((cinfo = server->add_player_info(server, player, new_string(cmd))) !=
 	  NULL)
 	{
-	  dprintf(player->fd, "%s\n%s\n", cinfo->name->__str,
+	  dprintf(player->fd, "%d\n%s\n", cinfo->remaining,
 		  cinfo->coord->__str);
 	} else
 	{

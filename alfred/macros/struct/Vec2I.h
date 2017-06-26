@@ -11,12 +11,15 @@
 #ifndef ZAPPY_VEC2I_H
 #define ZAPPY_VEC2I_H
 
-typedef struct s_Vec2I Vec2I;
+typedef struct s_vec2I Vec2I;
 
-struct	s_Vec2I
+typedef struct	s_vec2I
 {
-  int	x;
-  int	y;
-};
+  int		x;
+  int		y;
+}		t_vec2I;
+
+t_vec2I		rand_pos(int minx, int miny, int maxx, int maxy);
+
 
 #endif //ZAPPY_VEC2I_H

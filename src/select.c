@@ -75,7 +75,9 @@ static void			select_op(t_socket *socket, Server *server)
 	raise("Select failed");
       else if (retval >= 0)
 	  select_check(socket, server, &rfds);
+      //TODO EXEC SEULEMENT CHAQUE 1/100 SECONDES OU UN TRUC DU GENRE
       loop_todo(server);
+      server->loop(server);
     }
 }
 

@@ -41,7 +41,7 @@ static Vector			*wrapper_fork(Server *server, t_player *player, t_mineral minera
   Vector		*out;
 
   out = newVector();
-  out->add(out, server->forkt_player(server, player)); //TODO FINIS FORK LOGIC
+  out->add(out, server->fork_player(server, player));
   return (out);
 }
 

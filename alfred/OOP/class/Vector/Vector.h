@@ -43,6 +43,7 @@ CLASS		s_Vector
   void		(*delete)(THIS);
   void		(*start_loop)(THIS);
   void		*(*loop)(THIS);
+  void		*(*erase)(THIS, int pos);
 };
 
 Vector	*newVector();

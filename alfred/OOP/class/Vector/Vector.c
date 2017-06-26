@@ -19,6 +19,7 @@ static Vector	*print(THIS, void (*_func)(void *));
 static void	delete(THIS);
 static void	start_loop(THIS);
 static void	*loop(THIS);
+static void	*erase(THIS, int pos);
 
 
 Vector		*newVector()
@@ -46,7 +47,7 @@ Vector		initVector()
   out.print = &print;
   out.start_loop = &start_loop;
   out.loop = &loop;
-
+  out.erase = &erase;
   return (out);
 }
 

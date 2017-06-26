@@ -18,6 +18,6 @@ char	*get_error(void)
 
 void	*__raise__(const char *msg, const char *file, unsigned int l, const char *f)
 {
-  fprintf(__norme__, file, l ,f , msg, get_error());
+  fprintf(__NORME__, file, l ,f , msg, get_error());
   exit(1);
 }
