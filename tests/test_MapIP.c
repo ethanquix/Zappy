@@ -19,33 +19,19 @@ void		print(PairCP *pair)
 
 int		main()
 {
-//  MapCP		*map;
-//  t_player	*a;
-//  t_player	*b;
-  t_vector	*vect;
-//
-  vect = new_vector();
+  MapCP		*map;
+  t_player	*a;
+  t_player	*b;
 
-
-  vect->delete(vect);
-  free(vect);
-//  a = new_player();
-//  b = new_player();
-//
-//  a->name = newString("t_player A");
-//  b->name = newString("t_player B");
-//
-//  map = newMapCP(10, NULL);
-//  map->set(map, 12, a);
-//  map->set(map, 13, b);
-//
-//  map->print(map, print);
-//
-//  map->erase(map, 13);
-//  map->print(map, print);
-//
-//  map->delete(map);
-//  a->delete(a);
-//  b->delete(b);
+  a = new_player();
+  b = new_player();
+  a->name = new_string("t_player A");
+  b->name = new_string("t_player B");
+  map = newMapCP(10, NULL);
+  map->set(map, 12, a);
+  map->set(map, 13, b);
+  map->print(map, print);
+  map->erase(map, 13);
+  map->print(map, print);
   return (0);
 }

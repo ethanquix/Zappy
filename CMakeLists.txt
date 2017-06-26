@@ -33,7 +33,6 @@ target_link_libraries(zappy alfred_c m)
 
 
 # Tests
-add_executable(SampleOOP tests/SampleOOP.c alfred/macros/Alfred.h alfred/macros/misc/macros.h alfred/macros/OOP_macros/OOP_macros.h)
 
-add_executable(test_MapIP src/class/MapPlayer/MapCP.c src/class/MapPlayer/MapCP.h src/class/MapPlayer/implem/MapCPImplem1.c src/class/MapPlayer/implem/MapCPImplem2.c tests/test_MapIP.c src/class/Player/Player.c src/class/Player/Player.h)
+add_executable(test_MapIP src/class/MapPlayer/MapCP.c src/class/MapPlayer/MapCP.h src/class/MapPlayer/implem/MapCPImplem1.c src/class/MapPlayer/implem/MapCPImplem2.c tests/test_MapIP.c src/class/Player/Player.c src/class/Player/Player.h src/inc/inventory.c)
 target_link_libraries(test_MapIP alfred_c)
