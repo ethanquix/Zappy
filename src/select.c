@@ -63,6 +63,8 @@ static void			select_op(t_socket *socket, t_server *server)
   tv.tv_usec = 0;
   while (!sig_int)
     {
+      //RAPH PK IL RENTRE ICI GENRE TOUTES LES 1-2 SECONDES ??? TODO le printf pour voir
+      printf("%d\n", rand());
       FD_ZERO(&rfds);
       server->players->start_loop(server->players);
       while ((it = server->players->loop(server->players)))
@@ -76,7 +78,6 @@ static void			select_op(t_socket *socket, t_server *server)
 	RAISE("Select failed");
       else if (retval >= 0)
 	  select_check(socket, server, &rfds);
-      //RAPH PK IL RENTRE ICI GENRE TOUTES LES 1-2 SECONDES ??? TODO (j'ai mis un printf random dans la fonction après)
       if (server->check_time(server) == false)
 	continue;
       loop_todo(server);

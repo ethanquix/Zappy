@@ -158,7 +158,7 @@ static bool		check_time(THIS)
   clock_gettime(CLOCK_REALTIME, &spec);
   current_ms = round(spec.tv_nsec / 1.0e6);
   diff_ms = current_ms - this->ms;
-  printf("%d\n", rand());
+//  printf("%d\n", rand());
 //  printf("%lf\n", diff_ms);
   if (diff_ms != 0 && diff_ms >= this->cur_div)
     {
