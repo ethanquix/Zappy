@@ -17,11 +17,6 @@
 
 #define MAX_MINERAL 7
 
-typedef struct s_inv	Inventory;
-
-typedef enum e_mineral	Mineral;
-
-//TODO Norme
 static char*	mineral_name[] =
   {
     "linemate",
@@ -46,29 +41,10 @@ typedef	enum	e_mineral
 
 typedef struct	s_inv
 {
-  int		loot[7];
+  int		loot[MAX_MINERAL];
 }		t_inv;
 
-static void		init_inv(Inventory *inv)
-{
-  inv->loot[LINEMATE] = 0;
-  inv->loot[DERAUMERE] = 0;
-  inv->loot[SIBUR] = 0;
-  inv->loot[MENDIANE] = 0;
-  inv->loot[PHIRAS] = 0;
-  inv->loot[THYSTAME] = 0;
-  inv->loot[FOOD] = 0;
-}
-
-static void		random_inv(Inventory *inv)
-{
-  inv->loot[LINEMATE] = rand() % LINEMATE_RARITY;
-  inv->loot[DERAUMERE] = rand() % DERAUMERE_RARITY;
-  inv->loot[SIBUR] = rand() % SIBUR_RARITY;
-  inv->loot[MENDIANE] = rand() % MENDIANE_RARITY;
-  inv->loot[PHIRAS] = rand() % PHIRAS_RARITY;
-  inv->loot[THYSTAME] = rand() % THYSTAME_RARITY;
-  inv->loot[FOOD] = rand() % FOOD_RARITY;
-}
+void		init_inv(t_inv *inv);
+void		random_inv(t_inv *inv);
 
 #endif //ZAPPY_INVENTORY_H

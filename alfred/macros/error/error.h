@@ -20,11 +20,11 @@
 #define __NORME__ stderr, "%s: %u [%s] -> %s\nERRNO: %s\n"
 
 char	*get_error(void);
-void	*__raise__(const char *msg, const char *file, unsigned int l, const char *f);
+void	*__RAISE__(const char *msg, const char *file, unsigned int l, const char *f);
 
-#define raise(msg) (__raise__(msg, __NORME__1))
+#define RAISE(msg) (__RAISE__(msg, __NORME__1))
 
-#define MALLOC(a, b) (((a) = malloc(b)) == NULL && raise("Malloc fail"))
+#define MALLOC(a, b) (((a) = malloc(b)) == NULL && RAISE("Malloc fail"))
 #define ST(a) sizeof(typeof(a))
 
 

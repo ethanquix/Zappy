@@ -70,7 +70,7 @@ static MapCP		*erase(THIS, int key)
   struct s_entryCP	*pair;
 
   if (this->exist(this, key) == false)
-    raise("Can't erase because don'key exist");
+    RAISE("Can't erase because don'key exist");
 
   this->__items -= 1;
   bin = __hash_MapCP(this, key);

@@ -5,7 +5,7 @@
 ** Login   <dimitri1.wyzlic@epitech.eu>
 **
 ** Started on  Wed Jun 07 17:11:37 2017 Dimitri Wyzlic
-** Last update Wed Jun 07 17:11:37 2017 Dimitri Wyzlic
+** Last update Mon Jun 26 14:19:40 2017 Doom
 */
 
 #ifndef ZAPPY_PLAYER_H
@@ -15,8 +15,6 @@
 #include "inventory.h"
 #include "String.h"
 #include "Alfred.h"
-
-//TODO NORME
 
 #define TIME_FORWARD 7
 #define TIME_RIGHT 7
@@ -29,7 +27,7 @@
 #define TIME_EJECT 7
 #define TIME_TAKE 7
 #define TIME_SET 7
-#define TIME_INCANT 0 //TODO because incant in serv: see server.h
+#define TIME_INCANT 0
 
 enum	e_cmd_nb
 {
@@ -51,14 +49,12 @@ enum	e_cmd_nb
 
 
 static char*	direction_name[] =
-	{
-		"NORTH",
-		"EAST",
-		"SOUTH",
-		"WEST"
-	};
-
-//typedef CLASS s_player t_player;
+  {
+    "NORTH",
+    "EAST",
+    "SOUTH",
+    "WEST"
+  };
 
 typedef enum e_dir Direction;
 
@@ -86,7 +82,7 @@ typedef CLASS		s_player
   Vec2I			position;
   Direction		direction;
   int			level;
-  Inventory		inv;
+  t_inv			inv;
   t_string		*name;
   t_string		*team;
   struct s_todo		todo[MAX_CMD];

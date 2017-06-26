@@ -10,7 +10,7 @@
 
 #include "WorldMap.h"
 
-Inventory	*init_row(int width);
+t_inv	*init_row(int width);
 
 static void	delete(THIS);
 
@@ -34,7 +34,7 @@ WorldMap		initWorldMap(int width, int height)
   i = 0;
   map.width = width;
   map.height = height;
-  MALLOC(map.tiles, sizeof(Inventory *) * height);
+  MALLOC(map.tiles, sizeof(t_inv *) * height);
   while (i < height)
     {
       map.tiles[i] = init_row(width);
@@ -43,13 +43,13 @@ WorldMap		initWorldMap(int width, int height)
   return (map);
 }
 
-Inventory	*init_row(int width)
+t_inv	*init_row(int width)
 {
-  Inventory	*out;
+  t_inv	*out;
   int		i;
 
   i = 0;
-  MALLOC(out, sizeof(Inventory) * width);
+  MALLOC(out, sizeof(t_inv) * width);
   while (i < width)
     {
       random_inv(&(out[i]));

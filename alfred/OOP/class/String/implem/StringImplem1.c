@@ -31,7 +31,7 @@ static char	at(THIS, int at)
 
 #ifdef RELEASE
   if (at > this->__len OR at < 0)
-      raise("Invalid index");
+      RAISE("Invalid index");
 #endif
   return (this->__str[at]);
 }

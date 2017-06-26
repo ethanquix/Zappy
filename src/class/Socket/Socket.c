@@ -31,12 +31,12 @@ static void	bind_listen(THIS, int port, int maxclients)
   this->in.sin_port = htons(port);
   this->fd = socket(AF_INET, SOCK_STREAM, getprotobyname("TCP")->p_proto);
   if (this->fd == -1)
-    raise("socketi creation error");
+    RAISE("socketi creation error");
   if (bind(this->fd, (const struct sockaddr*)(&this->in),
 	   sizeof(this->in)) == -1)
-    raise("Bind failed");
+    RAISE("Bind failed");
   if (listen(this->fd, port) == -1)
-    raise("Listen failed");
+    RAISE("Listen failed");
 }
 
 static void	socket_accept(THIS)

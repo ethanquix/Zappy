@@ -59,7 +59,7 @@ typedef struct	s_connect_info
 
 CLASS			s_server
 {
-  MapCI			*team_index;
+  t_map_ci			*team_index;
   t_team		**teams;
   WorldMap		*map;
   MapCP			*players;

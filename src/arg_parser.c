@@ -34,7 +34,7 @@ Vector		*parse_team(int idx, char **arg, int max)
   while (idx < max)
     {
       if (strcmp(strdup(arg[idx]), strdup("GUI")) == 0)
-	raise("Can't have a GUI team name");
+	RAISE("Can't have a GUI team name");
       tmp->add(tmp, new_string(strdup(arg[idx])));
       idx += 1;
     }
@@ -44,17 +44,17 @@ Vector		*parse_team(int idx, char **arg, int max)
 t_arg		*verif_arg(t_arg *src)
 {
   if (src->port < 0)
-    raise("Port must be positive");
+    RAISE("Port must be positive");
   if (src->freq < 2 || src->port > 10000)
-    raise("-f option only accepts integer values between 2 and 10000");
+    RAISE("-f option only accepts integer values between 2 and 10000");
   if (src->width < 10 || src->width > 30)
-    raise("-x option only accepts integer values between 10 and 30");
+    RAISE("-x option only accepts integer values between 10 and 30");
   if (src->height < 10 || src->height > 30)
-    raise("-y option only accepts integer values between 10 and 30");
+    RAISE("-y option only accepts integer values between 10 and 30");
   if (src->maxt_players < 1)
-    raise("-c option only accepts integer values greater or equal to 1");
+    RAISE("-c option only accepts integer values greater or equal to 1");
   if (src->teamName->len(src->teamName) <= 0)
-    raise("You need to specify team name");
+    RAISE("You need to specify team name");
   //TODO CHECK IF NOT TEAM DOUBLON
   return (src);
 }

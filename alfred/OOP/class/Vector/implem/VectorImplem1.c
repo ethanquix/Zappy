@@ -50,7 +50,7 @@ static void	*get(THIS, int pos)
 
 #ifdef RELEASE
   if (pos < 0 OR pos >= this->__len OR this->__len <= 0)
-    raise("Out of bounds");
+    RAISE("Out of bounds");
 #endif
   while (i < pos)
     {
@@ -93,7 +93,7 @@ static Vector	*set(THIS, int pos, void *obj)
 
 #ifdef RELEASE
   if (pos < 0 OR pos >= this->__len OR this->__len <= 0)
-    raise("Out of bounds");
+    RAISE("Out of bounds");
 #endif
   while (i < pos)
     {

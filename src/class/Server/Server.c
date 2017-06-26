@@ -32,7 +32,7 @@ static void		delete(THIS);
 static Server		*apply_fork(THIS);
 static Server		*apply_incant(THIS, t_serv_todo *todo);
 
-static Server	*(*wrapper_function_server[1])(THIS, t_serv_todo *src) =
+static Server	*(*wrapper_function_server[])(THIS, t_serv_todo *src) =
 {
   &apply_incant
 };
@@ -73,7 +73,7 @@ Server			initServer(WorldMap *map, t_arg *arg)
   out.unused_slot = &unused_slot;
   out.take_obj = &take_obj;
   out.place_obj = &place_obj;
-  out.team_index = newMapCI(MAP_CI_MAX, -1);
+  out.team_index = new_map_ci(MAP_CI_MAX, -1);
   out.nb_teams = arg->teamName->len(arg->teamName);
   MALLOC(out.teams, sizeof(t_team *) * out.nb_teams);
   while (i < out.nb_teams)
@@ -134,7 +134,7 @@ static Server		*loop(THIS)
   t_serv_todo		*cur;
   int			i;
 
-  apply_fork(this); //TODO it's for the eggs (should work)
+  apply_fork(this);
   i = 0;
   while (i > 0 && i < this->todo->len(this->todo))
     {

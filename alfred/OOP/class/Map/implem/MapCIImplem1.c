@@ -1,5 +1,5 @@
 /*
-** MapCIImplem1.c.c for Zappy in /home/wyzlic_a/delivery/Zappy/MapCIImplem1.c.c
+** t_map_ciImplem1.c.c for Zappy in /home/wyzlic_a/delivery/Zappy/t_map_ciImplem1.c.c
 **
 ** Made by Dimitri Wyzlic
 ** Login   <dimitri1.wyzlic@epitech.eu>
@@ -10,13 +10,13 @@
 
 #include "MapCI.h"
 
-static MapCI		*set(THIS, char *key, int data)
+static t_map_ci		*set(THIS, char *key, int data)
 {
   int			bin;
-  struct s_entryCI	*newpair;
-  struct s_entryCI	*next;
+  struct s_entry_ci	*newpair;
+  struct s_entry_ci	*next;
 
-  bin = __hash_MapCI(this, key);
+  bin = __hash_map_ci(this, key);
   next = this->__table[bin];
 
   while (next NOT NULL AND next->key NOT NULL AND strcmp(key, next->key) > 0)
@@ -25,7 +25,7 @@ static MapCI		*set(THIS, char *key, int data)
     next->data = data;
   else
     {
-      newpair = __newPairCI(key, data);
+      newpair = __new_pair_ci(key, data);
 
       newpair->__next = this->__table[bin];
       this->__table[bin] = newpair;
@@ -37,9 +37,9 @@ static MapCI		*set(THIS, char *key, int data)
 static int		get(THIS, char *key)
 {
   int			bin;
-  struct s_entryCI	*pair;
+  struct s_entry_ci	*pair;
 
-  bin = __hash_MapCI(this, key);
+  bin = __hash_map_ci(this, key);
 
   pair = this->__table[bin];
   while (pair NOT NULL AND pair->key NOT NULL AND strcmp(key, pair->key) > 0)
@@ -63,9 +63,9 @@ static int	end(THIS)
 static bool		exist(THIS, char *key)
 {
   int			bin;
-  struct s_entryCI	*tmp;
+  struct s_entry_ci	*tmp;
 
-  bin = __hash_MapCI(this, key);
+  bin = __hash_map_ci(this, key);
   tmp = this->__table[bin];
 
   return (tmp NOT NULL);

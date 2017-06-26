@@ -18,7 +18,7 @@ static const t_cmd	client_cmd[] =
 		{ "Left", C_LEFT, TIME_LEFT },
 		{ "Right", C_RIGHT, TIME_RIGHT },
 		{ "Look", C_LOOK, TIME_LOOK },
-		{ "Inventory", C_INVENTORY, TIME_INVENTORY },
+		{ "t_inv", C_INVENTORY, TIME_INVENTORY },
 		{ "Broadcast", C_BROADCAST, TIME_BROADCAST },
 		{ "Connect_nbr", C_UNUSED, TIME_UNUSED },
 		{ "Fork", C_FORK, TIME_FORK },

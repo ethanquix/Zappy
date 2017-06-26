@@ -72,7 +72,7 @@ static void			select_op(t_socket *socket, Server *server)
       tv.tv_sec = 2;
       if ((retval = select(server->players->len(server->players) + socket->fd + 2,
 			   &rfds, NULL, NULL, &tv)) == -1 && !sig_int)
-	raise("Select failed");
+	RAISE("Select failed");
       else if (retval >= 0)
 	  select_check(socket, server, &rfds);
       //TODO EXEC SEULEMENT CHAQUE 1/100 SECONDES OU UN TRUC DU GENRE

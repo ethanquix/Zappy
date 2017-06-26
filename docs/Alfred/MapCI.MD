@@ -1,7 +1,7 @@
 Create:
 
-- `MapCI		initMapCI(int size, int nof)`
-- `MapCI		*newMapCI(int size, int nof)`
+- `MapCI		init_map_ci(int size, int nof)`
+- `MapCI		*new_map_ci(int size, int nof)`
 
 Method:
 
@@ -12,8 +12,8 @@ Method:
 - `bool		exist(MapCI *this, char *key)`
 - `char		at(MapCI *this, int pos);`
 - `void		start_loop(MapCI *this);`
-- `PairCI	*loop(MapCI *this);`
-- `void		*print(MapCI *this, void (*_func)(PairCI *pair));`
+- `PAIR_CI	*loop(MapCI *this);`
+- `void		*print(MapCI *this, void (*_func)(PAIR_CI *pair));`
 
 Example:
 ```
@@ -22,9 +22,9 @@ Example:
 void		mapCI_sample()
 {
   MapCI		*map;
-  PairCI	*pair;
+  PAIR_CI	*pair;
   
-  map = newMapCI(100, -1);
+  map = new_map_ci(100, -1);
 
   map->set(map, "toto", 1);
   map->set(map, "salut", 2);;

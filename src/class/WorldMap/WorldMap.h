@@ -25,7 +25,7 @@ CLASS			s_WorldMap
 {
   int			width;
   int			height;
-  Inventory		**tiles;
+  t_inv		**tiles;
 
   void			(*delete)(THIS);
 };

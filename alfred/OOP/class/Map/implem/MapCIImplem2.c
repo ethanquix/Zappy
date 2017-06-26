@@ -1,5 +1,5 @@
 /*
-** MapCIImplem2.c.c for Zappy in /home/wyzlic_a/delivery/Zappy/MapCIImplem2.c.c
+** t_map_ciImplem2.c.c for Zappy in /home/wyzlic_a/delivery/Zappy/t_map_ciImplem2.c.c
 **
 ** Made by Dimitri Wyzlic
 ** Login   <dimitri1.wyzlic@epitech.eu>
@@ -26,9 +26,9 @@ static void		start_loop(THIS)
     }
 }
 
-static PairCI		*loop(THIS)
+static PAIR_CI		*loop(THIS)
 {
-  PairCI		*out;
+  PAIR_CI		*out;
 
   while (this->__currentIt < this->__size)
     {
@@ -45,11 +45,11 @@ static PairCI		*loop(THIS)
   return (NULL);
 }
 
-MapCI			*print(THIS, void (*_func)(PairCI *pair))
+t_map_ci			*print(THIS, void (*_func)(PAIR_CI *pair))
 {
   int			bckpIt;
-  PairCI		*bckpP;
-  PairCI		*it;
+  PAIR_CI		*bckpP;
+  PAIR_CI		*it;
 
   bckpIt = this->__currentIt;
   bckpP = this->__currentEntry;
@@ -63,16 +63,16 @@ MapCI			*print(THIS, void (*_func)(PairCI *pair))
   return (this);
 }
 
-static MapCI		*erase(THIS, char *key)
+static t_map_ci		*erase(THIS, char *key)
 {
   int			bin;
-  struct s_entryCI	*pair;
+  struct s_entry_ci	*pair;
 
   if (this->exist(this, key) == false)
-    raise("Can't erase because don'key exist");
+    RAISE("Can't erase because don'key exist");
 
   this->__items -= 1;
-  bin = __hash_MapCI(this, key);
+  bin = __hash_map_ci(this, key);
   pair = this->__table[bin];
 
   if (strcmp(key, pair->key) IS 0)

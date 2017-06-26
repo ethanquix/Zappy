@@ -39,7 +39,7 @@ MapCP		initMapCP(int size, t_player *nof)
 
   i = 0;
   if (size <= 0 OR size > USHRT_MAX)
-    raise("Can't create Map: Size negative or too big");
+    RAISE("Can't create Map: Size negative or too big");
 
   (out.__size = size, out.__items = 0, out.__notfound = nof);
 

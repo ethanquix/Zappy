@@ -13,44 +13,44 @@
 
 #include "Alfred.h"
 
-typedef CLASS s_MapCI MapCI;
+typedef CLASS s_map_ci t_map_ci;
 
 #undef THIS
-#define THIS MapCI *this
+#define THIS t_map_ci *this
 
-#define PairCI	struct s_entryCI
+#define PAIR_CI	struct s_entry_ci
 
-struct			s_entryCI
+struct			s_entry_ci
 {
   char			*key;
   int			data;
-  PairCI		*__next;
+  PAIR_CI		*__next;
 };
 
-CLASS			s_MapCI
+typedef CLASS		s_map_ci
 {
   int			__size;
   int			__items;
   int			__notfound;
-  PairCI		**__table;
+  PAIR_CI		**__table;
   int			__currentIt;
-  PairCI		*__currentEntry;
+  PAIR_CI		*__currentEntry;
 
-  MapCI			*(*set)(THIS, char *key, int data);
+  t_map_ci			*(*set)(THIS, char *key, int data);
   int			(*get)(THIS, char *key);
   int			(*len)(THIS);
   int			(*end)(THIS);
   bool			(*exist)(THIS, char *key);
-  PairCI		*(*loop)(THIS);
+  PAIR_CI		*(*loop)(THIS);
   void			(*start_loop)(THIS);
-  MapCI			*(*print)(THIS, void (*_func)(PairCI *pair));
+  t_map_ci			*(*print)(THIS, void (*_func)(PAIR_CI *pair));
   void			(*delete)(THIS);
-  MapCI			*(*erase)(THIS, char *key);
-};
+  t_map_ci			*(*erase)(THIS, char *key);
+}			t_map_ci;
 
-MapCI			*newMapCI(int size, int nof);
-MapCI			initMapCI(int size, int nof);
-int			__hash_MapCI(THIS, char *key);
-PairCI			*__newPairCI(char *key, int val);
+t_map_ci			*new_map_ci(int size, int nof);
+t_map_ci			init_map_ci(int size, int nof);
+int			__hash_map_ci(THIS, char *key);
+PAIR_CI			*__new_pair_ci(char *key, int val);
 
 #endif //ZAPPY_MAPINTERFACE_H

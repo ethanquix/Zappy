@@ -1,5 +1,5 @@
 /*
-** MapCI.c for Zappy in /home/wyzlic_a/delivery/Zappy/MapCI.c
+** t_map_ci.c for Zappy in /home/wyzlic_a/delivery/Zappy/t_map_ci.c
 **
 ** Made by Dimitri Wyzlic
 ** Login   <dimitri1.wyzlic@epitech.eu>
@@ -11,35 +11,35 @@
 #include <limits.h>
 #include "MapCI.h"
 
-static MapCI		*set(THIS, char *key, int data);
+static t_map_ci		*set(THIS, char *key, int data);
 static int		get(THIS, char *key);
 static int		len(THIS);
 static int		end(THIS);
 static bool		exist(THIS, char *key);
 static void		start_loop(THIS);
-static PairCI		*loop(THIS);
-static MapCI		*print(THIS, void (*_func)(PairCI *pair));
+static PAIR_CI		*loop(THIS);
+static t_map_ci		*print(THIS, void (*_func)(PAIR_CI *pair));
 static void		delete(THIS);
-static MapCI		*erase(THIS, char *key);
+static t_map_ci		*erase(THIS, char *key);
 
-MapCI		*newMapCI(int size, int nof)
+t_map_ci		*new_map_ci(int size, int nof)
 {
-  MapCI		*out;
+  t_map_ci		*out;
 
-  MALLOC(out, sizeof(MapCI));
-  *out = initMapCI(size, nof);
+  MALLOC(out, sizeof(t_map_ci));
+  *out = init_map_ci(size, nof);
 
   return (out);
 }
 
-MapCI		initMapCI(int size, int nof)
+t_map_ci		init_map_ci(int size, int nof)
 {
-  MapCI		out;
+  t_map_ci		out;
   int		i;
 
   i = 0;
   if (size <= 0 OR size > USHRT_MAX)
-    raise("Size negative or too big");
+    RAISE("Size negative or too big");
 
   (out.__size = size, out.__items = 0, out.__notfound = nof);
 
@@ -54,13 +54,13 @@ MapCI		initMapCI(int size, int nof)
   out.delete = &delete;
   out.erase = &erase;
 
-  MALLOC(out.__table, sizeof(struct s_entryCI *) * size);
+  MALLOC(out.__table, sizeof(struct s_entry_ci *) * size);
   while (i < size)
     (out.__table[i] = NULL, i INC 1);
   return (out);
 }
 
-int		__hash_MapCI(THIS, char *key)
+int		__hash_map_ci(THIS, char *key)
 {
   unsigned int	hash;
   unsigned int	i;
@@ -79,14 +79,14 @@ int		__hash_MapCI(THIS, char *key)
   return (hash % this->__size);
 }
 
-struct s_entryCI	*__newPairCI(char *key, int val)
+struct s_entry_ci	*__new_pair_ci(char *key, int val)
 {
-  struct s_entryCI	*newpair;
+  struct s_entry_ci	*newpair;
 
-  MALLOC(newpair, sizeof(struct s_entryCI));
+  MALLOC(newpair, sizeof(struct s_entry_ci));
 
   if((newpair->key = strdup(key)) IS NULL)
-      raise("Error during strdup");
+      RAISE("Error during strdup");
   newpair->data = val;
   newpair->__next = NULL;
 
@@ -95,8 +95,8 @@ struct s_entryCI	*__newPairCI(char *key, int val)
 
 static void		delete(THIS)
 {
-  struct s_entryCI	**tmp;
-  struct s_entryCI	*tmp2;
+  struct s_entry_ci	**tmp;
+  struct s_entry_ci	*tmp2;
   int			i;
 
   i = 0;
