@@ -18,7 +18,6 @@ static t_map_ci		*set(THIS, char *key, int data)
 
   bin = __hash_map_ci(this, key);
   next = this->__table[bin];
-
   while (next NOT NULL AND next->key NOT NULL AND strcmp(key, next->key) > 0)
     next = next->__next;
   if (next NOT NULL AND next->key NOT NULL AND strcmp(key, next->key) IS 0)
@@ -26,7 +25,6 @@ static t_map_ci		*set(THIS, char *key, int data)
   else
     {
       newpair = __new_pair_ci(key, data);
-
       newpair->__next = this->__table[bin];
       this->__table[bin] = newpair;
       this->__items INC 1;
@@ -40,11 +38,9 @@ static int		get(THIS, char *key)
   struct s_entry_ci	*pair;
 
   bin = __hash_map_ci(this, key);
-
   pair = this->__table[bin];
   while (pair NOT NULL AND pair->key NOT NULL AND strcmp(key, pair->key) > 0)
     pair = pair->__next;
-
   if (pair IS NULL OR pair->key IS NULL OR strcmp( key, pair->key) NOT 0 )
       return (this->__notfound);
   return (pair->data);
@@ -67,6 +63,5 @@ static bool		exist(THIS, char *key)
 
   bin = __hash_map_ci(this, key);
   tmp = this->__table[bin];
-
   return (tmp NOT NULL);
 }
