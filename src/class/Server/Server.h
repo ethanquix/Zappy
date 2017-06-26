@@ -85,6 +85,9 @@ typedef CLASS		s_server
   t_string		*(*__get_tile_inv)(THIS, int x, int y);
   struct s_server	*(*death)(THIS, t_player *player);
   struct s_server	*(*loop)(THIS);
+  bool			(*check_time)(THIS);
+  double		ms;
+  double		cur_div;
 }			t_server;
 
 t_server			*new_server(t_worldmap *map, t_arg *arg);

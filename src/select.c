@@ -76,7 +76,9 @@ static void			select_op(t_socket *socket, t_server *server)
 	RAISE("Select failed");
       else if (retval >= 0)
 	  select_check(socket, server, &rfds);
-      //TODO EXEC SEULEMENT CHAQUE 1/100 SECONDES OU UN TRUC DU GENRE
+      //RAPH PK IL RENTRE ICI GENRE TOUTES LES 1-2 SECONDES ??? TODO (j'ai mis un printf random dans la fonction après)
+      if (server->check_time(server) == false)
+	continue;
       loop_todo(server);
       server->loop(server);
     }

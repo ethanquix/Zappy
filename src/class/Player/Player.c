@@ -32,6 +32,7 @@ t_player			init_player()
   out.todo_time = 0;
   memset(out.todo, 0, sizeof(t_todo) * 10);
   init_inv(&(out.inv));
+  out.inv.loot[FOOD] = BASE_FOOD;
   out.delete = &delete;
   return (out);
 }

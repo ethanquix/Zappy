@@ -11,6 +11,12 @@
 #ifndef ZAPPY_CONFIG_H
 #define ZAPPY_CONFIG_H
 
+#define DEFAULT_WIDTH 10
+#define DEFAULT_HEIGHT 10
+#define DEFAULT_PORT 4242
+#define DEFAULT_MAX_CLIENT 10
+#define DEFAULT_FREQ 100
+
 #define MAX_CMD 10
 #define MAX_FD 2500
 #define MAP_IP_MAX 500
@@ -27,5 +33,7 @@
 #define MSG_OK "ok"
 #define MSG_KO "ko"
 #define MSG_WELCOME "WELCOME\n"
+
+#define BASE_FOOD 10
 
 #endif //ZAPPY_CONFIG_H

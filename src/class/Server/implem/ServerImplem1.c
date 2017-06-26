@@ -114,7 +114,6 @@ static t_response	*forward(THIS, t_player *player)
     (player->position.x = (player->position.x + 1 + this->map->width) % this->map->width);
   else if (player->direction == WEST)
     (player->position.x = (player->position.x - 1 + this->map->width) % this->map->width);
-  printf("x %d y %d\n", player->position.x, player->position.y);
   return (out);
 }
 
@@ -166,7 +165,6 @@ static t_string		*get_tile_inv(THIS, int x, int y)
   PAIR_CP		*it;
 
   i = 0;
-  printf("x %d y %d\n", x, y);
   out = new_string("");
   while (i < MAX_MINERAL)
     {

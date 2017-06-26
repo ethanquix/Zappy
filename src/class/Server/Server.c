@@ -31,6 +31,7 @@ static t_string		*get_tile_inv(THIS, int x, int y);
 static void		delete(THIS);
 static t_server		*apply_fork(THIS);
 static t_server		*apply_incant(THIS, t_serv_todo *todo);
+static bool		check_time(THIS);
 
 static t_server	*(*wrapper_function_server[])(THIS, t_serv_todo *src) =
 {
@@ -88,6 +89,9 @@ t_server			init_server(t_worldmap *map, t_arg *arg)
   out.death = &death;
   out.loop = &loop;
   out.__get_tile_inv = &get_tile_inv;
+  out.ms = 0;
+  out.cur_div = 1000 / out.freq;
+  out.check_time = &check_time;
 
   return (out);
 }
@@ -143,6 +147,25 @@ static t_server		*loop(THIS)
       cur->time -= 1;
     }
   return (this);
+}
+
+static bool		check_time(THIS)
+{
+  double		current_ms;
+  struct timespec	spec;
+  double		diff_ms;
+
+  clock_gettime(CLOCK_REALTIME, &spec);
+  current_ms = round(spec.tv_nsec / 1.0e6);
+  diff_ms = current_ms - this->ms;
+  printf("%d\n", rand());
+//  printf("%lf\n", diff_ms);
+  if (diff_ms != 0 && diff_ms >= this->cur_div)
+    {
+      this->ms = current_ms;
+      return (true);
+    }
+  return (false);
 }
 
 #include "implem/ServerImplem1.c"
