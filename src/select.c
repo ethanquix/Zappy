@@ -41,12 +41,13 @@ static void			select_check(t_socket *socket, t_server *server, fd_set *rfds)
 	      dprintf(socket->fd_client, MSG_WELCOME);
 	      server->player_connect(server, socket->fd_client);
 	    }
-	  else if (index == server->gui->fd)
-	    check_cmd_gui(server, socket);
 	  else
 	    {
 	      socket->fd_client = index;
-	      check_cmd_client(server, socket);
+	      if (index == server->gui->fd)
+		check_cmd_gui(server, socket);
+	      else
+		check_cmd_client(server, socket);
 	    }
 	}
     }
