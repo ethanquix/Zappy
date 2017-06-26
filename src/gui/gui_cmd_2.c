@@ -13,7 +13,20 @@
 
 static void		get_team_list(t_server *server, t_string *cmd)
 {
-  RAISE("Not done yet");
+  t_string		*out;
+  int			i;
+
+  UNUSED(cmd);
+  out = new_string("");
+  i = 0;
+  while (i < server->nb_teams)
+    {
+      if (i != 0)
+	out->add(out, new_string(" "));
+      out->add(out, server->teams[i]->name);
+      i += 1;
+    }
+  dprintf(server->gui->fd, "%s\n", out->__str);
 }
 
 static void		get_player_info(t_server *server, t_string *cmd)

@@ -81,6 +81,8 @@ static void		get_players_by_team(t_server *server, t_string *cmd)
   t_string		*out;
   PAIR_CP		*it;
 
+
+  //TODO ELLE MARCHE PAS GENRE H24 ELLE DIT NONE OU TRUC C CHELOU JE PENSE QUE C A CAUSE DU STRCMP LIGNE 96
   printf("1: %s\n", cmd->__str);
   tmp = strtok(cmd->__str, " ");
   printf("2: %s\n", cmd->__str);
