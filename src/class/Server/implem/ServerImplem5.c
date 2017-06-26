@@ -79,7 +79,7 @@ static t_response	*incant(THIS, t_player *player)
 
 static Server		*apply_incant(THIS, t_serv_todo *todo)
 {
-  PairCP		*it;
+  PAIR_CP		*it;
   t_player		*current;
 
   current = this->players->get(this->players, todo->player_fd);

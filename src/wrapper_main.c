@@ -58,7 +58,7 @@ void		respond(t_vector *vector)
 void		loop_todo(Server *server)
 {
   int		i;
-  PairCP	*it;
+  PAIR_CP	*it;
 
   server->players->start_loop(server->players);
   while ((it = server->players->loop(server->players)) != NULL)

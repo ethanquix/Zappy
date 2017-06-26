@@ -34,7 +34,7 @@ static t_response	*eject_player(THIS, t_player *from, t_player *to)
 static t_vector		*eject(THIS, t_player *player)
 {
   t_vector		*out;
-  PairCP		*it;
+  PAIR_CP		*it;
   t_response		*resp;
 
   MALLOC(resp, sizeof(t_response));

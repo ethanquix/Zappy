@@ -81,7 +81,7 @@ Server			initServer(WorldMap *map, t_arg *arg)
   out.map = map;
   out.maxSlots = arg->maxt_players;
   out.freq = arg->freq;
-  out.players = newMapCP(MAP_IP_MAX, NULL);
+  out.players = new_map_cp(MAP_IP_MAX, NULL);
   arg->teamName->start_loop(arg->teamName);
   while ((it = arg->teamName->loop(arg->teamName)) != NULL)
       out.add_team(&out, (t_string *) it);

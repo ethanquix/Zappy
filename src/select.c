@@ -57,7 +57,7 @@ static void			select_op(t_socket *socket, Server *server)
   fd_set			rfds;
   struct timeval		tv;
   int				retval;
-  PairCP			*it;
+  PAIR_CP			*it;
 
   tv.tv_usec = 0;
   while (!sig_int)

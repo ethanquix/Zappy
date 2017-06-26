@@ -14,44 +14,44 @@
 #include "Alfred.h"
 #include "Player.h"
 
-typedef CLASS s_MapCP MapCP;
+typedef CLASS s_map_cp t_map_cp;
 
 #undef THIS
-#define THIS MapCP *this
+#define THIS t_map_cp *this
 
-#define PairCP	struct s_entryCP
+#define PAIR_CP	struct s_entry_cp
 
-struct			s_entryCP
+struct			s_entry_cp
 {
   int			key;
   t_player		*data;
-  PairCP		*__next;
+  PAIR_CP		*__next;
 };
 
-CLASS			s_MapCP
+typedef CLASS		s_map_cp
 {
   int			__size;
   int			__items;
   t_player		*__notfound;
-  PairCP		**__table;
+  PAIR_CP		**__table;
   int			__currentIt;
-  PairCP		*__currentEntry;
+  PAIR_CP		*__currentEntry;
 
-  MapCP			*(*set)(THIS, int key, t_player *data);
+  t_map_cp		*(*set)(THIS, int key, t_player *data);
   t_player		*(*get)(THIS, int key);
   int			(*len)(THIS);
   t_player		*(*end)(THIS);
   bool			(*exist)(THIS, int key);
-  PairCP		*(*loop)(THIS);
+  PAIR_CP		*(*loop)(THIS);
   void			(*start_loop)(THIS);
-  MapCP			*(*print)(THIS, void (*_func)(PairCP *pair));
+  t_map_cp		*(*print)(THIS, void (*_func)(PAIR_CP *pair));
   void			(*delete)(THIS);
-  MapCP			*(*erase)(THIS, int key);
-};
+  t_map_cp		*(*erase)(THIS, int key);
+}			t_map_cp;
 
-MapCP			*newMapCP(int size, t_player *end);
-MapCP			initMapCP(int size, t_player *end);
-int			__hash_MapCP(THIS, int key);
-PairCP			*__newPairCP(int key, t_player *val);
+t_map_cp			*new_map_cp(int size, t_player *end);
+t_map_cp			init_map_cp(int size, t_player *end);
+int			__hash_map_cp(THIS, int key);
+PAIR_CP			*__new_pair_cp(int key, t_player *val);
 
 #endif //ZAPPY_MAPCP_H

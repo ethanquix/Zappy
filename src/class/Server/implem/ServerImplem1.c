@@ -163,7 +163,7 @@ static t_string		*get_tile_inv(THIS, int x, int y)
   t_string		*out;
   int			i;
   int			tmp;
-  PairCP		*it;
+  PAIR_CP		*it;
 
   i = 0;
   printf("x %d y %d\n", x, y);

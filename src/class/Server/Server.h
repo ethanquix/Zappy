@@ -62,7 +62,7 @@ CLASS			s_server
   t_map_ci			*team_index;
   t_team		**teams;
   WorldMap		*map;
-  MapCP			*players;
+  t_map_cp			*players;
   int			maxSlots;
   int			nb_teams;
   int			freq;

@@ -1,5 +1,5 @@
 /*
-** MapCPImplem2.c.c for Zappy in /home/wyzlic_a/delivery/Zappy/MapCPImplem2.c.c
+** t_map_cpImplem2.c.c for Zappy in /home/wyzlic_a/delivery/Zappy/t_map_cpImplem2.c.c
 **
 ** Made by Dimitri Wyzlic
 ** Login   <dimitri1.wyzlic@epitech.eu>
@@ -26,9 +26,9 @@ static void		start_loop(THIS)
     }
 }
 
-static PairCP		*loop(THIS)
+static PAIR_CP		*loop(THIS)
 {
-  PairCP		*out;
+  PAIR_CP		*out;
 
   while (this->__currentIt < this->__size)
     {
@@ -46,11 +46,11 @@ static PairCP		*loop(THIS)
 }
 
 
-static MapCP		*print(THIS, void (*_func)(PairCP *pair))
+static t_map_cp		*print(THIS, void (*_func)(PAIR_CP *pair))
 {
   int			bckpIt;
-  PairCP		*bckpP;
-  PairCP		*it;
+  PAIR_CP		*bckpP;
+  PAIR_CP		*it;
 
   bckpIt = this->__currentIt;
   bckpP = this->__currentEntry;
@@ -64,16 +64,16 @@ static MapCP		*print(THIS, void (*_func)(PairCP *pair))
   return (this);
 }
 
-static MapCP		*erase(THIS, int key)
+static t_map_cp		*erase(THIS, int key)
 {
   int			bin;
-  struct s_entryCP	*pair;
+  struct s_entry_cp	*pair;
 
   if (this->exist(this, key) == false)
     RAISE("Can't erase because don'key exist");
 
   this->__items -= 1;
-  bin = __hash_MapCP(this, key);
+  bin = __hash_map_cp(this, key);
   pair = this->__table[bin];
 
   if (key == pair->key)

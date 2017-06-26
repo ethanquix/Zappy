@@ -89,7 +89,7 @@ static t_response		*calc_sound(THIS, t_player *from, t_player *to, t_string *msg
 static t_vector		*broadcast(THIS, t_player *player, t_string *msg)
 {
   t_vector		*out;
-  PairCP		*it;
+  PAIR_CP		*it;
 
   out = new_vector();
   this->players->start_loop(this->players);

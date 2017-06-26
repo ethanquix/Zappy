@@ -30,7 +30,7 @@ static const t_levelup	levelup_need[] =
 static int	count_player_on_tile(THIS, Vec2I pos)
 {
   int		out;
-  PairCP	*it;
+  PAIR_CP	*it;
 
   out = 0;
   this->players->start_loop(this->players);

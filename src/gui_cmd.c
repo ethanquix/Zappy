@@ -73,7 +73,7 @@ static void		get_players_by_team(Server *server, t_string *cmd)
 {
   char			*tmp;
   t_string		*out;
-  PairCP		*it;
+  PAIR_CP		*it;
 
   //TODO DOIT FAIL PARCEQUE NOM TEAM A ENCORE \n
   tmp = strtok(cmd->__str, " ");

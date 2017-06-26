@@ -12,14 +12,14 @@
 #include "Vector.h"
 #include "Alfred.h"
 
-void		print(PairCP *pair)
+void		print(PAIR_CP *pair)
 {
   printf("Id: %d name: %s\n", pair->key, pair->data->name->__str);
 }
 
 int		main()
 {
-  MapCP		*map;
+  t_map_cp		*map;
   t_player	*a;
   t_player	*b;
 
@@ -27,7 +27,7 @@ int		main()
   b = new_player();
   a->name = new_string("t_player A");
   b->name = new_string("t_player B");
-  map = newMapCP(10, NULL);
+  map = new_map_cp(10, NULL);
   map->set(map, 12, a);
   map->set(map, 13, b);
   map->print(map, print);
