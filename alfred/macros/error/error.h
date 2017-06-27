@@ -5,7 +5,7 @@
 ** Login   <dimitri1.wyzlic@epitech.eu>
 **
 ** Started on  Mon Jun 05 15:16:50 2017 Dimitri Wyzlic
-** Last update Mon Jun 05 15:16:50 2017 Dimitri Wyzlic
+** Last update Mon Jun 26 18:05:03 2017 Doom
 */
 
 #include <stdio.h>
@@ -20,7 +20,8 @@
 #define __NORME__ stderr, "%s: %u [%s] -> %s\nERRNO: %s\n"
 
 char	*get_error(void);
-void	*__RAISE__(const char *msg, const char *file, unsigned int l, const char *f);
+void	*__RAISE__(const char *msg, const char *file, unsigned int l,
+		   const char *f);
 
 #define RAISE(msg) (__RAISE__(msg, __NORME__1))
 

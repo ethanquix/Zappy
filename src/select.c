@@ -89,8 +89,8 @@ int	        start(t_arg *args)
   t_socket	*socket;
 
   signal(SIGINT, &sigHandler);
-  (socket = get_socketi())->bind_listen(socket, args->port, args->maxt_players * 1);//TODO ADD maxTeam
-  server = new_server(new_world_map(args->height, args->width), args); //TODO nbTeams
+  (socket = get_socketi())->bind_listen(socket, args->port, args->maxt_players * 1);
+  server = new_server(new_world_map(args->height, args->width), args);
   select_op(socket, server);
   close(socket->fd);
   server->delete(server);

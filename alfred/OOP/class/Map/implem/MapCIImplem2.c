@@ -53,11 +53,9 @@ t_map_ci			*print(THIS, void (*_func)(PAIR_CI *pair))
 
   bckpIt = this->__currentIt;
   bckpP = this->__currentEntry;
-
   this->start_loop(this);
   while ((it = this->loop(this)) NOT NULL)
     (*_func)(it);
-
   this->__currentIt = bckpIt;
   this->__currentEntry = bckpP;
   return (this);
@@ -70,11 +68,9 @@ static t_map_ci		*erase(THIS, char *key)
 
   if (this->exist(this, key) == false)
     RAISE("Can't erase because don'key exist");
-
   this->__items -= 1;
   bin = __hash_map_ci(this, key);
   pair = this->__table[bin];
-
   if (strcmp(key, pair->key) IS 0)
     {
       if (this->__table[bin]->__next NOT NULL)
@@ -83,12 +79,9 @@ static t_map_ci		*erase(THIS, char *key)
 	this->__table[bin] = NULL;
       return (this);
     }
-
   while (pair->__next NOT NULL AND pair->__next->key NOT NULL AND strcmp(key, pair->__next->key) > 0)
     pair = pair->__next;
-
   if (pair->__next NOT NULL)
     pair->__next = pair->__next->__next;
-
   return (this);
 }

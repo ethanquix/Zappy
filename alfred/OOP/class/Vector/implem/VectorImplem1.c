@@ -20,15 +20,14 @@ static t_vector	*add(THIS, void *obj)
   t_llist	*tmp;
 
   MALLOC(tmp, sizeof(t_llist));
-
   tmp->__elem = obj;
-
   if (this->__len IS 0)
     {
       this->__obj = tmp;
       tmp->next = tmp;
       tmp->prev = tmp;
-    } else
+    }
+  else
     {
       tmp->next = this->__obj;
       tmp->prev = this->__obj->prev;
@@ -36,7 +35,6 @@ static t_vector	*add(THIS, void *obj)
       this->__obj->prev = tmp;
     }
   this->__len INC 1;
-
   return (this);
 }
 
@@ -47,7 +45,6 @@ static void	*get(THIS, int pos)
 
   i = 0;
   tmp = this->__obj;
-
 #ifdef RELEASE
   if (pos < 0 OR pos >= this->__len OR this->__len <= 0)
     RAISE("Out of bounds");
@@ -66,9 +63,7 @@ static void	*pop(THIS)
 
   if (this->__len IS 0)
     return (NULL);
-
   tmp = this->__obj->prev->__elem;
-
   if (this->__len IS 1)
     {
       this->len = 0;
@@ -90,7 +85,6 @@ static t_vector	*set(THIS, int pos, void *obj)
 
   it = this->__obj;
   i = 0;
-
 #ifdef RELEASE
   if (pos < 0 OR pos >= this->__len OR this->__len <= 0)
     RAISE("Out of bounds");

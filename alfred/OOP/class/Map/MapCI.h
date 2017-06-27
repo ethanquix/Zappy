@@ -35,7 +35,6 @@ typedef CLASS		s_map_ci
   PAIR_CI		**__table;
   int			__currentIt;
   PAIR_CI		*__currentEntry;
-
   t_map_ci			*(*set)(THIS, char *key, int data);
   int			(*get)(THIS, char *key);
   int			(*len)(THIS);
@@ -50,7 +49,7 @@ typedef CLASS		s_map_ci
 
 t_map_ci			*new_map_ci(int size, int nof);
 t_map_ci			init_map_ci(int size, int nof);
-int			__hash_map_ci(THIS, char *key);
-PAIR_CI			*__new_pair_ci(char *key, int val);
+int				__hash_map_ci(THIS, char *key);
+PAIR_CI				*__new_pair_ci(char *key, int val);
 
 #endif //ZAPPY_MAPINTERFACE_H

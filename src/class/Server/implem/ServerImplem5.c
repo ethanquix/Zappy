@@ -21,7 +21,7 @@ static t_response	*fork_player(THIS, t_player *player)
   MALLOC(egg, ST(egg));
   egg->pos = player->position;
   egg->is_hatched = false;
-  egg->time = TIME_SERVER_FORK / this->freq;
+  egg->time = TIME_SERVER_FORK;
   it = this->team_index->get(this->team_index, player->team->__str);
   this->teams[it]->eggs->add(this->teams[it]->eggs, egg);
   MALLOC(resp, sizeof(t_response));
@@ -65,9 +65,8 @@ static t_response	*incant(THIS, t_player *player)
   resp->msg = new_string(MSG_OK);
   resp->name = player->name;
   todo->player_fd = player->fd;
-  todo->time = TIME_SERVER_INCANT / this->freq;
+  todo->time = TIME_SERVER_INCANT;
   todo->action = CMD_SERVER_INCANT;
-
   if (check_levelup(this, player) == false)
     {
       resp->msg = new_string(MSG_KO);

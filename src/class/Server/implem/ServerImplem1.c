@@ -185,7 +185,7 @@ static t_string		*get_tile_inv(THIS, int x, int y)
 	{
 	  if (out->len > 0)
 	    out->add(out, new_string(" "));
-	  out->add(out, it->data->name);
+	  out->add(out, new_string("player"));
 	}
     }
   return (out);

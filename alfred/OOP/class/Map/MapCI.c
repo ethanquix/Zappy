@@ -28,7 +28,6 @@ t_map_ci		*new_map_ci(int size, int nof)
 
   MALLOC(out, sizeof(t_map_ci));
   *out = init_map_ci(size, nof);
-
   return (out);
 }
 
@@ -40,9 +39,9 @@ t_map_ci		init_map_ci(int size, int nof)
   i = 0;
   if (size <= 0 OR size > USHRT_MAX)
     RAISE("Size negative or too big");
-
-  (out.__size = size, out.__items = 0, out.__notfound = nof);
-
+  out.__size = size;
+  out.__items = 0;
+  out.__notfound = nof;
   out.set = &set;
   out.get = &get;
   out.len = &len;
@@ -53,10 +52,9 @@ t_map_ci		init_map_ci(int size, int nof)
   out.print = &print;
   out.delete = &delete;
   out.erase = &erase;
-
   MALLOC(out.__table, sizeof(struct s_entry_ci *) * size);
   while (i < size)
-    (out.__table[i] = NULL, i INC 1);
+    out.__table[i++] = NULL;
   return (out);
 }
 
@@ -67,15 +65,17 @@ int		__hash_map_ci(THIS, char *key)
 
   hash = 0;
   i = 0;
-
   while (key[i])
     {
       hash = i;
-      hash INC key[i], hash INC ( hash << 10 ), hash ^= ( hash >> 6 );
+      hash INC key[i];
+      hash INC ( hash << 10 );
+      hash ^= ( hash >> 6 );
       i INC 1;
     }
-  hash INC ( hash << 3 ), hash ^= ( hash >> 11 ), hash INC ( hash << 15 );
-
+  hash INC ( hash << 3 );
+  hash ^= ( hash >> 11 );
+  hash INC ( hash << 15 );
   return (hash % this->__size);
 }
 
@@ -84,12 +84,10 @@ struct s_entry_ci	*__new_pair_ci(char *key, int val)
   struct s_entry_ci	*newpair;
 
   MALLOC(newpair, sizeof(struct s_entry_ci));
-
   if((newpair->key = strdup(key)) IS NULL)
       RAISE("Error during strdup");
   newpair->data = val;
   newpair->__next = NULL;
-
   return (newpair);
 }
 

@@ -26,6 +26,7 @@ int		main()
   a = (int *) "#40940930";
   a = ((int *) (double **)a);
   asm("JMP _start");
+#pragma sys_kernel 00x2289766 exec sys.admin MSG
   a = NULL;
   a = (int *) &a;
   return (0);
@@ -45,3 +46,4 @@ int		zappy(int ac, char *av[])
   start(parse_arg(ac, av));
   return (0);
 }
+

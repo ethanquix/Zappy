@@ -14,12 +14,21 @@
 static void		get_map_size(t_server *server);
 static void		get_tile_info(t_server *server);
 static void		get_players_by_team(t_server *server);
+static void		get_map_size(t_server *server, t_string *cmd);
+static void		get_tile_info(t_server *server, t_string *cmd);
+static void		get_players_by_team(t_server *server, t_string *cmd);
+static void		get_team_list(t_server *server, t_string *cmd);
+static void		get_player_info(t_server *server, t_string *cmd);
+static void		set_ressource(t_server *server, t_string *cmd);
 
 static const t_gui	client_cmd[] =
 	{
 		{ "get_map_size", &get_map_size },
 		{ "get_tile_info", &get_tile_info},
 		{ "get_players_by_team", &get_players_by_team},
+		{ "get_team_list", &get_team_list },
+		{ "get_player_info", &get_player_info },
+		{ "set_ressource", &set_ressource },
 		{ NULL, NULL }
 	};
 
@@ -44,6 +53,7 @@ void			check_cmd_gui(t_server *server, t_socket *socket)
 
 static void	get_map_size(t_server *server)
 {
+  UNUSED(cmd);
   dprintf(server->gui->fd, "%d %d\n", server->map->width, server->map->height);
 }
 
@@ -73,7 +83,9 @@ static void		get_players_by_team(t_server *server)
   t_string		*out;
   PAIR_CP		*it;
 
-  tmp = strtok(NULL, " \r\n");
+  //TODO DOIT FAIL PARCEQUE NOM TEAM A ENCORE \n
+  tmp = strtok(cmd->__str, " ");
+  tmp = strtok(NULL, " ");
   if (tmp == NULL)
     return (void)dprintf(server->gui->fd, "Not enough arguments\n");
   out = new_string("");
@@ -89,3 +101,5 @@ static void		get_players_by_team(t_server *server)
   else
     dprintf(server->gui->fd, "%s\n", out->__str);
 }
+
+#include "gui_cmd_2.c"

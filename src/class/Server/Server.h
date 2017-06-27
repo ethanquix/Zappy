@@ -86,6 +86,7 @@ typedef CLASS		s_server
   struct s_server	*(*death)(THIS, t_player *player);
   struct s_server	*(*loop)(THIS);
   bool			(*check_time)(THIS);
+  bool			(*calc_food)(THIS, t_player *player);
   double		ms;
   double		cur_div;
 }			t_server;
