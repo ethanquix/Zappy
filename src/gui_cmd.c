@@ -11,9 +11,9 @@
 #include "Server.h"
 #include "cmd.h"
 
-static void		get_map_size(t_server *server, t_string *cmd);
-static void		get_tile_info(t_server *server, t_string *cmd);
-static void		get_players_by_team(t_server *server, t_string *cmd);
+static void		get_map_size(t_server *server);
+static void		get_tile_info(t_server *server);
+static void		get_players_by_team(t_server *server);
 
 static const t_gui	client_cmd[] =
 	{
@@ -37,24 +37,22 @@ void			check_cmd_gui(t_server *server, t_socket *socket)
 	 strcasecmp(client_cmd[index].name, to_check) != 0)
     index++;
   if (client_cmd[index].name && to_check)
-    client_cmd[index].func(server, new_string(cmd));
+    client_cmd[index].func(server);
   else
     dprintf(server->gui->fd, "Invalid command\n");
 }
 
-static		void	get_map_size(t_server *server, t_string *cmd)
+static void	get_map_size(t_server *server)
 {
-  UNUSED(cmd);
   dprintf(server->gui->fd, "%d %d\n", server->map->width, server->map->height);
 }
 
-static void		get_tile_info(t_server *server, t_string *cmd)
+static void		get_tile_info(t_server *server)
 {
   char			*tmp;
   int			x;
   int			y;
 
-  tmp = strtok(cmd->__str, " ");
   tmp = strtok(NULL, " ");
   if (tmp == NULL)
     return (void)dprintf(server->gui->fd, "Not enough arguments\n");
@@ -69,22 +67,23 @@ static void		get_tile_info(t_server *server, t_string *cmd)
     dprintf(server->gui->fd, "%s\n", server->__get_tile_inv(server, x, y)->__str);
 }
 
-static void		get_players_by_team(t_server *server, t_string *cmd)
+static void		get_players_by_team(t_server *server)
 {
   char			*tmp;
   t_string		*out;
   PAIR_CP		*it;
 
-  //TODO DOIT FAIL PARCEQUE NOM TEAM A ENCORE \n
-  tmp = strtok(cmd->__str, " ");
-  tmp = strtok(NULL, " ");
+  tmp = strtok(NULL, " \r\n");
   if (tmp == NULL)
     return (void)dprintf(server->gui->fd, "Not enough arguments\n");
   out = new_string("");
   server->players->start_loop(server->players);
   while ((it = server->players->loop(server->players)))
-    if (strcmp(it->data->team->__str, tmp) == 0)
-      out->add(out, new_string(" "))->add(out, it->data->name);
+    {
+      printf("DEBUG : tmp[%s], it[%s]\n", tmp, it->data->team->__str);
+      if (strcmp(it->data->team->__str, tmp) == 0)
+	out->add(out, new_string(" "))->add(out, it->data->name);
+    }
   if (out->len(out) <= 1)
     dprintf(server->gui->fd, "none\n");
   else

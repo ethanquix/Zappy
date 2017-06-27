@@ -14,7 +14,7 @@
 #include "Server.h"
 #include "config.h"
 
-typedef void	(*gui_ptr)(t_server *server, t_string *cmd);
+typedef void	(*gui_ptr)(t_server *server);
 
 typedef struct		s_gui
 {

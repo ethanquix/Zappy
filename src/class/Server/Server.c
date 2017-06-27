@@ -159,7 +159,7 @@ static bool		check_time(THIS)
   current_ms = round(spec.tv_nsec / 1.0e6);
   diff_ms = current_ms - this->ms;
 //  printf("%d\n", rand());
-  printf("cur ms: %lf previous ms: %lf\n", current_ms, this->ms);
+//  printf("cur ms: %lf previous ms: %lf\n", current_ms, this->ms);
   if (diff_ms != 0 && diff_ms >= this->cur_div)
     {
       this->ms = current_ms;
