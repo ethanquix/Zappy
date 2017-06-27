@@ -14,12 +14,9 @@
 static void		get_map_size(t_server *server);
 static void		get_tile_info(t_server *server);
 static void		get_players_by_team(t_server *server);
-static void		get_map_size(t_server *server, t_string *cmd);
-static void		get_tile_info(t_server *server, t_string *cmd);
-static void		get_players_by_team(t_server *server, t_string *cmd);
-static void		get_team_list(t_server *server, t_string *cmd);
-static void		get_player_info(t_server *server, t_string *cmd);
-static void		set_ressource(t_server *server, t_string *cmd);
+static void		get_team_list(t_server *server);
+static void		get_player_info(t_server *server);
+static void		set_ressource(t_server *server);
 
 static const t_gui	client_cmd[] =
 	{
@@ -53,7 +50,6 @@ void			check_cmd_gui(t_server *server, t_socket *socket)
 
 static void	get_map_size(t_server *server)
 {
-  UNUSED(cmd);
   dprintf(server->gui->fd, "%d %d\n", server->map->width, server->map->height);
 }
 
@@ -63,11 +59,11 @@ static void		get_tile_info(t_server *server)
   int			x;
   int			y;
 
-  tmp = strtok(NULL, " ");
+  tmp = strtok(NULL, " \r\n");
   if (tmp == NULL)
     return (void)dprintf(server->gui->fd, "Not enough arguments\n");
   x = atoi(tmp);
-  tmp = strtok(NULL, " ");
+  tmp = strtok(NULL, " \r\n");
   if (tmp == NULL)
     return (void)dprintf(server->gui->fd, "Not enough arguments\n");
   y = atoi(tmp);
@@ -83,19 +79,14 @@ static void		get_players_by_team(t_server *server)
   t_string		*out;
   PAIR_CP		*it;
 
-  //TODO DOIT FAIL PARCEQUE NOM TEAM A ENCORE \n
-  tmp = strtok(cmd->__str, " ");
-  tmp = strtok(NULL, " ");
+  tmp = strtok(NULL, " \r\n");
   if (tmp == NULL)
     return (void)dprintf(server->gui->fd, "Not enough arguments\n");
   out = new_string("");
   server->players->start_loop(server->players);
   while ((it = server->players->loop(server->players)))
-    {
-      printf("DEBUG : tmp[%s], it[%s]\n", tmp, it->data->team->__str);
-      if (strcmp(it->data->team->__str, tmp) == 0)
-	out->add(out, new_string(" "))->add(out, it->data->name);
-    }
+    if (strcmp(it->data->team->__str, tmp) == 0)
+      out->add(out, new_string(" "))->add(out, it->data->name);
   if (out->len(out) <= 1)
     dprintf(server->gui->fd, "none\n");
   else

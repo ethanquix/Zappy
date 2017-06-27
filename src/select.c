@@ -22,7 +22,7 @@ static char	sig_int = 0;
 static void	sigHandler(int n)
 {
   (void)n;
-  printf("\b\bt_server Closing\n");
+  printf("\b\bServer Closing\n");
   sig_int = 1;
 }
 

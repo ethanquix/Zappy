@@ -11,12 +11,11 @@
 #include "Server.h"
 #include "cmd.h"
 
-static void		get_team_list(t_server *server, t_string *cmd)
+static void		get_team_list(t_server *server)
 {
   t_string		*out;
   int			i;
 
-  UNUSED(cmd);
   out = new_string("");
   i = 0;
   while (i < server->nb_teams)
@@ -29,12 +28,12 @@ static void		get_team_list(t_server *server, t_string *cmd)
   dprintf(server->gui->fd, "%s\n", out->__str);
 }
 
-static void		get_player_info(t_server *server, t_string *cmd)
+static void		get_player_info(t_server *server)
 {
   RAISE("Not done yet");
 }
 
-static void		set_ressource(t_server *server, t_string *cmd)
+static void		set_ressource(t_server *server)
 {
   RAISE("Not done yet");
 }
