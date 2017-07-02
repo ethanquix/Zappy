@@ -239,8 +239,8 @@ static t_response	*see(THIS, t_player *player)
 {
   t_string		*out;
   int			i;
-  t_vec_ii			a;
-  t_vec_ii			b;
+  t_vec_ii		a;
+  t_vec_ii		b;
   t_response		*resp;
 
   MALLOC(resp, sizeof(t_response));
@@ -249,7 +249,7 @@ static t_response	*see(THIS, t_player *player)
   a.x = player->position.x;
   a.y = player->position.y;
   b = a;
-  out = new_string("");
+  out = new_string("[ ");
   i = 1;
 
   out->add(out, get_line_from_map(this, a.x, a.y, b.x, b.y));
@@ -290,6 +290,7 @@ static t_response	*see(THIS, t_player *player)
       i += 1;
     }
   // TODO NORME
+  out->add(out, new_string(" ]"));
   resp->msg = out;
   if (resp->msg->__len > 1 && resp->msg->__str[resp->msg->__len - 1] == ',' || resp->msg->__str[0] == ',')
     resp->msg->__str[resp->msg->__len - 1] = 0;
@@ -306,17 +307,19 @@ static t_response	*get_inventory(THIS, t_player *player)
   MALLOC(tmp, 1000);
   resp->name = player->name;
   resp->fd = player->fd;
-  resp->msg = new_string("");
-  i = 0;
-  while (i < MAX_MINERAL)
+  resp->msg = new_string("[ ");
+  i = MAX_MINERAL;
+  while (--i >= 0)
     {
       free(tmp);
       MALLOC(tmp, 1000);
       RESET(tmp, '\0');
       sprintf(tmp, "%d", player->inv.loot[i]);
       resp->msg->add(resp->msg, new_string(mineral_name[i]))->add(resp->msg, new_string(" "));
-      resp->msg->add(resp->msg, new_string(tmp))->add(resp->msg, new_string(","));
-      i INC 1;
+      resp->msg->add(resp->msg, new_string(tmp));
+      if (i > 0)
+	resp->msg->add(resp->msg, new_string(", "));
     }
+  resp->msg->add(resp->msg, new_string(" ]"));
   return (resp);
 }

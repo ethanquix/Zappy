@@ -14,7 +14,6 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-
 typedef struct s_socket t_socket;
 
 #undef THIS

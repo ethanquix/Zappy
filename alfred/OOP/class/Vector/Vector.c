@@ -21,7 +21,6 @@ static void	start_loop(THIS);
 static void	*loop(THIS);
 static void	*erase(THIS, int pos);
 
-
 t_vector		*new_vector()
 {
   t_vector		*out;

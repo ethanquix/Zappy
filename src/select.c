@@ -40,6 +40,7 @@ static void			select_check(t_socket *socket, t_server *server, fd_set *rfds)
 	      socket->socket_accept(socket);
 	      dprintf(socket->fd_client, MSG_WELCOME);
 	      server->player_connect(server, socket->fd_client);
+	      printf("Player %d Connected\n", socket->fd_client);
 	    }
 	  else
 	    {
@@ -90,7 +91,7 @@ int	        start(t_arg *args)
 
   signal(SIGINT, &sigHandler);
   (socket = get_socketi())->bind_listen(socket, args->port, args->maxt_players * 1);
-  server = new_server(new_world_map(args->height, args->width), args);
+  server = init_server(new_world_map(args->height, args->width), args);
   select_op(socket, server);
   close(socket->fd);
   server->delete(server);

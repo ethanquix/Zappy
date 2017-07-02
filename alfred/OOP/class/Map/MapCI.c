@@ -84,7 +84,7 @@ struct s_entry_ci	*__new_pair_ci(char *key, int val)
   struct s_entry_ci	*newpair;
 
   MALLOC(newpair, sizeof(struct s_entry_ci));
-  if((newpair->key = strdup(key)) IS NULL)
+  if ((newpair->key = strdup(key)) IS NULL)
       RAISE("Error during strdup");
   newpair->data = val;
   newpair->__next = NULL;

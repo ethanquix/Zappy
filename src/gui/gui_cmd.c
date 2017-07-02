@@ -50,7 +50,8 @@ void			check_cmd_gui(t_server *server, t_socket *socket)
 
 static void	get_map_size(t_server *server)
 {
-  dprintf(server->gui->fd, "%d %d\n", server->map->width, server->map->height);
+  printf("sending to GUI : MSIZE %d %d\n", server->map->width, server->map->height);
+  dprintf(server->gui->fd, "MSIZE %d %d\n", server->map->width, server->map->height);
 }
 
 static void		get_tile_info(t_server *server)
@@ -70,7 +71,7 @@ static void		get_tile_info(t_server *server)
   if (x >= server->map->width || x < 0 || y >= server->map->height || y < 0)
     dprintf(server->gui->fd, "Invalid position\n");
   else
-    dprintf(server->gui->fd, "%s\n", server->__get_tile_inv(server, x, y)->__str);
+    dprintf(server->gui->fd, "CELI %d %d %s\n", x,  y, server->__get_tile_inv(server, x, y)->__str);
 }
 
 static void		get_players_by_team(t_server *server)
@@ -90,7 +91,7 @@ static void		get_players_by_team(t_server *server)
   if (out->len(out) <= 1)
     dprintf(server->gui->fd, "none\n");
   else
-    dprintf(server->gui->fd, "%s\n", out->__str);
+    dprintf(server->gui->fd, "PTEAM%s\n", out->__str);
 }
 
 #include "gui_cmd_2.c"

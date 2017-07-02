@@ -25,12 +25,27 @@ static void		get_team_list(t_server *server)
       out->add(out, server->teams[i]->name);
       i += 1;
     }
-  dprintf(server->gui->fd, "%s\n", out->__str);
+  dprintf(server->gui->fd, "TEAML %s\n", out->__str);
 }
 
 static void		get_player_info(t_server *server)
 {
-  RAISE("Not done yet");
+  char		*cmd;
+  PAIR_CP	*it;
+
+  cmd = strtok(NULL, " \n");
+  server->players->start_loop(server->players);
+  while (cmd != NULL && (it = server->players->loop(server->players)) != NULL)
+    {
+      if (strcmp(cmd, it->data->name->__str) == 0)
+	{
+	  dprintf(server->gui->fd, "PINFO %s %d %d %d %d %d %d %d %d %d\n", it->data->name->__str,
+		  it->data->position.x, it->data->position.y, it->data->inv.loot[0],
+		  it->data->inv.loot[1], it->data->inv.loot[2], it->data->inv.loot[3],
+		  it->data->inv.loot[4], it->data->inv.loot[5], it->data->inv.loot[6]);
+	  return ;
+	}
+    }
 }
 
 static void		set_ressource(t_server *server)

@@ -79,7 +79,8 @@ static t_map_ci		*erase(THIS, char *key)
 	this->__table[bin] = NULL;
       return (this);
     }
-  while (pair->__next NOT NULL AND pair->__next->key NOT NULL AND strcmp(key, pair->__next->key) > 0)
+  while (pair->__next NOT NULL AND pair->__next->key NOT NULL AND
+	 strcmp(key, pair->__next->key) > 0)
     pair = pair->__next;
   if (pair->__next NOT NULL)
     pair->__next = pair->__next->__next;

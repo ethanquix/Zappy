@@ -13,7 +13,6 @@
 #include "WorldMap.h"
 #include "Server.h"
 
-
 THE_BEST
 ZAPPY_EVER
 
@@ -32,17 +31,13 @@ int		main()
   return (0);
 }
 
-
-
-void	__attribute__ ((constructor)) premain()
+void	__attribute__((constructor))premain()
 {
   srand(time(NULL));
 }
 
 int		zappy(int ac, char *av[])
 {
-  if (strcmp(__FUNCTION__, "zappy") != 0)
-    exit(84);
   start(parse_arg(ac, av));
   return (0);
 }

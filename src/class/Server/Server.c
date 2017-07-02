@@ -12,7 +12,8 @@
 
 static t_server		*add_team(THIS, t_string *name);
 static t_server		*player_connect(THIS, int fd); //TODO
-static t_connect_info	*add_player_info(THIS, t_player *player, t_string *team);
+static t_connect_info	*add_player_info(THIS, t_player *player,
+					      t_string *team);
 static t_response	*forward(THIS, t_player *player);
 static t_response	*rotate_left(THIS, t_player *player);
 static t_response	*rotate_right(THIS, t_player *player);
@@ -24,7 +25,7 @@ static t_vector		*eject(THIS, t_player *player);
 static t_server		*death(THIS, t_player *player);
 static t_response	*take_obj(THIS, t_player *player, t_mineral mineral);
 static t_response	*place_obj(THIS, t_player *player, t_mineral mineral);
-static t_response	*incant(THIS, t_player *player); //TODO
+static t_response	*incant(THIS, t_player *player);
 static t_response	*unused_slot(THIS, t_player *player);
 static t_server		*loop(THIS);
 static t_string		*get_tile_inv(THIS, int x, int y);
@@ -36,64 +37,61 @@ static bool		calc_food(THIS, t_player *player);
 
 static t_server	*(*wrapper_function_server[])(THIS, t_serv_todo *src) =
 {
-  &apply_incant
+	&apply_incant
 };
 
-
-t_server			*new_server(t_worldmap *map, t_arg *arg)
+static void	init_server_fnc(t_server *server)
 {
-  t_server		*tmp;
-
-  MALLOC(tmp, sizeof(t_server));
-  *tmp = init_server(map, arg);
-  return (tmp);
+  server->delete = &delete;
+  server->player_connect = &player_connect;
+  server->add_player_info = &add_player_info;
+  server->add_team = &add_team;
+  server->forward = &forward;
+  server->rotate_left = &rotate_left;
+  server->rotate_right = &rotate_right;
+  server->see = &see;
+  server->get_inventory = &get_inventory;
+  server->broadcast = &broadcast;
+  server->eject = &eject;
+  server->unused_slot = &unused_slot;
+  server->take_obj = &take_obj;
+  server->place_obj = &place_obj;
+  server->fork_player = &fork_player;
+  server->incant = &incant;
+  server->death = &death;
+  server->loop = &loop;
+  server->__get_tile_inv = &get_tile_inv;
+  server->check_time = &check_time;
+  server->calc_food = &calc_food;
 }
 
-t_server			init_server(t_worldmap *map, t_arg *arg)
+t_server	*init_server(t_worldmap *map, t_arg *arg)
 {
-  t_server		out;
-  int			i;
-  void			*it;
+  t_server	*out;
+  int		i;
+  void		*it;
 
+  MALLOC(out, sizeof(t_server));
+  memset(out, 0, sizeof(t_server));
+  init_server_fnc(out);
   i = 0;
-  out.gui = new_player();
-  out.gui->fd = -1;
-  out.todo = new_vector();
-  out.delete = &delete;
-  out.player_connect = &player_connect;
-  out.add_player_info = &add_player_info;
-  out.add_team = &add_team;
-  out.forward = &forward;
-  out.rotate_left = &rotate_left;
-  out.rotate_right = &rotate_right;
-  out.see = &see;
-  out.get_inventory = &get_inventory;
-  out.broadcast = &broadcast;
-  out.eject = &eject;
-  out.unused_slot = &unused_slot;
-  out.take_obj = &take_obj;
-  out.place_obj = &place_obj;
-  out.team_index = new_map_ci(MAP_CI_MAX, -1);
-  out.nb_teams = arg->teamName->len(arg->teamName);
-  MALLOC(out.teams, sizeof(t_team *) * out.nb_teams);
-  while (i < out.nb_teams)
-    out.teams[i++] = NULL;
-  out.map = map;
-  out.maxSlots = arg->maxt_players;
-  out.freq = arg->freq;
-  out.players = new_map_cp(MAP_IP_MAX, NULL);
+  out->gui = new_player();
+  out->gui->fd = -1;
+  out->todo = new_vector();
+  out->team_index = new_map_ci(MAP_CI_MAX, -1);
+  out->nb_teams = arg->teamName->len(arg->teamName);
+  MALLOC(out->teams, sizeof(t_team *) * out->nb_teams);
+  while (i < out->nb_teams)
+    out->teams[i++] = NULL;
+  out->map = map;
+  out->maxSlots = arg->maxt_players;
+  out->freq = arg->freq;
+  out->players = new_map_cp(MAP_IP_MAX, NULL);
   arg->teamName->start_loop(arg->teamName);
   while ((it = arg->teamName->loop(arg->teamName)) != NULL)
-      out.add_team(&out, (t_string *) it);
-  out.fork_player = &fork_player;
-  out.incant = &incant;
-  out.death = &death;
-  out.loop = &loop;
-  out.__get_tile_inv = &get_tile_inv;
-  out.ms = 0;
-  out.cur_div = 1000 / out.freq;
-  out.check_time = &check_time;
-  out.calc_food = &calc_food;
+      out->add_team(out, (t_string *) it);
+  out->ms = 0;
+  out->cur_div = 1000 / out->freq;
   return (out);
 }
 
@@ -112,21 +110,6 @@ static void	delete(THIS)
   this->players->delete(this->players);
   this->map->delete(this->map);
   free(this);
-}
-
-static t_server		*death(THIS, t_player *player)
-{
-  int			ti;
-
-  if (player->team != NULL)
-    {
-      ti = this->team_index->get(this->team_index, player->team->__str);
-      this->teams[ti]->current_nb_player -= 1;
-    }
-  dprintf(player->fd, "death\n");
-  this->players->erase(this->players, player->fd);
-  player->delete(player);
-  return (this);
 }
 
 static t_server		*loop(THIS)
@@ -153,41 +136,6 @@ static t_server		*loop(THIS)
     if (this->calc_food(this, it->data) == true)
       this->death(this, it->data);
   return (this);
-}
-
-static bool		check_time(THIS)
-{
-  double		current_ms;
-  struct timespec	spec;
-  double		diff;
-  double		current_s;
-
-  clock_gettime(CLOCK_REALTIME, &spec);
-  current_s = spec.tv_sec;
-  current_ms = ((round(spec.tv_nsec / 1.0e6) + (current_s * 1000))) / 1000;
-  diff = (current_ms - this->ms) * 1000;
-  if (diff != 0 && diff >= this->cur_div)
-    {
-      this->ms = current_ms;
-      return (true);
-    }
-  return (false);
-}
-
-static bool		calc_food(THIS, t_player *player)
-{
-  if (DISABLE_FOOD)
-    return (false);
-  if (player->team == NULL)
-    return (false);
-  if (player->cur_food_loss -= 1 <= 0)
-    {
-      player->inv.loot[FOOD] -= 1;
-      player->cur_food_loss = FOOD_LOSS;
-    }
-  if (player->inv.loot[FOOD] <= 0)
-    return (true);
-  return (false);
 }
 
 #include "implem/ServerImplem1.c"

@@ -73,7 +73,9 @@ static t_response	*take_obj(THIS, t_player *player, t_mineral mineral)
   MALLOC(resp, sizeof(t_response));
   resp->name = player->name;
   resp->fd = player->fd;
-  if (this->map->tiles[player->position.y][player->position.x].loot[mineral] > 0)
+  if (mineral == UNKNOW || mineral >= MAX_MINERAL)
+    resp->msg = new_string(MSG_KO);
+  else if (this->map->tiles[player->position.y][player->position.x].loot[mineral] > 0)
     {
       resp->msg = new_string(MSG_OK);
       player->inv.loot[mineral] += 1;

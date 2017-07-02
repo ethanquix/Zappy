@@ -59,3 +59,53 @@ static bool	check_levelup(THIS, t_player *player)
     }
   return (true);
 }
+
+static bool		check_time(THIS)
+{
+  double		current_ms;
+  struct timespec	spec;
+  double		diff;
+  double		current_s;
+
+  clock_gettime(CLOCK_REALTIME, &spec);
+  current_s = spec.tv_sec;
+  current_ms = ((round(spec.tv_nsec / 1.0e6) + (current_s * 1000))) / 1000;
+  diff = (current_ms - this->ms) * 1000;
+  if (diff != 0 && diff >= this->cur_div)
+    {
+      this->ms = current_ms;
+      return (true);
+    }
+  return (false);
+}
+
+static bool		calc_food(THIS, t_player *player)
+{
+  if (DISABLE_FOOD)
+    return (false);
+  if (player->team == NULL)
+    return (false);
+  if (player->cur_food_loss -= 1 <= 0)
+    {
+      player->inv.loot[FOOD] -= 1;
+      player->cur_food_loss = FOOD_LOSS;
+    }
+  if (player->inv.loot[FOOD] <= 0)
+    return (true);
+  return (false);
+}
+
+static t_server		*death(THIS, t_player *player)
+{
+  int			ti;
+
+  if (player->team != NULL)
+    {
+      ti = this->team_index->get(this->team_index, player->team->__str);
+      this->teams[ti]->current_nb_player -= 1;
+    }
+  dprintf(player->fd, "death\n");
+  this->players->erase(this->players, player->fd);
+  player->delete(player);
+  return (this);
+}

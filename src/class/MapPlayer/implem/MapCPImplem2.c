@@ -45,7 +45,6 @@ static PAIR_CP		*loop(THIS)
   return (NULL);
 }
 
-
 static t_map_cp		*print(THIS, void (*_func)(PAIR_CP *pair))
 {
   int			bckpIt;
@@ -54,11 +53,9 @@ static t_map_cp		*print(THIS, void (*_func)(PAIR_CP *pair))
 
   bckpIt = this->__currentIt;
   bckpP = this->__currentEntry;
-
   this->start_loop(this);
   while ((it = this->loop(this)) NOT NULL)
     (*_func)(it);
-
   this->__currentEntry = bckpP;
   this->__currentIt = bckpIt;
   return (this);
@@ -71,11 +68,9 @@ static t_map_cp		*erase(THIS, int key)
 
   if (this->exist(this, key) == false)
     RAISE("Can't erase because don'key exist");
-
   this->__items -= 1;
   bin = __hash_map_cp(this, key);
   pair = this->__table[bin];
-
   if (key == pair->key)
     {
       if (pair->__next NOT NULL)
@@ -84,12 +79,9 @@ static t_map_cp		*erase(THIS, int key)
 	this->__table[bin] = NULL;
       return (this);
     }
-
   while (pair->__next NOT NULL AND key NOT pair->__next->key)
     pair = pair->__next;
-
   if (pair->__next NOT NULL)
     pair->__next = pair->__next->__next;
-
   return (this);
 }

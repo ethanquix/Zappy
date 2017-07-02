@@ -77,7 +77,6 @@ static void	*pop(THIS)
   return (tmp);
 }
 
-
 static t_vector	*set(THIS, int pos, void *obj)
 {
   t_llist	*it;

@@ -30,6 +30,7 @@ static char*	mineral_name[] =
 
 typedef	enum	e_mineral
   {
+    UNKNOW = -1,
     LINEMATE = 0,
     DERAUMERE = 1,
     SIBUR = 2,

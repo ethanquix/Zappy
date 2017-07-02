@@ -23,7 +23,6 @@ t_socket		*get_socketi()
   return (socketi);
 }
 
-
 static void	bind_listen(THIS, int port, int maxclients)
 {
   if (port == -1)
@@ -63,9 +62,11 @@ static char	*socket_receive(THIS)
       if (index < 0)
 	perror("failed to read");
       close(this->fd_client);
+      printf("Player %d Disconnected\n", this->fd_client);
       return (NULL);
     }
   buff[index] = '\0';
+  printf("Player %d : received %s", this->fd_client, buff);
   return (buff);
 }
 

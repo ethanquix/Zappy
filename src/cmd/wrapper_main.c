@@ -47,11 +47,11 @@ void		respond(t_vector *vector)
   t_response	*resp;
 
   vector->start_loop(vector);
-
   while ((ret = vector->loop(vector)) != NULL)
     {
       resp = (t_response *)ret;
       dprintf(resp->fd, "%s\n", resp->msg->__str);
+      printf("Respond with %s\n", resp->msg->__str);
     }
 }
 
@@ -70,6 +70,8 @@ void		loop_todo(t_server *server)
 	    {
  	      respond(wrapper_function[it->data->todo[i].action - 1](server, it->data, it->data->todo[i].mineral, it->data->todo[i].msg));
 	      it->data->todo[i].action = C_NOTHING;
+	      if (server->gui->fd != -1 && it->data->todo[i].action == -1)
+		dprintf(server->gui->fd, "%s %d %s\n", it->data->name->__str, it->data->todo[i].action, it->data->todo[i].msg->__str);
 	    }
 	  it->data->todo[i].time -= 1;
 	  i += 1;

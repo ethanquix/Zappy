@@ -91,7 +91,6 @@ typedef CLASS		s_server
   double		cur_div;
 }			t_server;
 
-t_server			*new_server(t_worldmap *map, t_arg *arg);
-t_server			init_server(t_worldmap *map, t_arg *arg);
+t_server		*init_server(t_worldmap *map, t_arg *arg);
 
 #endif //ZAPPY_SERVER_H

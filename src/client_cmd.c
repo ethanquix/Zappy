@@ -18,7 +18,7 @@ static const t_cmd	client_cmd[] =
 		{ "Left", C_LEFT, TIME_LEFT },
 		{ "Right", C_RIGHT, TIME_RIGHT },
 		{ "Look", C_LOOK, TIME_LOOK },
-		{ "t_inv", C_INVENTORY, TIME_INVENTORY },
+		{ "Inventory", C_INVENTORY, TIME_INVENTORY },
 		{ "Broadcast", C_BROADCAST, TIME_BROADCAST },
 		{ "Connect_nbr", C_UNUSED, TIME_UNUSED },
 		{ "Fork", C_FORK, TIME_FORK },
@@ -43,8 +43,12 @@ int			check_team(t_player *player, t_server *server, char *cmd)
       if ((cinfo = server->add_player_info(server, player, new_string(cmd))) !=
 	  NULL)
 	{
-	  dprintf(player->fd, "%d\n%s\n", cinfo->remaining,
-		  cinfo->coord->__str);
+	  dprintf(player->fd, "%d\n%d %d\n", cinfo->remaining,
+		  server->map->width, server->map->height);
+	  if (server->gui->fd != -1 && player->fd != server->gui->fd)
+	    dprintf(server->gui->fd, "PINFO %s %d %d 0 0 0 0 0 0 10\n",
+		    player->name->__str, player->position.x, player->position.y);
+
 	} else
 	{
 	  dprintf(player->fd, "ko\r\n");
@@ -52,25 +56,6 @@ int			check_team(t_player *player, t_server *server, char *cmd)
       return (1);
     }
   return (0);
-}
-
-void			second_tick(t_server *server, t_player *player)
-{
-//  Vector		*resp;
-//  int			index;
-
-//  resp = client_cmd[index].ptr(server, player);
-//  index = 0;
-
-  //TODO A REFAIRE TA FOIRE TES DPRINTF MDR
-//  while (index < resp->len(resp))
-//    dprintf(server->players->get(server->players, ((t_response*)resp->get(resp, index))->name->__str)->fd,
-//	    ((t_response*)resp->get(resp, index))->msg->__str);
-//
-//
-//  dprintf(server->players->get(server->players,
-//			       ((t_response*)resp->get(resp, index))->name->get(((t_response*)resp->get(resp, index))->name))->fd,
-//	  ((t_response*)resp->get(resp, index))->msg->get(((t_response*)resp->get(resp, index))->msg));
 }
 
 static void		action_setup(t_server *server, t_player *player, char *cmd, int index)
@@ -87,9 +72,10 @@ static void		action_setup(t_server *server, t_player *player, char *cmd, int ind
       player->todo[todo_index].action = client_cmd[index].action;
       player->todo[todo_index].time = (client_cmd[index].time) + player->todo_time;
       player->todo_time = player->todo[todo_index].time;
-      cmd = strtok(NULL, " \n"); //TODO DAFUQ ??????
-      mineraln = -1; //TODO ERROR HERE MINERAL DONT NOT HAVE -1
-      while (mineraln < MAX_MINERAL && (cmd != mineral_name[++mineraln]));
+      cmd = strtok(NULL, " \n");
+      mineraln = UNKNOW;
+      while (cmd != NULL && mineraln < MAX_MINERAL &&
+	     strcmp(cmd, mineral_name[++mineraln]) > 0);
       player->todo[todo_index].mineral = mineraln;
       player->todo[todo_index].msg = new_string(cmd);
     }
